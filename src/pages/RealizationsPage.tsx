@@ -98,7 +98,7 @@ const RealizationsPage = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-blue-600 text-white py-16">
+      <section className="bg-orange-600 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl font-bold mb-6">Nasze realizacje</h1>
@@ -126,8 +126,8 @@ const RealizationsPage = () => {
                       className="w-full h-auto object-cover rounded" 
                     />
                   ) : (
-                    <div className="w-full aspect-video bg-blue-100 flex items-center justify-center rounded">
-                      <p className="text-blue-500 font-medium">Zdjęcie realizacji</p>
+                    <div className="w-full aspect-video bg-orange-100 flex items-center justify-center rounded">
+                      <p className="text-orange-500 font-medium">Zdjęcie realizacji</p>
                     </div>
                   )}
                 </div>
@@ -177,8 +177,8 @@ const RealizationsPage = () => {
                 </div>
                 <p className="text-gray-600 italic mb-6">"{testimonial.quote}"</p>
                 <div className="flex items-center">
-                  <div className="mr-4 h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center">
-                    <span className="text-blue-600 font-bold">{testimonial.author.charAt(0)}</span>
+                  <div className="mr-4 h-12 w-12 rounded-full bg-orange-100 flex items-center justify-center">
+                    <span className="text-orange-600 font-bold">{testimonial.author.charAt(0)}</span>
                   </div>
                   <div>
                     <p className="font-semibold">{testimonial.author}</p>
@@ -202,23 +202,23 @@ const RealizationsPage = () => {
               </p>
               <ul className="space-y-4">
                 <li className="flex items-start">
-                  <Check className="h-6 w-6 text-green-500 mr-3 mt-0.5" />
+                  <Check className="h-6 w-6 text-orange-500 mr-3 mt-0.5" />
                   <p className="text-gray-600">Specjalizacja w szkoleniach dla firm produkcyjnych</p>
                 </li>
                 <li className="flex items-start">
-                  <Check className="h-6 w-6 text-green-500 mr-3 mt-0.5" />
+                  <Check className="h-6 w-6 text-orange-500 mr-3 mt-0.5" />
                   <p className="text-gray-600">Doświadczeni trenerzy z praktyczną wiedzą branżową</p>
                 </li>
                 <li className="flex items-start">
-                  <Check className="h-6 w-6 text-green-500 mr-3 mt-0.5" />
+                  <Check className="h-6 w-6 text-orange-500 mr-3 mt-0.5" />
                   <p className="text-gray-600">Elastyczne formy szkolenia dopasowane do potrzeb klienta</p>
                 </li>
                 <li className="flex items-start">
-                  <Check className="h-6 w-6 text-green-500 mr-3 mt-0.5" />
+                  <Check className="h-6 w-6 text-orange-500 mr-3 mt-0.5" />
                   <p className="text-gray-600">Kompleksowa obsługa procesu certyfikacji</p>
                 </li>
                 <li className="flex items-start">
-                  <Check className="h-6 w-6 text-green-500 mr-3 mt-0.5" />
+                  <Check className="h-6 w-6 text-orange-500 mr-3 mt-0.5" />
                   <p className="text-gray-600">Bezpłatny audyt szkoleniowy pozwalający na optymalizację kosztów</p>
                 </li>
               </ul>
@@ -228,23 +228,23 @@ const RealizationsPage = () => {
                 </Link>
               </Button>
             </div>
-            <div className="bg-blue-50 p-8 rounded-lg shadow-md">
+            <div className="bg-orange-50 p-8 rounded-lg shadow-md">
               <h3 className="text-xl font-bold mb-4 text-center">Nasze liczby mówią same za siebie</h3>
               <div className="grid grid-cols-2 gap-6">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">500+</div>
+                  <div className="text-3xl font-bold text-orange-600 mb-2">500+</div>
                   <p className="text-gray-600">zadowolonych firm</p>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">1000+</div>
+                  <div className="text-3xl font-bold text-orange-600 mb-2">1000+</div>
                   <p className="text-gray-600">zrealizowanych szkoleń</p>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">98%</div>
+                  <div className="text-3xl font-bold text-orange-600 mb-2">98%</div>
                   <p className="text-gray-600">zdawalność egzaminów</p>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">10+</div>
+                  <div className="text-3xl font-bold text-orange-600 mb-2">10+</div>
                   <p className="text-gray-600">lat doświadczenia</p>
                 </div>
               </div>
@@ -254,17 +254,17 @@ const RealizationsPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-blue-600 text-white">
+      <section className="py-16 bg-orange-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-6">Gotowy, aby rozpocząć współpracę?</h2>
           <p className="text-xl mb-8 max-w-3xl mx-auto">
             Skontaktuj się z nami, aby omówić Twoje potrzeby szkoleniowe i dowiedzieć się, jak możemy pomóc Twojej firmie.
           </p>
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
-            <Button asChild size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
+            <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-gray-100">
               <Link to="/kontakt">Skontaktuj się z nami</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-white hover:bg-blue-700">
+            <Button asChild size="lg" variant="outline" className="border-white hover:bg-orange-700">
               <Link to="/wycena">Błyskawiczna Wycena</Link>
             </Button>
           </div>
