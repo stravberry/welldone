@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -12,31 +11,31 @@ const ServicesPage = () => {
     {
       title: "Uprawnienia UDT dla operatorów",
       description: "Szkolenia dla operatorów urządzeń transportu bliskiego, takich jak wózki widłowe, suwnice i podesty ruchome. Dostępne w formie stacjonarnej i online, dostosowane do potrzeb dużych firm produkcyjnych.",
-      icon: <Award size={40} />,
+      icon: <Award size={40} className="text-orange-500" />,
       link: "/uslugi/udt-operatorzy"
     },
     {
       title: "Uprawnienia UDT dla konserwatorów",
       description: "Kursy dla konserwatorów urządzeń transportu bliskiego, takich jak suwnice i żurawie. Hybrydowa forma szkolenia: teoria online, praktyka stcjonarna.",
-      icon: <Briefcase size={40} />,
+      icon: <Briefcase size={40} className="text-orange-500" />,
       link: "/uslugi/udt-konserwatorzy"
     },
     {
       title: "Uprawnienia SEP",
       description: "Szkolenia i certyfikacja w zakresie uprawnień SEP: elektryczne, cieplne i gazowe. Specjalizujemy się w szkoleniach dla pracowników obsługujących urządzenia generujące ciepło i gaz.",
-      icon: <BookOpen size={40} />,
+      icon: <BookOpen size={40} className="text-orange-500" />,
       link: "/uslugi/sep"
     },
     {
       title: "Szkolenia z lutowania",
       description: "Kursy dla firm zajmujących się procesami lutowania. Skupiamy się na podnoszeniu jakości produkcji i redukcji błędów.",
-      icon: <BarChart size={40} />,
+      icon: <BarChart size={40} className="text-orange-500" />,
       link: "/uslugi/lutowanie"
     },
     {
       title: "Eventy edukacyjne",
       description: "Organizacja eventów edukacyjnych dla firm, które chcą zwiększyć świadomość pracowników w zakresie bezpieczeństwa technicznego.",
-      icon: <Users size={40} />,
+      icon: <Users size={40} className="text-orange-500" />,
       link: "/uslugi/eventy"
     }
   ];

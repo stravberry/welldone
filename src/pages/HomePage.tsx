@@ -13,31 +13,31 @@ const HomePage = () => {
     {
       title: "Uprawnienia UDT dla operatorów",
       description: "Szkolenia i certyfikacja dla operatorów urządzeń transportu bliskiego, takich jak wózki widłowe, suwnice i podesty ruchome.",
-      icon: <Award size={40} />,
+      icon: <Award size={40} className="text-orange-500" />,
       link: "/uslugi/udt-operatorzy"
     },
     {
       title: "Uprawnienia UDT dla konserwatorów",
       description: "Kursy dla konserwatorów urządzeń transportu bliskiego, takich jak suwnice i żurawie. Teoria online, praktyka stacjonarna.",
-      icon: <Briefcase size={40} />,
+      icon: <Briefcase size={40} className="text-orange-500" />,
       link: "/uslugi/udt-konserwatorzy"
     },
     {
       title: "Uprawnienia SEP",
       description: "Szkolenia i certyfikacja w zakresie uprawnień SEP: elektryczne, cieplne i gazowe dla pracowników obsługujących specjalistyczne urządzenia.",
-      icon: <BookOpen size={40} />,
+      icon: <BookOpen size={40} className="text-orange-500" />,
       link: "/uslugi/sep"
     },
     {
       title: "Szkolenia z lutowania",
       description: "Profesjonalne kursy dla firm zajmujących się procesami lutowania. Podnosimy jakość produkcji i redukujemy liczbę błędów.",
-      icon: <BarChart size={40} />,
+      icon: <BarChart size={40} className="text-orange-500" />,
       link: "/uslugi/lutowanie"
     },
     {
       title: "Eventy edukacyjne",
       description: "Organizacja wydarzeń edukacyjnych dla firm, które chcą zwiększyć świadomość pracowników w zakresie bezpieczeństwa technicznego.",
-      icon: <Users size={40} />,
+      icon: <Users size={40} className="text-orange-500" />,
       link: "/uslugi/eventy"
     }
   ];
