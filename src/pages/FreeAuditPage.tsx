@@ -300,4 +300,4 @@ const FreeAuditPage = () => {
   );
 };
 
-export default Free<lov-add-dependency>react-hook-form@^7.43.0</lov-add-dependency>AuditPage;
+export default FreeAuditPage;
