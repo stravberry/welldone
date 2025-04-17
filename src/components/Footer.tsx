@@ -7,16 +7,16 @@ const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white pt-12 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center mb-4">
               <img 
                 src="/lovable-uploads/a2c8c546-13e6-445b-9832-abf375420d6c.png" 
                 alt="Well-done.pl Logo" 
-                className="h-10 mr-2" 
+                className="h-8 sm:h-10 mr-2" 
               />
             </div>
-            <p className="text-gray-400 mb-4">
+            <p className="text-gray-400 mb-4 text-sm sm:text-base">
               Pomagamy firmom produkcyjnym działać bez ryzyka – zapewniamy pełną zgodność uprawnień UDT i SEP dla pracowników.
             </p>
             <div className="flex space-x-4">
@@ -35,9 +35,9 @@ const Footer = () => {
             </div>
           </div>
           
-          <div>
+          <div className="mt-8 sm:mt-0">
             <h3 className="text-lg font-semibold mb-4">Szybki dostęp</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-2 text-sm sm:text-base">
               <li>
                 <Link to="/" className="text-gray-400 hover:text-white">Home</Link>
               </li>
@@ -59,9 +59,9 @@ const Footer = () => {
             </ul>
           </div>
           
-          <div>
+          <div className="mt-8 md:mt-0">
             <h3 className="text-lg font-semibold mb-4">Usługi</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-2 text-sm sm:text-base">
               <li>
                 <Link to="/uslugi/udt-operatorzy" className="text-gray-400 hover:text-white">Uprawnienia UDT dla operatorów</Link>
               </li>
@@ -80,33 +80,33 @@ const Footer = () => {
             </ul>
           </div>
           
-          <div>
+          <div className="mt-8 md:mt-0">
             <h3 className="text-lg font-semibold mb-4">Kontakt</h3>
-            <ul className="space-y-4">
+            <ul className="space-y-4 text-sm sm:text-base">
               <li className="flex items-start">
-                <Phone size={20} className="mr-2 mt-1 text-orange-400" />
+                <Phone size={20} className="mr-2 mt-1 text-orange-400 flex-shrink-0" />
                 <span>504-305-437</span>
               </li>
               <li className="flex items-start">
-                <Mail size={20} className="mr-2 mt-1 text-orange-400" />
-                <span>pgerus@well-done.pl</span>
+                <Mail size={20} className="mr-2 mt-1 text-orange-400 flex-shrink-0" />
+                <span className="break-all">pgerus@well-done.pl</span>
               </li>
               <li className="flex items-start">
-                <MapPin size={20} className="mr-2 mt-1 text-orange-400" />
+                <MapPin size={20} className="mr-2 mt-1 text-orange-400 flex-shrink-0" />
                 <div>
                   <span>ul. Drzewieckiego 19/11</span>
                   <br />
                   <span>54-129 Wrocław</span>
                   <br />
-                  <span className="text-sm text-gray-500 mt-2">
+                  <span className="text-xs sm:text-sm text-gray-500 mt-2">
                     Centrum Kompetencji Zawodowych Well-Done.pl Paweł Gerus
                   </span>
                   <br />
-                  <span className="text-sm text-gray-500">
+                  <span className="text-xs sm:text-sm text-gray-500">
                     NIP: 884-248-74-55
                   </span>
                   <br />
-                  <span className="text-sm text-gray-500">
+                  <span className="text-xs sm:text-sm text-gray-500">
                     REGON: 022303775
                   </span>
                 </div>
@@ -116,17 +116,17 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">
+          <p className="text-gray-400 text-xs sm:text-sm">
             &copy; {new Date().getFullYear()} Well-Done.pl. Wszelkie prawa zastrzeżone.
           </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link to="/polityka-prywatnosci" className="text-gray-400 hover:text-white text-sm">
+          <div className="flex flex-col sm:flex-row sm:space-x-6 space-y-2 sm:space-y-0 mt-4 md:mt-0">
+            <Link to="/polityka-prywatnosci" className="text-gray-400 hover:text-white text-xs sm:text-sm">
               Polityka prywatności
             </Link>
-            <Link to="/regulamin" className="text-gray-400 hover:text-white text-sm">
+            <Link to="/regulamin" className="text-gray-400 hover:text-white text-xs sm:text-sm">
               Regulamin
             </Link>
-            <Link to="/mapa-strony" className="text-gray-400 hover:text-white text-sm">
+            <Link to="/mapa-strony" className="text-gray-400 hover:text-white text-xs sm:text-sm">
               Mapa strony
             </Link>
           </div>
