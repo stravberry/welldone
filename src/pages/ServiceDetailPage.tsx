@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -59,7 +58,7 @@ const ServiceDetailPage = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
                   <h5 className="font-semibold mb-2">Dla kogo:</h5>
-                  <p className="text-gray-600">Pracownicy firm produkcyjnych obsługujący wciągniki i wciągarki.</p>
+                  <p className="text-gray-600">Pracownicy firm produkcyjnych obsługujący wciągniki i wciągarek.</p>
                 </div>
                 <div>
                   <h5 className="font-semibold mb-2">Forma szkolenia:</h5>
@@ -190,7 +189,7 @@ const ServiceDetailPage = () => {
           </ul>
           
           <h3 className="text-2xl font-semibold mb-4">Kontakt i zapisy:</h3>
-          <div className="bg-blue-50 p-6 rounded-lg mb-8">
+          <div className="bg-orange-50 p-6 rounded-lg mb-8">
             <p className="mb-4">Oferujemy możliwość organizacji szkoleń na terenie całego kraju, dostosowanych do specyfiki Twojej firmy.</p>
             <p className="mb-4">Organizujemy szkolenia nawet dla jednej osoby - skontaktuj się z nami, aby omówić szczegóły.</p>
           </div>
@@ -289,19 +288,19 @@ const ServiceDetailPage = () => {
           
           <h3 className="text-2xl font-semibold mb-4">Korzyści dla firmy:</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div className="bg-blue-50 p-6 rounded-lg">
+            <div className="bg-orange-50 p-6 rounded-lg">
               <h4 className="font-semibold mb-2">Podniesienie kwalifikacji pracowników</h4>
               <p>Pracownicy z uprawnieniami SEP mogą samodzielnie wykonywać prace przy urządzeniach, co zwiększa efektywność działania firmy.</p>
             </div>
-            <div className="bg-blue-50 p-6 rounded-lg">
+            <div className="bg-orange-50 p-6 rounded-lg">
               <h4 className="font-semibold mb-2">Zwiększenie bezpieczeństwa w miejscu pracy</h4>
               <p>Przeszkoleni pracownicy mają większą świadomość zagrożeń i potrafią im zapobiegać.</p>
             </div>
-            <div className="bg-blue-50 p-6 rounded-lg">
+            <div className="bg-orange-50 p-6 rounded-lg">
               <h4 className="font-semibold mb-2">Zgodność z przepisami</h4>
               <p>Uprawnienia SEP są wymagane przez prawo dla osób obsługujących określone urządzenia.</p>
             </div>
-            <div className="bg-blue-50 p-6 rounded-lg">
+            <div className="bg-orange-50 p-6 rounded-lg">
               <h4 className="font-semibold mb-2">Redukcja kosztów zewnętrznych usług</h4>
               <p>Pracownicy z uprawnieniami mogą wykonywać prace, które inaczej wymagałyby zatrudnienia zewnętrznych firm.</p>
             </div>
@@ -368,19 +367,19 @@ const ServiceDetailPage = () => {
           
           <h3 className="text-2xl font-semibold mb-4">Korzyści dla firmy:</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div className="bg-blue-50 p-6 rounded-lg">
+            <div className="bg-orange-50 p-6 rounded-lg">
               <h4 className="font-semibold mb-2">Zmniejszenie liczby reklamacji</h4>
               <p>Poprawnie wykonane połączenia lutowane to mniej usterek i reklamacji od klientów.</p>
             </div>
-            <div className="bg-blue-50 p-6 rounded-lg">
+            <div className="bg-orange-50 p-6 rounded-lg">
               <h4 className="font-semibold mb-2">Oszczędności poprzez redukcję odpadów</h4>
               <p>Mniej błędów to mniej odpadów produkcyjnych i mniej zmarnowanych materiałów.</p>
             </div>
-            <div className="bg-blue-50 p-6 rounded-lg">
+            <div className="bg-orange-50 p-6 rounded-lg">
               <h4 className="font-semibold mb-2">Zwiększenie wydajności produkcji</h4>
               <p>Wyszkoleni pracownicy pracują szybciej i dokładniej, co zwiększa przepustowość linii produkcyjnych.</p>
             </div>
-            <div className="bg-blue-50 p-6 rounded-lg">
+            <div className="bg-orange-50 p-6 rounded-lg">
               <h4 className="font-semibold mb-2">Spełnienie standardów jakości</h4>
               <p>Szkolenia uwzględniają międzynarodowe standardy jakości połączeń lutowanych (IPC).</p>
             </div>
@@ -415,7 +414,7 @@ const ServiceDetailPage = () => {
           </ul>
           
           <h3 className="text-2xl font-semibold mb-4">Kontakt:</h3>
-          <div className="bg-blue-50 p-6 rounded-lg">
+          <div className="bg-orange-50 p-6 rounded-lg">
             <p className="mb-4">Zapraszamy do kontaktu w celu przygotowania indywidualnej oferty szkoleniowej dostosowanej do potrzeb Państwa firmy.</p>
             <p>Możemy przygotować szkolenie zamknięte dla grupy pracowników lub cykliczne szkolenia dla całego zespołu.</p>
           </div>
@@ -467,19 +466,19 @@ const ServiceDetailPage = () => {
           
           <h3 className="text-2xl font-semibold mb-4">Korzyści dla firmy i pracowników:</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div className="bg-blue-50 p-6 rounded-lg">
+            <div className="bg-orange-50 p-6 rounded-lg">
               <h4 className="font-semibold mb-2">Zwiększenie zaangażowania</h4>
               <p>Interaktywna forma przekazywania wiedzy zwiększa zaangażowanie pracowników w kwestie bezpieczeństwa.</p>
             </div>
-            <div className="bg-blue-50 p-6 rounded-lg">
+            <div className="bg-orange-50 p-6 rounded-lg">
               <h4 className="font-semibold mb-2">Poprawa bezpieczeństwa pracy</h4>
               <p>Świadomi pracownicy popełniają mniej błędów, co przekłada się na mniejszą liczbę wypadków.</p>
             </div>
-            <div className="bg-blue-50 p-6 rounded-lg">
+            <div className="bg-orange-50 p-6 rounded-lg">
               <h4 className="font-semibold mb-2">Budowanie kultury organizacyjnej</h4>
               <p>Eventy integrują pracowników i budują pozytywną kulturę organizacyjną zorientowaną na bezpieczeństwo.</p>
             </div>
-            <div className="bg-blue-50 p-6 rounded-lg">
+            <div className="bg-orange-50 p-6 rounded-lg">
               <h4 className="font-semibold mb-2">Praktyczny wymiar szkoleń</h4>
               <p>Eventy pozwalają na przekazanie praktycznej wiedzy w atrakcyjnej formie, co zwiększa jej przyswajanie.</p>
             </div>
@@ -506,7 +505,7 @@ const ServiceDetailPage = () => {
           </ul>
           
           <h3 className="text-2xl font-semibold mb-4">Kontakt i organizacja:</h3>
-          <div className="bg-blue-50 p-6 rounded-lg">
+          <div className="bg-orange-50 p-6 rounded-lg">
             <p className="mb-4">Każdy event jest dostosowany do indywidualnych potrzeb i specyfiki firmy. Współpracujemy z klientem na każdym etapie organizacji, od planowania po realizację.</p>
             <p>Zapraszamy do kontaktu w celu omówienia szczegółów i przygotowania oferty dopasowanej do Państwa potrzeb.</p>
           </div>
@@ -544,10 +543,10 @@ const ServiceDetailPage = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-blue-600 text-white py-16">
+      <section className="bg-orange-500 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <Button asChild variant="ghost" className="mb-4 text-white hover:bg-blue-700">
+            <Button asChild variant="ghost" className="mb-4 text-white hover:bg-orange-600">
               <Link to="/uslugi"><ArrowLeft className="mr-2 h-4 w-4" /> Powrót do usług</Link>
             </Button>
             <h1 className="text-4xl font-bold mb-6">{serviceInfo.title}</h1>
