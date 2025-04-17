@@ -99,7 +99,7 @@ const Navbar = () => {
           </div>
           
           <div className="hidden md:flex items-center">
-            <Button asChild variant="default" className="ml-4">
+            <Button asChild variant="default" className="ml-4 bg-orange-500 hover:bg-orange-600 border-orange-500 hover:border-orange-600">
               <Link to="/kontakt">Kontakt</Link>
             </Button>
             <Button asChild variant="outline" className="ml-2 bg-orange-500 text-white hover:bg-orange-600 border-orange-500 hover:border-orange-600">
@@ -180,7 +180,7 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="pt-4 pb-3 border-t border-gray-200 flex flex-col space-y-2 px-4">
-            <Button asChild variant="default" className="w-full justify-center">
+            <Button asChild variant="default" className="w-full justify-center bg-orange-500 hover:bg-orange-600 border-orange-500 hover:border-orange-600">
               <Link to="/kontakt">Kontakt</Link>
             </Button>
             <Button asChild variant="outline" className="w-full justify-center bg-orange-500 text-white hover:bg-orange-600 border-orange-500 hover:border-orange-600">
