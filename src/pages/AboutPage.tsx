@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -95,8 +94,8 @@ const AboutPage = () => {
             </div>
             <div className="rounded-lg overflow-hidden shadow-xl">
               <img 
-                src="/public/lovable-uploads/1dd9cbee-fe1a-42e5-b83b-bbbb2d075760.png" 
-                alt="Diagramy usług" 
+                src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81" 
+                alt="Szkolenie pracowników w fabryce" 
                 className="w-full h-auto" 
               />
             </div>
