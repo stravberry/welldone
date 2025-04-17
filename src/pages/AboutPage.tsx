@@ -1,6 +1,7 @@
+
 import React from 'react';
-import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
 import { Clock, Users, Target, CheckCircle, Award, Briefcase } from 'lucide-react';
 import StatItem from '@/components/StatItem';
 import Testimonial from '@/components/Testimonial';
@@ -125,42 +126,42 @@ const AboutPage = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <Clock size={40} className="text-blue-500 mb-4" />
+              <Clock size={40} className="text-orange-500 mb-4" />
               <h3 className="text-xl font-semibold mb-3">Elastyczność</h3>
               <p className="text-gray-600">
                 Dostosowujemy terminy i formę szkoleń do indywidualnych potrzeb i harmonogramu Twojej firmy.
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <Users size={40} className="text-blue-500 mb-4" />
+              <Users size={40} className="text-orange-500 mb-4" />
               <h3 className="text-xl font-semibold mb-3">Specjalizacja</h3>
               <p className="text-gray-600">
                 Specjalizujemy się wyłącznie we współpracy z firmami produkcyjnymi, co pozwala nam lepiej rozumieć ich wyzwania i potrzeby.
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <Target size={40} className="text-blue-500 mb-4" />
+              <Target size={40} className="text-orange-500 mb-4" />
               <h3 className="text-xl font-semibold mb-3">Bezpłatny audyt</h3>
               <p className="text-gray-600">
                 Oferujemy bezpłatny audyt, który pozwala firmom ocenić, czy aktualnie przepłacają za szkolenia i uprawnienia pracowników.
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <CheckCircle size={40} className="text-blue-500 mb-4" />
+              <CheckCircle size={40} className="text-orange-500 mb-4" />
               <h3 className="text-xl font-semibold mb-3">Kompleksowa obsługa</h3>
               <p className="text-gray-600">
                 Zapewniamy pełną obsługę – od organizacji szkoleń, po finalne uzyskanie uprawnień przez pracowników.
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <Award size={40} className="text-blue-500 mb-4" />
+              <Award size={40} className="text-orange-500 mb-4" />
               <h3 className="text-xl font-semibold mb-3">Doświadczenie</h3>
               <p className="text-gray-600">
                 Posiadamy wieloletnie doświadczenie w branży szkoleniowej i certyfikacyjnej.
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <Briefcase size={40} className="text-blue-500 mb-4" />
+              <Briefcase size={40} className="text-orange-500 mb-4" />
               <h3 className="text-xl font-semibold mb-3">Różnorodność szkoleń</h3>
               <p className="text-gray-600">
                 Oferujemy szeroki zakres szkoleń – od UDT, przez SEP, po szkolenia specjalistyczne.
