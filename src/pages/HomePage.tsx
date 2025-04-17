@@ -149,8 +149,8 @@ const HomePage = () => {
                   <iframe 
                     src="https://www.youtube.com/embed/8QDIVIU9QZQ" 
                     title="Well-Done.pl Company Presentation" 
-                    className="w-full h-full"
-                    frameBorder="0" 
+                    className="w-full h-full border-none" 
+                    frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowFullScreen
                   ></iframe>
