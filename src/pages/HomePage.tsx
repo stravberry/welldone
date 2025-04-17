@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Award, Users, Briefcase, BarChart, CheckCircle, BookOpen, Clock, ThumbsUp } from 'lucide-react';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 import ServiceCard from '@/components/ServiceCard';
 import Testimonial from '@/components/Testimonial';
 import FAQ from '@/components/FAQ';
@@ -142,16 +143,18 @@ const HomePage = () => {
                 </Button>
               </div>
             </div>
-            <div className="rounded-lg overflow-hidden shadow-xl">
-              <div className="aspect-w-16 aspect-h-9">
-                <iframe 
-                  src="https://www.youtube.com/embed/8QDIVIU9QZQ" 
-                  title="Well-Done.pl Company Presentation" 
-                  className="w-full h-full"
-                  frameBorder="0" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                  allowFullScreen
-                ></iframe>
+            <div className="rounded-lg overflow-hidden shadow-xl h-full">
+              <div className="w-full h-full">
+                <AspectRatio ratio={16/9} className="bg-gray-800">
+                  <iframe 
+                    src="https://www.youtube.com/embed/8QDIVIU9QZQ" 
+                    title="Well-Done.pl Company Presentation" 
+                    className="w-full h-full"
+                    frameBorder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowFullScreen
+                  ></iframe>
+                </AspectRatio>
               </div>
             </div>
           </div>
