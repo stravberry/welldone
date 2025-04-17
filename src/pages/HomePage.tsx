@@ -143,10 +143,15 @@ const HomePage = () => {
               </div>
             </div>
             <div className="rounded-lg overflow-hidden shadow-xl">
-              <div className="aspect-w-16 aspect-h-9 bg-gray-200">
-                <div className="w-full h-full flex items-center justify-center bg-gray-800 text-white">
-                  <p className="text-center p-4">Miejsce na video przedstawiające firmę</p>
-                </div>
+              <div className="aspect-w-16 aspect-h-9">
+                <iframe 
+                  src="https://www.youtube.com/embed/8QDIVIU9QZQ" 
+                  title="Well-Done.pl Company Presentation" 
+                  className="w-full h-full"
+                  frameBorder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowFullScreen
+                ></iframe>
               </div>
             </div>
           </div>
