@@ -44,24 +44,24 @@ const Navbar = () => {
               <img 
                 src="/lovable-uploads/a2c8c546-13e6-445b-9832-abf375420d6c.png" 
                 alt="Well-done.pl Logo" 
-                className="h-8 sm:h-10 mr-2" 
+                className="h-6 sm:h-8 mr-2" 
               />
             </Link>
           </div>
           
-          <div className="hidden md:ml-6 md:flex md:items-center md:space-x-2 lg:space-x-4">
-            <Link to="/" className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600">
+          <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4 lg:space-x-6">
+            <Link to="/" className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
               Home
             </Link>
-            <Link to="/o-nas" className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600">
+            <Link to="/o-nas" className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
               O Nas
             </Link>
             <div className="relative">
               <button
                 onClick={toggleServices}
-                className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 flex items-center"
+                className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 flex items-center whitespace-nowrap"
               >
-                Usługi / Dla Firm
+                Usługi
                 <ChevronDown className="ml-1 h-4 w-4" />
               </button>
               {servicesOpen && (
@@ -106,13 +106,13 @@ const Navbar = () => {
                 </div>
               )}
             </div>
-            <Link to="/bezplatny-audyt" className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600">
+            <Link to="/bezplatny-audyt" className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
               Bezpłatny Audyt
             </Link>
-            <Link to="/realizacje" className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600">
+            <Link to="/realizacje" className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
               Realizacje
             </Link>
-            <Link to="/wiedza" className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600">
+            <Link to="/wiedza" className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
               Wiedza
             </Link>
           </div>
@@ -151,7 +151,7 @@ const Navbar = () => {
               onClick={toggleServices}
               className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100 flex items-center justify-between"
             >
-              Usługi / Dla Firm
+              Usługi
               <ChevronDown className={`h-4 w-4 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
             </button>
             {servicesOpen && (
