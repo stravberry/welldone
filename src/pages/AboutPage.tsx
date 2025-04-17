@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -177,8 +176,8 @@ const AboutPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
               <img 
-                src="/public/lovable-uploads/f9dc5911-3540-4c1c-91a0-f031a4e94698.png" 
-                alt="Buyer persona" 
+                src="/public/lovable-uploads/657768d6-dc5a-419b-80b8-b664af6c6775.png" 
+                alt="Inspekcja w magazynie" 
                 className="w-full h-auto rounded-lg shadow-xl" 
               />
             </div>
@@ -268,7 +267,7 @@ const AboutPage = () => {
               company="Firma Y"
             />
             <Testimonial
-              quote="Bezpłatny audyt pomógł nam zoptymalizować proces szkoleniowy, co przełożyło się na realne oszczędności."
+              quote="Bezpłatny audyt pomóg�� nam zoptymalizować proces szkoleniowy, co przełożyło się na realne oszczędności."
               author="Piotr Wiśniewski"
               role="Dyrektor Operacyjny"
               company="Firma Z"
