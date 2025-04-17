@@ -21,22 +21,22 @@ const FreeAuditPage = () => {
     {
       title: "Ocena aktualnych szkoleń",
       description: "Przeanalizujemy, czy obecne szkolenia spełniają wszystkie wymagania prawne oraz czy odpowiadają na realne potrzeby Twojej firmy.",
-      icon: <ClipboardCheck size={40} className="text-blue-500" />
+      icon: <ClipboardCheck size={40} className="text-orange-500" />
     },
     {
       title: "Weryfikacja uprawnień pracowników",
       description: "Sprawdzimy, czy wszyscy pracownicy posiadają wymagane uprawnienia do obsługi sprzętu i urządzeń w Twojej firmie.",
-      icon: <Search size={40} className="text-blue-500" />
+      icon: <Search size={40} className="text-orange-500" />
     },
     {
       title: "Optymalizacja kosztów",
       description: "Pomożemy zidentyfikować, czy nie przepłacasz za szkolenia i certyfikacje, oraz wskażemy obszary, w których możesz zredukować koszty.",
-      icon: <TrendingUp size={40} className="text-blue-500" />
+      icon: <TrendingUp size={40} className="text-orange-500" />
     },
     {
       title: "Dostosowanie szkoleń do potrzeb firmy",
       description: "Oferujemy indywidualnie dobrane programy szkoleniowe, które idealnie pasują do specyfiki Twojej produkcji i działalności.",
-      icon: <FileSearch size={40} className="text-blue-500" />
+      icon: <FileSearch size={40} className="text-orange-500" />
     }
   ];
   
@@ -81,7 +81,7 @@ const FreeAuditPage = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-blue-600 text-white py-16">
+      <section className="bg-orange-600 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl font-bold mb-6">Bezpłatny audyt szkoleniowy</h1>
@@ -158,7 +158,7 @@ const FreeAuditPage = () => {
             {steps.map((step) => (
               <div key={step.number} className="relative">
                 <div className="flex md:block md:text-center">
-                  <div className="flex items-center justify-center h-12 w-12 rounded-full bg-blue-600 text-white font-bold md:mx-auto">
+                  <div className="flex items-center justify-center h-12 w-12 rounded-full bg-orange-600 text-white font-bold md:mx-auto">
                     {step.number}
                   </div>
                   <div className="ml-4 md:ml-0 md:mt-4">
@@ -288,7 +288,7 @@ const FreeAuditPage = () => {
                   {errors.needs && <p className="text-red-500 text-sm">{errors.needs.message as string}</p>}
                 </div>
                 
-                <Button type="submit" className="w-full" size="lg">
+                <Button type="submit" className="w-full bg-orange-500 hover:bg-orange-600" size="lg">
                   Zgłoś się na audyt
                 </Button>
               </form>
