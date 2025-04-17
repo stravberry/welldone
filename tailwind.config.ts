@@ -20,7 +20,7 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				sans: ['Inter', 'sans-serif'],
+				sans: ['Outfit', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -65,6 +65,18 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				orange: {
+					50: '#fff8f1',
+					100: '#ffe9d5',
+					200: '#ffd2ac',
+					300: '#ffb477',
+					400: '#ff9144',
+					500: '#ff7a1a',
+					600: '#ff6600',
+					700: '#cc4e00',
+					800: '#a23e00',
+					900: '#7a3000',
 				},
 				blue: {
 					50: '#e6f7ff',

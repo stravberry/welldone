@@ -22,21 +22,25 @@ const Navbar = () => {
         <div className="flex justify-between h-16">
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="flex items-center">
-              <span className="text-xl font-bold text-blue-600">UDT & SEP Szkolenia</span>
+              <img 
+                src="/lovable-uploads/a2c8c546-13e6-445b-9832-abf375420d6c.png" 
+                alt="Well-done.pl Logo" 
+                className="h-10 mr-2" 
+              />
             </Link>
           </div>
           
           <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
-            <Link to="/" className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600">
+            <Link to="/" className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600">
               Home
             </Link>
-            <Link to="/o-nas" className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600">
+            <Link to="/o-nas" className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600">
               O Nas
             </Link>
             <div className="relative">
               <button
                 onClick={toggleServices}
-                className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 flex items-center"
+                className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 flex items-center"
               >
                 Usługi / Dla Firm
                 <ChevronDown className="ml-1 h-4 w-4" />
@@ -83,13 +87,13 @@ const Navbar = () => {
                 </div>
               )}
             </div>
-            <Link to="/bezplatny-audyt" className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600">
+            <Link to="/bezplatny-audyt" className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600">
               Bezpłatny Audyt
             </Link>
-            <Link to="/realizacje" className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600">
+            <Link to="/realizacje" className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600">
               Realizacje
             </Link>
-            <Link to="/wiedza" className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600">
+            <Link to="/wiedza" className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600">
               Wiedza
             </Link>
           </div>
@@ -98,7 +102,7 @@ const Navbar = () => {
             <Button asChild variant="default" className="ml-4">
               <Link to="/kontakt">Kontakt</Link>
             </Button>
-            <Button asChild variant="outline" className="ml-2 bg-amber-500 text-white hover:bg-amber-600 border-amber-500 hover:border-amber-600">
+            <Button asChild variant="outline" className="ml-2 bg-orange-500 text-white hover:bg-orange-600 border-orange-500 hover:border-orange-600">
               <Link to="/wycena">Błyskawiczna Wycena</Link>
             </Button>
           </div>
@@ -106,7 +110,7 @@ const Navbar = () => {
           <div className="-mr-2 flex items-center md:hidden">
             <button
               onClick={toggleMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-orange-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-500"
             >
               <span className="sr-only">Otwórz menu</span>
               {isOpen ? <X className="block h-6 w-6" /> : <Menu className="block h-6 w-6" />}
@@ -118,15 +122,15 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link to="/" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100">
+            <Link to="/" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100">
               Home
             </Link>
-            <Link to="/o-nas" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100">
+            <Link to="/o-nas" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100">
               O Nas
             </Link>
             <button
               onClick={toggleServices}
-              className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100 flex items-center justify-between"
+              className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100 flex items-center justify-between"
             >
               Usługi / Dla Firm
               <ChevronDown className={`h-4 w-4 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
@@ -135,43 +139,43 @@ const Navbar = () => {
               <div className="pl-4 space-y-1">
                 <Link
                   to="/uslugi/udt-operatorzy"
-                  className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100"
+                  className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100"
                 >
                   Uprawnienia UDT dla operatorów
                 </Link>
                 <Link
                   to="/uslugi/udt-konserwatorzy"
-                  className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100"
+                  className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100"
                 >
                   Uprawnienia UDT dla konserwatorów
                 </Link>
                 <Link
                   to="/uslugi/sep"
-                  className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100"
+                  className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100"
                 >
                   Uprawnienia SEP
                 </Link>
                 <Link
                   to="/uslugi/lutowanie"
-                  className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100"
+                  className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100"
                 >
                   Szkolenia z lutowania
                 </Link>
                 <Link
                   to="/uslugi/eventy"
-                  className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100"
+                  className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100"
                 >
                   Eventy edukacyjne
                 </Link>
               </div>
             )}
-            <Link to="/bezplatny-audyt" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100">
+            <Link to="/bezplatny-audyt" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100">
               Bezpłatny Audyt
             </Link>
-            <Link to="/realizacje" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100">
+            <Link to="/realizacje" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100">
               Realizacje
             </Link>
-            <Link to="/wiedza" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100">
+            <Link to="/wiedza" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100">
               Wiedza
             </Link>
           </div>
@@ -179,7 +183,7 @@ const Navbar = () => {
             <Button asChild variant="default" className="w-full justify-center">
               <Link to="/kontakt">Kontakt</Link>
             </Button>
-            <Button asChild variant="outline" className="w-full justify-center bg-amber-500 text-white hover:bg-amber-600 border-amber-500 hover:border-amber-600">
+            <Button asChild variant="outline" className="w-full justify-center bg-orange-500 text-white hover:bg-orange-600 border-orange-500 hover:border-orange-600">
               <Link to="/wycena">Błyskawiczna Wycena</Link>
             </Button>
           </div>

@@ -9,7 +9,13 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4">UDT & SEP Szkolenia</h3>
+            <div className="flex items-center mb-4">
+              <img 
+                src="/lovable-uploads/a2c8c546-13e6-445b-9832-abf375420d6c.png" 
+                alt="Well-done.pl Logo" 
+                className="h-10 mr-2" 
+              />
+            </div>
             <p className="text-gray-400 mb-4">
               Pomagamy firmom produkcyjnym działać bez ryzyka – zapewniamy pełną zgodność uprawnień UDT i SEP dla pracowników.
             </p>
@@ -78,16 +84,32 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Kontakt</h3>
             <ul className="space-y-4">
               <li className="flex items-start">
-                <Phone size={20} className="mr-2 mt-1 text-blue-400" />
-                <span>+48 123 456 789</span>
+                <Phone size={20} className="mr-2 mt-1 text-orange-400" />
+                <span>504-305-437</span>
               </li>
               <li className="flex items-start">
-                <Mail size={20} className="mr-2 mt-1 text-blue-400" />
-                <span>kontakt@udt-sep-szkolenia.pl</span>
+                <Mail size={20} className="mr-2 mt-1 text-orange-400" />
+                <span>pgerus@well-done.pl</span>
               </li>
               <li className="flex items-start">
-                <MapPin size={20} className="mr-2 mt-1 text-blue-400" />
-                <span>ul. Przemysłowa 1, 00-001 Warszawa</span>
+                <MapPin size={20} className="mr-2 mt-1 text-orange-400" />
+                <div>
+                  <span>ul. Drzewieckiego 19/11</span>
+                  <br />
+                  <span>54-129 Wrocław</span>
+                  <br />
+                  <span className="text-sm text-gray-500 mt-2">
+                    Centrum Kompetencji Zawodowych Well-Done.pl Paweł Gerus
+                  </span>
+                  <br />
+                  <span className="text-sm text-gray-500">
+                    NIP: 884-248-74-55
+                  </span>
+                  <br />
+                  <span className="text-sm text-gray-500">
+                    REGON: 022303775
+                  </span>
+                </div>
               </li>
             </ul>
           </div>
@@ -95,7 +117,7 @@ const Footer = () => {
         
         <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
-            &copy; {new Date().getFullYear()} UDT & SEP Szkolenia. Wszelkie prawa zastrzeżone.
+            &copy; {new Date().getFullYear()} Well-Done.pl. Wszelkie prawa zastrzeżone.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link to="/polityka-prywatnosci" className="text-gray-400 hover:text-white text-sm">

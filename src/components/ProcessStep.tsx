@@ -10,7 +10,7 @@ interface ProcessStepProps {
 const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description }) => {
   return (
     <div className="process-step flex md:block relative">
-      <div className="flex items-center justify-center h-10 w-10 rounded-full bg-blue-600 text-white font-bold flex-shrink-0 z-10">
+      <div className="flex items-center justify-center h-10 w-10 rounded-full bg-orange-600 text-white font-bold flex-shrink-0 z-10">
         {number}
       </div>
       <div className="ml-4 md:ml-0 md:mt-4">

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -102,22 +101,22 @@ const HomePage = () => {
     {
       title: "Elastyczny harmonogram",
       description: "Dostosowujemy terminy szkoleń do Twojego harmonogramu pracy.",
-      icon: <Clock size={24} className="text-blue-500" />
+      icon: <Clock size={24} className="text-orange-500" />
     },
     {
       title: "Doświadczeni trenerzy",
       description: "Nasi trenerzy to specjaliści z wieloletnim doświadczeniem w branży.",
-      icon: <Award size={24} className="text-blue-500" />
+      icon: <Award size={24} className="text-orange-500" />
     },
     {
       title: "Szkolenia szyte na miarę",
       description: "Każde szkolenie jest dopasowane do specyficznych potrzeb Twojej firmy.",
-      icon: <CheckCircle size={24} className="text-blue-500" />
+      icon: <CheckCircle size={24} className="text-orange-500" />
     },
     {
       title: "Najwyższa jakość",
       description: "Gwarantujemy najwyższą jakość szkoleń i wsparcie na każdym etapie.",
-      icon: <ThumbsUp size={24} className="text-blue-500" />
+      icon: <ThumbsUp size={24} className="text-orange-500" />
     }
   ];
 
@@ -135,10 +134,10 @@ const HomePage = () => {
                 Zapewniamy pełną zgodność uprawnień UDT i SEP dla pracowników. Stosujemy procesowe podejście, które umożliwia precyzyjne dopasowanie szkoleń do indywidualnych potrzeb klienta.
               </p>
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                <Button asChild size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
+                <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-gray-100">
                   <Link to="/o-nas">Dlaczego My?</Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="bg-amber-500 text-white hover:bg-amber-600 border-amber-500 hover:border-amber-600">
+                <Button asChild size="lg" variant="outline" className="bg-orange-500 text-white hover:bg-orange-600 border-orange-500 hover:border-orange-600">
                   <Link to="/wycena">Błyskawiczna Wycena</Link>
                 </Button>
               </div>
@@ -207,20 +206,20 @@ const HomePage = () => {
             </div>
             <div className="relative">
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-blue-50 rounded-lg p-6 text-center">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">10+</div>
+                <div className="bg-orange-50 rounded-lg p-6 text-center">
+                  <div className="text-3xl font-bold text-orange-600 mb-2">10+</div>
                   <div className="text-gray-600">lat doświadczenia</div>
                 </div>
-                <div className="bg-blue-50 rounded-lg p-6 text-center">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">500+</div>
+                <div className="bg-orange-50 rounded-lg p-6 text-center">
+                  <div className="text-3xl font-bold text-orange-600 mb-2">500+</div>
                   <div className="text-gray-600">zadowolonych firm</div>
                 </div>
-                <div className="bg-blue-50 rounded-lg p-6 text-center">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">1000+</div>
+                <div className="bg-orange-50 rounded-lg p-6 text-center">
+                  <div className="text-3xl font-bold text-orange-600 mb-2">1000+</div>
                   <div className="text-gray-600">zrealizowanych szkoleń</div>
                 </div>
-                <div className="bg-blue-50 rounded-lg p-6 text-center">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">80%</div>
+                <div className="bg-orange-50 rounded-lg p-6 text-center">
+                  <div className="text-3xl font-bold text-orange-600 mb-2">80%</div>
                   <div className="text-gray-600">zleceń dla produkcji</div>
                 </div>
               </div>
@@ -289,7 +288,7 @@ const HomePage = () => {
       </section>
 
       {/* Free Audit CTA */}
-      <section className="py-16 bg-blue-600 text-white">
+      <section className="py-16 bg-orange-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
@@ -297,20 +296,20 @@ const HomePage = () => {
               <p className="text-lg mb-6">
                 Zastanawiasz się, czy Twoje szkolenia są odpowiednio dobrane i czy nie przepłacasz za uzyskiwanie uprawnień pracowników? Skorzystaj z bezpłatnego audytu i dowiedz się, jak możemy pomóc.
               </p>
-              <Button asChild size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
+              <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-gray-100">
                 <Link to="/bezplatny-audyt">Zamów bezpłatny audyt</Link>
               </Button>
             </div>
             <div className="space-y-4">
-              <div className="bg-blue-500 rounded-lg p-4">
+              <div className="bg-orange-500 rounded-lg p-4">
                 <h3 className="font-semibold mb-2">Ocena aktualnych szkoleń</h3>
                 <p>Przeanalizujemy, czy obecne szkolenia spełniają wszystkie wymagania prawne oraz czy odpowiadają na realne potrzeby Twojej firmy.</p>
               </div>
-              <div className="bg-blue-500 rounded-lg p-4">
+              <div className="bg-orange-500 rounded-lg p-4">
                 <h3 className="font-semibold mb-2">Weryfikacja uprawnień pracowników</h3>
                 <p>Sprawdzimy, czy wszyscy pracownicy posiadają wymagane uprawnienia do obsługi sprzętu i urządzeń.</p>
               </div>
-              <div className="bg-blue-500 rounded-lg p-4">
+              <div className="bg-orange-500 rounded-lg p-4">
                 <h3 className="font-semibold mb-2">Optymalizacja kosztów</h3>
                 <p>Pomożemy zidentyfikować, czy nie przepłacasz za szkolenia i certyfikacje, oraz wskażemy obszary, w których możesz zredukować koszty.</p>
               </div>
