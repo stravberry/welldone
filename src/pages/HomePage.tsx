@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -143,9 +144,9 @@ const HomePage = () => {
                 </Button>
               </div>
             </div>
-            <div className="rounded-lg overflow-hidden shadow-xl h-full">
-              <div className="w-full h-full">
-                <AspectRatio ratio={16/9} className="bg-gray-800">
+            <div className="flex items-center justify-center">
+              <div className="w-full max-w-md">
+                <AspectRatio ratio={16/9}>
                   <iframe 
                     src="https://www.youtube.com/embed/8QDIVIU9QZQ" 
                     title="Well-Done.pl Company Presentation" 
