@@ -62,12 +62,23 @@ const AboutPage = () => {
 
   return (
     <div>
-      {/* Hero Section */}
-      <section className="bg-blue-600 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Hero Section with blurred background image */}
+      <section className="relative py-16 overflow-hidden">
+        {/* Background image with overlay */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="/public/lovable-uploads/e53f9387-8eab-484e-95d8-dae5efb914a0.png" 
+            alt="Szkolenie w fabryce" 
+            className="w-full h-full object-cover blur-sm"
+          />
+          <div className="absolute inset-0 bg-black opacity-60"></div>
+        </div>
+        
+        {/* Content */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
-            <h1 className="text-4xl font-bold mb-6">O Nas</h1>
-            <p className="text-xl max-w-3xl mx-auto">
+            <h1 className="text-4xl font-bold mb-6 text-white">O Nas</h1>
+            <p className="text-xl max-w-3xl mx-auto text-white">
               Poznaj firmę, która od lat wspiera przedsiębiorstwa produkcyjne w podnoszeniu kwalifikacji pracowników i zapewnianiu zgodności z wymogami prawnymi.
             </p>
           </div>
