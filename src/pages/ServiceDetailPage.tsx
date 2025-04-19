@@ -1,3 +1,4 @@
+
 import React, { ReactElement, isValidElement } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -545,4 +546,59 @@ const ServiceDetailPage = () => {
       ),
       faqItems: [
         {
-          question: "Ile czasu potrzeba na organizację eventu
+          question: "Ile czasu potrzeba na organizację eventu?",
+          answer: "Czas potrzebny na organizację eventu zależy od jego skali i złożoności. Standardowo potrzebujemy od 4 do 8 tygodni na przygotowanie wydarzenia, ale w przypadku dużych imprez firmowych lepiej zaplanować je z wyprzedzeniem 3-6 miesięcy."
+        },
+        {
+          question: "Czy możliwe jest zorganizowanie eventu online?",
+          answer: "Tak, oferujemy zarówno eventy stacjonarne, jak i w pełni wirtualne lub hybrydowe. Format dostosowujemy do potrzeb klienta i aktualnej sytuacji."
+        },
+        {
+          question: "Dla ilu osób możecie zorganizować event?",
+          answer: "Organizujemy wydarzenia dla grup od kilkunastu do nawet kilkuset osób. Wielkość grupy wpływa na format eventu i jego organizację, ale jesteśmy w stanie dostosować się do różnych potrzeb."
+        },
+        {
+          question: "Czy zapewniacie materiały edukacyjne dla uczestników?",
+          answer: "Tak, w ramach eventu uczestnicy otrzymują profesjonalnie przygotowane materiały edukacyjne, które mogą wykorzystać również po zakończeniu wydarzenia."
+        }
+      ]
+    }
+  };
+
+  if (!serviceId || !servicesData[serviceId]) {
+    return (
+      <div className="container mx-auto py-12 px-4">
+        <h1 className="text-3xl font-bold">Usługa nie znaleziona</h1>
+        <p className="mt-4">Przepraszamy, ale żądana usługa nie istnieje.</p>
+        <Button asChild className="mt-6">
+          <Link to="/uslugi">
+            <ArrowLeft className="mr-2 h-4 w-4" /> Powrót do usług
+          </Link>
+        </Button>
+      </div>
+    );
+  }
+
+  const service = servicesData[serviceId];
+
+  return (
+    <div className="container mx-auto py-12 px-4">
+      <div className="mb-8">
+        <Button asChild variant="outline">
+          <Link to="/uslugi">
+            <ArrowLeft className="mr-2 h-4 w-4" /> Powrót do usług
+          </Link>
+        </Button>
+      </div>
+      
+      <h1 className="text-4xl font-bold mb-4">{service.title}</h1>
+      <p className="text-xl text-gray-600 mb-12">{service.description}</p>
+      
+      {service.content}
+      
+      <FAQ items={service.faqItems} />
+    </div>
+  );
+};
+
+export default ServiceDetailPage;
