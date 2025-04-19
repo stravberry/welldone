@@ -27,7 +27,7 @@ const App = () => (
       <BrowserRouter>
         <div className="flex flex-col min-h-screen">
           <Navbar />
-          <main className="flex-grow">
+          <main className="flex-grow pt-16"> {/* Dodajemy górny padding o wysokości menu */}
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/o-nas" element={<AboutPage />} />
@@ -49,3 +49,4 @@ const App = () => (
 );
 
 export default App;
+
