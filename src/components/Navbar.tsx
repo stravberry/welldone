@@ -32,13 +32,11 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
-  const toggleServices = () => {
-    setServicesOpen(!servicesOpen);
-  };
-
   const closeMenu = () => {
     setIsOpen(false);
   };
+
+  // Removed the unused toggleServices function that was causing the build error
 
   const services = [
     { title: 'Uprawnienia UDT dla operatorów', href: '/uslugi/udt-operatorzy' },
@@ -73,21 +71,30 @@ const Navbar = () => {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger asChild>
-                    <Link 
-                      to="/uslugi" 
-                      className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap"
-                    >
+                  {/* Fix: Use proper structure for NavigationMenuTrigger */}
+                  <NavigationMenuTrigger>
+                    <span className="text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
                       Usługi
-                    </Link>
+                    </span>
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="bg-white">
                     <ul className="grid w-[400px] gap-3 p-4">
+                      {/* Add direct link to main services page at the top */}
+                      <li>
+                        <Link
+                          to="/uslugi"
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-orange-50 hover:text-orange-600 font-medium"
+                          onClick={closeMenu}
+                        >
+                          <div className="text-sm font-medium leading-none">Wszystkie usługi</div>
+                        </Link>
+                      </li>
                       {services.map((service) => (
                         <li key={service.href}>
                           <Link
                             to={service.href}
                             className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-orange-50 hover:text-orange-600"
+                            onClick={closeMenu}
                           >
                             <div className="text-sm font-medium leading-none">{service.title}</div>
                           </Link>
@@ -121,7 +128,7 @@ const Navbar = () => {
           
           <div className="-mr-2 flex items-center md:hidden">
             <button
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={toggleMenu}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-orange-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-500"
             >
               <span className="sr-only">Otwórz menu</span>
