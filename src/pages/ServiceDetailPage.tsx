@@ -654,8 +654,8 @@ const ServiceDetailPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="mb-8">
-        <Link to="/uslugi" className="inline-flex items-center">
+      <div className="mb-4">
+        <Link to="/uslugi">
           <Button variant="outline">
             <ArrowLeft className="mr-2" />
             Wróć do wszystkich usług
