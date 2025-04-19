@@ -654,7 +654,8 @@ const ServiceDetailPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="mb-4">
+      {/* Add more top padding to create space from the navigation menu */}
+      <div className="mb-4 pt-20">
         <Link to="/uslugi">
           <Button variant="outline">
             <ArrowLeft className="mr-2" />
