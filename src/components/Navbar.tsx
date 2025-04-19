@@ -1,11 +1,18 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -31,8 +38,15 @@ const Navbar = () => {
 
   const closeMenu = () => {
     setIsOpen(false);
-    setServicesOpen(false);
   };
+
+  const services = [
+    { title: 'Uprawnienia UDT dla operatorów', href: '/uslugi/udt-operatorzy' },
+    { title: 'Uprawnienia UDT dla konserwatorów', href: '/uslugi/udt-konserwatorzy' },
+    { title: 'Uprawnienia SEP', href: '/uslugi/sep' },
+    { title: 'Szkolenia z lutowania', href: '/uslugi/lutowanie' },
+    { title: 'Eventy edukacyjne', href: '/uslugi/eventy' },
+  ];
 
   return (
     <nav className={`bg-white shadow-sm sticky top-0 z-50 transition-shadow duration-300 ${scrolled ? 'shadow-md' : 'shadow-sm'}`}>
@@ -55,12 +69,36 @@ const Navbar = () => {
             <Link to="/o-nas" className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
               O Nas
             </Link>
-            <Link 
-              to="/uslugi" 
-              className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap"
-            >
-              Usługi
-            </Link>
+            
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger asChild>
+                    <Link 
+                      to="/uslugi" 
+                      className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap"
+                    >
+                      Usługi
+                    </Link>
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent className="bg-white">
+                    <ul className="grid w-[400px] gap-3 p-4">
+                      {services.map((service) => (
+                        <li key={service.href}>
+                          <Link
+                            to={service.href}
+                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-orange-50 hover:text-orange-600"
+                          >
+                            <div className="text-sm font-medium leading-none">{service.title}</div>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+            
             <Link to="/bezplatny-audyt" className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
               Bezpłatny Audyt
             </Link>
@@ -83,7 +121,7 @@ const Navbar = () => {
           
           <div className="-mr-2 flex items-center md:hidden">
             <button
-              onClick={toggleMenu}
+              onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-orange-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-500"
             >
               <span className="sr-only">Otwórz menu</span>
@@ -93,6 +131,7 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* Mobile menu */}
       {isOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
@@ -102,13 +141,19 @@ const Navbar = () => {
             <Link to="/o-nas" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100" onClick={closeMenu}>
               O Nas
             </Link>
-            <Link 
-              to="/uslugi" 
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100" 
-              onClick={closeMenu}
-            >
+            <Link to="/uslugi" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100" onClick={closeMenu}>
               Usługi
             </Link>
+            {services.map((service) => (
+              <Link
+                key={service.href}
+                to={service.href}
+                className="block px-3 py-2 pl-6 rounded-md text-sm font-medium text-gray-600 hover:text-orange-600 hover:bg-gray-100"
+                onClick={closeMenu}
+              >
+                {service.title}
+              </Link>
+            ))}
             <Link to="/bezplatny-audyt" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100" onClick={closeMenu}>
               Bezpłatny Audyt
             </Link>
