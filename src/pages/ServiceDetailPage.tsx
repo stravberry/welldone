@@ -105,22 +105,31 @@ const ServiceDetailPage = () => {
 
           <div className="bg-orange-50 py-16 px-4 rounded-xl mb-12">
             <h3 className="text-3xl font-semibold mb-12 text-center">Korzyści</h3>
-            <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="bg-white p-6 rounded-lg shadow-md flex items-start">
-                <Check className="h-6 w-6 text-green-500 mr-4 mt-1 flex-shrink-0" />
-                <span className="text-lg">Możliwość uzyskania uprawnień uznawanych w całej Polsce</span>
+            <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+              <div className="flex justify-center">
+                <img
+                  src="https://images.unsplash.com/photo-1606189934846-a527add8a77b?auto=format&fit=crop&w=800"
+                  alt="Korzyści ze szkolenia"
+                  className="rounded-lg shadow-lg max-w-full h-auto"
+                />
               </div>
-              <div className="bg-white p-6 rounded-lg shadow-md flex items-start">
-                <Check className="h-6 w-6 text-green-500 mr-4 mt-1 flex-shrink-0" />
-                <span className="text-lg">Doświadczeni trenerzy z praktycznym doświadczeniem</span>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-md flex items-start">
-                <Check className="h-6 w-6 text-green-500 mr-4 mt-1 flex-shrink-0" />
-                <span className="text-lg">Elastyczne formy szkolenia dostosowane do potrzeb firmy</span>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-md flex items-start">
-                <Check className="h-6 w-6 text-green-500 mr-4 mt-1 flex-shrink-0" />
-                <span className="text-lg">Kompleksowa obsługa procesu certyfikacji</span>
+              <div className="space-y-4">
+                <div className="bg-white p-4 rounded-lg shadow-md flex items-start">
+                  <Check className="h-6 w-6 text-green-500 mr-4 mt-1 flex-shrink-0" />
+                  <span className="text-lg">Możliwość uzyskania uprawnień uznawanych w całej Polsce</span>
+                </div>
+                <div className="bg-white p-4 rounded-lg shadow-md flex items-start">
+                  <Check className="h-6 w-6 text-green-500 mr-4 mt-1 flex-shrink-0" />
+                  <span className="text-lg">Doświadczeni trenerzy z praktycznym doświadczeniem</span>
+                </div>
+                <div className="bg-white p-4 rounded-lg shadow-md flex items-start">
+                  <Check className="h-6 w-6 text-green-500 mr-4 mt-1 flex-shrink-0" />
+                  <span className="text-lg">Elastyczne formy szkolenia dostosowane do potrzeb firmy</span>
+                </div>
+                <div className="bg-white p-4 rounded-lg shadow-md flex items-start">
+                  <Check className="h-6 w-6 text-green-500 mr-4 mt-1 flex-shrink-0" />
+                  <span className="text-lg">Kompleksowa obsługa procesu certyfikacji</span>
+                </div>
               </div>
             </div>
           </div>
