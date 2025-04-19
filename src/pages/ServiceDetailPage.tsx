@@ -575,12 +575,17 @@ const ServiceDetailPage = () => {
                   child.type === 'div' && 
                   isValidElement(child.props.children?.[0]) && 
                   child.props.children[0].type === 'h3' && 
+                  typeof child.props.children[0].props.children === 'string' && 
                   child.props.children[0].props.children === 'Lista dostępnych kursów:') {
                 return (
                   <div key={index} className="col-span-full">
-                    <h3 className="text-3xl font-semibold mb-8 text-center">{child.props.children[0].props.children}</h3>
+                    <h3 className="text-3xl font-semibold mb-8 text-center">
+                      {isValidElement(child.props.children[0]) ? child.props.children[0].props.children : null}
+                    </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                      {child.props.children[1].props.children}
+                      {isValidElement(child) && Array.isArray(child.props.children) && 
+                       isValidElement(child.props.children[1]) ? 
+                        child.props.children[1].props.children : null}
                     </div>
                   </div>
                 );
@@ -588,6 +593,7 @@ const ServiceDetailPage = () => {
               // Benefits section
               if (isValidElement(child) && 
                   child.type === 'h3' && 
+                  typeof child.props.children === 'string' &&
                   child.props.children === 'Korzyści:') {
                 const benefitsList = React.Children.toArray(isValidElement(serviceInfo.content) ? 
                   (serviceInfo.content as ReactElement).props.children : [])
@@ -597,7 +603,7 @@ const ServiceDetailPage = () => {
                   <div key={index} className="col-span-full py-16 bg-orange-50">
                     <h3 className="text-3xl font-semibold mb-12 text-center">Korzyści</h3>
                     <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-2 gap-8 px-4">
-                      {isValidElement(benefitsList) ? benefitsList.props.children : null}
+                      {isValidElement(benefitsList) && 'props' in benefitsList ? benefitsList.props.children : null}
                     </div>
                   </div>
                 );
