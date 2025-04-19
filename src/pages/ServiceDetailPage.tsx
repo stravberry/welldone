@@ -1,7 +1,8 @@
+
 import React, { ReactElement, isValidElement } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Check } from 'lucide-react';
 import FAQ from '@/components/FAQ';
 
 interface ServiceDetail {
@@ -631,6 +632,8 @@ const ServiceDetailPage = () => {
       ]
     }
   };
+
+  const service = serviceId ? servicesData[serviceId] : null;
 
   if (!service) {
     return (
