@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ServiceCard } from '@/components/ServiceCard';
-import { Wrench, Tool, Zap, Flame, Users } from 'lucide-react';
+import ServiceCard from '@/components/ServiceCard';
+import { Wrench, Wrench as Tool, Zap, Flame, Users } from 'lucide-react';
 
 const ServicesPage = () => {
   const services = [
