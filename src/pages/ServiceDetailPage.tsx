@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -542,15 +543,22 @@ const ServiceDetailPage = () => {
 
   return (
     <div>
-      {/* Hero Section */}
-      <section className="bg-orange-500 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Hero Section with Blurred Background */}
+      <section className="relative bg-orange-500 text-white">
+        <div 
+          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?auto=format&fit=crop&w=1200')`,
+            filter: 'blur(4px) brightness(0.7)'
+          }}
+        />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
-            <Button asChild variant="ghost" className="mb-4 text-white hover:bg-orange-600">
+            <Button asChild variant="ghost" className="mb-4 text-white hover:bg-orange-600/20">
               <Link to="/uslugi"><ArrowLeft className="mr-2 h-4 w-4" /> Powrót do usług</Link>
             </Button>
-            <h1 className="text-4xl font-bold mb-6">{serviceInfo.title}</h1>
-            <p className="text-xl max-w-3xl mx-auto">
+            <h1 className="text-5xl font-bold mb-6 text-shadow">{serviceInfo.title}</h1>
+            <p className="text-2xl max-w-3xl mx-auto text-shadow">
               {serviceInfo.description}
             </p>
           </div>
@@ -560,7 +568,40 @@ const ServiceDetailPage = () => {
       {/* Service Content */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {serviceInfo.content}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            {/* Map over list items and render them in a grid */}
+            {React.Children.toArray(serviceInfo.content.props.children).map((child: any) => {
+              if (child?.type === 'div' && child?.props?.children?.[0]?.type === 'h3' && 
+                  child?.props?.children?.[0]?.props?.children === 'Lista dostępnych kursów:') {
+                return (
+                  <div className="col-span-full">
+                    <h3 className="text-3xl font-semibold mb-8 text-center">{child.props.children[0].props.children}</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      {child.props.children[1].props.children}
+                    </div>
+                  </div>
+                );
+              }
+              // Benefits section
+              if (child?.type === 'h3' && child?.props?.children === 'Korzyści:') {
+                return (
+                  <div className="col-span-full py-16 bg-orange-50">
+                    <h3 className="text-3xl font-semibold mb-12 text-center">Korzyści</h3>
+                    <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-2 gap-8 px-4">
+                      {React.Children.toArray(serviceInfo.content.props.children)
+                        .find((c: any) => c?.type === 'ul')?.props.children}
+                    </div>
+                  </div>
+                );
+              }
+              // Render other content normally
+              if (child && typeof child === 'object') {
+                return child;
+              }
+              return null;
+            })}
+          </div>
+          
           <div className="mt-12 text-center">
             <Button asChild size="lg">
               <Link to="/wycena">Uzyskaj Błyskawiczną Wycenę</Link>
@@ -569,11 +610,16 @@ const ServiceDetailPage = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
+      {/* FAQ Section with condensed text */}
       {serviceInfo.faqItems.length > 0 && (
         <FAQ 
           title={`Najczęściej zadawane pytania o ${serviceInfo.title}`} 
-          items={serviceInfo.faqItems} 
+          items={serviceInfo.faqItems.map(item => ({
+            ...item,
+            answer: item.answer.length > 200 
+              ? item.answer.substring(0, 200) + '...' 
+              : item.answer
+          }))} 
         />
       )}
 
@@ -599,3 +645,4 @@ const ServiceDetailPage = () => {
 };
 
 export default ServiceDetailPage;
+
