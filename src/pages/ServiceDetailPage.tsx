@@ -1,4 +1,3 @@
-
 import React, { ReactElement, isValidElement } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -23,85 +22,101 @@ const ServiceDetailPage = () => {
       image: '/path/to/image.jpg',
       content: (
         <div>
-          <h3 className="text-2xl font-semibold mb-4">Lista dostępnych kursów:</h3>
-          <ul className="space-y-6 mb-8">
-            <li className="bg-white p-6 rounded-lg shadow-md">
-              <h4 className="text-xl font-semibold mb-2">Wózki widłowe (bez specjalizacji i specjalizowane)</h4>
-              <p className="text-gray-600 mb-4">Szkolenie przeznaczone dla osób, które chcą uzyskać uprawnienia do obsługi wózków jezdniowych z mechanicznym napędem podnoszenia.</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div>
-                  <h5 className="font-semibold mb-2">Dla kogo:</h5>
-                  <p className="text-gray-600">Pracownicy firm produkcyjnych i magazynów obsługujący wózki widłowe.</p>
-                </div>
-                <div>
-                  <h5 className="font-semibold mb-2">Forma szkolenia:</h5>
-                  <p className="text-gray-600">Stacjonarna, online (część teoretyczna), hybrydowa</p>
-                </div>
-              </div>
-            </li>
-            <li className="bg-white p-6 rounded-lg shadow-md">
-              <h4 className="text-xl font-semibold mb-2">Suwnice</h4>
-              <p className="text-gray-600 mb-4">Kurs przygotowujący do zdobycia uprawnień na obsługę suwnic sterowanych z poziomu roboczego i kabiny.</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div>
-                  <h5 className="font-semibold mb-2">Dla kogo:</h5>
-                  <p className="text-gray-600">Pracownicy firm produkcyjnych obsługujący urządzenia dźwignicowe.</p>
-                </div>
-                <div>
-                  <h5 className="font-semibold mb-2">Forma szkolenia:</h5>
-                  <p className="text-gray-600">Stacjonarna, hybrydowa</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <img 
+                src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800"
+                alt="Wózki widłowe"
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-6">
+                <h4 className="text-xl font-semibold mb-2">Wózki widłowe (bez specjalizacji i specjalizowane)</h4>
+                <p className="text-gray-600 mb-4">Szkolenie przeznaczone dla osób, które chcą uzyskać uprawnienia do obsługi wózków jezdniowych z mechanicznym napędem podnoszenia.</p>
+                <div className="grid grid-cols-1 gap-4">
+                  <div>
+                    <h5 className="font-semibold mb-2">Forma szkolenia:</h5>
+                    <p className="text-gray-600">Stacjonarna, online (część teoretyczna), hybrydowa</p>
+                  </div>
                 </div>
               </div>
-            </li>
-            <li className="bg-white p-6 rounded-lg shadow-md">
-              <h4 className="text-xl font-semibold mb-2">Wciągniki i wciągarki</h4>
-              <p className="text-gray-600 mb-4">Szkolenie z obsługi wciągników i wciągarek wykorzystywanych w zakładach przemysłowych.</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div>
-                  <h5 className="font-semibold mb-2">Dla kogo:</h5>
-                  <p className="text-gray-600">Pracownicy firm produkcyjnych obsługujący wciągniki i wciągarek.</p>
-                </div>
-                <div>
-                  <h5 className="font-semibold mb-2">Forma szkolenia:</h5>
-                  <p className="text-gray-600">Stacjonarna, hybrydowa</p>
-                </div>
-              </div>
-            </li>
-            <li className="bg-white p-6 rounded-lg shadow-md">
-              <h4 className="text-xl font-semibold mb-2">Podesty ruchome</h4>
-              <p className="text-gray-600 mb-4">Kurs przygotowujący do obsługi podestów ruchomych przejezdnych i wiszących.</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div>
-                  <h5 className="font-semibold mb-2">Dla kogo:</h5>
-                  <p className="text-gray-600">Pracownicy firm produkcyjnych i budowlanych obsługujący podesty ruchome.</p>
-                </div>
-                <div>
-                  <h5 className="font-semibold mb-2">Forma szkolenia:</h5>
-                  <p className="text-gray-600">Stacjonarna, hybrydowa</p>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <img 
+                src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800"
+                alt="Suwnice"
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-6">
+                <h4 className="text-xl font-semibold mb-2">Suwnice</h4>
+                <p className="text-gray-600 mb-4">Kurs przygotowujący do zdobycia uprawnień na obsługę suwnic sterowanych z poziomu roboczego i kabiny.</p>
+                <div className="grid grid-cols-1 gap-4">
+                  <div>
+                    <h5 className="font-semibold mb-2">Forma szkolenia:</h5>
+                    <p className="text-gray-600">Stacjonarna, hybrydowa</p>
+                  </div>
                 </div>
               </div>
-            </li>
-          </ul>
-          
-          <h3 className="text-2xl font-semibold mb-4">Korzyści:</h3>
-          <ul className="space-y-3 mb-8">
-            <li className="flex items-start">
-              <Check className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-              <span>Możliwość uzyskania uprawnień uznawanych w całej Polsce</span>
-            </li>
-            <li className="flex items-start">
-              <Check className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-              <span>Doświadczeni trenerzy z praktycznym doświadczeniem</span>
-            </li>
-            <li className="flex items-start">
-              <Check className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-              <span>Elastyczne formy szkolenia dostosowane do potrzeb firmy</span>
-            </li>
-            <li className="flex items-start">
-              <Check className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-              <span>Kompleksowa obsługa procesu certyfikacji</span>
-            </li>
-          </ul>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <img 
+                src="https://images.unsplash.com/photo-1589792923962-537704632910?auto=format&fit=crop&w=800"
+                alt="Wciągniki i wciągarki"
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-6">
+                <h4 className="text-xl font-semibold mb-2">Wciągniki i wciągarki</h4>
+                <p className="text-gray-600 mb-4">Szkolenie z obsługi wciągników i wciągarek wykorzystywanych w zakładach przemysłowych.</p>
+                <div className="grid grid-cols-1 gap-4">
+                  <div>
+                    <h5 className="font-semibold mb-2">Forma szkolenia:</h5>
+                    <p className="text-gray-600">Stacjonarna, hybrydowa</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <img 
+                src="https://images.unsplash.com/photo-1578864574232-89239b9c4174?auto=format&fit=crop&w=800"
+                alt="Podesty ruchome"
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-6">
+                <h4 className="text-xl font-semibold mb-2">Podesty ruchome</h4>
+                <p className="text-gray-600 mb-4">Kurs przygotowujący do obsługi podestów ruchomych przejezdnych i wiszących.</p>
+                <div className="grid grid-cols-1 gap-4">
+                  <div>
+                    <h5 className="font-semibold mb-2">Forma szkolenia:</h5>
+                    <p className="text-gray-600">Stacjonarna, hybrydowa</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-orange-50 py-16 px-4 rounded-xl mb-12">
+            <h3 className="text-3xl font-semibold mb-12 text-center">Korzyści</h3>
+            <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="bg-white p-6 rounded-lg shadow-md flex items-start">
+                <Check className="h-6 w-6 text-green-500 mr-4 mt-1 flex-shrink-0" />
+                <span className="text-lg">Możliwość uzyskania uprawnień uznawanych w całej Polsce</span>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-md flex items-start">
+                <Check className="h-6 w-6 text-green-500 mr-4 mt-1 flex-shrink-0" />
+                <span className="text-lg">Doświadczeni trenerzy z praktycznym doświadczeniem</span>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-md flex items-start">
+                <Check className="h-6 w-6 text-green-500 mr-4 mt-1 flex-shrink-0" />
+                <span className="text-lg">Elastyczne formy szkolenia dostosowane do potrzeb firmy</span>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-md flex items-start">
+                <Check className="h-6 w-6 text-green-500 mr-4 mt-1 flex-shrink-0" />
+                <span className="text-lg">Kompleksowa obsługa procesu certyfikacji</span>
+              </div>
+            </div>
+          </div>
         </div>
       ),
       faqItems: [
@@ -543,12 +558,11 @@ const ServiceDetailPage = () => {
 
   return (
     <div>
-      {/* Hero Section with Blurred Background */}
       <section className="relative bg-orange-500 text-white">
         <div 
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?auto=format&fit=crop&w=1200')`,
+            backgroundImage: `url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1200')`,
             filter: 'blur(4px) brightness(0.7)'
           }}
         />
@@ -565,61 +579,9 @@ const ServiceDetailPage = () => {
         </div>
       </section>
 
-      {/* Service Content */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            {/* Map over list items and render them in a grid */}
-            {React.Children.toArray(isValidElement(serviceInfo.content) ? (serviceInfo.content as ReactElement).props.children : null).map((child, index) => {
-              if (isValidElement(child) && 
-                  child.type === 'div' && 
-                  isValidElement(child.props.children?.[0]) && 
-                  child.props.children[0].type === 'h3' && 
-                  typeof child.props.children[0].props.children === 'string' && 
-                  child.props.children[0].props.children === 'Lista dostępnych kursów:') {
-                return (
-                  <div key={index} className="col-span-full">
-                    <h3 className="text-3xl font-semibold mb-8 text-center">
-                      {isValidElement(child.props.children[0]) ? child.props.children[0].props.children : null}
-                    </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                      {isValidElement(child) && Array.isArray(child.props.children) && 
-                       isValidElement(child.props.children[1]) ? 
-                        child.props.children[1].props.children : null}
-                    </div>
-                  </div>
-                );
-              }
-              // Benefits section
-              if (isValidElement(child) && 
-                  child.type === 'h3' && 
-                  typeof child.props.children === 'string' &&
-                  child.props.children === 'Korzyści:') {
-                const benefitsList = React.Children.toArray(isValidElement(serviceInfo.content) ? 
-                  (serviceInfo.content as ReactElement).props.children : [])
-                  .find((c) => isValidElement(c) && c.type === 'ul');
-                
-                return (
-                  <div key={index} className="col-span-full py-16 bg-orange-50">
-                    <h3 className="text-3xl font-semibold mb-12 text-center">Korzyści</h3>
-                    <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-2 gap-8 px-4">
-                      {isValidElement(benefitsList) && 'props' in benefitsList ? benefitsList.props.children : null}
-                    </div>
-                  </div>
-                );
-              }
-              // Render other content normally
-              if (child && typeof child === 'object') {
-                return (
-                  <React.Fragment key={index}>
-                    {child}
-                  </React.Fragment>
-                );
-              }
-              return null;
-            })}
-          </div>
-          
+          {isValidElement(serviceInfo.content) ? serviceInfo.content : null}
           <div className="mt-12 text-center">
             <Button asChild size="lg">
               <Link to="/wycena">Uzyskaj Błyskawiczną Wycenę</Link>
@@ -628,7 +590,6 @@ const ServiceDetailPage = () => {
         </div>
       </section>
 
-      {/* FAQ Section with condensed text */}
       {serviceInfo.faqItems.length > 0 && (
         <FAQ 
           title={`Najczęściej zadawane pytania o ${serviceInfo.title}`} 
@@ -641,7 +602,6 @@ const ServiceDetailPage = () => {
         />
       )}
 
-      {/* CTA Section */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-6">Potrzebujesz więcej informacji?</h2>
