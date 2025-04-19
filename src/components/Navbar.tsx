@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
@@ -36,8 +35,6 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
-  // Removed the unused toggleServices function that was causing the build error
-
   const services = [
     { title: 'Uprawnienia UDT dla operatorów', href: '/uslugi/udt-operatorzy' },
     { title: 'Uprawnienia UDT dla konserwatorów', href: '/uslugi/udt-konserwatorzy' },
@@ -71,24 +68,18 @@ const Navbar = () => {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  {/* Fix: Use proper structure for NavigationMenuTrigger */}
-                  <NavigationMenuTrigger>
-                    <span className="text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
-                      Usługi
-                    </span>
-                  </NavigationMenuTrigger>
+                  <Link 
+                    to="/uslugi" 
+                    className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap"
+                  >
+                    <NavigationMenuTrigger>
+                      <span className="text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
+                        Usługi
+                      </span>
+                    </NavigationMenuTrigger>
+                  </Link>
                   <NavigationMenuContent className="bg-white">
                     <ul className="grid w-[400px] gap-3 p-4">
-                      {/* Add direct link to main services page at the top */}
-                      <li>
-                        <Link
-                          to="/uslugi"
-                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-orange-50 hover:text-orange-600 font-medium"
-                          onClick={closeMenu}
-                        >
-                          <div className="text-sm font-medium leading-none">Wszystkie usługi</div>
-                        </Link>
-                      </li>
                       {services.map((service) => (
                         <li key={service.href}>
                           <Link
@@ -138,7 +129,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile menu */}
       {isOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
