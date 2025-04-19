@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
@@ -56,56 +55,12 @@ const Navbar = () => {
             <Link to="/o-nas" className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
               O Nas
             </Link>
-            <div className="relative">
-              <button
-                onClick={toggleServices}
-                className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 flex items-center whitespace-nowrap"
-              >
-                Usługi
-                <ChevronDown className="ml-1 h-4 w-4" />
-              </button>
-              {servicesOpen && (
-                <div className="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
-                  <div className="py-1">
-                    <Link
-                      to="/uslugi/udt-operatorzy"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      onClick={() => setServicesOpen(false)}
-                    >
-                      Uprawnienia UDT dla operatorów
-                    </Link>
-                    <Link
-                      to="/uslugi/udt-konserwatorzy"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      onClick={() => setServicesOpen(false)}
-                    >
-                      Uprawnienia UDT dla konserwatorów
-                    </Link>
-                    <Link
-                      to="/uslugi/sep"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      onClick={() => setServicesOpen(false)}
-                    >
-                      Uprawnienia SEP
-                    </Link>
-                    <Link
-                      to="/uslugi/lutowanie"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      onClick={() => setServicesOpen(false)}
-                    >
-                      Szkolenia z lutowania
-                    </Link>
-                    <Link
-                      to="/uslugi/eventy"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      onClick={() => setServicesOpen(false)}
-                    >
-                      Eventy edukacyjne
-                    </Link>
-                  </div>
-                </div>
-              )}
-            </div>
+            <Link 
+              to="/uslugi" 
+              className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap"
+            >
+              Usługi
+            </Link>
             <Link to="/bezplatny-audyt" className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
               Bezpłatny Audyt
             </Link>
@@ -147,52 +102,13 @@ const Navbar = () => {
             <Link to="/o-nas" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100" onClick={closeMenu}>
               O Nas
             </Link>
-            <button
-              onClick={toggleServices}
-              className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100 flex items-center justify-between"
+            <Link 
+              to="/uslugi" 
+              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100" 
+              onClick={closeMenu}
             >
               Usługi
-              <ChevronDown className={`h-4 w-4 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
-            </button>
-            {servicesOpen && (
-              <div className="pl-4 space-y-1">
-                <Link
-                  to="/uslugi/udt-operatorzy"
-                  className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100"
-                  onClick={closeMenu}
-                >
-                  Uprawnienia UDT dla operatorów
-                </Link>
-                <Link
-                  to="/uslugi/udt-konserwatorzy"
-                  className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100"
-                  onClick={closeMenu}
-                >
-                  Uprawnienia UDT dla konserwatorów
-                </Link>
-                <Link
-                  to="/uslugi/sep"
-                  className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100"
-                  onClick={closeMenu}
-                >
-                  Uprawnienia SEP
-                </Link>
-                <Link
-                  to="/uslugi/lutowanie"
-                  className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100"
-                  onClick={closeMenu}
-                >
-                  Szkolenia z lutowania
-                </Link>
-                <Link
-                  to="/uslugi/eventy"
-                  className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100"
-                  onClick={closeMenu}
-                >
-                  Eventy edukacyjne
-                </Link>
-              </div>
-            )}
+            </Link>
             <Link to="/bezplatny-audyt" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100" onClick={closeMenu}>
               Bezpłatny Audyt
             </Link>
