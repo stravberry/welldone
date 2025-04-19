@@ -540,4 +540,138 @@ const ServiceDetailPage = () => {
 
           <div className="bg-orange-50 py-16 px-4 rounded-xl mb-12">
             <h3 className="text-3xl font-semibold mb-12 text-center">Korzyści dla firmy i pracowników</h3>
-            <div className="max-w-6
+            <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-4">
+                <div className="bg-white p-4 rounded-lg shadow-md flex items-start">
+                  <Check className="h-6 w-6 text-orange-500 mr-4 mt-1 flex-shrink-0" />
+                  <div>
+                    <h5 className="font-semibold mb-1">Zwiększenie zaangażowania</h5>
+                    <p className="text-gray-600">Interaktywna forma przekazywania wiedzy zwiększa zaangażowanie pracowników w kwestie bezpieczeństwa.</p>
+                  </div>
+                </div>
+                <div className="bg-white p-4 rounded-lg shadow-md flex items-start">
+                  <Check className="h-6 w-6 text-orange-500 mr-4 mt-1 flex-shrink-0" />
+                  <div>
+                    <h5 className="font-semibold mb-1">Poprawa bezpieczeństwa pracy</h5>
+                    <p className="text-gray-600">Świadomi pracownicy popełniają mniej błędów, co przekłada się na mniejszą liczbę wypadków.</p>
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div className="bg-white p-4 rounded-lg shadow-md flex items-start">
+                  <Check className="h-6 w-6 text-orange-500 mr-4 mt-1 flex-shrink-0" />
+                  <div>
+                    <h5 className="font-semibold mb-1">Budowanie kultury organizacyjnej</h5>
+                    <p className="text-gray-600">Eventy integrują pracowników i budują pozytywną kulturę organizacyjną zorientowaną na bezpieczeństwo.</p>
+                  </div>
+                </div>
+                <div className="bg-white p-4 rounded-lg shadow-md flex items-start">
+                  <Check className="h-6 w-6 text-orange-500 mr-4 mt-1 flex-shrink-0" />
+                  <div>
+                    <h5 className="font-semibold mb-1">Praktyczny wymiar szkoleń</h5>
+                    <p className="text-gray-600">Eventy pozwalają na przekazanie praktycznej wiedzy w atrakcyjnej formie, co zwiększa jej przyswajanie.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mb-12">
+            <h4 className="text-2xl font-semibold mb-6 text-center">Przykładowe formaty eventów</h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-white p-6 rounded-lg shadow-md">
+                <h5 className="text-xl font-semibold mb-2">Dzień Bezpieczeństwa Technicznego</h5>
+                <p className="text-gray-600">Całodniowe wydarzenie obejmujące szereg aktywności: prelekcje, warsztaty, pokazy, konkursy. Może być organizowane cyklicznie, np. raz do roku.</p>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-md">
+                <h5 className="text-xl font-semibold mb-2">Warsztaty tematyczne</h5>
+                <p className="text-gray-600">Krótsze wydarzenia poświęcone konkretnym zagadnieniom, np. bezpieczeństwo przy obsłudze suwnic, zapobieganie porażeniom prądem elektrycznym.</p>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-md">
+                <h5 className="text-xl font-semibold mb-2">Roadshow bezpieczeństwa</h5>
+                <p className="text-gray-600">Seria mniejszych wydarzeń organizowanych w różnych lokalizacjach firmy, np. w różnych zakładach produkcyjnych.</p>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-md">
+                <h5 className="text-xl font-semibold mb-2">Konkursy i kampanie edukacyjne</h5>
+                <p className="text-gray-600">Długoterminowe działania angażujące pracowników, np. konkursy wiedzy, kampanie plakatowe, akcje "zgłoś zagrożenie".</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-gray-50 py-10 px-4 rounded-xl mb-12">
+            <div className="max-w-3xl mx-auto text-center">
+              <h4 className="text-2xl font-semibold mb-6">Kontakt i organizacja</h4>
+              <p className="text-gray-700 text-lg mb-6">
+                Każdy event jest dostosowany do indywidualnych potrzeb i specyfiki firmy. Współpracujemy z klientem na każdym etapie organizacji, od planowania po realizację.
+              </p>
+              <p className="text-gray-700 text-lg">
+                Zapraszamy do kontaktu w celu omówienia szczegółów i przygotowania oferty dopasowanej do Państwa potrzeb.
+              </p>
+            </div>
+          </div>
+        </div>
+      ),
+      faqItems: [
+        {
+          question: "Jak duża musi być firma, aby zorganizować event edukacyjny?",
+          answer: "Nasze eventy edukacyjne możemy dostosować do firm różnej wielkości. Dla mniejszych organizacji przygotowujemy kameralne warsztaty, a dla większych kompleksowe wydarzenia z wieloma aktywnościami."
+        },
+        {
+          question: "Ile czasu potrzeba na przygotowanie eventu?",
+          answer: "Czas przygotowania zależy od skali wydarzenia. Małe warsztaty tematyczne możemy zorganizować nawet w ciągu 2-3 tygodni, natomiast duże wydarzenia wymagają około 1-2 miesięcy przygotowań."
+        },
+        {
+          question: "Czy zapewniacie materiały edukacyjne?",
+          answer: "Tak, przygotowujemy komplet materiałów edukacyjnych dopasowanych do tematyki eventu: prezentacje, broszury, plakaty, filmy instruktażowe oraz materiały do ćwiczeń praktycznych."
+        },
+        {
+          question: "Czy eventy mogą być organizowane cyklicznie?",
+          answer: "Jak najbardziej. Wielu naszych klientów decyduje się na cykliczną organizację eventów, np. kwartalnych warsztatów tematycznych lub corocznego Dnia Bezpieczeństwa. Takie podejście pozwala na systematyczne budowanie kultury bezpieczeństwa w firmie."
+        }
+      ]
+    }
+  };
+
+  const service = serviceId ? servicesData[serviceId] : null;
+
+  if (!service) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Nie znaleziono usługi</h2>
+          <p className="mb-6">Przepraszamy, ale nie znaleźliśmy wybranej usługi.</p>
+          <Link to="/uslugi">
+            <Button variant="outline">
+              <ArrowLeft className="mr-2" />
+              Powrót do listy usług
+            </Button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <div className="mb-8">
+        <Link to="/uslugi" className="inline-flex items-center text-blue-600 hover:text-blue-800">
+          <ArrowLeft className="h-4 w-4 mr-1" />
+          <span>Powrót do listy usług</span>
+        </Link>
+      </div>
+      
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">{service.title}</h1>
+        <p className="text-xl text-gray-600">{service.description}</p>
+      </div>
+      
+      <div className="mb-12">
+        {service.content}
+      </div>
+      
+      <FAQ items={service.faqItems} />
+    </div>
+  );
+};
+
+export default ServiceDetailPage;
