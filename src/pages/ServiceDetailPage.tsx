@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { ReactElement, isValidElement } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Check } from 'lucide-react';
@@ -570,11 +570,14 @@ const ServiceDetailPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             {/* Map over list items and render them in a grid */}
-            {React.Children.toArray(serviceInfo.content.props.children).map((child: any) => {
-              if (child?.type === 'div' && child?.props?.children?.[0]?.type === 'h3' && 
-                  child?.props?.children?.[0]?.props?.children === 'Lista dostępnych kursów:') {
+            {React.Children.toArray(isValidElement(serviceInfo.content) ? (serviceInfo.content as ReactElement).props.children : null).map((child, index) => {
+              if (isValidElement(child) && 
+                  child.type === 'div' && 
+                  isValidElement(child.props.children?.[0]) && 
+                  child.props.children[0].type === 'h3' && 
+                  child.props.children[0].props.children === 'Lista dostępnych kursów:') {
                 return (
-                  <div className="col-span-full">
+                  <div key={index} className="col-span-full">
                     <h3 className="text-3xl font-semibold mb-8 text-center">{child.props.children[0].props.children}</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       {child.props.children[1].props.children}
@@ -583,20 +586,29 @@ const ServiceDetailPage = () => {
                 );
               }
               // Benefits section
-              if (child?.type === 'h3' && child?.props?.children === 'Korzyści:') {
+              if (isValidElement(child) && 
+                  child.type === 'h3' && 
+                  child.props.children === 'Korzyści:') {
+                const benefitsList = React.Children.toArray(isValidElement(serviceInfo.content) ? 
+                  (serviceInfo.content as ReactElement).props.children : [])
+                  .find((c) => isValidElement(c) && c.type === 'ul');
+                
                 return (
-                  <div className="col-span-full py-16 bg-orange-50">
+                  <div key={index} className="col-span-full py-16 bg-orange-50">
                     <h3 className="text-3xl font-semibold mb-12 text-center">Korzyści</h3>
                     <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-2 gap-8 px-4">
-                      {React.Children.toArray(serviceInfo.content.props.children)
-                        .find((c: any) => c?.type === 'ul')?.props.children}
+                      {isValidElement(benefitsList) ? benefitsList.props.children : null}
                     </div>
                   </div>
                 );
               }
               // Render other content normally
               if (child && typeof child === 'object') {
-                return child;
+                return (
+                  <React.Fragment key={index}>
+                    {child}
+                  </React.Fragment>
+                );
               }
               return null;
             })}
@@ -645,4 +657,3 @@ const ServiceDetailPage = () => {
 };
 
 export default ServiceDetailPage;
-
