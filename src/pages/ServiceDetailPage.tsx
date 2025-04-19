@@ -1,7 +1,7 @@
 import React, { ReactElement, isValidElement } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Check } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import FAQ from '@/components/FAQ';
 
 interface ServiceDetail {
@@ -531,7 +531,7 @@ const ServiceDetailPage = () => {
                 "Konkursy z nagrodami sprawdzające wiedzę uczestników"
               ].map((item, index) => (
                 <div key={index} className="bg-white p-6 rounded-lg shadow-md flex items-start">
-                  <Check className="h-6 w-6 text-orange-500 mr-4 mt-1 flex-shrink-0" />
+                  <Check className="h-6 w-6 text-green-500 mr-4 mt-1 flex-shrink-0" />
                   <span className="text-gray-700">{item}</span>
                 </div>
               ))}
@@ -632,8 +632,6 @@ const ServiceDetailPage = () => {
     }
   };
 
-  const service = serviceId ? servicesData[serviceId] : null;
-
   if (!service) {
     return (
       <div className="container mx-auto px-4 py-8">
@@ -654,9 +652,11 @@ const ServiceDetailPage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
-        <Link to="/uslugi" className="inline-flex items-center text-blue-600 hover:text-blue-800">
-          <ArrowLeft className="h-4 w-4 mr-1" />
-          <span>Powrót do listy usług</span>
+        <Link to="/uslugi" className="inline-flex items-center">
+          <Button variant="outline">
+            <ArrowLeft className="mr-2" />
+            Wróć do wszystkich usług
+          </Button>
         </Link>
       </div>
       
