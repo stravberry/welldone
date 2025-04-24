@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -16,8 +15,6 @@ import KnowledgePage from "@/pages/KnowledgePage";
 import QuotePage from "@/pages/QuotePage";
 import ContactPage from "@/pages/ContactPage";
 import NotFound from "@/pages/NotFound";
-
-// Admin components
 import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import AdminLayout from "@/pages/admin/AdminLayout";
@@ -27,6 +24,7 @@ import BlogManagement from "@/pages/admin/BlogManagement";
 import BlogPostEditor from "@/pages/admin/BlogPostEditor";
 import MediaManagement from "@/pages/admin/MediaManagement";
 import SettingsPage from "@/pages/admin/SettingsPage";
+import CMSLoginPage from "@/pages/CMSLoginPage";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +50,9 @@ const App = () => (
               <Route path="media" element={<MediaManagement />} />
               <Route path="settings" element={<SettingsPage />} />
             </Route>
+
+            {/* Login Route */}
+            <Route path="/cms-login" element={<CMSLoginPage />} />
 
             {/* Public Routes */}
             <Route path="/" element={
