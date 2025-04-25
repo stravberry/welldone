@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -25,6 +26,8 @@ import BlogPostEditor from "@/pages/admin/BlogPostEditor";
 import MediaManagement from "@/pages/admin/MediaManagement";
 import SettingsPage from "@/pages/admin/SettingsPage";
 import CMSLoginPage from "@/pages/CMSLoginPage";
+import CMSLoginPanel from "@/components/CMSLoginPanel";
+import RouteChangeTracker from "@/components/RouteChangeTracker";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +38,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <RouteChangeTracker />
           <Routes>
             {/* Admin Routes */}
             <Route path="/admin" element={
@@ -62,6 +66,7 @@ const App = () => (
                   <HomePage />
                 </main>
                 <Footer />
+                <CMSLoginPanel />
               </div>
             } />
 
@@ -82,6 +87,7 @@ const App = () => (
                   </Routes>
                 </main>
                 <Footer />
+                <CMSLoginPanel />
               </div>
             } />
           </Routes>
