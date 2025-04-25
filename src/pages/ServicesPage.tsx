@@ -3,8 +3,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ServiceCard from '@/components/ServiceCard';
 import { Wrench, Wrench as Tool, Zap, Flame, Users } from 'lucide-react';
+import useEventTracking from '@/hooks/useEventTracking';
+import { Button } from '@/components/ui/button';
 
 const ServicesPage = () => {
+  const { trackEvent } = useEventTracking();
+  
   const services = [
     {
       title: 'Uprawnienia UDT dla operatorów',
@@ -43,6 +47,17 @@ const ServicesPage = () => {
     }
   ];
 
+  const handleServiceClick = (serviceName: string) => {
+    trackEvent({
+      category: 'navigation',
+      action: 'click',
+      label: `service-card-${serviceName}`,
+      additionalData: {
+        serviceTitle: serviceName
+      }
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -61,7 +76,12 @@ const ServicesPage = () => {
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {services.map((service) => (
-            <Link key={service.link} to={service.link} className="block">
+            <Link 
+              key={service.link} 
+              to={service.link} 
+              className="block"
+              onClick={() => handleServiceClick(service.title)}
+            >
               <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105 duration-300">
                 <div className="relative h-48">
                   <img
@@ -99,12 +119,13 @@ const ServicesPage = () => {
             Skontaktuj się z nami, aby omówić spersonalizowane rozwiązanie dla Twojej firmy.
           </p>
           <div className="mt-8">
-            <Link
-              to="/kontakt"
-              className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700"
+            <Button
+              variant="default"
+              className="px-5 py-3 text-base font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700"
+              trackingLabel="contact-us-from-services"
             >
               Skontaktuj się z nami
-            </Link>
+            </Button>
           </div>
         </div>
       </div>

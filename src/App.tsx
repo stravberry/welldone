@@ -28,6 +28,7 @@ import SettingsPage from "@/pages/admin/SettingsPage";
 import CMSLoginPage from "@/pages/CMSLoginPage";
 import CMSLoginPanel from "@/components/CMSLoginPanel";
 import RouteChangeTracker from "@/components/RouteChangeTracker";
+import ScrollTracker from "@/components/ScrollTracker";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <RouteChangeTracker />
+          <ScrollTracker />
           <Routes>
             {/* Admin Routes */}
             <Route path="/admin" element={
