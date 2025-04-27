@@ -129,7 +129,7 @@ const UserManagement = () => {
       // Generate reset password link
       const { error } = await supabase.auth.admin.generateLink({
         type: 'recovery',
-        user_id: userId,
+        userId: userId, // Changed from user_id to userId to match the expected type
       });
 
       if (error) {
