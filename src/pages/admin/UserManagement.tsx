@@ -126,10 +126,23 @@ const UserManagement = () => {
 
   const handleResetPassword = async (userId: string) => {
     try {
-      // Generate reset password link - using 'id' parameter instead of 'userId' or 'user_id'
+      // First find the user's email by their ID
+      const { data: userListData, error: userError } = await supabase.auth.admin.listUsers();
+      
+      if (userError) {
+        throw userError;
+      }
+      
+      const user = userListData.users.find(u => u.id === userId);
+      
+      if (!user || !user.email) {
+        throw new Error("User or email not found");
+      }
+      
+      // Generate reset password link using the email parameter
       const { error } = await supabase.auth.admin.generateLink({
         type: 'recovery',
-        id: userId, // Fixed parameter name to match Supabase API
+        email: user.email,
       });
 
       if (error) {
