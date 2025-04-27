@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
@@ -45,7 +44,6 @@ const UserManagement = () => {
         throw error;
       }
 
-      // Get roles for users
       const { data: rolesData, error: rolesError } = await supabase
         .from('user_roles')
         .select('user_id, role');
@@ -54,7 +52,6 @@ const UserManagement = () => {
         throw rolesError;
       }
 
-      // Create a map of user_id to role
       const roleMap = new Map<string, Database['public']['Enums']['app_role']>();
       rolesData?.forEach((roleEntry) => {
         roleMap.set(roleEntry.user_id, roleEntry.role);
@@ -81,13 +78,8 @@ const UserManagement = () => {
     }
   };
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
   const handleCreateUser = async (email: string, password: string, role: Database['public']['Enums']['app_role']) => {
     try {
-      // Create user in Auth
       const { data: userData, error: createError } = await supabase.auth.admin.createUser({
         email,
         password,
@@ -98,7 +90,6 @@ const UserManagement = () => {
         throw createError;
       }
 
-      // Assign role
       if (userData.user) {
         const { error: roleError } = await supabase
           .from('user_roles')
@@ -127,7 +118,6 @@ const UserManagement = () => {
 
   const handleResetPassword = async (userId: string) => {
     try {
-      // First find the user's email by their ID
       const { data, error: userError } = await supabase.auth.admin.listUsers();
       
       if (userError) {
@@ -140,7 +130,6 @@ const UserManagement = () => {
         throw new Error("User or email not found");
       }
       
-      // Generate reset password link using the email parameter
       const { error } = await supabase.auth.admin.generateLink({
         type: 'recovery',
         email: user.email,
@@ -185,6 +174,47 @@ const UserManagement = () => {
       });
     }
   };
+
+  const createAdminUser = async () => {
+    try {
+      const { data: userData, error: createError } = await supabase.auth.admin.createUser({
+        email: 'admin',
+        password: 'admin123',
+        email_confirm: true,
+      });
+
+      if (createError) {
+        throw createError;
+      }
+
+      if (userData.user) {
+        const { error: roleError } = await supabase
+          .from('user_roles')
+          .insert([{ user_id: userData.user.id, role: 'admin' }]);
+
+        if (roleError) {
+          throw roleError;
+        }
+
+        toast({
+          title: "Sukces",
+          description: "Administrator został pomyślnie utworzony",
+        });
+        
+        fetchUsers();
+      }
+    } catch (error: any) {
+      toast({
+        title: "Błąd",
+        description: `Nie udało się utworzyć administratora: ${error.message}`,
+        variant: "destructive"
+      });
+    }
+  };
+
+  useEffect(() => {
+    createAdminUser();
+  }, []);
 
   return (
     <div className="space-y-6">
