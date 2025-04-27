@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Home, BookOpen, Mail } from 'lucide-react';
+import { Home, BookOpen, Mail, Check, Star, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -844,7 +844,7 @@ const UdtLandingPage = () => {
           </div>
         </section>
 
-        <Toaster />
+        <toast />
       </div>
     </div>
   );
