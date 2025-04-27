@@ -19,6 +19,7 @@ import { format } from 'date-fns';
 import CreateUser from '@/components/admin/CreateUser';
 import UserDetails from '@/components/admin/UserDetails';
 import { Database } from '@/integrations/supabase/types';
+import { AdminUserAttributes } from '@supabase/supabase-js';
 
 type User = {
   id: string;
@@ -127,13 +128,13 @@ const UserManagement = () => {
   const handleResetPassword = async (userId: string) => {
     try {
       // First find the user's email by their ID
-      const { data: userListData, error: userError } = await supabase.auth.admin.listUsers();
+      const { data, error: userError } = await supabase.auth.admin.listUsers();
       
       if (userError) {
         throw userError;
       }
       
-      const user = userListData.users.find(u => u.id === userId);
+      const user = data.users.find((u: AdminUserAttributes) => u.id === userId);
       
       if (!user || !user.email) {
         throw new Error("User or email not found");
