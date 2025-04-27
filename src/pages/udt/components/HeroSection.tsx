@@ -5,10 +5,13 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import useEventTracking from '@/hooks/useEventTracking';
 import type { FormData } from '../types';
+import StatsCounter from './StatsCounter';
+import StatsBanner from './StatsBanner';
+import QuickContactForm from './QuickContactForm';
 
 interface HeroSectionProps {
   formData: FormData;
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;
   trackCTAClick: (ctaName: string, destinationId?: string) => void;
 }
