@@ -18,11 +18,12 @@ import { toast } from '@/components/ui/use-toast';
 import { format } from 'date-fns';
 import CreateUser from '@/components/admin/CreateUser';
 import UserDetails from '@/components/admin/UserDetails';
+import { Database } from '@/integrations/supabase/types';
 
 type User = {
   id: string;
   email: string;
-  role: string;
+  role: Database['public']['Enums']['app_role'];
   created_at: string;
   last_sign_in_at: string | null;
 };
@@ -53,15 +54,15 @@ const UserManagement = () => {
       }
 
       // Create a map of user_id to role
-      const roleMap: Record<string, string> = {};
+      const roleMap = new Map<string, Database['public']['Enums']['app_role']>();
       rolesData?.forEach((roleEntry) => {
-        roleMap[roleEntry.user_id] = roleEntry.role;
+        roleMap.set(roleEntry.user_id, roleEntry.role);
       });
 
       const formattedUsers = users.map((user) => ({
         id: user.id,
         email: user.email || 'No email',
-        role: roleMap[user.id] || 'user',
+        role: roleMap.get(user.id) || 'user',
         created_at: user.created_at,
         last_sign_in_at: user.last_sign_in_at,
       }));
@@ -83,7 +84,7 @@ const UserManagement = () => {
     fetchUsers();
   }, []);
 
-  const handleCreateUser = async (email: string, password: string, role: string) => {
+  const handleCreateUser = async (email: string, password: string, role: Database['public']['Enums']['app_role']) => {
     try {
       // Create user in Auth
       const { data: userData, error: createError } = await supabase.auth.admin.createUser({
@@ -128,7 +129,7 @@ const UserManagement = () => {
       // Generate reset password link
       const { error } = await supabase.auth.admin.generateLink({
         type: 'recovery',
-        userId,
+        user_id: userId,
       });
 
       if (error) {
@@ -171,10 +172,6 @@ const UserManagement = () => {
     }
   };
 
-  const handleUserClick = (user: User) => {
-    setSelectedUser(user);
-  };
-
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -208,7 +205,7 @@ const UserManagement = () => {
               </TableHeader>
               <TableBody>
                 {users.map((user) => (
-                  <TableRow key={user.id} onClick={() => handleUserClick(user)} className="cursor-pointer hover:bg-muted/30">
+                  <TableRow key={user.id} onClick={() => setSelectedUser(user)} className="cursor-pointer hover:bg-muted/30">
                     <TableCell>{user.email}</TableCell>
                     <TableCell>
                       <span className={`px-2 py-1 rounded-full text-xs ${
@@ -281,12 +278,11 @@ const UserManagement = () => {
               onClose={() => setSelectedUser(null)}
               onResetPassword={handleResetPassword}
               onDelete={handleDeleteUser}
-              onUpdateRole={async (userId, role) => {
+              onUpdateRole={async (userId, newRole: Database['public']['Enums']['app_role']) => {
                 try {
-                  // Update the role
                   const { error } = await supabase
                     .from('user_roles')
-                    .upsert({ user_id: userId, role }, { onConflict: 'user_id' });
+                    .upsert({ user_id: userId, role: newRole }, { onConflict: 'user_id' });
 
                   if (error) throw error;
                   
