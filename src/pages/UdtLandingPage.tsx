@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Toaster } from "@/components/ui/sonner";
@@ -91,12 +90,12 @@ const UdtLandingPage = () => {
                 </Button>
                 <Button 
                   size="lg" 
-                  variant="outline" 
+                  variant="outline"
                   onClick={() => {
                     trackCTAClick('hero-offerings');
                     document.getElementById('offerings')?.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="text-white border-white hover:bg-white hover:text-orange-600"
+                  className="text-orange-600 border-orange-600 hover:bg-orange-600 hover:text-white"
                 >
                   Sprawdź ofertę szkoleń
                 </Button>
