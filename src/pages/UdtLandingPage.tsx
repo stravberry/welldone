@@ -795,7 +795,7 @@ const UdtLandingPage = () => {
             <Button 
               size="lg" 
               variant="outline" 
-              className="text-white border-white hover:bg-white hover:text-orange-600"
+              className="text-orange-600 border-orange-600 hover:bg-orange-600 hover:text-white"
               onClick={() => {
                 trackCTAClick('final-phone');
                 window.location.href = 'tel:504305437';
