@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { Home, BookOpen, Mail, Check, Star, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -17,9 +19,25 @@ const UdtLandingPage = () => {
     message: ''
   });
 
+  // Track page view on component mount
+  useEffect(() => {
+    document.title = "Szkolenia UDT i Kursy Operatorów - Najwyższa Zdawalność | Well-done";
+  }, []);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    
+    // Track form field interaction
+    trackEvent({
+      category: 'form',
+      action: 'input',
+      label: `udt-landing-form-field-${name}`,
+      additionalData: {
+        fieldName: name,
+        formType: 'UDT Landing Contact'
+      }
+    });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -31,7 +49,8 @@ const UdtLandingPage = () => {
       action: 'submit',
       label: 'udt-landing-contact-form',
       additionalData: {
-        formType: 'UDT Landing Contact'
+        formType: 'UDT Landing Contact',
+        formLocation: window.location.pathname
       }
     });
     
@@ -48,36 +67,76 @@ const UdtLandingPage = () => {
     });
   };
 
-  const trackCTAClick = (ctaName: string) => {
+  const trackCTAClick = (ctaName: string, destinationId?: string) => {
     trackEvent({
       category: 'button',
       action: 'click',
       label: `udt-landing-${ctaName}`,
       additionalData: {
-        buttonLocation: 'UDT Landing Page'
+        buttonLocation: 'UDT Landing Page',
+        destinationId: destinationId || null
+      }
+    });
+    
+    if (destinationId) {
+      document.getElementById(destinationId)?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const trackLinkClick = (linkName: string) => {
+    trackEvent({
+      category: 'navigation',
+      action: 'click',
+      label: `udt-landing-${linkName}`,
+      additionalData: {
+        linkLocation: 'UDT Landing Page Nav'
       }
     });
   };
 
   return (
     <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>Szkolenia UDT i Kursy Operatorów - Najwyższa Zdawalność | Well-done</title>
+        <meta name="description" content="Profesjonalne szkolenia na uprawnienia UDT dla operatorów - wózki widłowe, podesty ruchome, suwnice. Zdawalność 96%. Szkolenia w całej Polsce." />
+        <meta name="keywords" content="szkolenia UDT, uprawnienia UDT, kursy operatorów, wózki widłowe, podesty ruchome, suwnice, operator wózka widłowego" />
+        <meta property="og:title" content="Szkolenia UDT i Kursy Operatorów - Najwyższa Zdawalność | Well-done" />
+        <meta property="og:description" content="Profesjonalne szkolenia na uprawnienia UDT dla operatorów - wózki widłowe, podesty ruchome, suwnice. Zdawalność 96%. Szkolenia w całej Polsce." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://well-done.pl/udt-szkolenia" />
+        <meta property="og:image" content="/lovable-uploads/a2c8c546-13e6-445b-9832-abf375420d6c.png" />
+        <link rel="canonical" href="https://well-done.pl/udt-szkolenia" />
+      </Helmet>
+      
       {/* Simple Navigation Menu */}
       <nav className="fixed top-0 left-0 right-0 bg-white shadow-sm z-50 px-4 py-2">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <Link to="/" className="flex items-center">
+          <Link 
+            to="/" 
+            className="flex items-center"
+            onClick={() => trackLinkClick('logo')}
+          >
             <img 
               src="/lovable-uploads/a2c8c546-13e6-445b-9832-abf375420d6c.png" 
-              alt="Well-done.pl Logo" 
+              alt="Well-done.pl Logo - Szkolenia UDT" 
               className="h-8" 
             />
           </Link>
           
           <div className="flex items-center space-x-6">
-            <Link to="/" className="flex items-center space-x-2 text-gray-700 hover:text-orange-600">
+            <Link 
+              to="/" 
+              className="flex items-center space-x-2 text-gray-700 hover:text-orange-600"
+              onClick={() => trackLinkClick('home')}
+            >
               <Home size={20} />
               <span className="hidden sm:inline">Home</span>
             </Link>
-            <Link to="/wiedza" className="flex items-center space-x-2 text-gray-700 hover:text-orange-600">
+            <Link 
+              to="/wiedza" 
+              className="flex items-center space-x-2 text-gray-700 hover:text-orange-600"
+              onClick={() => trackLinkClick('blog')}
+            >
               <BookOpen size={20} />
               <span className="hidden sm:inline">Blog</span>
             </Link>
@@ -117,10 +176,7 @@ const UdtLandingPage = () => {
                 <div className="flex flex-wrap gap-4">
                   <Button 
                     size="lg" 
-                    onClick={() => {
-                      trackCTAClick('hero-contact');
-                      document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
-                    }}
+                    onClick={() => trackCTAClick('hero-contact', 'contact-form')}
                     className="bg-white text-orange-600 hover:bg-orange-100"
                   >
                     Skontaktuj się z nami
@@ -128,10 +184,7 @@ const UdtLandingPage = () => {
                   <Button 
                     size="lg" 
                     variant="outline"
-                    onClick={() => {
-                      trackCTAClick('hero-offerings');
-                      document.getElementById('offerings')?.scrollIntoView({ behavior: 'smooth' });
-                    }}
+                    onClick={() => trackCTAClick('hero-offerings', 'offerings')}
                     className="text-orange-600 border-orange-600 hover:bg-orange-600 hover:text-white"
                   >
                     Sprawdź ofertę szkoleń
@@ -233,24 +286,28 @@ const UdtLandingPage = () => {
                   title: "Wózki widłowe",
                   description: "Szkolenia na wszystkie kategorie wózków jezdniowych podnośnikowych",
                   image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=800&q=80",
+                  alt: "Operator wózka widłowego podczas pracy w magazynie",
                   features: ["Kategorie I WJO", "Kategorie II WJO", "Kategorie III WJO"]
                 },
                 {
                   title: "Podesty ruchome",
                   description: "Szkolenia na podesty przejezdne, wolnobieżne i przewoźne",
                   image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
+                  alt: "Podest ruchomy nożycowy używany podczas prac na wysokości",
                   features: ["Podesty nożycowe", "Podesty przejezdne", "Podesty montowane"]
                 },
                 {
                   title: "Suwnice",
                   description: "Pełne szkolenia na obsługę suwnic hakowych i specjalistycznych",
                   image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80",
+                  alt: "Suwnica przemysłowa w hali produkcyjnej",
                   features: ["Suwnice sterowane z kabiny", "Suwnice sterowane z poziomu", "Suwnice specjalistyczne"]
                 },
                 {
                   title: "Układnice magazynowe",
                   description: "Profesjonalne szkolenia z obsługi układnic wysokiego składowania",
                   image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80",
+                  alt: "Układnica magazynowa wysokiego składowania w nowoczesnym magazynie",
                   features: ["Układnice półautomatyczne", "Układnice automatyczne", "Układnice specjalistyczne"]
                 }
               ].map((offering, index) => (
@@ -261,7 +318,7 @@ const UdtLandingPage = () => {
                   <div className="relative h-48">
                     <img 
                       src={offering.image} 
-                      alt={offering.title} 
+                      alt={offering.alt} 
                       className="w-full h-full object-cover" 
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -284,8 +341,7 @@ const UdtLandingPage = () => {
                     <Button 
                       className="w-full bg-orange-600 hover:bg-orange-700 mt-2"
                       onClick={() => {
-                        trackCTAClick(`offering-${offering.title}`);
-                        document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+                        trackCTAClick(`offering-${offering.title}`, 'contact-form');
                       }}
                     >
                       Zapisz się na szkolenie
@@ -303,8 +359,7 @@ const UdtLandingPage = () => {
                 size="lg"
                 className="bg-orange-600 hover:bg-orange-700"
                 onClick={() => {
-                  trackCTAClick('see-more-offerings');
-                  document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+                  trackCTAClick('see-more-offerings', 'contact-form');
                 }}
               >
                 Sprawdź wszystkie szkolenia
@@ -357,8 +412,7 @@ const UdtLandingPage = () => {
                   className="mt-10 bg-orange-600 hover:bg-orange-700 text-white"
                   size="lg"
                   onClick={() => {
-                    trackCTAClick('why-choose-us');
-                    document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+                    trackCTAClick('why-choose-us', 'contact-form');
                   }}
                 >
                   Skontaktuj się z nami
@@ -369,28 +423,28 @@ const UdtLandingPage = () => {
                 <div className="rounded-lg overflow-hidden h-64">
                   <img
                     src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=800&q=80"
-                    alt="Szkolenia UDT"
+                    alt="Operator podczas szkolenia na wózek widłowy UDT"
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div className="rounded-lg overflow-hidden h-64 mt-6">
                   <img
                     src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80"
-                    alt="Szkolenie na wózki widłowe"
+                    alt="Kursant podczas szkolenia na podeście ruchomym"
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div className="rounded-lg overflow-hidden h-64">
                   <img
                     src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80"
-                    alt="Obsługa urządzeń UDT"
+                    alt="Szkolenie na obsługę suwnic UDT w hali przemysłowej"
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div className="rounded-lg overflow-hidden h-64 mt-6">
                   <img
                     src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80"
-                    alt="Egzamin UDT"
+                    alt="Egzamin UDT dla operatora wózka widłowego"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -458,8 +512,7 @@ const UdtLandingPage = () => {
                 size="lg"
                 className="bg-orange-600 hover:bg-orange-700"
                 onClick={() => {
-                  trackCTAClick('process-learn-more');
-                  document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+                  trackCTAClick('process-learn-more', 'contact-form');
                 }}
               >
                 Zamów bezpłatną konsultację
@@ -607,8 +660,7 @@ const UdtLandingPage = () => {
                 size="lg"
                 className="bg-orange-600 hover:bg-orange-700"
                 onClick={() => {
-                  trackCTAClick('comparison-cta');
-                  document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+                  trackCTAClick('comparison-cta', 'contact-form');
                 }}
               >
                 Wybierz najlepsze szkolenia UDT
@@ -647,7 +699,7 @@ const UdtLandingPage = () => {
                 },
                 {
                   question: "Jak wygląda proces odnowienia uprawnień UDT?",
-                  answer: "Uprawnienia UDT są wydawane na 5 lat. Aby je odnowić, należy złożyć wniosek o przedłużenie ważności zaświadczenia przed up��ywem terminu. Pomagamy w całym procesie odnowienia, włącznie z przygotowaniem dokumentacji i organizacją egzaminu sprawdzającego."
+                  answer: "Uprawnienia UDT są wydawane na 5 lat. Aby je odnowić, należy złożyć wniosek o przedłużenie ważności zaświadczenia przed upływem terminu. Pomagamy w całym procesie odnowienia, włącznie z przygotowaniem dokumentacji i organizacją egzaminu sprawdzającego."
                 },
                 {
                   question: "Co obejmuje koszt szkolenia?",
@@ -669,8 +721,7 @@ const UdtLandingPage = () => {
                 size="lg"
                 className="bg-orange-600 hover:bg-orange-700"
                 onClick={() => {
-                  trackCTAClick('faq-contact');
-                  document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+                  trackCTAClick('faq-contact', 'contact-form');
                 }}
               >
                 Zadaj pytanie ekspertowi
@@ -823,8 +874,7 @@ const UdtLandingPage = () => {
                 size="lg" 
                 className="bg-white text-orange-600 hover:bg-orange-100"
                 onClick={() => {
-                  trackCTAClick('final-contact');
-                  document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+                  trackCTAClick('final-contact', 'contact-form');
                 }}
               >
                 Skontaktuj się z nami
@@ -844,7 +894,7 @@ const UdtLandingPage = () => {
           </div>
         </section>
 
-        <toast />
+        {/* Toast notification system */}
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HomePage from "@/pages/HomePage";
@@ -35,71 +36,73 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <AuthProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <RouteChangeTracker />
-          <ScrollTracker />
-          <Routes>
-            {/* Admin Routes */}
-            <Route path="/admin" element={
-              <ProtectedRoute>
-                <AdminLayout />
-              </ProtectedRoute>
-            }>
-              <Route index element={<AdminDashboard />} />
-              <Route path="pages" element={<PagesManagement />} />
-              <Route path="blog" element={<BlogManagement />} />
-              <Route path="blog/new" element={<BlogPostEditor />} />
-              <Route path="blog/edit/:id" element={<BlogPostEditor />} />
-              <Route path="media" element={<MediaManagement />} />
-              <Route path="settings" element={<SettingsPage />} />
-            </Route>
+    <HelmetProvider>
+      <TooltipProvider>
+        <AuthProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <RouteChangeTracker />
+            <ScrollTracker />
+            <Routes>
+              {/* Admin Routes */}
+              <Route path="/admin" element={
+                <ProtectedRoute>
+                  <AdminLayout />
+                </ProtectedRoute>
+              }>
+                <Route index element={<AdminDashboard />} />
+                <Route path="pages" element={<PagesManagement />} />
+                <Route path="blog" element={<BlogManagement />} />
+                <Route path="blog/new" element={<BlogPostEditor />} />
+                <Route path="blog/edit/:id" element={<BlogPostEditor />} />
+                <Route path="media" element={<MediaManagement />} />
+                <Route path="settings" element={<SettingsPage />} />
+              </Route>
 
-            {/* Login Route */}
-            <Route path="/cms-login" element={<CMSLoginPage />} />
-            
-            {/* UDT Landing Page */}
-            <Route path="/udt-szkolenia" element={<UdtLandingPage />} />
+              {/* Login Route */}
+              <Route path="/cms-login" element={<CMSLoginPage />} />
+              
+              {/* UDT Landing Page */}
+              <Route path="/udt-szkolenia" element={<UdtLandingPage />} />
 
-            {/* Public Routes */}
-            <Route path="/" element={
-              <div className="flex flex-col min-h-screen">
-                <Navbar />
-                <main className="flex-grow pt-16">
-                  <HomePage />
-                </main>
-                <Footer />
-                <CMSLoginPanel />
-              </div>
-            } />
+              {/* Public Routes */}
+              <Route path="/" element={
+                <div className="flex flex-col min-h-screen">
+                  <Navbar />
+                  <main className="flex-grow pt-16">
+                    <HomePage />
+                  </main>
+                  <Footer />
+                  <CMSLoginPanel />
+                </div>
+              } />
 
-            <Route path="*" element={
-              <div className="flex flex-col min-h-screen">
-                <Navbar />
-                <main className="flex-grow pt-16">
-                  <Routes>
-                    <Route path="/o-nas" element={<AboutPage />} />
-                    <Route path="/uslugi" element={<ServicesPage />} />
-                    <Route path="/uslugi/:serviceId" element={<ServiceDetailPage />} />
-                    <Route path="/bezplatny-audyt" element={<FreeAuditPage />} />
-                    <Route path="/realizacje" element={<RealizationsPage />} />
-                    <Route path="/wiedza" element={<KnowledgePage />} />
-                    <Route path="/wycena" element={<QuotePage />} />
-                    <Route path="/kontakt" element={<ContactPage />} />
-                    <Route path="*" element={<NotFound />} />
-                  </Routes>
-                </main>
-                <Footer />
-                <CMSLoginPanel />
-              </div>
-            } />
-          </Routes>
-        </BrowserRouter>
-      </AuthProvider>
-    </TooltipProvider>
+              <Route path="*" element={
+                <div className="flex flex-col min-h-screen">
+                  <Navbar />
+                  <main className="flex-grow pt-16">
+                    <Routes>
+                      <Route path="/o-nas" element={<AboutPage />} />
+                      <Route path="/uslugi" element={<ServicesPage />} />
+                      <Route path="/uslugi/:serviceId" element={<ServiceDetailPage />} />
+                      <Route path="/bezplatny-audyt" element={<FreeAuditPage />} />
+                      <Route path="/realizacje" element={<RealizationsPage />} />
+                      <Route path="/wiedza" element={<KnowledgePage />} />
+                      <Route path="/wycena" element={<QuotePage />} />
+                      <Route path="/kontakt" element={<ContactPage />} />
+                      <Route path="*" element={<NotFound />} />
+                    </Routes>
+                  </main>
+                  <Footer />
+                  <CMSLoginPanel />
+                </div>
+              } />
+            </Routes>
+          </BrowserRouter>
+        </AuthProvider>
+      </TooltipProvider>
+    </HelmetProvider>
   </QueryClientProvider>
 );
 
