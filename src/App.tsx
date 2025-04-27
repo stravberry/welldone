@@ -29,6 +29,7 @@ import CMSLoginPage from "@/pages/CMSLoginPage";
 import CMSLoginPanel from "@/components/CMSLoginPanel";
 import RouteChangeTracker from "@/components/RouteChangeTracker";
 import ScrollTracker from "@/components/ScrollTracker";
+import UdtLandingPage from "@/pages/UdtLandingPage";
 
 const queryClient = new QueryClient();
 
@@ -59,6 +60,9 @@ const App = () => (
 
             {/* Login Route */}
             <Route path="/cms-login" element={<CMSLoginPage />} />
+            
+            {/* UDT Landing Page */}
+            <Route path="/udt-szkolenia" element={<UdtLandingPage />} />
 
             {/* Public Routes */}
             <Route path="/" element={
