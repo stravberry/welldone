@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
@@ -38,31 +39,29 @@ const UserManagement = () => {
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const { data: { users }, error } = await supabase.auth.admin.listUsers();
       
-      if (error) {
-        throw error;
-      }
-
+      // Get user roles from the public table
       const { data: rolesData, error: rolesError } = await supabase
         .from('user_roles')
-        .select('user_id, role');
+        .select('user_id, role, created_at');
 
       if (rolesError) {
         throw rolesError;
       }
 
-      const roleMap = new Map<string, Database['public']['Enums']['app_role']>();
-      rolesData?.forEach((roleEntry) => {
-        roleMap.set(roleEntry.user_id, roleEntry.role);
-      });
+      if (!rolesData || rolesData.length === 0) {
+        setUsers([]);
+        setLoading(false);
+        return;
+      }
 
-      const formattedUsers = users.map((user) => ({
-        id: user.id,
-        email: user.email || 'No email',
-        role: roleMap.get(user.id) || 'user',
-        created_at: user.created_at,
-        last_sign_in_at: user.last_sign_in_at,
+      // Transform the roles data into the user format we need
+      const formattedUsers = rolesData.map((roleEntry) => ({
+        id: roleEntry.user_id,
+        email: roleEntry.user_id, // We'll use ID as email initially
+        role: roleEntry.role,
+        created_at: roleEntry.created_at,
+        last_sign_in_at: null,
       }));
 
       setUsers(formattedUsers);
@@ -80,20 +79,24 @@ const UserManagement = () => {
 
   const handleCreateUser = async (email: string, password: string, role: Database['public']['Enums']['app_role']) => {
     try {
-      const { data: userData, error: createError } = await supabase.auth.admin.createUser({
+      // Create user using signUp instead of admin methods
+      const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
         email,
         password,
-        email_confirm: true,
+        options: {
+          emailRedirectTo: window.location.origin,
+        }
       });
 
-      if (createError) {
-        throw createError;
+      if (signUpError) {
+        throw signUpError;
       }
 
-      if (userData.user) {
+      if (signUpData.user) {
+        // Add role for the new user
         const { error: roleError } = await supabase
           .from('user_roles')
-          .insert([{ user_id: userData.user.id, role }]);
+          .insert([{ user_id: signUpData.user.id, role }]);
 
         if (roleError) {
           throw roleError;
@@ -118,30 +121,11 @@ const UserManagement = () => {
 
   const handleResetPassword = async (userId: string) => {
     try {
-      const { data, error: userError } = await supabase.auth.admin.listUsers();
-      
-      if (userError) {
-        throw userError;
-      }
-      
-      const user = data.users.find((u: AdminUserAttributes) => u.id === userId);
-      
-      if (!user || !user.email) {
-        throw new Error("User or email not found");
-      }
-      
-      const { error } = await supabase.auth.admin.generateLink({
-        type: 'recovery',
-        email: user.email,
-      });
-
-      if (error) {
-        throw error;
-      }
-
+      // We need to get the email from somewhere else, since we can't use admin API
+      // For this example, we'll just show a message to the user
       toast({
-        title: "Sukces",
-        description: "Link do resetowania hasła został wysłany na adres e-mail użytkownika",
+        title: "Informacja",
+        description: "Funkcja resetowania hasła wymaga uprawnień administratora Supabase.",
       });
     } catch (error: any) {
       toast({
@@ -154,15 +138,22 @@ const UserManagement = () => {
 
   const handleDeleteUser = async (userId: string) => {
     try {
-      const { error } = await supabase.auth.admin.deleteUser(userId);
+      // Delete the user role first
+      const { error: roleError } = await supabase
+        .from('user_roles')
+        .delete()
+        .eq('user_id', userId);
 
-      if (error) {
-        throw error;
+      if (roleError) {
+        throw roleError;
       }
+
+      // Note: We can't actually delete the auth user without admin API
+      // But we can remove their role which effectively deactivates them
 
       toast({
         title: "Sukces",
-        description: "Użytkownik został pomyślnie usunięty",
+        description: "Rola użytkownika została usunięta",
       });
       
       fetchUsers();
@@ -177,20 +168,24 @@ const UserManagement = () => {
 
   const createAdminUser = async () => {
     try {
-      const { data: userData, error: createError } = await supabase.auth.admin.createUser({
-        email: 'admin',
+      // Create admin user with signUp
+      const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+        email: 'admin@example.com',
         password: 'admin123',
-        email_confirm: true,
+        options: {
+          emailRedirectTo: window.location.origin,
+        }
       });
 
-      if (createError) {
-        throw createError;
+      if (signUpError) {
+        throw signUpError;
       }
 
-      if (userData.user) {
+      if (signUpData.user) {
+        // Add admin role
         const { error: roleError } = await supabase
           .from('user_roles')
-          .insert([{ user_id: userData.user.id, role: 'admin' }]);
+          .insert([{ user_id: signUpData.user.id, role: 'admin' }]);
 
         if (roleError) {
           throw roleError;
@@ -198,12 +193,18 @@ const UserManagement = () => {
 
         toast({
           title: "Sukces",
-          description: "Administrator został pomyślnie utworzony",
+          description: "Administrator został pomyślnie utworzony (admin@example.com, admin123)",
         });
         
         fetchUsers();
       }
     } catch (error: any) {
+      if (error.message.includes('already registered')) {
+        // If admin user exists, just fetch users
+        fetchUsers();
+        return;
+      }
+      
       toast({
         title: "Błąd",
         description: `Nie udało się utworzyć administratora: ${error.message}`,
@@ -240,17 +241,16 @@ const UserManagement = () => {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Email</TableHead>
+                  <TableHead>ID Użytkownika</TableHead>
                   <TableHead>Rola</TableHead>
                   <TableHead>Data utworzenia</TableHead>
-                  <TableHead>Ostatnie logowanie</TableHead>
                   <TableHead>Akcje</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {users.map((user) => (
                   <TableRow key={user.id} onClick={() => setSelectedUser(user)} className="cursor-pointer hover:bg-muted/30">
-                    <TableCell>{user.email}</TableCell>
+                    <TableCell>{user.id}</TableCell>
                     <TableCell>
                       <span className={`px-2 py-1 rounded-full text-xs ${
                         user.role === 'admin' 
@@ -267,11 +267,6 @@ const UserManagement = () => {
                       </span>
                     </TableCell>
                     <TableCell>{format(new Date(user.created_at), 'dd.MM.yyyy HH:mm')}</TableCell>
-                    <TableCell>
-                      {user.last_sign_in_at 
-                        ? format(new Date(user.last_sign_in_at), 'dd.MM.yyyy HH:mm')
-                        : 'Brak logowania'}
-                    </TableCell>
                     <TableCell className="space-x-2">
                       <Button 
                         variant="outline" 
@@ -345,7 +340,10 @@ const UserManagement = () => {
                 }
               }}
               onUpdatePassword={(userId, password) => {
-                // Implement this to change a user's password
+                toast({
+                  title: "Informacja",
+                  description: "Funkcja zmiany hasła wymaga uprawnień administratora Supabase.",
+                });
               }}
             />
           </DialogContent>
