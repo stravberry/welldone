@@ -2,7 +2,7 @@
 import { useCallback } from 'react';
 
 type EventCategory = 'navigation' | 'engagement' | 'form' | 'download' | 'social' | 'button';
-type EventAction = 'click' | 'submit' | 'view' | 'scroll' | 'download' | 'share';
+type EventAction = 'click' | 'submit' | 'view' | 'scroll' | 'download' | 'share' | 'input';
 
 interface TrackEventProps {
   category: EventCategory;
