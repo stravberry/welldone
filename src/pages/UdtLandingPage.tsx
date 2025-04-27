@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
@@ -8,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from "sonner";
 import useEventTracking from '@/hooks/useEventTracking';
+import { supabase } from '@/lib/supabase';
 
 const UdtLandingPage = () => {
   const { trackEvent } = useEventTracking();
@@ -19,7 +19,6 @@ const UdtLandingPage = () => {
     message: ''
   });
 
-  // Track page view on component mount
   useEffect(() => {
     document.title = "Szkolenia UDT i Kursy Operatorów - Najwyższa Zdawalność | Well-done";
   }, []);
@@ -28,7 +27,6 @@ const UdtLandingPage = () => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     
-    // Track form field interaction
     trackEvent({
       category: 'form',
       action: 'input',
@@ -40,10 +38,9 @@ const UdtLandingPage = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Track form submission
     trackEvent({
       category: 'form',
       action: 'submit',
@@ -53,18 +50,29 @@ const UdtLandingPage = () => {
         formLocation: window.location.pathname
       }
     });
-    
-    // Show success message
-    toast.success("Dziękujemy! Wkrótce się z Tobą skontaktujemy.");
-    
-    // Reset form
-    setFormData({
-      name: '',
-      company: '',
-      email: '',
-      phone: '',
-      message: ''
-    });
+
+    try {
+      const response = await supabase.functions.invoke('send-contact-email', {
+        body: formData
+      });
+
+      if (response.error) {
+        throw new Error(response.error.message);
+      }
+      
+      toast.success("Dziękujemy! Wkrótce się z Tobą skontaktujemy.");
+      
+      setFormData({
+        name: '',
+        company: '',
+        email: '',
+        phone: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Error sending email:', error);
+      toast.error("Przepraszamy, wystąpił błąd. Spróbuj ponownie później.");
+    }
   };
 
   const trackCTAClick = (ctaName: string, destinationId?: string) => {
