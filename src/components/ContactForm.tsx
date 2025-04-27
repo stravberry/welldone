@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
+import useEventTracking from '@/hooks/useEventTracking';
 
 interface ContactFormProps {
   title?: string;
@@ -17,11 +18,46 @@ const ContactForm: React.FC<ContactFormProps> = ({
   subtitle = "Wypełnij formularz, a nasz zespół skontaktuje się z Tobą najszybciej jak to możliwe."
 }) => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const { trackEvent } = useEventTracking();
 
   const onSubmit = (data: any) => {
     console.log(data);
+
+    // Śledzenie zdarzenia wysłania formularza
+    trackEvent({
+      category: 'form',
+      action: 'submit',
+      label: 'contact-form',
+      value: 1,
+      additionalData: {
+        formName: 'contact-form',
+        formLocation: window.location.pathname
+      }
+    });
+
+    // W rzeczywistej implementacji tutaj byłby kod do wysyłania danych na serwer
+    // np. fetch('/api/contact', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(data)
+    // })
+    
     toast.success("Formularz został wysłany! Skontaktujemy się wkrótce.");
     reset();
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    // Śledzenie interakcji z polami formularza
+    trackEvent({
+      category: 'form',
+      action: 'input',
+      label: `contact-form-${e.target.name}`,
+      additionalData: {
+        fieldName: e.target.name,
+        formName: 'contact-form',
+        page: window.location.pathname
+      }
+    });
   };
 
   return (
@@ -38,6 +74,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
               placeholder="Jan Kowalski"
               {...register("name", { required: "To pole jest wymagane" })}
               className={errors.name ? "border-red-500" : ""}
+              onChange={handleInputChange}
             />
             {errors.name && <p className="text-red-500 text-sm">{errors.name.message as string}</p>}
           </div>
@@ -49,6 +86,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
               placeholder="Firma Sp. z o.o."
               {...register("company", { required: "To pole jest wymagane" })}
               className={errors.company ? "border-red-500" : ""}
+              onChange={handleInputChange}
             />
             {errors.company && <p className="text-red-500 text-sm">{errors.company.message as string}</p>}
           </div>
@@ -69,6 +107,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
                 }
               })}
               className={errors.email ? "border-red-500" : ""}
+              onChange={handleInputChange}
             />
             {errors.email && <p className="text-red-500 text-sm">{errors.email.message as string}</p>}
           </div>
@@ -80,6 +119,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
               placeholder="+48 123 456 789"
               {...register("phone", { required: "To pole jest wymagane" })}
               className={errors.phone ? "border-red-500" : ""}
+              onChange={handleInputChange}
             />
             {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message as string}</p>}
           </div>
@@ -93,11 +133,26 @@ const ContactForm: React.FC<ContactFormProps> = ({
             rows={5}
             {...register("message", { required: "To pole jest wymagane" })}
             className={errors.message ? "border-red-500" : ""}
+            onChange={handleInputChange}
           />
           {errors.message && <p className="text-red-500 text-sm">{errors.message.message as string}</p>}
         </div>
         
-        <Button type="submit" className="w-full">Wyślij wiadomość</Button>
+        <Button 
+          type="submit" 
+          className="w-full"
+          onClick={() => trackEvent({
+            category: 'button',
+            action: 'click',
+            label: 'submit-contact-form',
+            additionalData: {
+              buttonLocation: 'contact-form',
+              page: window.location.pathname
+            }
+          })}
+        >
+          Wyślij wiadomość
+        </Button>
       </form>
     </div>
   );
