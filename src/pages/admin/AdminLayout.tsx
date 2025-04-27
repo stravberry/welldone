@@ -3,7 +3,7 @@ import React from 'react';
 import { Outlet, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { Button } from '@/components/ui/button';
-import { LayoutDashboard, FileText, Settings, Image, LogOut } from 'lucide-react';
+import { LayoutDashboard, FileText, Settings, Image, LogOut, Users } from 'lucide-react';
 
 const AdminLayout: React.FC = () => {
   const { logout, username } = useAuth();
@@ -49,6 +49,10 @@ const AdminLayout: React.FC = () => {
             <Link to="/admin/media" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
               <Image className="w-5 h-5 mr-3" />
               <span>Media</span>
+            </Link>
+            <Link to="/admin/users" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+              <Users className="w-5 h-5 mr-3" />
+              <span>Użytkownicy</span>
             </Link>
             <Link to="/admin/settings" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
               <Settings className="w-5 h-5 mr-3" />
@@ -102,6 +106,10 @@ const AdminLayout: React.FC = () => {
         <Link to="/admin/media" className="flex flex-col items-center p-2">
           <Image className="w-5 h-5" />
           <span className="text-xs mt-1">Media</span>
+        </Link>
+        <Link to="/admin/users" className="flex flex-col items-center p-2">
+          <Users className="w-5 h-5" />
+          <span className="text-xs mt-1">Użytkownicy</span>
         </Link>
         <Link to="/admin/settings" className="flex flex-col items-center p-2">
           <Settings className="w-5 h-5" />

@@ -26,6 +26,7 @@ import BlogManagement from "@/pages/admin/BlogManagement";
 import BlogPostEditor from "@/pages/admin/BlogPostEditor";
 import MediaManagement from "@/pages/admin/MediaManagement";
 import SettingsPage from "@/pages/admin/SettingsPage";
+import UserManagement from "@/pages/admin/UserManagement";
 import CMSLoginPage from "@/pages/CMSLoginPage";
 import CMSLoginPanel from "@/components/CMSLoginPanel";
 import RouteChangeTracker from "@/components/RouteChangeTracker";
@@ -57,6 +58,7 @@ const App = () => (
                 <Route path="blog/new" element={<BlogPostEditor />} />
                 <Route path="blog/edit/:id" element={<BlogPostEditor />} />
                 <Route path="media" element={<MediaManagement />} />
+                <Route path="users" element={<UserManagement />} />
                 <Route path="settings" element={<SettingsPage />} />
               </Route>
 
