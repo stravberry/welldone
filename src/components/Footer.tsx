@@ -1,8 +1,6 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Linkedin, Youtube, Phone, Mail, MapPin } from 'lucide-react';
-import CMSLoginPanel from './CMSLoginPanel';
 
 const Footer = () => {
   return (
@@ -119,7 +117,7 @@ const Footer = () => {
           
           <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-xs sm:text-sm">
-              &copy; {new Date().getFullYear()} Well-Done.pl. Wszelkie prawa zastrzeżone.
+              © {new Date().getFullYear()} Well-Done.pl. Wszelkie prawa zastrzeżone.
             </p>
             <div className="flex flex-col sm:flex-row sm:space-x-6 space-y-2 sm:space-y-0 mt-4 md:mt-0">
               <Link to="/polityka-prywatnosci" className="text-gray-400 hover:text-white text-xs sm:text-sm">
@@ -135,9 +133,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      
-      {/* CMS Login Panel */}
-      <CMSLoginPanel />
     </footer>
   );
 };
