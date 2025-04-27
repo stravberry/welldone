@@ -63,6 +63,13 @@ const UdtLandingPage = () => {
         throw new Error(response.error.message);
       }
       
+      // Track successful form submission for GTM
+      if (window.dataLayer) {
+        window.dataLayer.push({
+          'event': 'success_sent_form'
+        });
+      }
+      
       toast.success("Dziękujemy! Wkrótce się z Tobą skontaktujemy.");
       
       setFormData({

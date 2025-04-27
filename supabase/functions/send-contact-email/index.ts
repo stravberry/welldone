@@ -39,7 +39,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Send the email
     const emailResponse = await resend.emails.send({
       from: "Well-done.pl <noreply@well-done.pl>",
-      to: ["marketing@well-done.pl"],
+      to: ["wskopek.all@gmail.com"],
       subject: `Nowe zapytanie UDT od ${formData.name} - ${formData.company}`,
       html: html,
       reply_to: formData.email,
