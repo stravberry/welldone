@@ -126,10 +126,10 @@ const UserManagement = () => {
 
   const handleResetPassword = async (userId: string) => {
     try {
-      // Generate reset password link
+      // Generate reset password link - using 'id' parameter instead of 'userId' or 'user_id'
       const { error } = await supabase.auth.admin.generateLink({
         type: 'recovery',
-        userId: userId, // Changed from user_id to userId to match the expected type
+        id: userId, // Fixed parameter name to match Supabase API
       });
 
       if (error) {
