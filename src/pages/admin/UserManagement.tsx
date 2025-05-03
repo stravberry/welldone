@@ -19,12 +19,11 @@ import { format } from 'date-fns';
 import CreateUser from '@/components/admin/CreateUser';
 import UserDetails from '@/components/admin/UserDetails';
 import { Database } from '@/integrations/supabase/types';
-import { AdminUserAttributes } from '@supabase/supabase-js';
 
 type User = {
   id: string;
   email: string;
-  role: Database['public']['Enums']['app_role'];
+  role: 'admin' | 'moderator' | 'user';
   created_at: string;
   last_sign_in_at: string | null;
 };
@@ -77,7 +76,7 @@ const UserManagement = () => {
     }
   };
 
-  const handleCreateUser = async (email: string, password: string, role: Database['public']['Enums']['app_role']) => {
+  const handleCreateUser = async (email: string, password: string, role: 'admin' | 'moderator' | 'user') => {
     try {
       // Create user using signUp instead of admin methods
       const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
@@ -317,7 +316,7 @@ const UserManagement = () => {
               onClose={() => setSelectedUser(null)}
               onResetPassword={handleResetPassword}
               onDelete={handleDeleteUser}
-              onUpdateRole={async (userId, newRole: Database['public']['Enums']['app_role']) => {
+              onUpdateRole={async (userId, newRole: 'admin' | 'moderator' | 'user') => {
                 try {
                   const { error } = await supabase
                     .from('user_roles')
