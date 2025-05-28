@@ -20,20 +20,6 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
       ref={elementRef}
       className="process-step flex md:block relative group"
     >
-      {/* Connection line for desktop */}
-      {index < 5 && (
-        <div 
-          className="hidden lg:block absolute top-5 left-full w-full h-0.5 bg-gradient-to-r from-orange-300 to-orange-400 z-0"
-          style={{
-            opacity: isInView ? 1 : 0,
-            transform: isInView ? 'scaleX(1)' : 'scaleX(0)',
-            transformOrigin: 'left',
-            transition: 'all 1.2s ease-out',
-            transitionDelay: isInView ? `${(index + 1) * 400}ms` : '0ms'
-          }}
-        />
-      )}
-      
       {/* Animated circle with number */}
       <div 
         className="relative z-10"
@@ -44,13 +30,15 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
           transitionDelay: isInView ? `${index * 300}ms` : '0ms'
         }}
       >
-        {/* Pulsing background effect - reduced frequency and size */}
+        {/* Growing background circle effect */}
         <div 
           className="absolute inset-0 rounded-full bg-orange-400"
           style={{
-            opacity: isInView ? 0.2 : 0,
-            animation: isInView ? 'pulse 4s ease-in-out infinite' : 'none',
-            animationDelay: isInView ? `${index * 300 + 1000}ms` : '0ms',
+            opacity: isInView ? 0.3 : 0,
+            transform: isInView ? 'scale(1.5)' : 'scale(0)',
+            transition: 'all 1s ease-out',
+            animationDelay: isInView ? `${index * 600}ms` : '0ms',
+            transitionDelay: isInView ? `${index * 600}ms` : '0ms'
           }}
         />
         
