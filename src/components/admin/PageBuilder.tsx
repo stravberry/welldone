@@ -295,6 +295,54 @@ const getDefaultContent = (blockType: string): any => {
       return { text: 'Kliknij tutaj', url: '#', variant: 'primary' };
     case 'spacer':
       return { height: 40 };
+    case 'hero':
+      return {
+        title: 'Pomagamy firmom produkcyjnym działać bez ryzyka',
+        description: 'Zapewniamy pełną zgodność uprawnień UDT i SEP dla pracowników.',
+        buttonText: 'Dlaczego My?',
+        buttonUrl: '/o-nas',
+        videoUrl: 'https://www.youtube.com/embed/8QDIVIU9QZQ'
+      };
+    case 'services-grid':
+      return {
+        title: 'Nasze Usługi',
+        description: 'Oferujemy kompleksowe szkolenia dla firm produkcyjnych.',
+        services: [
+          {
+            title: "Uprawnienia UDT dla operatorów",
+            description: "Szkolenia i certyfikacja dla operatorów urządzeń transportu bliskiego.",
+            icon: "award"
+          },
+          {
+            title: "Uprawnienia UDT dla konserwatorów",
+            description: "Kursy dla konserwatorów urządzeń transportu bliskiego.",
+            icon: "briefcase"
+          },
+          {
+            title: "Uprawnienia SEP",
+            description: "Szkolenia i certyfikacja w zakresie uprawnień SEP.",
+            icon: "book"
+          }
+        ]
+      };
+    case 'stats':
+      return {
+        title: 'Dlaczego warto z nami współpracować?',
+        stats: [
+          { value: 10, label: 'lat doświadczenia', suffix: '+' },
+          { value: 500, label: 'zadowolonych firm', suffix: '+' },
+          { value: 1000, label: 'zrealizowanych szkoleń', suffix: '+' },
+          { value: 80, label: 'zleceń dla produkcji', suffix: '%' }
+        ]
+      };
+    case 'cta':
+      return {
+        title: 'Skorzystaj z bezpłatnego audytu',
+        description: 'Zastanawiasz się, czy Twoje szkolenia są odpowiednio dobrane? Skorzystaj z bezpłatnego audytu.',
+        buttonText: 'Zamów bezpłatny audyt',
+        buttonUrl: '/bezplatny-audyt',
+        backgroundType: 'gradient'
+      };
     default:
       return {};
   }

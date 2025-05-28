@@ -1,12 +1,12 @@
-
 import React from 'react';
 import { useDraggable } from '@dnd-kit/core';
-import { Type, Image, Square, Link, Minus, Video, Grid, Quote } from 'lucide-react';
+import { Type, Image, Square, Link, Minus, Video, Grid, Quote, Award, BarChart, Users, Zap } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import type { BlockType } from './types';
 
 const blockTypes: BlockType[] = [
+  // Basic blocks
   {
     id: 'text',
     name: 'Tekst',
@@ -25,7 +25,7 @@ const blockTypes: BlockType[] = [
     id: 'image',
     name: 'Obraz',
     icon: <Image className="h-6 w-6" />,
-    category: 'media',
+    category: 'basic',
     description: 'Blok obrazu z podpisem',
   },
   {
@@ -42,19 +42,44 @@ const blockTypes: BlockType[] = [
     category: 'layout',
     description: 'Dodaj przestrzeń między blokami',
   },
+
+  // Homepage specific blocks
+  {
+    id: 'hero',
+    name: 'Hero',
+    icon: <Zap className="h-6 w-6" />,
+    category: 'homepage',
+    description: 'Sekcja hero z tytułem i video',
+  },
+  {
+    id: 'services-grid',
+    name: 'Siatka usług',
+    icon: <Grid className="h-6 w-6" />,
+    category: 'homepage',
+    description: 'Siatka usług z ikonami',
+  },
+  {
+    id: 'stats',
+    name: 'Statystyki',
+    icon: <BarChart className="h-6 w-6" />,
+    category: 'homepage',
+    description: 'Blok ze statystykami',
+  },
+  {
+    id: 'cta',
+    name: 'Call to Action',
+    icon: <Award className="h-6 w-6" />,
+    category: 'homepage',
+    description: 'Sekcja zachęcająca do działania',
+  },
+
+  // Media blocks
   {
     id: 'video',
     name: 'Video',
     icon: <Video className="h-6 w-6" />,
     category: 'media',
     description: 'Embed YouTube/Vimeo',
-  },
-  {
-    id: 'columns',
-    name: 'Kolumny',
-    icon: <Grid className="h-6 w-6" />,
-    category: 'layout',
-    description: 'Layout w kolumnach',
   },
   {
     id: 'quote',
@@ -112,6 +137,7 @@ const BlockLibrary: React.FC = () => {
 
   const categoryLabels = {
     basic: 'Podstawowe',
+    homepage: 'Strona główna',
     media: 'Media',
     layout: 'Layout',
     advanced: 'Zaawansowane',
@@ -119,11 +145,18 @@ const BlockLibrary: React.FC = () => {
 
   return (
     <div className="p-4">
-      <Tabs defaultValue="basic" className="w-full">
-        <TabsList className="grid w-full grid-cols-2">
+      <Tabs defaultValue="homepage" className="w-full">
+        <TabsList className="grid w-full grid-cols-3">
+          <TabsTrigger value="homepage" className="text-xs">Strona główna</TabsTrigger>
           <TabsTrigger value="basic" className="text-xs">Podstawowe</TabsTrigger>
           <TabsTrigger value="all" className="text-xs">Wszystkie</TabsTrigger>
         </TabsList>
+        
+        <TabsContent value="homepage" className="mt-4 space-y-4">
+          {groupedBlocks.homepage?.map((block) => (
+            <DraggableBlock key={block.id} block={block} />
+          ))}
+        </TabsContent>
         
         <TabsContent value="basic" className="mt-4 space-y-4">
           {groupedBlocks.basic?.map((block) => (

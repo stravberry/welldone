@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -10,6 +9,10 @@ import ImageBlock from './blocks/ImageBlock';
 import ButtonBlock from './blocks/ButtonBlock';
 import SpacerBlock from './blocks/SpacerBlock';
 import VideoBlock from './blocks/VideoBlock';
+import HeroBlock from './blocks/HeroBlock';
+import ServicesGridBlock from './blocks/ServicesGridBlock';
+import StatsBlock from './blocks/StatsBlock';
+import CTABlock from './blocks/CTABlock';
 import type { PageBlock, ViewportMode } from './types';
 
 interface BlockRendererProps {
@@ -62,6 +65,14 @@ const BlockRenderer: React.FC<BlockRendererProps> = ({
         return <SpacerBlock block={block} onUpdate={onUpdate} />;
       case 'video':
         return <VideoBlock block={block} onUpdate={onUpdate} />;
+      case 'hero':
+        return <HeroBlock block={block} onUpdate={onUpdate} />;
+      case 'services-grid':
+        return <ServicesGridBlock block={block} onUpdate={onUpdate} />;
+      case 'stats':
+        return <StatsBlock block={block} onUpdate={onUpdate} />;
+      case 'cta':
+        return <CTABlock block={block} onUpdate={onUpdate} />;
       default:
         return (
           <div className="p-4 bg-gray-100 text-center text-gray-500">
