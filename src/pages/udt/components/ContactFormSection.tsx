@@ -28,11 +28,11 @@ const ContactFormSection: React.FC<ContactFormSectionProps> = ({
       <div className="container mx-auto px-4">
         <div 
           ref={titleRef}
-          className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${
-            titleInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'
+          className={`text-center mb-12 sm:mb-16 transition-all duration-500 ${
+            titleInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
-          <span className="text-orange-600 font-medium text-sm sm:text-base animate-pulse-slow">Kontakt</span>
+          <span className="text-orange-600 font-medium text-sm sm:text-base">Kontakt</span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mt-2 mb-4">Skontaktuj się z nami</h2>
           <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
             Masz pytania? Wypełnij formularz, a nasz konsultant skontaktuje się z Tobą w ciągu 24 godzin
@@ -41,12 +41,12 @@ const ContactFormSection: React.FC<ContactFormSectionProps> = ({
         
         <div 
           ref={formRef}
-          className={`max-w-4xl mx-auto bg-white p-6 sm:p-8 rounded-lg shadow-md transition-all duration-1000 ${
-            formInView ? 'animate-scale-in' : 'opacity-0 scale-95'
+          className={`max-w-4xl mx-auto bg-white p-6 sm:p-8 rounded-lg shadow-md transition-all duration-500 ${
+            formInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className={`transition-all duration-700 ${formInView ? 'animate-fade-in-left' : 'opacity-0'}`} style={{ animationDelay: '0.1s' }}>
+            <div>
               <Label htmlFor="name" className="text-gray-700">Imię i nazwisko</Label>
               <Input 
                 id="name" 
@@ -59,7 +59,7 @@ const ContactFormSection: React.FC<ContactFormSectionProps> = ({
               />
             </div>
             
-            <div className={`transition-all duration-700 ${formInView ? 'animate-fade-in-right' : 'opacity-0'}`} style={{ animationDelay: '0.2s' }}>
+            <div>
               <Label htmlFor="company" className="text-gray-700">Firma</Label>
               <Input 
                 id="company" 
@@ -71,7 +71,7 @@ const ContactFormSection: React.FC<ContactFormSectionProps> = ({
               />
             </div>
             
-            <div className={`transition-all duration-700 ${formInView ? 'animate-fade-in-left' : 'opacity-0'}`} style={{ animationDelay: '0.3s' }}>
+            <div>
               <Label htmlFor="email" className="text-gray-700">Email</Label>
               <Input 
                 id="email" 
@@ -85,7 +85,7 @@ const ContactFormSection: React.FC<ContactFormSectionProps> = ({
               />
             </div>
             
-            <div className={`transition-all duration-700 ${formInView ? 'animate-fade-in-right' : 'opacity-0'}`} style={{ animationDelay: '0.4s' }}>
+            <div>
               <Label htmlFor="phone" className="text-gray-700">Telefon</Label>
               <Input 
                 id="phone" 
@@ -98,7 +98,7 @@ const ContactFormSection: React.FC<ContactFormSectionProps> = ({
               />
             </div>
             
-            <div className={`md:col-span-2 transition-all duration-700 ${formInView ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.5s' }}>
+            <div className="md:col-span-2">
               <Label htmlFor="message" className="text-gray-700">Wiadomość</Label>
               <Textarea 
                 id="message" 
@@ -112,10 +112,10 @@ const ContactFormSection: React.FC<ContactFormSectionProps> = ({
               />
             </div>
             
-            <div className={`md:col-span-2 transition-all duration-700 ${formInView ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.6s' }}>
+            <div className="md:col-span-2">
               <Button 
                 type="submit"
-                className="w-full bg-orange-600 hover:bg-orange-700 py-6 transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:animate-glow"
+                className="w-full bg-orange-600 hover:bg-orange-700 py-6 transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
                 onClick={() => trackCTAClick('contact-form-submit')}
               >
                 Wyślij wiadomość
