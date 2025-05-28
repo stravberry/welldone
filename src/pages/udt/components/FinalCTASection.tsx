@@ -17,14 +17,6 @@ const FinalCTASection: React.FC<FinalCTASectionProps> = ({ trackCTAClick }) => {
         sectionInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'
       }`}
     >
-      {/* Simplified background elements - no problematic animations */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-10 left-10 w-20 h-20 bg-white rounded-full"></div>
-        <div className="absolute top-32 right-20 w-16 h-16 bg-white rounded-full"></div>
-        <div className="absolute bottom-20 left-20 w-12 h-12 bg-white rounded-full"></div>
-        <div className="absolute bottom-32 right-10 w-24 h-24 bg-white rounded-full"></div>
-      </div>
-
       <div className="container mx-auto px-4 relative z-10">
         <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 transition-all duration-800 ${
           sectionInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'

@@ -57,7 +57,7 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({ trackCTAClick }
               key={index} 
               className={`bg-gray-50 p-6 rounded-lg transition-all duration-600 hover:shadow-lg hover:bg-white group cursor-pointer border border-transparent hover:border-orange-200 ${
                 visibleItems.includes(index) 
-                  ? 'animate-fade-in-up opacity-100' 
+                  ? 'animate-fade-in-up' 
                   : 'opacity-0 translate-y-5'
               }`}
               style={{ animationDelay: `${index * 0.1}s` }}
