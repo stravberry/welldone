@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Separator } from '@/components/ui/separator';
 import { toast } from 'sonner';
+import { CheckCircle, Clock, Users, Zap } from 'lucide-react';
 
 const QuotePage = () => {
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const { register, handleSubmit, control, watch, reset, formState: { errors } } = useForm();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({});
@@ -292,13 +299,13 @@ const QuotePage = () => {
                     
                     <div className="space-y-2">
                       <Label htmlFor="additionalInfo">Dodatkowe informacje (opcjonalnie)</Label>
-                      <textarea
+                      <Textarea
                         {...register("additionalInfo")}
                         id="additionalInfo"
                         rows={3}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md"
                         placeholder="Dodatkowe informacje, które pomogą nam lepiej przygotować ofertę..."
-                      ></textarea>
+                      ></Textarea>
                     </div>
                   </div>
                   
