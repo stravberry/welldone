@@ -68,7 +68,7 @@ const App = () => (
               {/* UDT Landing Page */}
               <Route path="/udt-szkolenia" element={<UdtLandingPage />} />
 
-              {/* Public Routes */}
+              {/* Main Website Routes with Layout */}
               <Route path="/" element={
                 <div className="flex flex-col min-h-screen">
                   <Navbar />
@@ -80,21 +80,100 @@ const App = () => (
                 </div>
               } />
 
+              <Route path="/o-nas" element={
+                <div className="flex flex-col min-h-screen">
+                  <Navbar />
+                  <main className="flex-grow pt-16">
+                    <AboutPage />
+                  </main>
+                  <Footer />
+                  <CMSLoginPanel />
+                </div>
+              } />
+
+              <Route path="/uslugi" element={
+                <div className="flex flex-col min-h-screen">
+                  <Navbar />
+                  <main className="flex-grow pt-16">
+                    <ServicesPage />
+                  </main>
+                  <Footer />
+                  <CMSLoginPanel />
+                </div>
+              } />
+
+              <Route path="/uslugi/:serviceId" element={
+                <div className="flex flex-col min-h-screen">
+                  <Navbar />
+                  <main className="flex-grow pt-16">
+                    <ServiceDetailPage />
+                  </main>
+                  <Footer />
+                  <CMSLoginPanel />
+                </div>
+              } />
+
+              <Route path="/bezplatny-audyt" element={
+                <div className="flex flex-col min-h-screen">
+                  <Navbar />
+                  <main className="flex-grow pt-16">
+                    <FreeAuditPage />
+                  </main>
+                  <Footer />
+                  <CMSLoginPanel />
+                </div>
+              } />
+
+              <Route path="/realizacje" element={
+                <div className="flex flex-col min-h-screen">
+                  <Navbar />
+                  <main className="flex-grow pt-16">
+                    <RealizationsPage />
+                  </main>
+                  <Footer />
+                  <CMSLoginPanel />
+                </div>
+              } />
+
+              <Route path="/wiedza" element={
+                <div className="flex flex-col min-h-screen">
+                  <Navbar />
+                  <main className="flex-grow pt-16">
+                    <KnowledgePage />
+                  </main>
+                  <Footer />
+                  <CMSLoginPanel />
+                </div>
+              } />
+
+              <Route path="/wycena" element={
+                <div className="flex flex-col min-h-screen">
+                  <Navbar />
+                  <main className="flex-grow pt-16">
+                    <QuotePage />
+                  </main>
+                  <Footer />
+                  <CMSLoginPanel />
+                </div>
+              } />
+
+              <Route path="/kontakt" element={
+                <div className="flex flex-col min-h-screen">
+                  <Navbar />
+                  <main className="flex-grow pt-16">
+                    <ContactPage />
+                  </main>
+                  <Footer />
+                  <CMSLoginPanel />
+                </div>
+              } />
+
+              {/* 404 Route */}
               <Route path="*" element={
                 <div className="flex flex-col min-h-screen">
                   <Navbar />
                   <main className="flex-grow pt-16">
-                    <Routes>
-                      <Route path="/o-nas" element={<AboutPage />} />
-                      <Route path="/uslugi" element={<ServicesPage />} />
-                      <Route path="/uslugi/:serviceId" element={<ServiceDetailPage />} />
-                      <Route path="/bezplatny-audyt" element={<FreeAuditPage />} />
-                      <Route path="/realizacje" element={<RealizationsPage />} />
-                      <Route path="/wiedza" element={<KnowledgePage />} />
-                      <Route path="/wycena" element={<QuotePage />} />
-                      <Route path="/kontakt" element={<ContactPage />} />
-                      <Route path="*" element={<NotFound />} />
-                    </Routes>
+                    <NotFound />
                   </main>
                   <Footer />
                   <CMSLoginPanel />
