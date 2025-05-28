@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -150,36 +151,36 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-              <h1 className={`text-4xl md:text-5xl font-bold mb-6 transform-gpu transition-all duration-1000 ${
-                heroInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'
+              <h1 className={`text-4xl md:text-5xl font-bold mb-6 transition-all duration-1000 ${
+                heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}>
                 Pomagamy firmom produkcyjnym działać bez ryzyka
               </h1>
-              <p className={`text-lg mb-8 transform-gpu transition-all duration-1000 ${
-                heroInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'
-              }`} style={{ animationDelay: '0.3s' }}>
+              <p className={`text-lg mb-8 transition-all duration-1000 delay-300 ${
+                heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}>
                 Zapewniamy pełną zgodność uprawnień UDT i SEP dla pracowników. Stosujemy procesowe podejście, które umożliwia precyzyjne dopasowanie szkoleń do indywidualnych potrzeb klienta.
               </p>
-              <div className={`flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 transform-gpu transition-all duration-1000 ${
-                heroInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'
-              }`} style={{ animationDelay: '0.6s' }}>
-                <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-gray-100 transform-gpu transition-all duration-300 hover:scale-105 will-change-transform">
+              <div className={`flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 transition-all duration-1000 delay-500 ${
+                heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}>
+                <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-gray-100">
                   <Link to="/o-nas">Dlaczego My?</Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="bg-orange-500 text-white hover:bg-orange-600 border-orange-500 hover:border-orange-600 transform-gpu transition-all duration-300 hover:scale-105 will-change-transform">
+                <Button asChild size="lg" variant="outline" className="bg-orange-500 text-white hover:bg-orange-600 border-orange-500 hover:border-orange-600">
                   <Link to="/wycena">Błyskawiczna Wycena</Link>
                 </Button>
               </div>
             </div>
-            <div className={`flex items-center justify-center transform-gpu transition-all duration-1000 ${
-              heroInView ? 'animate-fade-in-left' : 'opacity-0 translate-x-10'
-            }`} style={{ animationDelay: '0.4s' }}>
+            <div className={`flex items-center justify-center transition-all duration-1000 delay-400 ${
+              heroInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+            }`}>
               <div className="w-full max-w-md">
                 <AspectRatio ratio={16/9}>
                   <iframe 
                     src="https://www.youtube.com/embed/8QDIVIU9QZQ" 
                     title="Well-Done.pl Company Presentation" 
-                    className="w-full h-full border-none transform-gpu transition-transform duration-300 hover:scale-105 will-change-transform" 
+                    className="w-full h-full border-none" 
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowFullScreen
@@ -196,8 +197,8 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div 
             ref={servicesHeaderRef}
-            className={`text-center mb-12 transform-gpu transition-all duration-1000 ${
-              servicesHeaderInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'
+            className={`text-center mb-12 transition-all duration-1000 ${
+              servicesHeaderInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
             <h2 className="text-3xl font-bold mb-4">Nasze Usługi</h2>
@@ -209,9 +210,9 @@ const HomePage = () => {
             {services.map((service, index) => (
               <div
                 key={index}
-                className={`transform-gpu transition-all duration-700 ${
+                className={`transition-all duration-700 ${
                   visibleServices.includes(index) 
-                    ? 'animate-fade-in-up opacity-100' 
+                    ? 'opacity-100 translate-y-0' 
                     : 'opacity-0 translate-y-5'
                 }`}
               >
@@ -233,8 +234,8 @@ const HomePage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div 
               ref={whyUsHeaderRef}
-              className={`transform-gpu transition-all duration-1000 ${
-                whyUsHeaderInView ? 'animate-fade-in-right' : 'opacity-0 translate-x-10'
+              className={`transition-all duration-1000 ${
+                whyUsHeaderInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
               }`}
             >
               <h2 className="text-3xl font-bold mb-6">Dlaczego warto z nami współpracować?</h2>
@@ -243,14 +244,13 @@ const HomePage = () => {
               </p>
               <div 
                 ref={whyUsContentRef}
-                className={`space-y-6 transform-gpu transition-all duration-1000 ${
-                  whyUsContentInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'
+                className={`space-y-6 transition-all duration-1000 delay-300 ${
+                  whyUsContentInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                 }`}
-                style={{ animationDelay: '0.3s' }}
               >
                 {benefits.map((benefit, index) => (
-                  <div key={index} className="flex group cursor-pointer transform-gpu transition-transform duration-300 hover:translate-x-2 will-change-transform">
-                    <div className="flex-shrink-0 mr-4 transform-gpu transition-transform duration-300 group-hover:scale-110 will-change-transform">
+                  <div key={index} className="flex group cursor-pointer transition-transform duration-300 hover:translate-x-2">
+                    <div className="flex-shrink-0 mr-4 transition-transform duration-300 group-hover:scale-110">
                       {benefit.icon}
                     </div>
                     <div>
@@ -260,7 +260,7 @@ const HomePage = () => {
                   </div>
                 ))}
               </div>
-              <Button asChild className="mt-8 transform-gpu transition-all duration-300 hover:scale-105 will-change-transform">
+              <Button asChild className="mt-8">
                 <Link to="/o-nas">
                   Poznaj nas lepiej <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
@@ -270,8 +270,8 @@ const HomePage = () => {
               <div ref={statsRef} className="grid grid-cols-2 gap-4">
                 <div 
                   ref={counter1Ref}
-                  className={`bg-orange-50 rounded-lg p-6 text-center transform-gpu transition-all duration-700 hover:scale-105 hover:shadow-xl hover:bg-orange-100 cursor-pointer will-change-transform backface-hidden ${
-                    visibleStats.includes(0) ? 'animate-fade-in-up' : 'opacity-0 translate-y-5'
+                  className={`bg-orange-50 rounded-lg p-6 text-center transition-all duration-700 hover:scale-105 hover:shadow-xl hover:bg-orange-100 cursor-pointer ${
+                    visibleStats.includes(0) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
                   }`}
                 >
                   <div className="text-3xl font-bold text-orange-600 mb-2">{count1}+</div>
@@ -279,8 +279,8 @@ const HomePage = () => {
                 </div>
                 <div 
                   ref={counter2Ref}
-                  className={`bg-orange-50 rounded-lg p-6 text-center transform-gpu transition-all duration-700 hover:scale-105 hover:shadow-xl hover:bg-orange-100 cursor-pointer will-change-transform backface-hidden ${
-                    visibleStats.includes(1) ? 'animate-fade-in-up' : 'opacity-0 translate-y-5'
+                  className={`bg-orange-50 rounded-lg p-6 text-center transition-all duration-700 hover:scale-105 hover:shadow-xl hover:bg-orange-100 cursor-pointer ${
+                    visibleStats.includes(1) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
                   }`}
                 >
                   <div className="text-3xl font-bold text-orange-600 mb-2">{count2}+</div>
@@ -288,8 +288,8 @@ const HomePage = () => {
                 </div>
                 <div 
                   ref={counter3Ref}
-                  className={`bg-orange-50 rounded-lg p-6 text-center transform-gpu transition-all duration-700 hover:scale-105 hover:shadow-xl hover:bg-orange-100 cursor-pointer will-change-transform backface-hidden ${
-                    visibleStats.includes(2) ? 'animate-fade-in-up' : 'opacity-0 translate-y-5'
+                  className={`bg-orange-50 rounded-lg p-6 text-center transition-all duration-700 hover:scale-105 hover:shadow-xl hover:bg-orange-100 cursor-pointer ${
+                    visibleStats.includes(2) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
                   }`}
                 >
                   <div className="text-3xl font-bold text-orange-600 mb-2">{count3}+</div>
@@ -297,8 +297,8 @@ const HomePage = () => {
                 </div>
                 <div 
                   ref={counter4Ref}
-                  className={`bg-orange-50 rounded-lg p-6 text-center transform-gpu transition-all duration-700 hover:scale-105 hover:shadow-xl hover:bg-orange-100 cursor-pointer will-change-transform backface-hidden ${
-                    visibleStats.includes(3) ? 'animate-fade-in-up' : 'opacity-0 translate-y-5'
+                  className={`bg-orange-50 rounded-lg p-6 text-center transition-all duration-700 hover:scale-105 hover:shadow-xl hover:bg-orange-100 cursor-pointer ${
+                    visibleStats.includes(3) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
                   }`}
                 >
                   <div className="text-3xl font-bold text-orange-600 mb-2">{count4}%</div>
@@ -315,8 +315,8 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div 
             ref={processHeaderRef}
-            className={`text-center mb-12 transform-gpu transition-all duration-1000 ${
-              processHeaderInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'
+            className={`text-center mb-12 transition-all duration-1000 ${
+              processHeaderInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
             <h2 className="text-3xl font-bold mb-4">Jak wygląda proces współpracy?</h2>
@@ -328,9 +328,9 @@ const HomePage = () => {
             {processSteps.map((step) => (
               <div
                 key={step.number}
-                className={`transform-gpu transition-all duration-700 ${
+                className={`transition-all duration-700 ${
                   visibleSteps.includes(step.number - 1) 
-                    ? 'animate-fade-in-up opacity-100' 
+                    ? 'opacity-100 translate-y-0' 
                     : 'opacity-0 translate-y-5'
                 }`}
               >
@@ -343,7 +343,7 @@ const HomePage = () => {
             ))}
           </div>
           <div className="text-center mt-12">
-            <Button asChild size="lg" className="transform-gpu transition-all duration-300 hover:scale-105 will-change-transform animate-pulse-slow">
+            <Button asChild size="lg" className="animate-pulse">
               <Link to="/wycena">Uzyskaj Błyskawiczną Wycenę</Link>
             </Button>
           </div>
@@ -355,8 +355,8 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div 
             ref={testimonialsHeaderRef}
-            className={`text-center mb-12 transform-gpu transition-all duration-1000 ${
-              testimonialsHeaderInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'
+            className={`text-center mb-12 transition-all duration-1000 ${
+              testimonialsHeaderInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
             <h2 className="text-3xl font-bold mb-4">Co mówią nasi klienci</h2>
@@ -366,9 +366,9 @@ const HomePage = () => {
           </div>
           <div ref={testimonialsGridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div
-              className={`transform-gpu transition-all duration-700 ${
+              className={`transition-all duration-700 ${
                 visibleTestimonials.includes(0) 
-                  ? 'animate-fade-in-up opacity-100' 
+                  ? 'opacity-100 translate-y-0' 
                   : 'opacity-0 translate-y-5'
               }`}
             >
@@ -380,9 +380,9 @@ const HomePage = () => {
               />
             </div>
             <div
-              className={`transform-gpu transition-all duration-700 ${
+              className={`transition-all duration-700 ${
                 visibleTestimonials.includes(1) 
-                  ? 'animate-fade-in-up opacity-100' 
+                  ? 'opacity-100 translate-y-0' 
                   : 'opacity-0 translate-y-5'
               }`}
             >
@@ -394,9 +394,9 @@ const HomePage = () => {
               />
             </div>
             <div
-              className={`transform-gpu transition-all duration-700 ${
+              className={`transition-all duration-700 ${
                 visibleTestimonials.includes(2) 
-                  ? 'animate-fade-in-up opacity-100' 
+                  ? 'opacity-100 translate-y-0' 
                   : 'opacity-0 translate-y-5'
               }`}
             >
@@ -418,37 +418,37 @@ const HomePage = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className={`transform-gpu transition-all duration-1000 ${
-              auditInView ? 'animate-slide-in-left' : 'opacity-0 translate-x-10'
+            <div className={`transition-all duration-1000 ${
+              auditInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
             }`}>
               <h2 className="text-3xl font-bold mb-4">Skorzystaj z bezpłatnego audytu</h2>
               <p className="text-lg mb-6">
                 Zastanawiasz się, czy Twoje szkolenia są odpowiednio dobrane i czy nie przepłacasz za uzyskiwanie uprawnień pracowników? Skorzystaj z bezpłatnego audytu i dowiedz się, jak możemy pomóc.
               </p>
-              <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-gray-100 transform-gpu transition-all duration-300 hover:scale-105 will-change-transform animate-pulse-slow">
+              <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-gray-100 animate-pulse">
                 <Link to="/bezplatny-audyt">Zamów bezpłatny audyt</Link>
               </Button>
             </div>
             <div ref={auditBenefitsRef} className="space-y-4">
               <div
-                className={`bg-orange-500 rounded-lg p-4 transform-gpu transition-all duration-700 hover:bg-orange-400 hover:scale-105 cursor-pointer will-change-transform backface-hidden ${
-                  visibleBenefits.includes(0) ? 'animate-fade-in-right' : 'opacity-0 translate-x-5'
+                className={`bg-orange-500 rounded-lg p-4 transition-all duration-700 hover:bg-orange-400 hover:scale-105 cursor-pointer ${
+                  visibleBenefits.includes(0) ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-5'
                 }`}
               >
                 <h3 className="font-semibold mb-2">Ocena aktualnych szkoleń</h3>
                 <p>Przeanalizujemy, czy obecne szkolenia spełniają wszystkie wymagania prawne oraz czy odpowiadają na realne potrzeby Twojej firmy.</p>
               </div>
               <div
-                className={`bg-orange-500 rounded-lg p-4 transform-gpu transition-all duration-700 hover:bg-orange-400 hover:scale-105 cursor-pointer will-change-transform backface-hidden ${
-                  visibleBenefits.includes(1) ? 'animate-fade-in-right' : 'opacity-0 translate-x-5'
+                className={`bg-orange-500 rounded-lg p-4 transition-all duration-700 hover:bg-orange-400 hover:scale-105 cursor-pointer ${
+                  visibleBenefits.includes(1) ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-5'
                 }`}
               >
                 <h3 className="font-semibold mb-2">Weryfikacja uprawnień pracowników</h3>
                 <p>Sprawdzimy, czy wszyscy pracownicy posiadają wymagane uprawnienia do obsługi sprzętu i urządzeń.</p>
               </div>
               <div
-                className={`bg-orange-500 rounded-lg p-4 transform-gpu transition-all duration-700 hover:bg-orange-400 hover:scale-105 cursor-pointer will-change-transform backface-hidden ${
-                  visibleBenefits.includes(2) ? 'animate-fade-in-right' : 'opacity-0 translate-x-5'
+                className={`bg-orange-500 rounded-lg p-4 transition-all duration-700 hover:bg-orange-400 hover:scale-105 cursor-pointer ${
+                  visibleBenefits.includes(2) ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-5'
                 }`}
               >
                 <h3 className="font-semibold mb-2">Optymalizacja kosztów</h3>
