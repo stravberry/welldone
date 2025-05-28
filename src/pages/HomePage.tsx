@@ -164,10 +164,10 @@ const HomePage = () => {
               <div className={`flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 transition-all duration-1000 ${
                 heroInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'
               }`} style={{ animationDelay: '0.6s' }}>
-                <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-gray-100 transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-gray-100 transition-all duration-300 hover:scale-105 will-change-transform">
                   <Link to="/o-nas">Dlaczego My?</Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="bg-orange-500 text-white hover:bg-orange-600 border-orange-500 hover:border-orange-600 transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                <Button asChild size="lg" variant="outline" className="bg-orange-500 text-white hover:bg-orange-600 border-orange-500 hover:border-orange-600 transition-all duration-300 hover:scale-105 will-change-transform">
                   <Link to="/wycena">Błyskawiczna Wycena</Link>
                 </Button>
               </div>
@@ -180,7 +180,7 @@ const HomePage = () => {
                   <iframe 
                     src="https://www.youtube.com/embed/8QDIVIU9QZQ" 
                     title="Well-Done.pl Company Presentation" 
-                    className="w-full h-full border-none transform transition-all duration-500 hover:scale-105" 
+                    className="w-full h-full border-none transition-transform duration-300 hover:scale-105 will-change-transform" 
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowFullScreen
@@ -251,7 +251,7 @@ const HomePage = () => {
                 style={{ animationDelay: '0.3s' }}
               >
                 {benefits.map((benefit, index) => (
-                  <div key={index} className="flex group cursor-pointer transition-all duration-300 hover:transform hover:translate-x-2">
+                  <div key={index} className="flex group cursor-pointer transition-all duration-300 hover:translate-x-2">
                     <div className="flex-shrink-0 mr-4 transition-transform duration-300 group-hover:scale-110">
                       {benefit.icon}
                     </div>
@@ -262,7 +262,7 @@ const HomePage = () => {
                   </div>
                 ))}
               </div>
-              <Button asChild className="mt-8 transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+              <Button asChild className="mt-8 transition-all duration-300 hover:scale-105 will-change-transform">
                 <Link to="/o-nas">
                   Poznaj nas lepiej <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
@@ -272,7 +272,7 @@ const HomePage = () => {
               <div ref={statsRef} className="grid grid-cols-2 gap-4">
                 <div 
                   ref={counter1Ref}
-                  className={`bg-orange-50 rounded-lg p-6 text-center transition-all duration-700 hover:scale-105 hover:shadow-xl hover:bg-orange-100 cursor-pointer ${
+                  className={`bg-orange-50 rounded-lg p-6 text-center transition-all duration-700 hover:scale-105 hover:shadow-xl hover:bg-orange-100 cursor-pointer will-change-transform ${
                     visibleStats.includes(0) ? 'animate-fade-in-up' : 'opacity-0 translate-y-5'
                   }`}
                 >
@@ -281,7 +281,7 @@ const HomePage = () => {
                 </div>
                 <div 
                   ref={counter2Ref}
-                  className={`bg-orange-50 rounded-lg p-6 text-center transition-all duration-700 hover:scale-105 hover:shadow-xl hover:bg-orange-100 cursor-pointer ${
+                  className={`bg-orange-50 rounded-lg p-6 text-center transition-all duration-700 hover:scale-105 hover:shadow-xl hover:bg-orange-100 cursor-pointer will-change-transform ${
                     visibleStats.includes(1) ? 'animate-fade-in-up' : 'opacity-0 translate-y-5'
                   }`}
                   style={{ animationDelay: '0.15s' }}
@@ -291,7 +291,7 @@ const HomePage = () => {
                 </div>
                 <div 
                   ref={counter3Ref}
-                  className={`bg-orange-50 rounded-lg p-6 text-center transition-all duration-700 hover:scale-105 hover:shadow-xl hover:bg-orange-100 cursor-pointer ${
+                  className={`bg-orange-50 rounded-lg p-6 text-center transition-all duration-700 hover:scale-105 hover:shadow-xl hover:bg-orange-100 cursor-pointer will-change-transform ${
                     visibleStats.includes(2) ? 'animate-fade-in-up' : 'opacity-0 translate-y-5'
                   }`}
                   style={{ animationDelay: '0.3s' }}
@@ -301,7 +301,7 @@ const HomePage = () => {
                 </div>
                 <div 
                   ref={counter4Ref}
-                  className={`bg-orange-50 rounded-lg p-6 text-center transition-all duration-700 hover:scale-105 hover:shadow-xl hover:bg-orange-100 cursor-pointer ${
+                  className={`bg-orange-50 rounded-lg p-6 text-center transition-all duration-700 hover:scale-105 hover:shadow-xl hover:bg-orange-100 cursor-pointer will-change-transform ${
                     visibleStats.includes(3) ? 'animate-fade-in-up' : 'opacity-0 translate-y-5'
                   }`}
                   style={{ animationDelay: '0.45s' }}
@@ -349,7 +349,7 @@ const HomePage = () => {
             ))}
           </div>
           <div className="text-center mt-12">
-            <Button asChild size="lg" className="transform transition-all duration-300 hover:scale-105 hover:shadow-xl animate-pulse-slow">
+            <Button asChild size="lg" className="transition-all duration-300 hover:scale-105 will-change-transform animate-pulse-slow">
               <Link to="/wycena">Uzyskaj Błyskawiczną Wycenę</Link>
             </Button>
           </div>
@@ -433,13 +433,13 @@ const HomePage = () => {
               <p className="text-lg mb-6">
                 Zastanawiasz się, czy Twoje szkolenia są odpowiednio dobrane i czy nie przepłacasz za uzyskiwanie uprawnień pracowników? Skorzystaj z bezpłatnego audytu i dowiedz się, jak możemy pomóc.
               </p>
-              <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-gray-100 transform transition-all duration-300 hover:scale-105 hover:shadow-xl animate-pulse-slow">
+              <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-gray-100 transition-all duration-300 hover:scale-105 will-change-transform animate-pulse-slow">
                 <Link to="/bezplatny-audyt">Zamów bezpłatny audyt</Link>
               </Button>
             </div>
             <div ref={auditBenefitsRef} className="space-y-4">
               <div
-                className={`bg-orange-500 rounded-lg p-4 transition-all duration-700 hover:bg-orange-400 hover:scale-105 hover:shadow-xl cursor-pointer ${
+                className={`bg-orange-500 rounded-lg p-4 transition-all duration-700 hover:bg-orange-400 hover:scale-105 cursor-pointer will-change-transform ${
                   visibleBenefits.includes(0) ? 'animate-fade-in-right' : 'opacity-0 translate-x-5'
                 }`}
               >
@@ -447,7 +447,7 @@ const HomePage = () => {
                 <p>Przeanalizujemy, czy obecne szkolenia spełniają wszystkie wymagania prawne oraz czy odpowiadają na realne potrzeby Twojej firmy.</p>
               </div>
               <div
-                className={`bg-orange-500 rounded-lg p-4 transition-all duration-700 hover:bg-orange-400 hover:scale-105 hover:shadow-xl cursor-pointer ${
+                className={`bg-orange-500 rounded-lg p-4 transition-all duration-700 hover:bg-orange-400 hover:scale-105 cursor-pointer will-change-transform ${
                   visibleBenefits.includes(1) ? 'animate-fade-in-right' : 'opacity-0 translate-x-5'
                 }`}
                 style={{ animationDelay: '0.2s' }}
@@ -456,7 +456,7 @@ const HomePage = () => {
                 <p>Sprawdzimy, czy wszyscy pracownicy posiadają wymagane uprawnienia do obsługi sprzętu i urządzeń.</p>
               </div>
               <div
-                className={`bg-orange-500 rounded-lg p-4 transition-all duration-700 hover:bg-orange-400 hover:scale-105 hover:shadow-xl cursor-pointer ${
+                className={`bg-orange-500 rounded-lg p-4 transition-all duration-700 hover:bg-orange-400 hover:scale-105 cursor-pointer will-change-transform ${
                   visibleBenefits.includes(2) ? 'animate-fade-in-right' : 'opacity-0 translate-x-5'
                 }`}
                 style={{ animationDelay: '0.4s' }}
