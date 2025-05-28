@@ -43,6 +43,6 @@ export interface BlockType {
   id: string;
   name: string;
   icon: React.ReactNode;
-  category: 'basic' | 'media' | 'layout' | 'advanced';
+  category: 'basic' | 'media' | 'layout' | 'advanced' | 'homepage';
   description: string;
 }
