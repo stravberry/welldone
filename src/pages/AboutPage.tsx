@@ -143,17 +143,48 @@ const AboutPage = () => {
               <h2 className="text-4xl font-bold mb-8 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
                 Czym się zajmujemy i do kogo skierowana jest nasza usługa
               </h2>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                Firma specjalizuje się w szkoleniach z zakresu BHP oraz uzyskiwania uprawnień UDT (operatorzy i konserwatorzy), SEP, a także szkoleniach specjalistycznych, takich jak spawalnicze oraz na wózki unoszące. Usługi te są skierowane głównie do dużych firm produkcyjnych (powyżej 500 pracowników), które potrzebują regularnych szkoleń dla swoich pracowników oraz zapewnienia uprawnień do obsługi nowego i używanego sprzętu.
-              </p>
-              <p className="text-gray-600 mb-8 leading-relaxed">
-                Naszym celem jest pokazanie, że firma posiada dogłębną wiedzę na temat specyficznych potrzeb firm produkcyjnych, co stanowi jedną z głównych przewag konkurencyjnych.
-              </p>
-              <Button asChild className="bg-orange-500 hover:bg-orange-600 transform hover:scale-105 transition-all duration-300">
-                <Link to="/uslugi">
-                  Zobacz nasze usługi
-                </Link>
-              </Button>
+              
+              <div className="space-y-6">
+                <div className="bg-gradient-to-r from-orange-50 to-orange-100 p-6 rounded-xl border-l-4 border-orange-500 shadow-sm">
+                  <p className="text-gray-700 leading-relaxed">
+                    Firma specjalizuje się w <span className="font-bold text-orange-600 bg-orange-100 px-2 py-1 rounded">szkoleniach z zakresu BHP</span> oraz 
+                    uzyskiwania <span className="font-bold text-blue-600 bg-blue-100 px-2 py-1 rounded">uprawnień UDT</span> (operatorzy i konserwatorzy), 
+                    <span className="font-bold text-green-600 bg-green-100 px-2 py-1 rounded">SEP</span>, a także 
+                    <span className="font-bold text-purple-600 bg-purple-100 px-2 py-1 rounded">szkoleniach specjalistycznych</span>, 
+                    takich jak spawalnicze oraz na wózki unoszące.
+                  </p>
+                </div>
+
+                <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-xl border-l-4 border-blue-500 shadow-sm">
+                  <p className="text-gray-700 leading-relaxed">
+                    Usługi te są skierowane głównie do <span className="font-bold text-blue-700 underline decoration-blue-400 decoration-2">dużych firm produkcyjnych</span> 
+                    (powyżej <span className="font-bold text-2xl text-blue-600">500 pracowników</span>), które potrzebują 
+                    <span className="font-semibold text-gray-800 bg-yellow-100 px-2 py-1 rounded">regularnych szkoleń</span> dla swoich pracowników oraz 
+                    zapewnienia uprawnień do obsługi nowego i używanego sprzętu.
+                  </p>
+                </div>
+
+                <div className="bg-gradient-to-r from-green-50 to-green-100 p-6 rounded-xl border-l-4 border-green-500 shadow-sm">
+                  <p className="text-gray-700 leading-relaxed">
+                    Naszym celem jest pokazanie, że firma posiada 
+                    <span className="font-bold text-green-700 underline decoration-green-400 decoration-2">dogłębną wiedzę</span> na temat 
+                    <span className="font-semibold text-gray-800 italic">specyficznych potrzeb firm produkcyjnych</span>, co stanowi jedną z głównych 
+                    <span className="font-bold text-green-600 bg-green-200 px-2 py-1 rounded">przewag konkurencyjnych</span>.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-8 flex items-center space-x-4">
+                <Button asChild className="bg-orange-500 hover:bg-orange-600 transform hover:scale-105 transition-all duration-300 shadow-lg">
+                  <Link to="/uslugi">
+                    Zobacz nasze usługi
+                  </Link>
+                </Button>
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-orange-500 rounded-full animate-pulse"></div>
+                  <span className="text-sm text-gray-600 font-medium">Sprawdzone rozwiązania</span>
+                </div>
+              </div>
             </div>
             <div 
               ref={whatWeDoImageRef}
