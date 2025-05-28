@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -188,6 +189,26 @@ export default {
 						transform: 'translateX(0)'
 					}
 				},
+				'slide-in-left': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateX(-100px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateX(0)'
+					}
+				},
+				'slide-in-right': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateX(100px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateX(0)'
+					}
+				},
 				'scale-in': {
 					'0%': {
 						opacity: '0',
@@ -239,6 +260,73 @@ export default {
 						transform: 'translateY(0)',
 						opacity: '1'
 					}
+				},
+				'glow': {
+					'0%, 100%': {
+						boxShadow: '0 0 5px rgba(255, 102, 0, 0.5)'
+					},
+					'50%': {
+						boxShadow: '0 0 20px rgba(255, 102, 0, 0.8), 0 0 30px rgba(255, 102, 0, 0.6)'
+					}
+				},
+				'gradient-shift': {
+					'0%': {
+						backgroundPosition: '0% 50%'
+					},
+					'50%': {
+						backgroundPosition: '100% 50%'
+					},
+					'100%': {
+						backgroundPosition: '0% 50%'
+					}
+				},
+				'typewriter': {
+					'0%': {
+						width: '0'
+					},
+					'100%': {
+						width: '100%'
+					}
+				},
+				'draw-line': {
+					'0%': {
+						strokeDashoffset: '100%'
+					},
+					'100%': {
+						strokeDashoffset: '0'
+					}
+				},
+				'magnetic': {
+					'0%': {
+						transform: 'translateY(0)'
+					},
+					'100%': {
+						transform: 'translateY(-8px)'
+					}
+				},
+				'star-fill': {
+					'0%': {
+						transform: 'scale(0)',
+						opacity: '0'
+					},
+					'50%': {
+						transform: 'scale(1.2)',
+						opacity: '1'
+					},
+					'100%': {
+						transform: 'scale(1)',
+						opacity: '1'
+					}
+				},
+				'table-row': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateX(-20px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateX(0)'
+					}
 				}
 			},
 			animation: {
@@ -248,12 +336,21 @@ export default {
 				'fade-in-up': 'fade-in-up 0.6s ease-out',
 				'fade-in-left': 'fade-in-left 0.6s ease-out',
 				'fade-in-right': 'fade-in-right 0.6s ease-out',
+				'slide-in-left': 'slide-in-left 0.8s ease-out',
+				'slide-in-right': 'slide-in-right 0.8s ease-out',
 				'scale-in': 'scale-in 0.4s ease-out',
 				'bounce-gentle': 'bounce-gentle 2s ease-in-out infinite',
 				'pulse-slow': 'pulse-slow 3s ease-in-out infinite',
 				'float': 'float 3s ease-in-out infinite',
 				'shimmer': 'shimmer 2s linear infinite',
-				'counter': 'counter 0.8s ease-out'
+				'counter': 'counter 0.8s ease-out',
+				'glow': 'glow 2s ease-in-out infinite',
+				'gradient-shift': 'gradient-shift 3s ease-in-out infinite',
+				'typewriter': 'typewriter 2s ease-out',
+				'draw-line': 'draw-line 1s ease-out',
+				'magnetic': 'magnetic 0.3s ease-out',
+				'star-fill': 'star-fill 0.5s ease-out',
+				'table-row': 'table-row 0.6s ease-out'
 			}
 		}
 	},

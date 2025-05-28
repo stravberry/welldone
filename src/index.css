@@ -260,3 +260,83 @@ select:focus-visible {
   outline: 2px solid #ff6600;
   outline-offset: 2px;
 }
+
+/* Additional animation utilities */
+@layer utilities {
+  .animate-delay-100 { animation-delay: 100ms; }
+  .animate-delay-200 { animation-delay: 200ms; }
+  .animate-delay-300 { animation-delay: 300ms; }
+  .animate-delay-500 { animation-delay: 500ms; }
+  .animate-delay-700 { animation-delay: 700ms; }
+  .animate-delay-1000 { animation-delay: 1000ms; }
+  
+  .hover-lift {
+    @apply transition-transform duration-300 hover:-translate-y-2;
+  }
+  
+  .hover-glow {
+    @apply transition-shadow duration-300 hover:shadow-lg hover:shadow-orange-500/20;
+  }
+  
+  .interactive-card {
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-orange-500/10 cursor-pointer;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-orange-600 to-orange-400 bg-clip-text text-transparent;
+  }
+  
+  .glass-effect {
+    @apply backdrop-blur-md bg-white/90 border border-white/20;
+  }
+}
+
+/* Parallax and advanced animations */
+.parallax {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Loading states */
+.skeleton {
+  @apply animate-pulse bg-gray-200 rounded;
+}
+
+/* Interactive hover zones */
+.hover-zone {
+  position: relative;
+  overflow: hidden;
+}
+
+.hover-zone::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.hover-zone:hover::before {
+  left: 100%;
+}
+
+/* Performance optimizations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Mobile touch improvements */
+@media (hover: none) and (pointer: coarse) {
+  .hover\:scale-105:hover {
+    transform: scale(1.02);
+  }
+  
+  .hover\:shadow-xl:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+}
