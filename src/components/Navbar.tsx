@@ -53,7 +53,7 @@ const Navbar = () => {
               <img 
                 src="/lovable-uploads/a2c8c546-13e6-445b-9832-abf375420d6c.png" 
                 alt="Well-done.pl Logo" 
-                className="h-6 sm:h-8 mr-2" 
+                className="h-8 sm:h-10 mr-2" 
               />
             </Link>
           </div>
