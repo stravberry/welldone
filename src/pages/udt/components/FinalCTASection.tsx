@@ -27,7 +27,7 @@ const FinalCTASection: React.FC<FinalCTASectionProps> = ({ trackCTAClick }) => {
           <Button
             size="lg"
             variant="outline"
-            className="border-white text-white hover:bg-orange-700"
+            className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-orange-600"
             onClick={() => trackCTAClick('final-offerings', 'offerings')}
           >
             Zobacz nasze szkolenia
