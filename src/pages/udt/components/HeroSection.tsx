@@ -46,7 +46,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                 size="lg" 
                 variant="outline"
                 onClick={() => trackCTAClick('hero-offerings', 'offerings')}
-                className="text-white border-white hover:bg-white hover:text-orange-600 transition-all duration-200"
+                className="bg-white bg-opacity-20 text-white border-white hover:bg-white hover:text-orange-600 transition-all duration-200"
               >
                 Sprawdź ofertę szkoleń
               </Button>
