@@ -1,13 +1,13 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Check } from 'lucide-react';
 
 interface OfferingProps {
   trackCTAClick: (ctaName: string, destinationId?: string) => void;
+  onOfferingSelect?: (offeringTitle: string) => void;
 }
 
-const OfferingsSection: React.FC<OfferingProps> = ({ trackCTAClick }) => {
+const OfferingsSection: React.FC<OfferingProps> = ({ trackCTAClick, onOfferingSelect }) => {
   const offerings = [
     {
       title: "Wózki widłowe",
@@ -54,7 +54,8 @@ const OfferingsSection: React.FC<OfferingProps> = ({ trackCTAClick }) => {
             <OfferingCard 
               key={index} 
               offering={offering} 
-              trackCTAClick={trackCTAClick} 
+              trackCTAClick={trackCTAClick}
+              onOfferingSelect={onOfferingSelect}
             />
           ))}
         </div>
@@ -85,41 +86,51 @@ interface OfferingCardProps {
     features: string[];
   };
   trackCTAClick: (ctaName: string, destinationId?: string) => void;
+  onOfferingSelect?: (offeringTitle: string) => void;
 }
 
-const OfferingCard: React.FC<OfferingCardProps> = ({ offering, trackCTAClick }) => (
-  <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:shadow-xl hover:-translate-y-1">
-    <div className="relative h-48">
-      <img 
-        src={offering.image} 
-        alt={offering.alt} 
-        className="w-full h-full object-cover" 
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-      <h3 className="absolute bottom-4 left-4 text-2xl font-bold text-white">
-        {offering.title}
-      </h3>
+const OfferingCard: React.FC<OfferingCardProps> = ({ offering, trackCTAClick, onOfferingSelect }) => {
+  const handleOfferingClick = () => {
+    trackCTAClick(`offering-${offering.title}`, 'contact-form');
+    if (onOfferingSelect) {
+      onOfferingSelect(offering.title);
+    }
+  };
+
+  return (
+    <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:shadow-xl hover:-translate-y-1">
+      <div className="relative h-48">
+        <img 
+          src={offering.image} 
+          alt={offering.alt} 
+          className="w-full h-full object-cover" 
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+        <h3 className="absolute bottom-4 left-4 text-2xl font-bold text-white">
+          {offering.title}
+        </h3>
+      </div>
+      <div className="p-6">
+        <p className="text-gray-600 mb-6">
+          {offering.description}
+        </p>
+        <ul className="space-y-2 mb-6">
+          {offering.features.map((feature, i) => (
+            <li key={i} className="flex items-center gap-2">
+              <Check className="h-5 w-5 text-green-500" />
+              <span className="text-gray-700">{feature}</span>
+            </li>
+          ))}
+        </ul>
+        <Button 
+          className="w-full bg-orange-600 hover:bg-orange-700 mt-2"
+          onClick={handleOfferingClick}
+        >
+          Zapisz się na szkolenie
+        </Button>
+      </div>
     </div>
-    <div className="p-6">
-      <p className="text-gray-600 mb-6">
-        {offering.description}
-      </p>
-      <ul className="space-y-2 mb-6">
-        {offering.features.map((feature, i) => (
-          <li key={i} className="flex items-center gap-2">
-            <Check className="h-5 w-5 text-green-500" />
-            <span className="text-gray-700">{feature}</span>
-          </li>
-        ))}
-      </ul>
-      <Button 
-        className="w-full bg-orange-600 hover:bg-orange-700 mt-2"
-        onClick={() => trackCTAClick(`offering-${offering.title}`, 'contact-form')}
-      >
-        Zapisz się na szkolenie
-      </Button>
-    </div>
-  </div>
-);
+  );
+};
 
 export default OfferingsSection;

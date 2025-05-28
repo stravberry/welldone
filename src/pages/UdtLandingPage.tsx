@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { toast } from "sonner";
@@ -39,6 +38,13 @@ const UdtLandingPage = () => {
         formType: 'UDT Landing Contact'
       }
     });
+  };
+
+  const handleOfferingSelect = (offeringTitle: string) => {
+    setFormData(prev => ({ 
+      ...prev, 
+      message: `Jestem zainteresowany szkoleniem: ${offeringTitle}` 
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -137,7 +143,10 @@ const UdtLandingPage = () => {
           trackCTAClick={trackCTAClick}
         />
         
-        <OfferingsSection trackCTAClick={trackCTAClick} />
+        <OfferingsSection 
+          trackCTAClick={trackCTAClick} 
+          onOfferingSelect={handleOfferingSelect}
+        />
 
         <WhyChooseUsSection trackCTAClick={trackCTAClick} />
 
