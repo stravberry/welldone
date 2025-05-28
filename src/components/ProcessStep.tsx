@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
@@ -20,11 +19,14 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
       <style>
         {`
           @keyframes pulseLoop {
-            0%, 83.33% {
+            0%, 75% {
               transform: scale(1);
             }
-            8.33%, 16.66% {
+            8.33% {
               transform: scale(1.2);
+            }
+            16.66% {
+              transform: scale(1);
             }
           }
         `}
