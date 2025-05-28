@@ -11,9 +11,10 @@ interface ServiceCardProps {
   description: string;
   icon: React.ReactNode;
   link: string;
+  index?: number;
 }
 
-const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, link }) => {
+const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, link, index = 0 }) => {
   const { trackEvent } = useEventTracking();
   const { elementRef, isInView } = useScrollAnimation<HTMLDivElement>({
     threshold: 0.2,
@@ -39,7 +40,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, lin
       style={{
         opacity: isInView ? 1 : 0,
         transform: isInView ? 'translateY(0) scale(1)' : 'translateY(30px) scale(0.95)',
-        transition: 'all 0.7s cubic-bezier(0.4, 0, 0.2, 1)'
+        transition: 'all 0.7s cubic-bezier(0.4, 0, 0.2, 1)',
+        transitionDelay: isInView ? `${index * 150}ms` : '0ms'
       }}
     >
       <div className="text-orange-500 mb-4 transition-transform duration-300 hover:scale-110">

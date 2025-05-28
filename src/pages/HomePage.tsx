@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -209,6 +208,7 @@ const HomePage = () => {
                 description={service.description}
                 icon={service.icon}
                 link={service.link}
+                index={index}
               />
             ))}
           </div>
