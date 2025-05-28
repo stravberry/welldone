@@ -118,18 +118,93 @@ const UdtLandingPage = () => {
     });
   };
 
+  // Structured Data for Local Business and Courses
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://well-done.pl/udt-szkolenia#business",
+        "name": "Well-done - Szkolenia UDT Wrocław",
+        "description": "Profesjonalne szkolenia UDT we Wrocławiu i okolicach - wózki widłowe, podesty ruchome, suwnice. Zdawalność 96%.",
+        "url": "https://well-done.pl/udt-szkolenia",
+        "telephone": "+48123456789",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wrocław",
+          "addressRegion": "Dolnośląskie",
+          "addressCountry": "PL"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "51.1079",
+          "longitude": "17.0385"
+        },
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "Wrocław"
+          },
+          {
+            "@type": "State",
+            "name": "Dolnośląskie"
+          }
+        ],
+        "serviceType": ["Szkolenia UDT", "Kursy operatorów", "Szkolenia wózków widłowych", "Szkolenia podestów ruchomych", "Szkolenia suwnic"]
+      },
+      {
+        "@type": "Course",
+        "@id": "https://well-done.pl/udt-szkolenia#course",
+        "name": "Szkolenia UDT dla Operatorów - Wrocław",
+        "description": "Kompleksowe szkolenia na uprawnienia UDT: wózki widłowe, podesty ruchome, suwnice, układnice magazynowe",
+        "provider": {
+          "@id": "https://well-done.pl/udt-szkolenia#business"
+        },
+        "courseMode": "offline",
+        "locationCreated": {
+          "@type": "Place",
+          "name": "Wrocław, Dolnośląskie"
+        }
+      }
+    ]
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
-        <title>Szkolenia UDT i Kursy Operatorów - Najwyższa Zdawalność | Well-done</title>
-        <meta name="description" content="Profesjonalne szkolenia na uprawnienia UDT dla operatorów - wózki widłowe, podesty ruchome, suwnice. Zdawalność 96%. Szkolenia w całej Polsce." />
-        <meta name="keywords" content="szkolenia UDT, uprawnienia UDT, kursy operatorów, wózki widłowe, podesty ruchome, suwnice, operator wózka widłowego" />
-        <meta property="og:title" content="Szkolenia UDT i Kursy Operatorów - Najwyższa Zdawalność | Well-done" />
-        <meta property="og:description" content="Profesjonalne szkolenia na uprawnienia UDT dla operatorów - wózki widłowe, podesty ruchome, suwnice. Zdawalność 96%. Szkolenia w całej Polsce." />
+        <title>Szkolenia UDT Wrocław i Okolice - Kursy Operatorów 96% Zdawalność | Well-done</title>
+        <meta name="description" content="Profesjonalne szkolenia UDT we Wrocławiu i okolicach - wózki widłowe, podesty ruchome, suwnice, układnice. Zdawalność 96%. Kursy operatorów w całym województwie dolnośląskim." />
+        <meta name="keywords" content="szkolenia UDT Wrocław, kursy operatorów Wrocław, uprawnienia UDT dolnośląskie, wózki widłowe Wrocław, podesty ruchome szkolenia, suwnice kursy, operator wózka widłowego Wrocław, szkolenia UDT okolice Wrocławia, kursy UDT dolny śląsk" />
+        
+        {/* Geographic targeting */}
+        <meta name="geo.region" content="PL-DS" />
+        <meta name="geo.placename" content="Wrocław" />
+        <meta name="geo.position" content="51.1079;17.0385" />
+        <meta name="ICBM" content="51.1079, 17.0385" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Szkolenia UDT Wrocław i Okolice - Kursy Operatorów 96% Zdawalność | Well-done" />
+        <meta property="og:description" content="Profesjonalne szkolenia UDT we Wrocławiu i okolicach - wózki widłowe, podesty ruchome, suwnice, układnice. Zdawalność 96%. Kursy operatorów w całym województwie dolnośląskim." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://well-done.pl/udt-szkolenia" />
         <meta property="og:image" content="/lovable-uploads/a2c8c546-13e6-445b-9832-abf375420d6c.png" />
+        <meta property="og:locale" content="pl_PL" />
+        <meta property="og:site_name" content="Well-done" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Szkolenia UDT Wrocław i Okolice - Kursy Operatorów 96% Zdawalność" />
+        <meta name="twitter:description" content="Profesjonalne szkolenia UDT we Wrocławiu i okolicach - wózki widłowe, podesty ruchome, suwnice, układnice. Zdawalność 96%." />
+        <meta name="twitter:image" content="/lovable-uploads/a2c8c546-13e6-445b-9832-abf375420d6c.png" />
+        
+        {/* Canonical and hreflang */}
         <link rel="canonical" href="https://well-done.pl/udt-szkolenia" />
+        <link rel="alternate" hrefLang="pl" href="https://well-done.pl/udt-szkolenia" />
+        
+        {/* Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
       </Helmet>
       
       <NavigationMenu trackLinkClick={trackLinkClick} trackCTAClick={trackCTAClick} />

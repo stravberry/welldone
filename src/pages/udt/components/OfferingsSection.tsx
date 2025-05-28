@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Check } from 'lucide-react';
@@ -43,9 +44,9 @@ const OfferingsSection: React.FC<OfferingProps> = ({ trackCTAClick, onOfferingSe
     <section id="offerings" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4 text-gray-800">Dostępne szkolenia UDT</h2>
+          <h2 className="text-4xl font-bold mb-4 text-gray-800">Szkolenia UDT we Wrocławiu i okolicach</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Oferujemy kompleksowe szkolenia na wszystkie rodzaje urządzeń transportu bliskiego objętych nadzorem UDT
+            Oferujemy kompleksowe kursy UDT na wszystkie rodzaje urządzeń transportu bliskiego we Wrocławiu i całym województwie dolnośląskim
           </p>
         </div>
 
@@ -62,7 +63,7 @@ const OfferingsSection: React.FC<OfferingProps> = ({ trackCTAClick, onOfferingSe
 
         <div className="mt-16 text-center">
           <p className="text-xl text-gray-700 mb-6">
-            Nie znalazłeś interesującego Cię szkolenia? Skontaktuj się z nami!
+            Potrzebujesz szkolenia UDT w okolicach Wrocławia? Skontaktuj się z nami!
           </p>
           <Button 
             size="lg"

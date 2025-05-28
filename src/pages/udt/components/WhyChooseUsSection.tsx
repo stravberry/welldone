@@ -20,9 +20,9 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({ trackCTAClick }
       icon: "🏆"
     },
     {
-      title: "Małe grupy szkoleniowe",
-      description: "Skupiamy się na jakości i indywidualnym podejściu",
-      icon: "👥"
+      title: "Kursy w całym regionie",
+      description: "Szkolenia UDT we Wrocławiu i okolicach - dojazd do klienta",
+      icon: "🚗"
     },
     {
       title: "Wsparcie po szkoleniu",
@@ -36,9 +36,9 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({ trackCTAClick }
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="text-orange-600 font-medium">Dlaczego my?</span>
-          <h2 className="text-4xl font-bold mt-2 mb-4">Wybieraj najlepszych w branży</h2>
+          <h2 className="text-4xl font-bold mt-2 mb-4">Najlepsze szkolenia UDT w województwie dolnośląskim</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Od 10 lat zapewniamy najwyższą jakość szkoleń UDT, gwarantując zdawalność na poziomie 96%
+            Od 10 lat zapewniamy najwyższą jakość szkoleń UDT we Wrocławiu i okolicach, gwarantując zdawalność na poziomie 96%
           </p>
         </div>
         

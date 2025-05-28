@@ -13,9 +13,9 @@ const ComparisonTableSection: React.FC<ComparisonTableSectionProps> = ({ trackCT
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="text-orange-600 font-medium">Porównanie</span>
-          <h2 className="text-4xl font-bold mt-2 mb-4">Dlaczego warto wybrać nasze szkolenia</h2>
+          <h2 className="text-4xl font-bold mt-2 mb-4">Dlaczego warto wybrać nasze szkolenia UDT</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Przekonaj się, co wyróżnia nasze szkolenia UDT na tle konkurencji
+            Przekonaj się, co wyróżnia nasze szkolenia UDT we Wrocławiu na tle konkurencji
           </p>
         </div>
         

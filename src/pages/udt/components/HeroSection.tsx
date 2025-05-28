@@ -31,11 +31,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({
               <span className="text-white font-medium">Certyfikowane szkolenia UDT</span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-              Zdobądź uprawnienia UDT<br/>
-              <span className="text-orange-200">dla operatorów</span>
+              Szkolenia UDT Wrocław<br/>
+              <span className="text-orange-200">i okolice - 96% zdawalność</span>
             </h1>
             <p className="text-white text-xl mb-8">
-              Kompleksowe szkolenia na urządzenia techniczne ze zdawalnością 96%
+              Profesjonalne kursy na uprawnienia UDT dla operatorów we Wrocławiu i całym województwie dolnośląskim. Wózki widłowe, podesty ruchome, suwnice i układnice magazynowe.
             </p>
             <div className="flex flex-wrap gap-4">
               <Button 

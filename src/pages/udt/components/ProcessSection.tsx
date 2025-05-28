@@ -35,7 +35,7 @@ const ProcessSection: React.FC<ProcessSectionProps> = ({ trackCTAClick }) => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="text-orange-600 font-medium">Jak to działa?</span>
-          <h2 className="text-4xl font-bold mt-2 mb-4">Prosty proces uzyskania uprawnień</h2>
+          <h2 className="text-4xl font-bold mt-2 mb-4">Prosty proces uzyskania uprawnień UDT</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Przeprowadzimy Cię przez cały proces uzyskania uprawnień UDT - od konsultacji po egzamin
           </p>

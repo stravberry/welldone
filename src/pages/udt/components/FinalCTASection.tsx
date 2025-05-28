@@ -11,10 +11,10 @@ const FinalCTASection: React.FC<FinalCTASectionProps> = ({ trackCTAClick }) => {
     <section className="bg-orange-600 py-20 text-white text-center">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold mb-6">
-          Rozpocznij swoją karierę z uprawnieniami UDT
+          Rozpocznij karierę z uprawnieniami UDT we Wrocławiu
         </h2>
         <p className="text-xl mb-10 max-w-3xl mx-auto">
-          Dołącz do ponad 5000 zadowolonych kursantów, którzy zdobyli uprawnienia UDT pod naszym okiem
+          Dołącz do ponad 5000 zadowolonych kursantów z Wrocławia i okolic, którzy zdobyli uprawnienia UDT pod naszym okiem
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <Button
@@ -26,8 +26,7 @@ const FinalCTASection: React.FC<FinalCTASectionProps> = ({ trackCTAClick }) => {
           </Button>
           <Button
             size="lg"
-            variant="outline"
-            className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-orange-600"
+            className="bg-orange-700 text-white hover:bg-orange-800 border-2 border-white"
             onClick={() => trackCTAClick('final-offerings', 'offerings')}
           >
             Zobacz nasze szkolenia
