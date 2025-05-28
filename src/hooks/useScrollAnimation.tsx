@@ -1,5 +1,5 @@
 
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface UseScrollAnimationOptions {
   threshold?: number;
@@ -11,23 +11,17 @@ export const useScrollAnimation = <T extends HTMLElement = HTMLElement>(options:
   const { threshold = 0.1, rootMargin = '0px', triggerOnce = true } = options;
   const [isInView, setIsInView] = useState(false);
   const elementRef = useRef<T>(null);
-  const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
     const element = elementRef.current;
     if (!element) return;
 
-    // Cleanup previous observer
-    if (observerRef.current) {
-      observerRef.current.disconnect();
-    }
-
-    observerRef.current = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsInView(true);
           if (triggerOnce) {
-            observerRef.current?.unobserve(element);
+            observer.unobserve(element);
           }
         } else if (!triggerOnce) {
           setIsInView(false);
@@ -39,58 +33,39 @@ export const useScrollAnimation = <T extends HTMLElement = HTMLElement>(options:
       }
     );
 
-    observerRef.current.observe(element);
+    observer.observe(element);
 
     return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-      }
+      observer.unobserve(element);
     };
   }, [threshold, rootMargin, triggerOnce]);
 
   return { elementRef, isInView };
 };
 
-export const useStaggeredAnimation = <T extends HTMLElement = HTMLElement>(itemCount: number, delay: number = 150) => {
+export const useStaggeredAnimation = <T extends HTMLElement = HTMLElement>(itemCount: number, delay: number = 100) => {
   const [visibleItems, setVisibleItems] = useState<number[]>([]);
-  const timeoutsRef = useRef<NodeJS.Timeout[]>([]);
-  const { elementRef, isInView } = useScrollAnimation<T>({ triggerOnce: true });
-
-  const clearTimeouts = useCallback(() => {
-    timeoutsRef.current.forEach(timeout => clearTimeout(timeout));
-    timeoutsRef.current = [];
-  }, []);
+  const { elementRef, isInView } = useScrollAnimation<T>();
 
   useEffect(() => {
-    if (isInView && visibleItems.length === 0) {
-      clearTimeouts();
-      
+    if (isInView) {
       for (let i = 0; i < itemCount; i++) {
-        const timeout = setTimeout(() => {
-          setVisibleItems(prev => {
-            if (!prev.includes(i)) {
-              return [...prev, i];
-            }
-            return prev;
-          });
+        setTimeout(() => {
+          setVisibleItems(prev => [...prev, i]);
         }, i * delay);
-        timeoutsRef.current.push(timeout);
       }
     }
-
-    return clearTimeouts;
-  }, [isInView, itemCount, delay, visibleItems.length, clearTimeouts]);
+  }, [isInView, itemCount, delay]);
 
   return { elementRef, visibleItems };
 };
 
 export const useCounterAnimation = <T extends HTMLElement = HTMLElement>(endValue: number, duration: number = 2000) => {
   const [count, setCount] = useState(0);
-  const animationRef = useRef<number>();
-  const { elementRef, isInView } = useScrollAnimation<T>({ triggerOnce: true });
+  const { elementRef, isInView } = useScrollAnimation<T>();
 
   useEffect(() => {
-    if (isInView && count === 0) {
+    if (isInView) {
       let startTime: number;
       const startValue = 0;
 
@@ -104,19 +79,13 @@ export const useCounterAnimation = <T extends HTMLElement = HTMLElement>(endValu
         setCount(currentCount);
 
         if (progress < 1) {
-          animationRef.current = requestAnimationFrame(animate);
+          requestAnimationFrame(animate);
         }
       };
 
-      animationRef.current = requestAnimationFrame(animate);
+      requestAnimationFrame(animate);
     }
-
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
-  }, [isInView, endValue, duration, count]);
+  }, [isInView, endValue, duration]);
 
   return { elementRef, count };
 };

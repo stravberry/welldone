@@ -28,20 +28,13 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, lin
   };
   
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 transform-gpu backface-hidden will-change-transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl flex flex-col group cursor-pointer border border-transparent hover:border-orange-200">
-      <div className="text-orange-500 mb-4 transform-gpu transition-transform duration-300 group-hover:scale-105 will-change-transform">
-        {icon}
-      </div>
-      <h3 className="text-xl font-semibold mb-3 transition-colors duration-300 group-hover:text-orange-600">{title}</h3>
-      <p className="text-gray-600 mb-6 flex-grow transition-colors duration-300 group-hover:text-gray-700">{description}</p>
-      <Button 
-        asChild 
-        variant="outline" 
-        className="mt-auto transform-gpu transition-all duration-300 group-hover:bg-orange-500 group-hover:text-white group-hover:border-orange-500 group-hover:shadow-lg will-change-transform" 
-        onClick={handleClick}
-      >
+    <div className="bg-white rounded-lg shadow-md p-6 transition-all duration-300 hover:shadow-lg flex flex-col">
+      <div className="text-orange-500 mb-4">{icon}</div>
+      <h3 className="text-xl font-semibold mb-3">{title}</h3>
+      <p className="text-gray-600 mb-6 flex-grow">{description}</p>
+      <Button asChild variant="outline" className="mt-auto" onClick={handleClick}>
         <Link to={link} className="flex items-center justify-center">
-          Dowiedz się więcej <ArrowRight className="ml-2 h-4 w-4 transform-gpu transition-transform duration-300 group-hover:translate-x-1 will-change-transform" />
+          Dowiedz się więcej <ArrowRight className="ml-2 h-4 w-4" />
         </Link>
       </Button>
     </div>
