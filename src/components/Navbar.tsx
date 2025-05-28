@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
@@ -58,11 +57,11 @@ const Navbar = () => {
             </Link>
           </div>
           
-          <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4 lg:space-x-6">
-            <Link to="/" className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
+          <div className="hidden lg:ml-6 lg:flex lg:items-center lg:space-x-4 xl:space-x-6">
+            <Link to="/" className="px-2 xl:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
               Home
             </Link>
-            <Link to="/o-nas" className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
+            <Link to="/o-nas" className="px-2 xl:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
               O Nas
             </Link>
             
@@ -71,7 +70,7 @@ const Navbar = () => {
                 <NavigationMenuItem>
                   <Link 
                     to="/uslugi" 
-                    className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap"
+                    className="px-2 xl:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap"
                   >
                     <NavigationMenuTrigger>
                       <span className="text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
@@ -98,27 +97,27 @@ const Navbar = () => {
               </NavigationMenuList>
             </NavigationMenu>
             
-            <Link to="/bezplatny-audyt" className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
+            <Link to="/bezplatny-audyt" className="px-2 xl:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
               Bezpłatny Audyt
             </Link>
-            <Link to="/realizacje" className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
+            <Link to="/realizacje" className="px-2 xl:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
               Realizacje
             </Link>
-            <Link to="/wiedza" className="px-2 lg:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
+            <Link to="/wiedza" className="px-2 xl:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
               Wiedza
             </Link>
           </div>
           
-          <div className="hidden md:flex items-center">
-            <Button asChild variant="default" className="ml-2 text-xs lg:text-sm bg-orange-500 hover:bg-orange-600 border-orange-500 hover:border-orange-600">
+          <div className="hidden lg:flex items-center">
+            <Button asChild variant="default" className="ml-2 text-xs xl:text-sm bg-orange-500 hover:bg-orange-600 border-orange-500 hover:border-orange-600">
               <Link to="/kontakt">Kontakt</Link>
             </Button>
-            <Button asChild variant="outline" className="ml-2 text-xs lg:text-sm bg-orange-500 text-white hover:bg-orange-600 border-orange-500 hover:border-orange-600">
+            <Button asChild variant="outline" className="ml-2 text-xs xl:text-sm bg-orange-500 text-white hover:bg-orange-600 border-orange-500 hover:border-orange-600">
               <Link to="/wycena">Błyskawiczna Wycena</Link>
             </Button>
           </div>
           
-          <div className="-mr-2 flex items-center md:hidden">
+          <div className="-mr-2 flex items-center lg:hidden">
             <button
               onClick={toggleMenu}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-orange-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-500"
@@ -131,7 +130,7 @@ const Navbar = () => {
       </div>
 
       {isOpen && (
-        <div className="md:hidden">
+        <div className="lg:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <Link to="/" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100" onClick={closeMenu}>
               Home
