@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Check } from 'lucide-react';
@@ -10,8 +9,8 @@ interface OfferingProps {
 }
 
 const OfferingsSection: React.FC<OfferingProps> = ({ trackCTAClick, onOfferingSelect }) => {
-  const { elementRef: titleRef, isInView: titleInView } = useScrollAnimation();
-  const { elementRef: cardsRef, visibleItems } = useStaggeredAnimation(4, 200);
+  const { elementRef: titleRef, isInView: titleInView } = useScrollAnimation<HTMLDivElement>();
+  const { elementRef: cardsRef, visibleItems } = useStaggeredAnimation<HTMLDivElement>(4, 200);
 
   const offerings = [
     {

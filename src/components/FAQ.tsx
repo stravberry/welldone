@@ -19,8 +19,8 @@ interface FAQProps {
 }
 
 const FAQ: React.FC<FAQProps> = ({ title = "Najczęściej zadawane pytania", items }) => {
-  const { elementRef: titleRef, isInView: titleInView } = useScrollAnimation();
-  const { elementRef: itemsRef, visibleItems } = useStaggeredAnimation(items.length, 100);
+  const { elementRef: titleRef, isInView: titleInView } = useScrollAnimation<HTMLHeadingElement>();
+  const { elementRef: itemsRef, visibleItems } = useStaggeredAnimation<HTMLDivElement>(items.length, 100);
 
   return (
     <div className="py-8 sm:py-12 lg:py-16 bg-gray-50">

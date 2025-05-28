@@ -14,8 +14,8 @@ interface FAQSectionProps {
 }
 
 const FAQSection: React.FC<FAQSectionProps> = ({ trackCTAClick }) => {
-  const { elementRef: titleRef, isInView: titleInView } = useScrollAnimation();
-  const { elementRef: faqRef, visibleItems } = useStaggeredAnimation(5, 150);
+  const { elementRef: titleRef, isInView: titleInView } = useScrollAnimation<HTMLDivElement>();
+  const { elementRef: faqRef, visibleItems } = useStaggeredAnimation<HTMLDivElement>(5, 150);
 
   const faqs = [
     {

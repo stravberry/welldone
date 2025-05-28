@@ -22,7 +22,7 @@ const AnimatedStatItem: React.FC<{ endValue: number; suffix: string; label: stri
   suffix, 
   label 
 }) => {
-  const { elementRef, count } = useCounterAnimation(endValue, 2000);
+  const { elementRef, count } = useCounterAnimation<HTMLDivElement>(endValue, 2000);
   
   return (
     <div ref={elementRef} className="text-center group">

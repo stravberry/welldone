@@ -7,10 +7,10 @@ interface UseScrollAnimationOptions {
   triggerOnce?: boolean;
 }
 
-export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
+export const useScrollAnimation = <T extends HTMLElement = HTMLElement>(options: UseScrollAnimationOptions = {}) => {
   const { threshold = 0.1, rootMargin = '0px', triggerOnce = true } = options;
   const [isInView, setIsInView] = useState(false);
-  const elementRef = useRef<HTMLElement>(null);
+  const elementRef = useRef<T>(null);
 
   useEffect(() => {
     const element = elementRef.current;
@@ -43,9 +43,9 @@ export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
   return { elementRef, isInView };
 };
 
-export const useStaggeredAnimation = (itemCount: number, delay: number = 100) => {
+export const useStaggeredAnimation = <T extends HTMLElement = HTMLElement>(itemCount: number, delay: number = 100) => {
   const [visibleItems, setVisibleItems] = useState<number[]>([]);
-  const { elementRef, isInView } = useScrollAnimation();
+  const { elementRef, isInView } = useScrollAnimation<T>();
 
   useEffect(() => {
     if (isInView) {
@@ -60,9 +60,9 @@ export const useStaggeredAnimation = (itemCount: number, delay: number = 100) =>
   return { elementRef, visibleItems };
 };
 
-export const useCounterAnimation = (endValue: number, duration: number = 2000) => {
+export const useCounterAnimation = <T extends HTMLElement = HTMLElement>(endValue: number, duration: number = 2000) => {
   const [count, setCount] = useState(0);
-  const { elementRef, isInView } = useScrollAnimation();
+  const { elementRef, isInView } = useScrollAnimation<T>();
 
   useEffect(() => {
     if (isInView) {
