@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Outlet, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
@@ -23,7 +22,7 @@ const AdminLayout: React.FC = () => {
           <img 
             src="/lovable-uploads/a2c8c546-13e6-445b-9832-abf375420d6c.png" 
             alt="Well-done.pl Logo" 
-            className="h-6 w-auto flex-shrink-0" 
+            className="h-4 w-auto flex-shrink-0 object-contain" 
           />
           <span className="ml-3 text-lg font-semibold text-gray-800 truncate">CMS Panel</span>
         </div>
@@ -80,7 +79,7 @@ const AdminLayout: React.FC = () => {
           <img 
             src="/lovable-uploads/a2c8c546-13e6-445b-9832-abf375420d6c.png" 
             alt="Well-done.pl Logo" 
-            className="h-5 w-auto flex-shrink-0" 
+            className="h-3 w-auto flex-shrink-0 object-contain" 
           />
           <span className="ml-2 text-base font-semibold text-gray-800 truncate">CMS Panel</span>
         </div>
