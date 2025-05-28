@@ -151,6 +151,69 @@ const HomePage = () => {
     );
   };
 
+  // Nowy komponent dla animowanej treści "Why Choose Us"
+  const WhyChooseUsContent = ({ benefits }: { benefits: any[] }) => {
+    const { elementRef: titleRef, isInView: titleInView } = useScrollAnimation<HTMLDivElement>();
+    const { elementRef: benefitsRef, visibleItems } = useStaggeredAnimation<HTMLDivElement>(4, 200);
+    const { elementRef: buttonRef, isInView: buttonInView } = useScrollAnimation<HTMLDivElement>();
+
+    return (
+      <div>
+        <div 
+          ref={titleRef}
+          className="transition-all duration-800"
+          style={{
+            opacity: titleInView ? 1 : 0,
+            transform: titleInView ? 'translateY(0)' : 'translateY(30px)'
+          }}
+        >
+          <h2 className="text-3xl font-bold mb-6">Dlaczego warto z nami współpracować?</h2>
+          <p className="text-gray-600 mb-8">
+            Wyróżniamy się elastycznością i zdolnością adaptacji do potrzeb klienta. Oferujemy szkolenia dostosowane do harmonogramu firm, możliwość szkoleń stacjonarnych, online oraz hybrydowych.
+          </p>
+        </div>
+        
+        <div ref={benefitsRef} className="space-y-6">
+          {benefits.map((benefit, index) => (
+            <div 
+              key={index} 
+              className="flex transition-all duration-700"
+              style={{
+                opacity: visibleItems.includes(index) ? 1 : 0,
+                transform: visibleItems.includes(index) ? 'translateX(0)' : 'translateX(-30px)',
+                transitionDelay: `${index * 200}ms`
+              }}
+            >
+              <div className="flex-shrink-0 mr-4 transition-transform duration-300 hover:scale-110">
+                {benefit.icon}
+              </div>
+              <div>
+                <h3 className="font-semibold mb-1">{benefit.title}</h3>
+                <p className="text-gray-600">{benefit.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div 
+          ref={buttonRef}
+          className="mt-8 transition-all duration-800"
+          style={{
+            opacity: buttonInView ? 1 : 0,
+            transform: buttonInView ? 'translateY(0)' : 'translateY(20px)',
+            transitionDelay: '600ms'
+          }}
+        >
+          <Button asChild className="hover:scale-105 transition-transform duration-300">
+            <Link to="/o-nas">
+              Poznaj nas lepiej <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div>
       {/* Hero Section */}
@@ -218,30 +281,7 @@ const HomePage = () => {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl font-bold mb-6">Dlaczego warto z nami współpracować?</h2>
-              <p className="text-gray-600 mb-8">
-                Wyróżniamy się elastycznością i zdolnością adaptacji do potrzeb klienta. Oferujemy szkolenia dostosowane do harmonogramu firm, możliwość szkoleń stacjonarnych, online oraz hybrydowych.
-              </p>
-              <div className="space-y-6">
-                {benefits.map((benefit, index) => (
-                  <div key={index} className="flex">
-                    <div className="flex-shrink-0 mr-4">
-                      {benefit.icon}
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">{benefit.title}</h3>
-                      <p className="text-gray-600">{benefit.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <Button asChild className="mt-8">
-                <Link to="/o-nas">
-                  Poznaj nas lepiej <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
+            <WhyChooseUsContent benefits={benefits} />
             <div className="relative" ref={statsRef}>
               <div className="grid grid-cols-2 gap-4">
                 <StatCard value={10} label="lat doświadczenia" delay={0} />
