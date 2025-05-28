@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Check } from 'lucide-react';
@@ -49,7 +50,7 @@ const OfferingsSection: React.FC<OfferingProps> = ({ trackCTAClick, onOfferingSe
         <div 
           ref={titleRef}
           className={`text-center mb-16 transition-all duration-1000 ${
-            titleInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'
+            titleInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
           <h2 className="text-4xl font-bold mb-4 text-gray-800">Szkolenia UDT we Wrocławiu i okolicach</h2>
@@ -64,7 +65,7 @@ const OfferingsSection: React.FC<OfferingProps> = ({ trackCTAClick, onOfferingSe
               key={index}
               className={`transition-all duration-700 ${
                 visibleItems.includes(index) 
-                  ? 'animate-fade-in-up opacity-100' 
+                  ? 'opacity-100 translate-y-0' 
                   : 'opacity-0 translate-y-10'
               }`}
               style={{ animationDelay: `${index * 0.2}s` }}
@@ -116,32 +117,32 @@ const OfferingCard: React.FC<OfferingCardProps> = ({ offering, trackCTAClick, on
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
       <div className="relative h-48 overflow-hidden">
         <img 
           src={offering.image} 
           alt={offering.alt} 
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" 
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent transition-opacity duration-300 group-hover:from-black/70" />
-        <h3 className="absolute bottom-4 left-4 text-2xl font-bold text-white transition-all duration-300 group-hover:scale-105">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+        <h3 className="absolute bottom-4 left-4 text-2xl font-bold text-white">
           {offering.title}
         </h3>
       </div>
       <div className="p-6">
-        <p className="text-gray-600 mb-6 transition-colors duration-300 group-hover:text-gray-700">
+        <p className="text-gray-600 mb-6">
           {offering.description}
         </p>
         <ul className="space-y-2 mb-6">
           {offering.features.map((feature, i) => (
-            <li key={i} className="flex items-center gap-2 transition-all duration-300 hover:translate-x-1">
-              <Check className="h-5 w-5 text-green-500 transition-colors duration-300 group-hover:text-green-600" />
+            <li key={i} className="flex items-center gap-2">
+              <Check className="h-5 w-5 text-green-500" />
               <span className="text-gray-700">{feature}</span>
             </li>
           ))}
         </ul>
         <Button 
-          className="w-full bg-orange-600 hover:bg-orange-700 mt-2 transform transition-all duration-300 hover:scale-105 hover:shadow-lg"
+          className="w-full bg-orange-600 hover:bg-orange-700 mt-2 transition-all duration-200"
           onClick={handleOfferingClick}
         >
           Zapisz się na szkolenie
