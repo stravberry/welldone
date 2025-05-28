@@ -1,5 +1,3 @@
-
-
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -166,10 +164,6 @@ const AboutPage = () => {
                     Zobacz nasze usługi
                   </Link>
                 </Button>
-                <div className="flex items-center space-x-2">
-                  <div className="w-3 h-3 bg-orange-500 rounded-full animate-pulse"></div>
-                  <span className="text-sm text-gray-600 font-medium">Sprawdzone rozwiązania</span>
-                </div>
               </div>
             </div>
             <div 
@@ -401,4 +395,3 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ quote, author, role, 
 };
 
 export default AboutPage;
-
