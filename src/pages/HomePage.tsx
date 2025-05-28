@@ -125,20 +125,28 @@ const HomePage = () => {
     }
   ];
 
-  // Individual counter animations for each stat
+  // Simplified StatCard with proper animation handling
   const StatCard = ({ value, label, delay }: { value: number; label: string; delay: number }) => {
     const { elementRef, count } = useCounterAnimation<HTMLDivElement>(value, 2000);
+    const index = delay / 150; // Calculate index from delay
+    const isVisible = visibleItems.includes(index);
     
     return (
       <div 
         ref={elementRef}
-        className={`bg-orange-50 rounded-lg p-6 text-center transition-all duration-700 opacity-0 translate-y-5 ${
-          visibleItems.includes(delay / 150) ? 'animate-fade-in-up opacity-100 translate-y-0' : ''
+        className={`bg-orange-50 rounded-lg p-6 text-center transition-all duration-700 ${
+          isVisible 
+            ? 'opacity-100 translate-y-0 animate-fade-in-up' 
+            : 'opacity-0 translate-y-5'
         }`}
-        style={{ animationDelay: `${delay}ms` }}
+        style={{ 
+          animationDelay: `${delay}ms`,
+          // Ensure element is always visible as fallback
+          opacity: isVisible ? undefined : 0
+        }}
       >
-        <div className="text-3xl font-bold text-orange-600 mb-2 animate-count-up">
-          {count}{value >= 1000 ? '+' : value === 80 || value === 96 ? '%' : '+'}
+        <div className="text-3xl font-bold text-orange-600 mb-2">
+          {isVisible ? count : 0}{value >= 1000 ? '+' : value === 80 || value === 96 ? '%' : '+'}
         </div>
         <div className="text-gray-600">{label}</div>
       </div>
