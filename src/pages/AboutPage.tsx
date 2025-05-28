@@ -1,4 +1,5 @@
 
+
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -146,33 +147,17 @@ const AboutPage = () => {
               </h2>
               
               <div className="space-y-6">
-                <div className="bg-gradient-to-r from-orange-50 to-orange-100 p-6 rounded-xl border-l-4 border-orange-500 shadow-sm">
-                  <p className="text-gray-700 leading-relaxed">
-                    Firma specjalizuje się w <span className="font-bold text-orange-600 bg-orange-100 px-2 py-1 rounded">szkoleniach z zakresu BHP</span> oraz 
-                    uzyskiwania <span className="font-bold text-blue-600 bg-blue-100 px-2 py-1 rounded">uprawnień UDT</span> (operatorzy i konserwatorzy), 
-                    <span className="font-bold text-green-600 bg-green-100 px-2 py-1 rounded">SEP</span>, a także 
-                    <span className="font-bold text-purple-600 bg-purple-100 px-2 py-1 rounded">szkoleniach specjalistycznych</span>, 
-                    takich jak spawalnicze oraz na wózki unoszące.
-                  </p>
-                </div>
+                <p className="text-gray-600 leading-relaxed">
+                  Firma specjalizuje się w szkoleniach z zakresu BHP oraz uzyskiwania uprawnień UDT (operatorzy i konserwatorzy), SEP, a także szkoleniach specjalistycznych, takich jak spawalnicze oraz na wózki unoszące.
+                </p>
 
-                <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-xl border-l-4 border-blue-500 shadow-sm">
-                  <p className="text-gray-700 leading-relaxed">
-                    Usługi te są skierowane głównie do <span className="font-bold text-blue-700 underline decoration-blue-400 decoration-2">dużych firm produkcyjnych</span> 
-                    (powyżej <span className="font-bold text-2xl text-blue-600">500 pracowników</span>), które potrzebują 
-                    <span className="font-semibold text-gray-800 bg-yellow-100 px-2 py-1 rounded">regularnych szkoleń</span> dla swoich pracowników oraz 
-                    zapewnienia uprawnień do obsługi nowego i używanego sprzętu.
-                  </p>
-                </div>
+                <p className="text-gray-600 leading-relaxed">
+                  Usługi te są skierowane głównie do dużych firm produkcyjnych (powyżej 500 pracowników), które potrzebują regularnych szkoleń dla swoich pracowników oraz zapewnienia uprawnień do obsługi nowego i używanego sprzętu.
+                </p>
 
-                <div className="bg-gradient-to-r from-green-50 to-green-100 p-6 rounded-xl border-l-4 border-green-500 shadow-sm">
-                  <p className="text-gray-700 leading-relaxed">
-                    Naszym celem jest pokazanie, że firma posiada 
-                    <span className="font-bold text-green-700 underline decoration-green-400 decoration-2">dogłębną wiedzę</span> na temat 
-                    <span className="font-semibold text-gray-800 italic">specyficznych potrzeb firm produkcyjnych</span>, co stanowi jedną z głównych 
-                    <span className="font-bold text-green-600 bg-green-200 px-2 py-1 rounded">przewag konkurencyjnych</span>.
-                  </p>
-                </div>
+                <p className="text-gray-600 leading-relaxed">
+                  Naszym celem jest pokazanie, że firma posiada dogłębną wiedzę na temat specyficznych potrzeb firm produkcyjnych, co stanowi jedną z głównych przewag konkurencyjnych.
+                </p>
               </div>
 
               <div className="mt-8 flex items-center space-x-4">
@@ -416,3 +401,4 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ quote, author, role, 
 };
 
 export default AboutPage;
+
