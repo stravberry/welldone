@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -8,8 +7,11 @@ import ServiceCard from '@/components/ServiceCard';
 import Testimonial from '@/components/Testimonial';
 import FAQ from '@/components/FAQ';
 import ProcessStep from '@/components/ProcessStep';
+import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/useScrollAnimation';
 
 const HomePage = () => {
+  const { elementRef: statsRef } = useStaggeredAnimation(4, 150);
+
   const services = [
     {
       title: "Uprawnienia UDT dla operatorów",
@@ -213,21 +215,21 @@ const HomePage = () => {
                 </Link>
               </Button>
             </div>
-            <div className="relative">
+            <div className="relative" ref={statsRef}>
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-orange-50 rounded-lg p-6 text-center">
+                <div className="bg-orange-50 rounded-lg p-6 text-center animate-fade-in-up animate-delay-100">
                   <div className="text-3xl font-bold text-orange-600 mb-2">10+</div>
                   <div className="text-gray-600">lat doświadczenia</div>
                 </div>
-                <div className="bg-orange-50 rounded-lg p-6 text-center">
+                <div className="bg-orange-50 rounded-lg p-6 text-center animate-fade-in-up animate-delay-200">
                   <div className="text-3xl font-bold text-orange-600 mb-2">500+</div>
                   <div className="text-gray-600">zadowolonych firm</div>
                 </div>
-                <div className="bg-orange-50 rounded-lg p-6 text-center">
+                <div className="bg-orange-50 rounded-lg p-6 text-center animate-fade-in-up animate-delay-300">
                   <div className="text-3xl font-bold text-orange-600 mb-2">1000+</div>
                   <div className="text-gray-600">zrealizowanych szkoleń</div>
                 </div>
-                <div className="bg-orange-50 rounded-lg p-6 text-center">
+                <div className="bg-orange-50 rounded-lg p-6 text-center animate-fade-in-up animate-delay-500">
                   <div className="text-3xl font-bold text-orange-600 mb-2">80%</div>
                   <div className="text-gray-600">zleceń dla produkcji</div>
                 </div>
