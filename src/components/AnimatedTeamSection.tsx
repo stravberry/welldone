@@ -33,7 +33,7 @@ const teamMembers: TeamMember[] = [
 
 const AnimatedTeamSection = () => {
   const { elementRef: headerRef, isInView: headerInView } = useScrollAnimation<HTMLDivElement>({
-    threshold: 0.3,
+    threshold: 0.1,
     triggerOnce: true
   });
 
@@ -45,8 +45,9 @@ const AnimatedTeamSection = () => {
           className="text-center mb-12"
           style={{
             opacity: headerInView ? 1 : 0,
-            transform: headerInView ? 'translateY(0)' : 'translateY(30px)',
-            transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
+            transform: headerInView ? 'translateY(0)' : 'translateY(20px)',
+            transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+            willChange: 'transform, opacity'
           }}
         >
           <h2 className="text-3xl font-bold mb-4">Nasz Zespół</h2>
@@ -72,29 +73,34 @@ interface TeamMemberCardProps {
 
 const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member, index }) => {
   const { elementRef, isInView } = useScrollAnimation<HTMLDivElement>({
-    threshold: 0.3,
+    threshold: 0.1,
     triggerOnce: true
   });
+
+  // Check if user prefers reduced motion
+  const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
   return (
     <div 
       ref={elementRef}
-      className="bg-white rounded-xl shadow-md hover:shadow-xl p-6 text-center group transition-all duration-500 hover:scale-105 hover:-translate-y-2"
+      className="bg-white rounded-xl shadow-md hover:shadow-xl p-6 text-center group transition-all duration-300 md:hover:scale-105 md:hover:-translate-y-2"
       style={{
         opacity: isInView ? 1 : 0,
         transform: isInView ? 'translateY(0)' : 'translateY(30px)',
-        transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-        transitionDelay: isInView ? `${index * 100}ms` : '0ms'
+        transition: prefersReducedMotion ? 'opacity 0.3s ease' : 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+        transitionDelay: prefersReducedMotion ? '0ms' : (isInView ? `${index * (isMobile ? 100 : 150)}ms` : '0ms'),
+        willChange: 'transform, opacity'
       }}
     >
-      <div className="w-24 h-24 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 text-white flex items-center justify-center text-2xl font-bold mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+      <div className="w-20 md:w-24 h-20 md:h-24 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 text-white flex items-center justify-center text-lg md:text-2xl font-bold mx-auto mb-4 md:group-hover:scale-110 transition-transform duration-300 shadow-lg">
         {member.name.split(' ').map(n => n[0]).join('')}
       </div>
-      <h3 className="text-xl font-semibold mb-2 group-hover:text-orange-600 transition-colors duration-300">
+      <h3 className="text-lg md:text-xl font-semibold mb-2 group-hover:text-orange-600 transition-colors duration-300">
         {member.name}
       </h3>
-      <p className="text-orange-600 mb-4 font-medium">{member.role}</p>
-      <p className="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+      <p className="text-orange-600 mb-4 font-medium text-sm md:text-base">{member.role}</p>
+      <p className="text-gray-600 group-hover:text-gray-700 transition-colors duration-300 text-sm md:text-base">
         {member.description}
       </p>
     </div>
