@@ -351,7 +351,7 @@ const AboutPage = () => {
               <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-gray-100 transform hover:scale-105 transition-all duration-300">
                 <Link to="/kontakt">Skontaktuj się z nami</Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-orange-600 transform hover:scale-105 transition-all duration-300">
+              <Button asChild size="lg" variant="outline" className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-orange-600 transform hover:scale-105 transition-all duration-300">
                 <Link to="/wycena">Błyskawiczna Wycena</Link>
               </Button>
             </div>
