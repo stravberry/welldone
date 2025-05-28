@@ -2,6 +2,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Check } from 'lucide-react';
+import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/useScrollAnimation';
 
 interface OfferingProps {
   trackCTAClick: (ctaName: string, destinationId?: string) => void;
@@ -9,6 +10,9 @@ interface OfferingProps {
 }
 
 const OfferingsSection: React.FC<OfferingProps> = ({ trackCTAClick, onOfferingSelect }) => {
+  const { elementRef: titleRef, isInView: titleInView } = useScrollAnimation();
+  const { elementRef: cardsRef, visibleItems } = useStaggeredAnimation(4, 200);
+
   const offerings = [
     {
       title: "Wózki widłowe",
@@ -43,21 +47,35 @@ const OfferingsSection: React.FC<OfferingProps> = ({ trackCTAClick, onOfferingSe
   return (
     <section id="offerings" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div 
+          ref={titleRef}
+          className={`text-center mb-16 transition-all duration-1000 ${
+            titleInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'
+          }`}
+        >
           <h2 className="text-4xl font-bold mb-4 text-gray-800">Szkolenia UDT we Wrocławiu i okolicach</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Oferujemy kompleksowe kursy UDT na wszystkie rodzaje urządzeń transportu bliskiego we Wrocławiu i całym województwie dolnośląskim
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {offerings.map((offering, index) => (
-            <OfferingCard 
-              key={index} 
-              offering={offering} 
-              trackCTAClick={trackCTAClick}
-              onOfferingSelect={onOfferingSelect}
-            />
+            <div
+              key={index}
+              className={`transition-all duration-700 ${
+                visibleItems.includes(index) 
+                  ? 'animate-fade-in-up opacity-100' 
+                  : 'opacity-0 translate-y-10'
+              }`}
+              style={{ animationDelay: `${index * 0.2}s` }}
+            >
+              <OfferingCard 
+                offering={offering} 
+                trackCTAClick={trackCTAClick}
+                onOfferingSelect={onOfferingSelect}
+              />
+            </div>
           ))}
         </div>
 
@@ -67,7 +85,7 @@ const OfferingsSection: React.FC<OfferingProps> = ({ trackCTAClick, onOfferingSe
           </p>
           <Button 
             size="lg"
-            className="bg-orange-600 hover:bg-orange-700"
+            className="bg-orange-600 hover:bg-orange-700 transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
             onClick={() => trackCTAClick('see-more-offerings', 'contact-form')}
           >
             Sprawdź wszystkie szkolenia
@@ -99,32 +117,32 @@ const OfferingCard: React.FC<OfferingCardProps> = ({ offering, trackCTAClick, on
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:shadow-xl hover:-translate-y-1">
-      <div className="relative h-48">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group">
+      <div className="relative h-48 overflow-hidden">
         <img 
           src={offering.image} 
           alt={offering.alt} 
-          className="w-full h-full object-cover" 
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-        <h3 className="absolute bottom-4 left-4 text-2xl font-bold text-white">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent transition-opacity duration-300 group-hover:from-black/70" />
+        <h3 className="absolute bottom-4 left-4 text-2xl font-bold text-white transition-all duration-300 group-hover:scale-105">
           {offering.title}
         </h3>
       </div>
       <div className="p-6">
-        <p className="text-gray-600 mb-6">
+        <p className="text-gray-600 mb-6 transition-colors duration-300 group-hover:text-gray-700">
           {offering.description}
         </p>
         <ul className="space-y-2 mb-6">
           {offering.features.map((feature, i) => (
-            <li key={i} className="flex items-center gap-2">
-              <Check className="h-5 w-5 text-green-500" />
+            <li key={i} className="flex items-center gap-2 transition-all duration-300 hover:translate-x-1">
+              <Check className="h-5 w-5 text-green-500 transition-colors duration-300 group-hover:text-green-600" />
               <span className="text-gray-700">{feature}</span>
             </li>
           ))}
         </ul>
         <Button 
-          className="w-full bg-orange-600 hover:bg-orange-700 mt-2"
+          className="w-full bg-orange-600 hover:bg-orange-700 mt-2 transform transition-all duration-300 hover:scale-105 hover:shadow-lg"
           onClick={handleOfferingClick}
         >
           Zapisz się na szkolenie

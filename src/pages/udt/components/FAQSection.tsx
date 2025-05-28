@@ -7,12 +7,16 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/useScrollAnimation';
 
 interface FAQSectionProps {
   trackCTAClick: (ctaName: string, destinationId?: string) => void;
 }
 
 const FAQSection: React.FC<FAQSectionProps> = ({ trackCTAClick }) => {
+  const { elementRef: titleRef, isInView: titleInView } = useScrollAnimation();
+  const { elementRef: faqRef, visibleItems } = useStaggeredAnimation(5, 150);
+
   const faqs = [
     {
       question: "Jak długo trwa szkolenie na uprawnienia UDT we Wrocławiu?",
@@ -39,19 +43,33 @@ const FAQSection: React.FC<FAQSectionProps> = ({ trackCTAClick }) => {
   return (
     <section id="faq" className="py-12 sm:py-16 lg:py-20 bg-white">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12 sm:mb-16">
-          <span className="text-orange-600 font-medium text-sm sm:text-base">FAQ</span>
+        <div 
+          ref={titleRef}
+          className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${
+            titleInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <span className="text-orange-600 font-medium text-sm sm:text-base animate-pulse-slow">FAQ</span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mt-2 mb-4">Najczęściej zadawane pytania o szkolenia UDT</h2>
           <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
             Odpowiadamy na najczęstsze pytania dotyczące szkoleń i uprawnień UDT we Wrocławiu i okolicach
           </p>
         </div>
         
-        <div className="max-w-4xl mx-auto mb-8 sm:mb-12">
+        <div ref={faqRef} className="max-w-4xl mx-auto mb-8 sm:mb-12">
           <Accordion type="single" collapsible className="w-full space-y-3 sm:space-y-4">
             {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="border border-gray-200 rounded-lg bg-white shadow-sm">
-                <AccordionTrigger className="text-base sm:text-lg font-medium text-left px-4 sm:px-6 py-3 sm:py-4 hover:no-underline">
+              <AccordionItem 
+                key={index} 
+                value={`item-${index}`} 
+                className={`border border-gray-200 rounded-lg bg-white shadow-sm transition-all duration-700 hover:shadow-lg hover:border-orange-200 group ${
+                  visibleItems.includes(index) 
+                    ? 'animate-fade-in-up opacity-100' 
+                    : 'opacity-0 translate-y-5'
+                }`}
+                style={{ animationDelay: `${index * 0.15}s` }}
+              >
+                <AccordionTrigger className="text-base sm:text-lg font-medium text-left px-4 sm:px-6 py-3 sm:py-4 hover:no-underline transition-all duration-300 group-hover:text-orange-600 group-hover:bg-orange-50/50">
                   {faq.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-600 px-4 sm:px-6 pb-3 sm:pb-4 pt-1 sm:pt-2 text-sm sm:text-base leading-relaxed">
@@ -66,7 +84,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({ trackCTAClick }) => {
           <p className="text-gray-700 mb-4 text-sm sm:text-base">Nie znalazłeś odpowiedzi na swoje pytanie o szkolenia UDT?</p>
           <Button 
             size="lg"
-            className="bg-orange-600 hover:bg-orange-700 text-sm sm:text-base px-6 sm:px-8 py-2 sm:py-3"
+            className="bg-orange-600 hover:bg-orange-700 text-sm sm:text-base px-6 sm:px-8 py-2 sm:py-3 transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
             onClick={() => trackCTAClick('faq-contact', 'contact-form')}
           >
             Skontaktuj się z nami
