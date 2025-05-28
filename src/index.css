@@ -98,6 +98,8 @@
     overflow-x: hidden;
     position: relative;
     font-family: 'Outfit', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -109,7 +111,6 @@
     height: auto;
   }
   
-  /* Responsive typography */
   h1 {
     @apply text-3xl sm:text-4xl md:text-5xl;
   }
@@ -126,7 +127,6 @@
     @apply text-sm sm:text-base;
   }
 
-  /* Animation utilities */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -165,12 +165,11 @@
   }
 }
 
-/* Fix for iframe aspect ratio */
 .video-container {
   position: relative;
   overflow: hidden;
   width: 100%;
-  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  padding-top: 56.25%;
 }
 
 .video-container iframe {
@@ -183,21 +182,18 @@
   height: 100%;
 }
 
-/* Responsive table styles */
 .responsive-table {
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
-/* Responsive images */
 .responsive-img {
   width: 100%;
   height: auto;
   object-fit: cover;
 }
 
-/* Remove App.css styles that might conflict */
 #root {
   max-width: 100%;
   margin: 0;
@@ -205,30 +201,6 @@
   text-align: left;
 }
 
-/* Enhanced button animations */
-.btn-magnetic {
-  position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.btn-magnetic:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-.btn-magnetic:active {
-  transform: translateY(0);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Shimmer effect for loading states */
-.shimmer {
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200% 100%;
-  animation: shimmer 2s infinite;
-}
-
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -246,12 +218,6 @@
   background: #e55a00;
 }
 
-/* Smooth transitions for all interactive elements */
-button, a, input, textarea, select {
-  transition: all 0.3s ease;
-}
-
-/* Focus states for accessibility */
 button:focus-visible,
 a:focus-visible,
 input:focus-visible,
@@ -261,8 +227,15 @@ select:focus-visible {
   outline-offset: 2px;
 }
 
-/* Additional animation utilities */
 @layer utilities {
+  .transform-gpu {
+    transform: translateZ(0);
+  }
+  
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  
   .animate-delay-100 { animation-delay: 100ms; }
   .animate-delay-200 { animation-delay: 200ms; }
   .animate-delay-300 { animation-delay: 300ms; }
@@ -279,7 +252,7 @@ select:focus-visible {
   }
   
   .interactive-card {
-    @apply transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-orange-500/10 cursor-pointer;
+    @apply transform-gpu backface-hidden transition-transform duration-300 hover:scale-105 hover:shadow-xl hover:shadow-orange-500/10 cursor-pointer will-change-transform;
   }
   
   .gradient-text {
@@ -291,18 +264,15 @@ select:focus-visible {
   }
 }
 
-/* Parallax and advanced animations */
 .parallax {
   transform: translateZ(0);
   will-change: transform;
 }
 
-/* Loading states */
 .skeleton {
   @apply animate-pulse bg-gray-200 rounded;
 }
 
-/* Interactive hover zones */
 .hover-zone {
   position: relative;
   overflow: hidden;
@@ -323,14 +293,12 @@ select:focus-visible {
   left: 100%;
 }
 
-/* Performance optimizations */
 .gpu-accelerated {
   transform: translateZ(0);
   backface-visibility: hidden;
   perspective: 1000px;
 }
 
-/* Mobile touch improvements */
 @media (hover: none) and (pointer: coarse) {
   .hover\:scale-105:hover {
     transform: scale(1.02);

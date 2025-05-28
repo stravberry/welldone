@@ -12,18 +12,17 @@ import { useScrollAnimation, useStaggeredAnimation, useCounterAnimation } from '
 const HomePage = () => {
   const { elementRef: heroRef, isInView: heroInView } = useScrollAnimation<HTMLElement>();
   const { elementRef: servicesHeaderRef, isInView: servicesHeaderInView } = useScrollAnimation<HTMLDivElement>();
-  const { elementRef: servicesGridRef, visibleItems: visibleServices } = useStaggeredAnimation<HTMLDivElement>(5, 200);
+  const { elementRef: servicesGridRef, visibleItems: visibleServices } = useStaggeredAnimation<HTMLDivElement>(5, 150);
   const { elementRef: whyUsHeaderRef, isInView: whyUsHeaderInView } = useScrollAnimation<HTMLDivElement>();
   const { elementRef: whyUsContentRef, isInView: whyUsContentInView } = useScrollAnimation<HTMLDivElement>();
-  const { elementRef: statsRef, visibleItems: visibleStats } = useStaggeredAnimation<HTMLDivElement>(4, 150);
+  const { elementRef: statsRef, visibleItems: visibleStats } = useStaggeredAnimation<HTMLDivElement>(4, 100);
   const { elementRef: processHeaderRef, isInView: processHeaderInView } = useScrollAnimation<HTMLDivElement>();
-  const { elementRef: processStepsRef, visibleItems: visibleSteps } = useStaggeredAnimation<HTMLDivElement>(6, 200);
+  const { elementRef: processStepsRef, visibleItems: visibleSteps } = useStaggeredAnimation<HTMLDivElement>(6, 150);
   const { elementRef: testimonialsHeaderRef, isInView: testimonialsHeaderInView } = useScrollAnimation<HTMLDivElement>();
-  const { elementRef: testimonialsGridRef, visibleItems: visibleTestimonials } = useStaggeredAnimation<HTMLDivElement>(3, 250);
+  const { elementRef: testimonialsGridRef, visibleItems: visibleTestimonials } = useStaggeredAnimation<HTMLDivElement>(3, 200);
   const { elementRef: auditRef, isInView: auditInView } = useScrollAnimation<HTMLElement>();
-  const { elementRef: auditBenefitsRef, visibleItems: visibleBenefits } = useStaggeredAnimation<HTMLDivElement>(3, 200);
+  const { elementRef: auditBenefitsRef, visibleItems: visibleBenefits } = useStaggeredAnimation<HTMLDivElement>(3, 150);
 
-  // Counter animations for stats
   const { elementRef: counter1Ref, count: count1 } = useCounterAnimation<HTMLDivElement>(10, 2000);
   const { elementRef: counter2Ref, count: count2 } = useCounterAnimation<HTMLDivElement>(500, 2500);
   const { elementRef: counter3Ref, count: count3 } = useCounterAnimation<HTMLDivElement>(1000, 3000);
@@ -151,28 +150,28 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-              <h1 className={`text-4xl md:text-5xl font-bold mb-6 transition-all duration-1000 ${
+              <h1 className={`text-4xl md:text-5xl font-bold mb-6 transform-gpu transition-all duration-1000 ${
                 heroInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'
               }`}>
                 Pomagamy firmom produkcyjnym działać bez ryzyka
               </h1>
-              <p className={`text-lg mb-8 transition-all duration-1000 ${
+              <p className={`text-lg mb-8 transform-gpu transition-all duration-1000 ${
                 heroInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'
               }`} style={{ animationDelay: '0.3s' }}>
                 Zapewniamy pełną zgodność uprawnień UDT i SEP dla pracowników. Stosujemy procesowe podejście, które umożliwia precyzyjne dopasowanie szkoleń do indywidualnych potrzeb klienta.
               </p>
-              <div className={`flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 transition-all duration-1000 ${
+              <div className={`flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 transform-gpu transition-all duration-1000 ${
                 heroInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'
               }`} style={{ animationDelay: '0.6s' }}>
-                <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-gray-100 transition-all duration-300 hover:scale-105 will-change-transform">
+                <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-gray-100 transform-gpu transition-all duration-300 hover:scale-105 will-change-transform">
                   <Link to="/o-nas">Dlaczego My?</Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="bg-orange-500 text-white hover:bg-orange-600 border-orange-500 hover:border-orange-600 transition-all duration-300 hover:scale-105 will-change-transform">
+                <Button asChild size="lg" variant="outline" className="bg-orange-500 text-white hover:bg-orange-600 border-orange-500 hover:border-orange-600 transform-gpu transition-all duration-300 hover:scale-105 will-change-transform">
                   <Link to="/wycena">Błyskawiczna Wycena</Link>
                 </Button>
               </div>
             </div>
-            <div className={`flex items-center justify-center transition-all duration-1000 ${
+            <div className={`flex items-center justify-center transform-gpu transition-all duration-1000 ${
               heroInView ? 'animate-fade-in-left' : 'opacity-0 translate-x-10'
             }`} style={{ animationDelay: '0.4s' }}>
               <div className="w-full max-w-md">
@@ -180,7 +179,7 @@ const HomePage = () => {
                   <iframe 
                     src="https://www.youtube.com/embed/8QDIVIU9QZQ" 
                     title="Well-Done.pl Company Presentation" 
-                    className="w-full h-full border-none transition-transform duration-300 hover:scale-105 will-change-transform" 
+                    className="w-full h-full border-none transform-gpu transition-transform duration-300 hover:scale-105 will-change-transform" 
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowFullScreen
@@ -197,7 +196,7 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div 
             ref={servicesHeaderRef}
-            className={`text-center mb-12 transition-all duration-1000 ${
+            className={`text-center mb-12 transform-gpu transition-all duration-1000 ${
               servicesHeaderInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'
             }`}
           >
@@ -210,12 +209,11 @@ const HomePage = () => {
             {services.map((service, index) => (
               <div
                 key={index}
-                className={`transition-all duration-700 ${
+                className={`transform-gpu transition-all duration-700 ${
                   visibleServices.includes(index) 
                     ? 'animate-fade-in-up opacity-100' 
                     : 'opacity-0 translate-y-5'
                 }`}
-                style={{ animationDelay: `${index * 0.2}s` }}
               >
                 <ServiceCard
                   title={service.title}
@@ -235,7 +233,7 @@ const HomePage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div 
               ref={whyUsHeaderRef}
-              className={`transition-all duration-1000 ${
+              className={`transform-gpu transition-all duration-1000 ${
                 whyUsHeaderInView ? 'animate-fade-in-right' : 'opacity-0 translate-x-10'
               }`}
             >
@@ -245,14 +243,14 @@ const HomePage = () => {
               </p>
               <div 
                 ref={whyUsContentRef}
-                className={`space-y-6 transition-all duration-1000 ${
+                className={`space-y-6 transform-gpu transition-all duration-1000 ${
                   whyUsContentInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'
                 }`}
                 style={{ animationDelay: '0.3s' }}
               >
                 {benefits.map((benefit, index) => (
-                  <div key={index} className="flex group cursor-pointer transition-all duration-300 hover:translate-x-2">
-                    <div className="flex-shrink-0 mr-4 transition-transform duration-300 group-hover:scale-110">
+                  <div key={index} className="flex group cursor-pointer transform-gpu transition-transform duration-300 hover:translate-x-2 will-change-transform">
+                    <div className="flex-shrink-0 mr-4 transform-gpu transition-transform duration-300 group-hover:scale-110 will-change-transform">
                       {benefit.icon}
                     </div>
                     <div>
@@ -262,7 +260,7 @@ const HomePage = () => {
                   </div>
                 ))}
               </div>
-              <Button asChild className="mt-8 transition-all duration-300 hover:scale-105 will-change-transform">
+              <Button asChild className="mt-8 transform-gpu transition-all duration-300 hover:scale-105 will-change-transform">
                 <Link to="/o-nas">
                   Poznaj nas lepiej <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
@@ -272,7 +270,7 @@ const HomePage = () => {
               <div ref={statsRef} className="grid grid-cols-2 gap-4">
                 <div 
                   ref={counter1Ref}
-                  className={`bg-orange-50 rounded-lg p-6 text-center transition-all duration-700 hover:scale-105 hover:shadow-xl hover:bg-orange-100 cursor-pointer will-change-transform ${
+                  className={`bg-orange-50 rounded-lg p-6 text-center transform-gpu transition-all duration-700 hover:scale-105 hover:shadow-xl hover:bg-orange-100 cursor-pointer will-change-transform backface-hidden ${
                     visibleStats.includes(0) ? 'animate-fade-in-up' : 'opacity-0 translate-y-5'
                   }`}
                 >
@@ -281,30 +279,27 @@ const HomePage = () => {
                 </div>
                 <div 
                   ref={counter2Ref}
-                  className={`bg-orange-50 rounded-lg p-6 text-center transition-all duration-700 hover:scale-105 hover:shadow-xl hover:bg-orange-100 cursor-pointer will-change-transform ${
+                  className={`bg-orange-50 rounded-lg p-6 text-center transform-gpu transition-all duration-700 hover:scale-105 hover:shadow-xl hover:bg-orange-100 cursor-pointer will-change-transform backface-hidden ${
                     visibleStats.includes(1) ? 'animate-fade-in-up' : 'opacity-0 translate-y-5'
                   }`}
-                  style={{ animationDelay: '0.15s' }}
                 >
                   <div className="text-3xl font-bold text-orange-600 mb-2">{count2}+</div>
                   <div className="text-gray-600">zadowolonych firm</div>
                 </div>
                 <div 
                   ref={counter3Ref}
-                  className={`bg-orange-50 rounded-lg p-6 text-center transition-all duration-700 hover:scale-105 hover:shadow-xl hover:bg-orange-100 cursor-pointer will-change-transform ${
+                  className={`bg-orange-50 rounded-lg p-6 text-center transform-gpu transition-all duration-700 hover:scale-105 hover:shadow-xl hover:bg-orange-100 cursor-pointer will-change-transform backface-hidden ${
                     visibleStats.includes(2) ? 'animate-fade-in-up' : 'opacity-0 translate-y-5'
                   }`}
-                  style={{ animationDelay: '0.3s' }}
                 >
                   <div className="text-3xl font-bold text-orange-600 mb-2">{count3}+</div>
                   <div className="text-gray-600">zrealizowanych szkoleń</div>
                 </div>
                 <div 
                   ref={counter4Ref}
-                  className={`bg-orange-50 rounded-lg p-6 text-center transition-all duration-700 hover:scale-105 hover:shadow-xl hover:bg-orange-100 cursor-pointer will-change-transform ${
+                  className={`bg-orange-50 rounded-lg p-6 text-center transform-gpu transition-all duration-700 hover:scale-105 hover:shadow-xl hover:bg-orange-100 cursor-pointer will-change-transform backface-hidden ${
                     visibleStats.includes(3) ? 'animate-fade-in-up' : 'opacity-0 translate-y-5'
                   }`}
-                  style={{ animationDelay: '0.45s' }}
                 >
                   <div className="text-3xl font-bold text-orange-600 mb-2">{count4}%</div>
                   <div className="text-gray-600">zleceń dla produkcji</div>
@@ -320,7 +315,7 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div 
             ref={processHeaderRef}
-            className={`text-center mb-12 transition-all duration-1000 ${
+            className={`text-center mb-12 transform-gpu transition-all duration-1000 ${
               processHeaderInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'
             }`}
           >
@@ -333,12 +328,11 @@ const HomePage = () => {
             {processSteps.map((step) => (
               <div
                 key={step.number}
-                className={`transition-all duration-700 ${
+                className={`transform-gpu transition-all duration-700 ${
                   visibleSteps.includes(step.number - 1) 
                     ? 'animate-fade-in-up opacity-100' 
                     : 'opacity-0 translate-y-5'
                 }`}
-                style={{ animationDelay: `${(step.number - 1) * 0.2}s` }}
               >
                 <ProcessStep
                   number={step.number}
@@ -349,7 +343,7 @@ const HomePage = () => {
             ))}
           </div>
           <div className="text-center mt-12">
-            <Button asChild size="lg" className="transition-all duration-300 hover:scale-105 will-change-transform animate-pulse-slow">
+            <Button asChild size="lg" className="transform-gpu transition-all duration-300 hover:scale-105 will-change-transform animate-pulse-slow">
               <Link to="/wycena">Uzyskaj Błyskawiczną Wycenę</Link>
             </Button>
           </div>
@@ -361,7 +355,7 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div 
             ref={testimonialsHeaderRef}
-            className={`text-center mb-12 transition-all duration-1000 ${
+            className={`text-center mb-12 transform-gpu transition-all duration-1000 ${
               testimonialsHeaderInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'
             }`}
           >
@@ -372,7 +366,7 @@ const HomePage = () => {
           </div>
           <div ref={testimonialsGridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div
-              className={`transition-all duration-700 ${
+              className={`transform-gpu transition-all duration-700 ${
                 visibleTestimonials.includes(0) 
                   ? 'animate-fade-in-up opacity-100' 
                   : 'opacity-0 translate-y-5'
@@ -386,12 +380,11 @@ const HomePage = () => {
               />
             </div>
             <div
-              className={`transition-all duration-700 ${
+              className={`transform-gpu transition-all duration-700 ${
                 visibleTestimonials.includes(1) 
                   ? 'animate-fade-in-up opacity-100' 
                   : 'opacity-0 translate-y-5'
               }`}
-              style={{ animationDelay: '0.25s' }}
             >
               <Testimonial
                 quote="Profesjonalne szkolenia, które dostosowali do naszych potrzeb. Współpraca była szybka i bezproblemowa."
@@ -401,12 +394,11 @@ const HomePage = () => {
               />
             </div>
             <div
-              className={`transition-all duration-700 ${
+              className={`transform-gpu transition-all duration-700 ${
                 visibleTestimonials.includes(2) 
                   ? 'animate-fade-in-up opacity-100' 
                   : 'opacity-0 translate-y-5'
               }`}
-              style={{ animationDelay: '0.5s' }}
             >
               <Testimonial
                 quote="Bezpłatny audyt pomógł nam zoptymalizować proces szkoleniowy, co przełożyło się na realne oszczędności."
@@ -426,20 +418,20 @@ const HomePage = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className={`transition-all duration-1000 ${
+            <div className={`transform-gpu transition-all duration-1000 ${
               auditInView ? 'animate-slide-in-left' : 'opacity-0 translate-x-10'
             }`}>
               <h2 className="text-3xl font-bold mb-4">Skorzystaj z bezpłatnego audytu</h2>
               <p className="text-lg mb-6">
                 Zastanawiasz się, czy Twoje szkolenia są odpowiednio dobrane i czy nie przepłacasz za uzyskiwanie uprawnień pracowników? Skorzystaj z bezpłatnego audytu i dowiedz się, jak możemy pomóc.
               </p>
-              <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-gray-100 transition-all duration-300 hover:scale-105 will-change-transform animate-pulse-slow">
+              <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-gray-100 transform-gpu transition-all duration-300 hover:scale-105 will-change-transform animate-pulse-slow">
                 <Link to="/bezplatny-audyt">Zamów bezpłatny audyt</Link>
               </Button>
             </div>
             <div ref={auditBenefitsRef} className="space-y-4">
               <div
-                className={`bg-orange-500 rounded-lg p-4 transition-all duration-700 hover:bg-orange-400 hover:scale-105 cursor-pointer will-change-transform ${
+                className={`bg-orange-500 rounded-lg p-4 transform-gpu transition-all duration-700 hover:bg-orange-400 hover:scale-105 cursor-pointer will-change-transform backface-hidden ${
                   visibleBenefits.includes(0) ? 'animate-fade-in-right' : 'opacity-0 translate-x-5'
                 }`}
               >
@@ -447,19 +439,17 @@ const HomePage = () => {
                 <p>Przeanalizujemy, czy obecne szkolenia spełniają wszystkie wymagania prawne oraz czy odpowiadają na realne potrzeby Twojej firmy.</p>
               </div>
               <div
-                className={`bg-orange-500 rounded-lg p-4 transition-all duration-700 hover:bg-orange-400 hover:scale-105 cursor-pointer will-change-transform ${
+                className={`bg-orange-500 rounded-lg p-4 transform-gpu transition-all duration-700 hover:bg-orange-400 hover:scale-105 cursor-pointer will-change-transform backface-hidden ${
                   visibleBenefits.includes(1) ? 'animate-fade-in-right' : 'opacity-0 translate-x-5'
                 }`}
-                style={{ animationDelay: '0.2s' }}
               >
                 <h3 className="font-semibold mb-2">Weryfikacja uprawnień pracowników</h3>
                 <p>Sprawdzimy, czy wszyscy pracownicy posiadają wymagane uprawnienia do obsługi sprzętu i urządzeń.</p>
               </div>
               <div
-                className={`bg-orange-500 rounded-lg p-4 transition-all duration-700 hover:bg-orange-400 hover:scale-105 cursor-pointer will-change-transform ${
+                className={`bg-orange-500 rounded-lg p-4 transform-gpu transition-all duration-700 hover:bg-orange-400 hover:scale-105 cursor-pointer will-change-transform backface-hidden ${
                   visibleBenefits.includes(2) ? 'animate-fade-in-right' : 'opacity-0 translate-x-5'
                 }`}
-                style={{ animationDelay: '0.4s' }}
               >
                 <h3 className="font-semibold mb-2">Optymalizacja kosztów</h3>
                 <p>Pomożemy zidentyfikować, czy nie przepłacasz za szkolenia i certyfikacje, oraz wskażemy obszary, w których możesz zredukować koszty.</p>

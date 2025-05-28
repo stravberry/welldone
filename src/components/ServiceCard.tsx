@@ -28,8 +28,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, lin
   };
   
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] hover:-translate-y-1 flex flex-col group cursor-pointer hover:bg-gradient-to-br hover:from-white hover:to-orange-50 border border-transparent hover:border-orange-200 will-change-transform">
-      <div className="text-orange-500 mb-4 transition-transform duration-300 group-hover:scale-110">
+    <div className="bg-white rounded-lg shadow-md p-6 transform-gpu backface-hidden will-change-transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl flex flex-col group cursor-pointer border border-transparent hover:border-orange-200">
+      <div className="text-orange-500 mb-4 transform-gpu transition-transform duration-300 group-hover:scale-105 will-change-transform">
         {icon}
       </div>
       <h3 className="text-xl font-semibold mb-3 transition-colors duration-300 group-hover:text-orange-600">{title}</h3>
@@ -37,11 +37,11 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, lin
       <Button 
         asChild 
         variant="outline" 
-        className="mt-auto transition-all duration-300 group-hover:bg-orange-500 group-hover:text-white group-hover:border-orange-500 group-hover:shadow-lg will-change-transform" 
+        className="mt-auto transform-gpu transition-all duration-300 group-hover:bg-orange-500 group-hover:text-white group-hover:border-orange-500 group-hover:shadow-lg will-change-transform" 
         onClick={handleClick}
       >
         <Link to={link} className="flex items-center justify-center">
-          Dowiedz się więcej <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+          Dowiedz się więcej <ArrowRight className="ml-2 h-4 w-4 transform-gpu transition-transform duration-300 group-hover:translate-x-1 will-change-transform" />
         </Link>
       </Button>
     </div>
