@@ -41,7 +41,7 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({ trackCTAClick }
         <div 
           ref={titleRef}
           className={`text-center mb-12 sm:mb-16 transition-all duration-800 ${
-            titleInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'
+            titleInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
           <span className="text-orange-600 font-medium text-sm sm:text-base">Dlaczego my?</span>
@@ -57,10 +57,9 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({ trackCTAClick }
               key={index} 
               className={`bg-gray-50 p-6 rounded-lg transition-all duration-600 hover:shadow-lg hover:bg-white group cursor-pointer border border-transparent hover:border-orange-200 ${
                 visibleItems.includes(index) 
-                  ? 'animate-fade-in-up' 
+                  ? 'opacity-100 translate-y-0' 
                   : 'opacity-0 translate-y-5'
               }`}
-              style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="text-4xl mb-4 transition-transform duration-200 group-hover:scale-110">{reason.icon}</div>
               <h3 className="text-xl font-bold mb-2 transition-colors duration-200 group-hover:text-orange-600">{reason.title}</h3>
@@ -72,7 +71,7 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({ trackCTAClick }
         <div 
           ref={ctaRef}
           className={`text-center transition-all duration-800 ${
-            ctaInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'
+            ctaInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
           <Button 

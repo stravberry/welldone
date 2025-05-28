@@ -24,17 +24,17 @@ const HeroSection: React.FC<HeroSectionProps> = ({
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between">
           <div className="lg:w-1/2 mb-10 lg:mb-0">
-            <div className="bg-white bg-opacity-10 p-2 rounded inline-block mb-6 animate-fade-in">
+            <div className="bg-white bg-opacity-10 p-2 rounded inline-block mb-6">
               <span className="text-white font-medium">Certyfikowane szkolenia UDT</span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
               Szkolenia UDT Wrocław<br/>
               <span className="text-orange-200">i okolice - 96% zdawalność</span>
             </h1>
-            <p className="text-white text-xl mb-8 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+            <p className="text-white text-xl mb-8">
               Profesjonalne kursy na uprawnienia UDT dla operatorów we Wrocławiu i całym województwie dolnośląskim. Wózki widłowe, podesty ruchome, suwnice i układnice magazynowe.
             </p>
-            <div className="flex flex-wrap gap-4 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+            <div className="flex flex-wrap gap-4">
               <Button 
                 size="lg" 
                 onClick={() => trackCTAClick('hero-contact', 'contact-form')}
@@ -51,11 +51,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                 Sprawdź ofertę szkoleń
               </Button>
             </div>
-            <div className="animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
+            <div className="mt-8">
               <StatsCounter />
             </div>
           </div>
-          <div className="animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+          <div>
             <QuickContactForm 
               formData={formData}
               handleInputChange={handleInputChange}
@@ -65,9 +65,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
         </div>
       </div>
-      <div className="animate-fade-in-up" style={{ animationDelay: '1s' }}>
-        <StatsBanner />
-      </div>
+      <StatsBanner />
     </section>
   );
 };

@@ -34,20 +34,17 @@ const TestimonialsSection: React.FC = () => {
       <div className="container mx-auto px-4">
         <div 
           ref={titleRef}
-          className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${
-            titleInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'
+          className={`text-center mb-12 sm:mb-16 transition-all duration-800 ${
+            titleInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
-          <span className="text-orange-600 font-medium text-sm sm:text-base animate-pulse-slow">Co mówią nasi kursanci</span>
+          <span className="text-orange-600 font-medium text-sm sm:text-base">Co mówią nasi kursanci</span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mt-2 mb-4">Opinie uczestników szkoleń</h2>
           <div className="flex items-center justify-center gap-1 mb-4">
             {[1, 2, 3, 4, 5].map(star => (
               <Star 
                 key={star} 
-                className={`h-6 w-6 fill-yellow-400 text-yellow-400 transition-all duration-500 ${
-                  titleInView ? 'animate-star-fill' : 'scale-0 opacity-0'
-                }`}
-                style={{ animationDelay: `${star * 0.1}s` }}
+                className="h-6 w-6 fill-yellow-400 text-yellow-400"
               />
             ))}
           </div>
@@ -61,21 +58,17 @@ const TestimonialsSection: React.FC = () => {
           {testimonials.map((testimonial, index) => (
             <div 
               key={index} 
-              className={`bg-gray-50 p-6 rounded-lg shadow-md transition-all duration-700 hover:shadow-xl hover:scale-105 hover:bg-white group cursor-pointer border border-transparent hover:border-orange-200 ${
+              className={`bg-gray-50 p-6 rounded-lg shadow-md transition-all duration-600 hover:shadow-xl hover:scale-105 hover:bg-white group cursor-pointer border border-transparent hover:border-orange-200 ${
                 visibleItems.includes(index) 
-                  ? 'animate-fade-in-up opacity-100' 
+                  ? 'opacity-100 translate-y-0' 
                   : 'opacity-0 translate-y-5'
               }`}
-              style={{ animationDelay: `${index * 0.2}s` }}
             >
               <div className="flex mb-4">
                 {Array(testimonial.rating).fill(null).map((_, i) => (
                   <Star 
                     key={i} 
-                    className={`h-5 w-5 fill-yellow-400 text-yellow-400 transition-all duration-500 ${
-                      visibleItems.includes(index) ? 'animate-star-fill' : 'scale-0'
-                    }`}
-                    style={{ animationDelay: `${(index * 0.2) + (i * 0.1)}s` }}
+                    className="h-5 w-5 fill-yellow-400 text-yellow-400"
                   />
                 ))}
               </div>
