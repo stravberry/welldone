@@ -30,7 +30,7 @@ const UDTNavigationMenu: React.FC<NavigationMenuProps> = ({ trackLinkClick, trac
   return (
     <div className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <a 
               href="#" 
@@ -40,7 +40,7 @@ const UDTNavigationMenu: React.FC<NavigationMenuProps> = ({ trackLinkClick, trac
               <img 
                 src="/lovable-uploads/a2c8c546-13e6-445b-9832-abf375420d6c.png" 
                 alt="Well-done.pl Logo" 
-                className="h-12 w-auto mr-2 flex-shrink-0" 
+                className="h-10 w-auto mr-2 flex-shrink-0 max-h-10" 
               />
             </a>
             <span className="ml-2 text-sm bg-orange-100 text-orange-700 px-2 py-1 rounded">
