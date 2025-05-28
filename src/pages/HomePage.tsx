@@ -321,7 +321,7 @@ const HomePage = () => {
       </section>
 
       {/* Free Audit CTA */}
-      <section className="py-16 lg:py-24 relative overflow-hidden">
+      <section className="py-12 lg:py-16 relative overflow-hidden">
         {/* Background with gradient and geometric shapes */}
         <div className="absolute inset-0 bg-gradient-to-br from-orange-600 via-orange-500 to-orange-700" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
@@ -330,7 +330,7 @@ const HomePage = () => {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Header with animation */}
-          <div className="text-center mb-12 lg:mb-16">
+          <div className="text-center mb-8 lg:mb-12">
             <div 
               className="inline-block mb-4"
               style={{
@@ -369,7 +369,7 @@ const HomePage = () => {
 
           {/* Stats Section */}
           <div 
-            className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-16"
+            className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-12"
             style={{
               opacity: 1,
               transform: 'translateY(0)',
