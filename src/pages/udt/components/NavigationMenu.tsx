@@ -26,10 +26,14 @@ const UDTNavigationMenu: React.FC<NavigationMenuProps> = ({ trackLinkClick, trac
           <div className="flex items-center">
             <a 
               href="#" 
-              className="text-2xl font-bold text-orange-600"
+              className="flex items-center"
               onClick={() => trackLinkClick('logo')}
             >
-              Well-done
+              <img 
+                src="/lovable-uploads/a2c8c546-13e6-445b-9832-abf375420d6c.png" 
+                alt="Well-done.pl Logo" 
+                className="h-6 sm:h-8 mr-2" 
+              />
             </a>
             <span className="ml-2 text-sm bg-orange-100 text-orange-700 px-2 py-1 rounded">
               Szkolenia UDT
