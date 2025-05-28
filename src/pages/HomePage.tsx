@@ -10,7 +10,7 @@ import ProcessStep from '@/components/ProcessStep';
 import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/useScrollAnimation';
 
 const HomePage = () => {
-  const { elementRef: statsRef } = useStaggeredAnimation(4, 150);
+  const { elementRef: statsRef } = useStaggeredAnimation<HTMLDivElement>(4, 150);
 
   const services = [
     {
