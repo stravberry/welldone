@@ -40,7 +40,7 @@ const UDTNavigationMenu: React.FC<NavigationMenuProps> = ({ trackLinkClick, trac
               <img 
                 src="/lovable-uploads/a2c8c546-13e6-445b-9832-abf375420d6c.png" 
                 alt="Well-done.pl Logo" 
-                className="h-10 w-auto mr-2 flex-shrink-0 max-h-10" 
+                className="h-6 sm:h-8 lg:h-10 w-auto mr-2 flex-shrink-0 min-w-0" 
               />
             </a>
             <span className="ml-2 text-sm bg-orange-100 text-orange-700 px-2 py-1 rounded">
