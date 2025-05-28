@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -215,21 +216,7 @@ const HomePage = () => {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <WhyChooseUsContent benefits={benefits} />
-            <div className="relative" ref={statsRef}>
-              <div className="grid grid-cols-2 gap-4">
-                <StatCard value={10} label="lat doświadczenia" delay={0} />
-                <StatCard value={500} label="zadowolonych firm" delay={150} />
-                <StatCard value={1000} label="zrealizowanych szkoleń" delay={300} />
-                <StatCard value={80} label="zleceń dla produkcji" delay={450} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <WhyChooseUsSection benefits={benefits} statsRef={statsRef} visibleItems={visibleItems} StatCard={StatCard} />
 
       {/* Process Section */}
       <section className="py-16 bg-gray-50">
@@ -327,78 +314,100 @@ const HomePage = () => {
   );
 };
 
-// Extracted WhyChooseUsContent as a separate component to prevent re-renders
-const WhyChooseUsContent = React.memo(({ benefits }: { benefits: any[] }) => {
+// Extracted WhyChooseUsSection as a separate component with animations
+const WhyChooseUsSection = React.memo(({ benefits, statsRef, visibleItems, StatCard }: { 
+  benefits: any[]; 
+  statsRef: React.RefObject<HTMLDivElement>; 
+  visibleItems: number[]; 
+  StatCard: any;
+}) => {
   const { elementRef: titleRef, isInView: titleInView } = useScrollAnimation<HTMLDivElement>({ 
     triggerOnce: true,
     threshold: 0.3
   });
+  
   const { elementRef: benefitsRef, isInView: benefitsInView } = useScrollAnimation<HTMLDivElement>({ 
     triggerOnce: true,
     threshold: 0.2
   });
+  
   const { elementRef: buttonRef, isInView: buttonInView } = useScrollAnimation<HTMLDivElement>({ 
     triggerOnce: true,
     threshold: 0.5
   });
 
   return (
-    <div>
-      <div 
-        ref={titleRef}
-        className="transition-all duration-800"
-        style={{
-          opacity: titleInView ? 1 : 0,
-          transform: titleInView ? 'translateY(0)' : 'translateY(30px)'
-        }}
-      >
-        <h2 className="text-3xl font-bold mb-6">Dlaczego warto z nami współpracować?</h2>
-        <p className="text-gray-600 mb-8">
-          Wyróżniamy się elastycznością i zdolnością adaptacji do potrzeb klienta. Oferujemy szkolenia dostosowane do harmonogramu firm, możliwość szkoleń stacjonarnych, online oraz hybrydowych.
-        </p>
-      </div>
-      
-      <div ref={benefitsRef} className="space-y-6">
-        {benefits.map((benefit, index) => (
-          <div 
-            key={index} 
-            className="flex transition-all duration-700"
-            style={{
-              opacity: benefitsInView ? 1 : 0,
-              transform: benefitsInView ? 'translateX(0)' : 'translateX(-30px)',
-              transitionDelay: benefitsInView ? `${index * 200}ms` : '0ms'
-            }}
-          >
-            <div className="flex-shrink-0 mr-4 transition-transform duration-300 hover:scale-110">
-              {benefit.icon}
+    <section className="py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div>
+            <div 
+              ref={titleRef}
+              className="transition-all duration-800"
+              style={{
+                opacity: titleInView ? 1 : 0,
+                transform: titleInView ? 'translateY(0)' : 'translateY(30px)'
+              }}
+            >
+              <h2 className="text-3xl font-bold mb-6">Dlaczego warto z nami współpracować?</h2>
+              <p className="text-gray-600 mb-8">
+                Wyróżniamy się elastycznością i zdolnością adaptacji do potrzeb klienta. Oferujemy szkolenia dostosowane do harmonogramu firm, możliwość szkoleń stacjonarnych, online oraz hybrydowych.
+              </p>
             </div>
-            <div>
-              <h3 className="font-semibold mb-1">{benefit.title}</h3>
-              <p className="text-gray-600">{benefit.description}</p>
+            
+            <div ref={benefitsRef} className="space-y-6">
+              {benefits.map((benefit, index) => (
+                <div 
+                  key={index} 
+                  className="flex transition-all duration-700"
+                  style={{
+                    opacity: benefitsInView ? 1 : 0,
+                    transform: benefitsInView ? 'translateX(0)' : 'translateX(-30px)',
+                    transitionDelay: benefitsInView ? `${index * 200}ms` : '0ms'
+                  }}
+                >
+                  <div className="flex-shrink-0 mr-4 transition-transform duration-300 hover:scale-110">
+                    {benefit.icon}
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-1">{benefit.title}</h3>
+                    <p className="text-gray-600">{benefit.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <div 
+              ref={buttonRef}
+              className="mt-8 transition-all duration-800"
+              style={{
+                opacity: buttonInView ? 1 : 0,
+                transform: buttonInView ? 'translateY(0)' : 'translateY(20px)',
+                transitionDelay: buttonInView ? '800ms' : '0ms'
+              }}
+            >
+              <Button asChild className="hover:scale-105 transition-transform duration-300">
+                <Link to="/o-nas">
+                  Poznaj nas lepiej <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
             </div>
           </div>
-        ))}
+          
+          <div className="relative" ref={statsRef}>
+            <div className="grid grid-cols-2 gap-4">
+              <StatCard value={10} label="lat doświadczenia" delay={0} />
+              <StatCard value={500} label="zadowolonych firm" delay={150} />
+              <StatCard value={1000} label="zrealizowanych szkoleń" delay={300} />
+              <StatCard value={80} label="zleceń dla produkcji" delay={450} />
+            </div>
+          </div>
+        </div>
       </div>
-      
-      <div 
-        ref={buttonRef}
-        className="mt-8 transition-all duration-800"
-        style={{
-          opacity: buttonInView ? 1 : 0,
-          transform: buttonInView ? 'translateY(0)' : 'translateY(20px)',
-          transitionDelay: buttonInView ? '800ms' : '0ms'
-        }}
-      >
-        <Button asChild className="hover:scale-105 transition-transform duration-300">
-          <Link to="/o-nas">
-            Poznaj nas lepiej <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
-        </Button>
-      </div>
-    </div>
+    </section>
   );
 });
 
-WhyChooseUsContent.displayName = 'WhyChooseUsContent';
+WhyChooseUsSection.displayName = 'WhyChooseUsSection';
 
 export default HomePage;
