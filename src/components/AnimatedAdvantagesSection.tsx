@@ -1,10 +1,10 @@
 
 import React from 'react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { Clock, Users, Target, CheckCircle, Award, Briefcase } from 'lucide-react';
+import { Clock, Users, Target, CheckCircle, Award, Briefcase, LucideProps } from 'lucide-react';
 
 interface AdvantageCard {
-  icon: React.ComponentType<{ size?: number; className?: string }>;
+  icon: React.ComponentType<LucideProps>;
   title: string;
   description: string;
   gradient: string;
