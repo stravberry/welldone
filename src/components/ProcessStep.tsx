@@ -20,18 +20,17 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
       ref={elementRef}
       className="process-step flex md:block relative group"
     >
-      {/* Simple scaling circle with number */}
+      {/* Simple scaling circle with number - looped animation */}
       <div 
         className="relative z-10"
         style={{
           opacity: isInView ? 1 : 0,
-          transform: isInView ? 'scale(1)' : 'scale(0)',
-          transition: 'all 0.5s ease-out',
-          transitionDelay: isInView ? `${index * 400}ms` : '0ms'
+          animation: isInView ? `pulseLoop 4.8s ease-in-out infinite ${index * 0.8}s` : 'none',
+          transition: 'opacity 0.5s ease-out'
         }}
       >
         {/* Main circle */}
-        <div className="relative flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 text-white font-bold shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110">
+        <div className="relative flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 text-white font-bold shadow-lg transition-all duration-300">
           <span className="text-lg">{number}</span>
         </div>
       </div>
@@ -46,11 +45,11 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
           transitionDelay: isInView ? `${index * 400 + 200}ms` : '0ms'
         }}
       >
-        <h3 className="text-lg font-semibold mb-2 group-hover:text-orange-600 transition-colors duration-300">
+        <h3 className="text-lg font-semibold mb-2 transition-colors duration-300">
           {title}
         </h3>
         <p 
-          className="text-gray-600 group-hover:text-gray-700 transition-colors duration-300"
+          className="text-gray-600 transition-colors duration-300"
           style={{
             opacity: isInView ? 1 : 0,
             transition: 'opacity 0.6s ease-out',
@@ -60,6 +59,17 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
           {description}
         </p>
       </div>
+      
+      <style jsx>{`
+        @keyframes pulseLoop {
+          0%, 83.33% {
+            transform: scale(1);
+          }
+          8.33%, 16.66% {
+            transform: scale(1.2);
+          }
+        }
+      `}</style>
     </div>
   );
 };
