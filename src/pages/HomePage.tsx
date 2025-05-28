@@ -221,26 +221,67 @@ const HomePage = () => {
       {/* Process Section */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Jak wygląda proces współpracy?</h2>
+          <div 
+            className="text-center mb-12"
+            style={{
+              opacity: 1,
+              transform: 'translateY(0)',
+              transition: 'all 0.8s ease-out'
+            }}
+          >
+            <div className="relative inline-block">
+              <span className="text-orange-600 font-medium text-sm uppercase tracking-wide animate-pulse-slow">
+                Jak to działa?
+              </span>
+              <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 animate-shimmer" />
+            </div>
+            <h2 className="text-3xl font-bold mb-4 mt-4">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                Jak wygląda proces współpracy?
+              </span>
+            </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Nasze podejście jest oparte na jasno określonym procesie, który zapewnia skuteczne i efektywne szkolenia.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-4">
-            {processSteps.map((step) => (
-              <ProcessStep
-                key={step.number}
-                number={step.number}
-                title={step.title}
-                description={step.description}
-              />
-            ))}
+          
+          <div className="relative">
+            {/* Background decoration */}
+            <div className="absolute inset-0 bg-gradient-to-r from-orange-50 via-white to-orange-50 rounded-3xl opacity-50" />
+            
+            <div className="relative grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-4 p-8">
+              {processSteps.map((step, index) => (
+                <ProcessStep
+                  key={step.number}
+                  number={step.number}
+                  title={step.title}
+                  description={step.description}
+                  index={index}
+                />
+              ))}
+            </div>
           </div>
-          <div className="text-center mt-12">
-            <Button asChild size="lg">
-              <Link to="/wycena">Uzyskaj Błyskawiczną Wycenę</Link>
-            </Button>
+          
+          <div 
+            className="text-center mt-12"
+            style={{
+              opacity: 1,
+              transform: 'translateY(0)',
+              transition: 'all 0.8s ease-out',
+              transitionDelay: '1.8s'
+            }}
+          >
+            <div className="relative inline-block group">
+              <Button asChild size="lg" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105 relative overflow-hidden">
+                <Link to="/wycena">
+                  <span className="relative z-10">Uzyskaj Błyskawiczną Wycenę</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </Link>
+              </Button>
+              
+              {/* Animated background glow */}
+              <div className="absolute inset-0 bg-orange-400 rounded-lg opacity-30 blur-lg scale-110 group-hover:scale-125 transition-transform duration-500" />
+            </div>
           </div>
         </div>
       </section>
