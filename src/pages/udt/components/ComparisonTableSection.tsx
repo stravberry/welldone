@@ -41,22 +41,12 @@ const ComparisonTableSection: React.FC<ComparisonTableSectionProps> = ({ trackCT
                 <td className="p-4 border text-center">75-80%</td>
               </tr>
               <tr>
-                <td className="p-4 border font-medium">Wielkość grup szkoleniowych</td>
-                <td className="p-4 border text-center">Max. 6 osób</td>
-                <td className="p-4 border text-center">10-15 osób</td>
-              </tr>
-              <tr>
                 <td className="p-4 border font-medium">Czas praktyki na urządzeniach</td>
                 <td className="p-4 border text-center">Min. 6h na osobę</td>
                 <td className="p-4 border text-center">2-3h na osobę</td>
               </tr>
               <tr>
                 <td className="p-4 border font-medium">Wsparcie po szkoleniu</td>
-                <td className="p-4 border text-center"><Check className="inline h-5 w-5 text-green-500" /></td>
-                <td className="p-4 border text-center"><X className="inline h-5 w-5 text-red-500" /></td>
-              </tr>
-              <tr>
-                <td className="p-4 border font-medium">Gwarancja zdawalności</td>
                 <td className="p-4 border text-center"><Check className="inline h-5 w-5 text-green-500" /></td>
                 <td className="p-4 border text-center"><X className="inline h-5 w-5 text-red-500" /></td>
               </tr>
