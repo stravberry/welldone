@@ -8,11 +8,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { Switch } from '@/components/ui/switch';
-import { Save, Eye, Globe, Settings, Image, Plus } from 'lucide-react';
+import { Save, Eye, Globe, Settings, Image, Plus, Paintbrush } from 'lucide-react';
 import { useUpdatePage, useCreatePageSection } from '@/hooks/usePages';
 import { useToast } from '@/hooks/use-toast';
 import PageSectionEditor from './PageSectionEditor';
+import PageBuilder from './PageBuilder';
 import type { Tables } from '@/integrations/supabase/types';
+import type { PageBlock } from './PageBuilder/types';
 
 type Page = Tables<'pages'> & {
   page_sections: Tables<'page_sections'>[];
@@ -36,6 +38,7 @@ const PageEditor: React.FC<PageEditorProps> = ({ page }) => {
   });
 
   const [newSectionType, setNewSectionType] = useState('');
+  const [activeEditor, setActiveEditor] = useState<'sections' | 'builder'>('sections');
   const updatePage = useUpdatePage();
   const createSection = useCreatePageSection();
   const { toast } = useToast();
@@ -93,6 +96,23 @@ const PageEditor: React.FC<PageEditorProps> = ({ page }) => {
     }
   };
 
+  const handleSavePageBuilder = async (blocks: PageBlock[]) => {
+    // Convert blocks to page sections format
+    const sectionsData = blocks.map((block, index) => ({
+      page_id: page.id,
+      section_type: 'builder_block',
+      section_key: `builder_${block.type}_${block.id}`,
+      title: `${block.type} block`,
+      content: JSON.stringify(block),
+      order_index: index,
+      is_active: true,
+    }));
+
+    // Here you would save the blocks to the database
+    // For now, we'll just show a success message
+    console.log('Saving page builder blocks:', blocks);
+  };
+
   const sectionTypes = [
     { value: 'hero', label: 'Hero/Nagłówek' },
     { value: 'about', label: 'O nas' },
@@ -103,6 +123,16 @@ const PageEditor: React.FC<PageEditorProps> = ({ page }) => {
     { value: 'faq', label: 'FAQ' },
     { value: 'gallery', label: 'Galeria' },
   ];
+
+  // Show full-screen page builder when active
+  if (activeEditor === 'builder') {
+    return (
+      <PageBuilder
+        pageId={page.id}
+        onSave={handleSavePageBuilder}
+      />
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -175,37 +205,73 @@ const PageEditor: React.FC<PageEditorProps> = ({ page }) => {
             </CardContent>
           </Card>
 
+          {/* Editor Mode Selector */}
           <Card>
-            <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle>Sekcje strony</CardTitle>
-              <div className="flex items-center space-x-2">
-                <select
-                  value={newSectionType}
-                  onChange={(e) => setNewSectionType(e.target.value)}
-                  className="px-3 py-1 border rounded-md text-sm"
-                >
-                  <option value="">Wybierz typ sekcji</option>
-                  {sectionTypes.map(type => (
-                    <option key={type.value} value={type.value}>{type.label}</option>
-                  ))}
-                </select>
-                <Button onClick={handleAddSection} size="sm" disabled={!newSectionType}>
-                  <Plus className="h-4 w-4 mr-1" />
-                  Dodaj
-                </Button>
-              </div>
+            <CardHeader>
+              <CardTitle>Tryb edycji</CardTitle>
             </CardHeader>
             <CardContent>
-              {page.page_sections
-                ?.sort((a, b) => a.order_index - b.order_index)
-                .map(section => (
-                  <PageSectionEditor
-                    key={section.id}
-                    section={section}
-                  />
-                ))}
+              <div className="flex space-x-4">
+                <Button
+                  variant={activeEditor === 'sections' ? 'default' : 'outline'}
+                  onClick={() => setActiveEditor('sections')}
+                  className="flex items-center"
+                >
+                  <Settings className="h-4 w-4 mr-2" />
+                  Sekcje (klasyczny)
+                </Button>
+                <Button
+                  variant={activeEditor === 'builder' ? 'default' : 'outline'}
+                  onClick={() => setActiveEditor('builder')}
+                  className="flex items-center"
+                >
+                  <Paintbrush className="h-4 w-4 mr-2" />
+                  Page Builder (wizualny)
+                </Button>
+              </div>
+              <p className="text-sm text-gray-500 mt-2">
+                {activeEditor === 'sections' 
+                  ? 'Edytuj sekcje strony za pomocą formularzy'
+                  : 'Zbuduj stronę wizualnie przeciągając bloki'
+                }
+              </p>
             </CardContent>
           </Card>
+
+          {/* Classic Sections Editor */}
+          {activeEditor === 'sections' && (
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between">
+                <CardTitle>Sekcje strony</CardTitle>
+                <div className="flex items-center space-x-2">
+                  <select
+                    value={newSectionType}
+                    onChange={(e) => setNewSectionType(e.target.value)}
+                    className="px-3 py-1 border rounded-md text-sm"
+                  >
+                    <option value="">Wybierz typ sekcji</option>
+                    {sectionTypes.map(type => (
+                      <option key={type.value} value={type.value}>{type.label}</option>
+                    ))}
+                  </select>
+                  <Button onClick={handleAddSection} size="sm" disabled={!newSectionType}>
+                    <Plus className="h-4 w-4 mr-1" />
+                    Dodaj
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent>
+                {page.page_sections
+                  ?.sort((a, b) => a.order_index - b.order_index)
+                  .map(section => (
+                    <PageSectionEditor
+                      key={section.id}
+                      section={section}
+                    />
+                  ))}
+              </CardContent>
+            </Card>
+          )}
         </TabsContent>
 
         <TabsContent value="seo" className="space-y-6">

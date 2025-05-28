@@ -145,3 +145,63 @@ export const useCreatePageSection = () => {
     },
   });
 };
+
+export const useDeletePageSection = () => {
+  const queryClient = useQueryClient();
+  
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase
+        .from('page_sections')
+        .delete()
+        .eq('id', id);
+      
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['pages'] });
+    },
+  });
+};
+
+// New hook for handling page builder blocks
+export const useSavePageBlocks = () => {
+  const queryClient = useQueryClient();
+  
+  return useMutation({
+    mutationFn: async ({ pageId, blocks }: { pageId: string; blocks: any[] }) => {
+      // First, delete existing page builder sections
+      await supabase
+        .from('page_sections')
+        .delete()
+        .eq('page_id', pageId)
+        .eq('section_type', 'builder_block');
+
+      // Then create new sections for each block
+      const sectionsData = blocks.map((block, index) => ({
+        page_id: pageId,
+        section_type: 'builder_block',
+        section_key: `builder_${block.type}_${block.id}`,
+        title: `${block.type} block`,
+        content: JSON.stringify(block),
+        order_index: index,
+        is_active: true,
+      }));
+
+      if (sectionsData.length > 0) {
+        const { data, error } = await supabase
+          .from('page_sections')
+          .insert(sectionsData)
+          .select();
+        
+        if (error) throw error;
+        return data;
+      }
+      
+      return [];
+    },
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({ queryKey: ['page', variables.pageId] });
+    },
+  });
+};
