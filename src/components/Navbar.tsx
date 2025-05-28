@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
@@ -120,57 +121,115 @@ const Navbar = () => {
           <div className="-mr-2 flex items-center lg:hidden">
             <button
               onClick={toggleMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-orange-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-500"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-orange-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-500 transition-colors duration-200"
             >
               <span className="sr-only">Otwórz menu</span>
-              {isOpen ? <X className="block h-6 w-6" /> : <Menu className="block h-6 w-6" />}
+              <div className="relative w-6 h-6">
+                <Menu 
+                  className={`absolute inset-0 h-6 w-6 transition-all duration-300 ${
+                    isOpen ? 'opacity-0 rotate-90 scale-50' : 'opacity-100 rotate-0 scale-100'
+                  }`} 
+                />
+                <X 
+                  className={`absolute inset-0 h-6 w-6 transition-all duration-300 ${
+                    isOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 rotate-90 scale-50'
+                  }`} 
+                />
+              </div>
             </button>
           </div>
         </div>
       </div>
 
-      {isOpen && (
-        <div className="lg:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link to="/" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100" onClick={closeMenu}>
-              Home
+      {/* Mobile Menu with Slide Down Animation */}
+      <div className={`lg:hidden transition-all duration-300 ease-out overflow-hidden ${
+        isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+      }`}>
+        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
+          {/* Main Menu Items with Staggered Animation */}
+          {[
+            { to: '/', label: 'Home', delay: 0 },
+            { to: '/o-nas', label: 'O Nas', delay: 50 },
+            { to: '/uslugi', label: 'Usługi', delay: 100 },
+            { to: '/bezplatny-audyt', label: 'Bezpłatny Audyt', delay: 150 },
+            { to: '/realizacje', label: 'Realizacje', delay: 200 },
+            { to: '/wiedza', label: 'Wiedza', delay: 250 }
+          ].map((item, index) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              className={`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100 transition-all duration-200 ${
+                isOpen 
+                  ? 'animate-fade-in opacity-100 translate-y-0' 
+                  : 'opacity-0 translate-y-2'
+              }`}
+              style={{
+                animationDelay: isOpen ? `${item.delay}ms` : '0ms',
+                animationFillMode: 'both'
+              }}
+              onClick={closeMenu}
+            >
+              {item.label}
             </Link>
-            <Link to="/o-nas" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100" onClick={closeMenu}>
-              O Nas
-            </Link>
-            <Link to="/uslugi" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100" onClick={closeMenu}>
-              Usługi
-            </Link>
-            {services.map((service) => (
+          ))}
+          
+          {/* Services Submenu with Animation */}
+          <div className="border-l-2 border-orange-200 ml-3">
+            {services.map((service, index) => (
               <Link
                 key={service.href}
                 to={service.href}
-                className="block px-3 py-2 pl-6 rounded-md text-sm font-medium text-gray-600 hover:text-orange-600 hover:bg-gray-100"
+                className={`block px-3 py-2 pl-6 rounded-md text-sm font-medium text-gray-600 hover:text-orange-600 hover:bg-gray-100 transition-all duration-200 ${
+                  isOpen 
+                    ? 'animate-fade-in opacity-100 translate-y-0' 
+                    : 'opacity-0 translate-y-2'
+                }`}
+                style={{
+                  animationDelay: isOpen ? `${300 + (index * 75)}ms` : '0ms',
+                  animationFillMode: 'both'
+                }}
                 onClick={closeMenu}
               >
                 {service.title}
               </Link>
             ))}
-            <Link to="/bezplatny-audyt" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100" onClick={closeMenu}>
-              Bezpłatny Audyt
-            </Link>
-            <Link to="/realizacje" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100" onClick={closeMenu}>
-              Realizacje
-            </Link>
-            <Link to="/wiedza" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-100" onClick={closeMenu}>
-              Wiedza
-            </Link>
-          </div>
-          <div className="pt-4 pb-3 border-t border-gray-200 flex flex-col space-y-2 px-4">
-            <Button asChild variant="default" className="w-full justify-center bg-orange-500 hover:bg-orange-600 border-orange-500 hover:border-orange-600">
-              <Link to="/kontakt" onClick={closeMenu}>Kontakt</Link>
-            </Button>
-            <Button asChild variant="outline" className="w-full justify-center bg-orange-500 text-white hover:bg-orange-600 border-orange-500 hover:border-orange-600">
-              <Link to="/wycena" onClick={closeMenu}>Błyskawiczna Wycena</Link>
-            </Button>
           </div>
         </div>
-      )}
+        
+        {/* CTA Buttons with Animation */}
+        <div className="pt-4 pb-3 border-t border-gray-200 flex flex-col space-y-2 px-4">
+          <Button 
+            asChild 
+            variant="default" 
+            className={`w-full justify-center bg-orange-500 hover:bg-orange-600 border-orange-500 hover:border-orange-600 transition-all duration-200 ${
+              isOpen 
+                ? 'animate-scale-in opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-4'
+            }`}
+            style={{
+              animationDelay: isOpen ? '600ms' : '0ms',
+              animationFillMode: 'both'
+            }}
+          >
+            <Link to="/kontakt" onClick={closeMenu}>Kontakt</Link>
+          </Button>
+          <Button 
+            asChild 
+            variant="outline" 
+            className={`w-full justify-center bg-orange-500 text-white hover:bg-orange-600 border-orange-500 hover:border-orange-600 transition-all duration-200 ${
+              isOpen 
+                ? 'animate-scale-in opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-4'
+            }`}
+            style={{
+              animationDelay: isOpen ? '700ms' : '0ms',
+              animationFillMode: 'both'
+            }}
+          >
+            <Link to="/wycena" onClick={closeMenu}>Błyskawiczna Wycena</Link>
+          </Button>
+        </div>
+      </div>
     </nav>
   );
 };
