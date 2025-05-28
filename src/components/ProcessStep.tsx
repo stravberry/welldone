@@ -20,33 +20,19 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
       ref={elementRef}
       className="process-step flex md:block relative group"
     >
-      {/* Animated circle with number */}
+      {/* Simple scaling circle with number */}
       <div 
         className="relative z-10"
         style={{
           opacity: isInView ? 1 : 0,
-          transform: isInView ? 'scale(1) rotate(0deg)' : 'scale(0) rotate(-180deg)',
-          transition: 'all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-          transitionDelay: isInView ? `${index * 800}ms` : '0ms'
+          transform: isInView ? 'scale(1)' : 'scale(0)',
+          transition: 'all 0.5s ease-out',
+          transitionDelay: isInView ? `${index * 400}ms` : '0ms'
         }}
       >
-        {/* Sequential growing background circle effect */}
-        <div 
-          className="absolute top-0 left-0 h-12 w-12 rounded-full bg-orange-400"
-          style={{
-            opacity: isInView ? 0.3 : 0,
-            transform: isInView ? 'scale(1)' : 'scale(0)',
-            transition: 'all 1s ease-out',
-            transitionDelay: isInView ? `${index * 800}ms` : '0ms'
-          }}
-        />
-        
         {/* Main circle */}
         <div className="relative flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 text-white font-bold shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110">
           <span className="text-lg">{number}</span>
-          
-          {/* Glowing effect on hover - more subtle */}
-          <div className="absolute inset-0 rounded-full bg-orange-400 opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
         </div>
       </div>
       
@@ -55,9 +41,9 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
         className="ml-4 md:ml-0 md:mt-4"
         style={{
           opacity: isInView ? 1 : 0,
-          transform: isInView ? 'translateY(0) translateX(0)' : 'translateY(20px) translateX(-10px)',
-          transition: 'all 1s ease-out',
-          transitionDelay: isInView ? `${index * 800 + 400}ms` : '0ms'
+          transform: isInView ? 'translateY(0)' : 'translateY(20px)',
+          transition: 'all 0.6s ease-out',
+          transitionDelay: isInView ? `${index * 400 + 200}ms` : '0ms'
         }}
       >
         <h3 className="text-lg font-semibold mb-2 group-hover:text-orange-600 transition-colors duration-300">
@@ -67,8 +53,8 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
           className="text-gray-600 group-hover:text-gray-700 transition-colors duration-300"
           style={{
             opacity: isInView ? 1 : 0,
-            transition: 'opacity 0.8s ease-out',
-            transitionDelay: isInView ? `${index * 800 + 600}ms` : '0ms'
+            transition: 'opacity 0.6s ease-out',
+            transitionDelay: isInView ? `${index * 400 + 400}ms` : '0ms'
           }}
         >
           {description}
