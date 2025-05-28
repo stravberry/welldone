@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -148,69 +147,6 @@ const HomePage = () => {
           {isVisible ? count : 0}{value >= 1000 ? '+' : value === 80 || value === 96 ? '%' : '+'}
         </div>
         <div className="text-gray-600">{label}</div>
-      </div>
-    );
-  };
-
-  // Fixed WhyChooseUsContent component with proper animation handling
-  const WhyChooseUsContent = ({ benefits }: { benefits: any[] }) => {
-    const { elementRef: titleRef, isInView: titleInView } = useScrollAnimation<HTMLDivElement>({ triggerOnce: true });
-    const { elementRef: benefitsRef, isInView: benefitsInView } = useScrollAnimation<HTMLDivElement>({ triggerOnce: true });
-    const { elementRef: buttonRef, isInView: buttonInView } = useScrollAnimation<HTMLDivElement>({ triggerOnce: true });
-
-    return (
-      <div>
-        <div 
-          ref={titleRef}
-          className="transition-all duration-800"
-          style={{
-            opacity: titleInView ? 1 : 0,
-            transform: titleInView ? 'translateY(0)' : 'translateY(30px)'
-          }}
-        >
-          <h2 className="text-3xl font-bold mb-6">Dlaczego warto z nami współpracować?</h2>
-          <p className="text-gray-600 mb-8">
-            Wyróżniamy się elastycznością i zdolnością adaptacji do potrzeb klienta. Oferujemy szkolenia dostosowane do harmonogramu firm, możliwość szkoleń stacjonarnych, online oraz hybrydowych.
-          </p>
-        </div>
-        
-        <div ref={benefitsRef} className="space-y-6">
-          {benefits.map((benefit, index) => (
-            <div 
-              key={index} 
-              className="flex transition-all duration-700"
-              style={{
-                opacity: benefitsInView ? 1 : 0,
-                transform: benefitsInView ? 'translateX(0)' : 'translateX(-30px)',
-                transitionDelay: benefitsInView ? `${index * 200}ms` : '0ms'
-              }}
-            >
-              <div className="flex-shrink-0 mr-4 transition-transform duration-300 hover:scale-110">
-                {benefit.icon}
-              </div>
-              <div>
-                <h3 className="font-semibold mb-1">{benefit.title}</h3>
-                <p className="text-gray-600">{benefit.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-        
-        <div 
-          ref={buttonRef}
-          className="mt-8 transition-all duration-800"
-          style={{
-            opacity: buttonInView ? 1 : 0,
-            transform: buttonInView ? 'translateY(0)' : 'translateY(20px)',
-            transitionDelay: buttonInView ? '800ms' : '0ms'
-          }}
-        >
-          <Button asChild className="hover:scale-105 transition-transform duration-300">
-            <Link to="/o-nas">
-              Poznaj nas lepiej <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
-        </div>
       </div>
     );
   };
@@ -390,5 +326,79 @@ const HomePage = () => {
     </div>
   );
 };
+
+// Extracted WhyChooseUsContent as a separate component to prevent re-renders
+const WhyChooseUsContent = React.memo(({ benefits }: { benefits: any[] }) => {
+  const { elementRef: titleRef, isInView: titleInView } = useScrollAnimation<HTMLDivElement>({ 
+    triggerOnce: true,
+    threshold: 0.3
+  });
+  const { elementRef: benefitsRef, isInView: benefitsInView } = useScrollAnimation<HTMLDivElement>({ 
+    triggerOnce: true,
+    threshold: 0.2
+  });
+  const { elementRef: buttonRef, isInView: buttonInView } = useScrollAnimation<HTMLDivElement>({ 
+    triggerOnce: true,
+    threshold: 0.5
+  });
+
+  return (
+    <div>
+      <div 
+        ref={titleRef}
+        className="transition-all duration-800"
+        style={{
+          opacity: titleInView ? 1 : 0,
+          transform: titleInView ? 'translateY(0)' : 'translateY(30px)'
+        }}
+      >
+        <h2 className="text-3xl font-bold mb-6">Dlaczego warto z nami współpracować?</h2>
+        <p className="text-gray-600 mb-8">
+          Wyróżniamy się elastycznością i zdolnością adaptacji do potrzeb klienta. Oferujemy szkolenia dostosowane do harmonogramu firm, możliwość szkoleń stacjonarnych, online oraz hybrydowych.
+        </p>
+      </div>
+      
+      <div ref={benefitsRef} className="space-y-6">
+        {benefits.map((benefit, index) => (
+          <div 
+            key={index} 
+            className="flex transition-all duration-700"
+            style={{
+              opacity: benefitsInView ? 1 : 0,
+              transform: benefitsInView ? 'translateX(0)' : 'translateX(-30px)',
+              transitionDelay: benefitsInView ? `${index * 200}ms` : '0ms'
+            }}
+          >
+            <div className="flex-shrink-0 mr-4 transition-transform duration-300 hover:scale-110">
+              {benefit.icon}
+            </div>
+            <div>
+              <h3 className="font-semibold mb-1">{benefit.title}</h3>
+              <p className="text-gray-600">{benefit.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <div 
+        ref={buttonRef}
+        className="mt-8 transition-all duration-800"
+        style={{
+          opacity: buttonInView ? 1 : 0,
+          transform: buttonInView ? 'translateY(0)' : 'translateY(20px)',
+          transitionDelay: buttonInView ? '800ms' : '0ms'
+        }}
+      >
+        <Button asChild className="hover:scale-105 transition-transform duration-300">
+          <Link to="/o-nas">
+            Poznaj nas lepiej <ArrowRight className="ml-2 h-4 w-4" />
+          </Link>
+        </Button>
+      </div>
+    </div>
+  );
+});
+
+WhyChooseUsContent.displayName = 'WhyChooseUsContent';
 
 export default HomePage;
