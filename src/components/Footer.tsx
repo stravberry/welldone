@@ -13,7 +13,7 @@ const Footer = () => {
                 <img 
                   src="/lovable-uploads/a2c8c546-13e6-445b-9832-abf375420d6c.png" 
                   alt="Well-done.pl Logo" 
-                  className="h-8 sm:h-10 mr-2" 
+                  className="h-12 sm:h-14 md:h-16 mr-2 object-contain" 
                 />
               </div>
               <p className="text-gray-400 mb-4 text-sm sm:text-base">
