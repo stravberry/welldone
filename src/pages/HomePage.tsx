@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -151,11 +152,11 @@ const HomePage = () => {
     );
   };
 
-  // Nowy komponent dla animowanej treści "Why Choose Us"
+  // Fixed WhyChooseUsContent component with proper animation handling
   const WhyChooseUsContent = ({ benefits }: { benefits: any[] }) => {
-    const { elementRef: titleRef, isInView: titleInView } = useScrollAnimation<HTMLDivElement>();
-    const { elementRef: benefitsRef, visibleItems } = useStaggeredAnimation<HTMLDivElement>(4, 200);
-    const { elementRef: buttonRef, isInView: buttonInView } = useScrollAnimation<HTMLDivElement>();
+    const { elementRef: titleRef, isInView: titleInView } = useScrollAnimation<HTMLDivElement>({ triggerOnce: true });
+    const { elementRef: benefitsRef, isInView: benefitsInView } = useScrollAnimation<HTMLDivElement>({ triggerOnce: true });
+    const { elementRef: buttonRef, isInView: buttonInView } = useScrollAnimation<HTMLDivElement>({ triggerOnce: true });
 
     return (
       <div>
@@ -179,9 +180,9 @@ const HomePage = () => {
               key={index} 
               className="flex transition-all duration-700"
               style={{
-                opacity: visibleItems.includes(index) ? 1 : 0,
-                transform: visibleItems.includes(index) ? 'translateX(0)' : 'translateX(-30px)',
-                transitionDelay: `${index * 200}ms`
+                opacity: benefitsInView ? 1 : 0,
+                transform: benefitsInView ? 'translateX(0)' : 'translateX(-30px)',
+                transitionDelay: benefitsInView ? `${index * 200}ms` : '0ms'
               }}
             >
               <div className="flex-shrink-0 mr-4 transition-transform duration-300 hover:scale-110">
@@ -201,7 +202,7 @@ const HomePage = () => {
           style={{
             opacity: buttonInView ? 1 : 0,
             transform: buttonInView ? 'translateY(0)' : 'translateY(20px)',
-            transitionDelay: '600ms'
+            transitionDelay: buttonInView ? '800ms' : '0ms'
           }}
         >
           <Button asChild className="hover:scale-105 transition-transform duration-300">
