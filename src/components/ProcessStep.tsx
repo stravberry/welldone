@@ -30,15 +30,14 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
           transitionDelay: isInView ? `${index * 300}ms` : '0ms'
         }}
       >
-        {/* Growing background circle effect */}
+        {/* Sequential growing background circle effect */}
         <div 
           className="absolute inset-0 rounded-full bg-orange-400"
           style={{
             opacity: isInView ? 0.3 : 0,
-            transform: isInView ? 'scale(1.5)' : 'scale(0)',
+            transform: isInView ? 'scale(1)' : 'scale(0)',
             transition: 'all 1s ease-out',
-            animationDelay: isInView ? `${index * 600}ms` : '0ms',
-            transitionDelay: isInView ? `${index * 600}ms` : '0ms'
+            transitionDelay: isInView ? `${index * 400}ms` : '0ms'
           }}
         />
         
