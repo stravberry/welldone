@@ -11,7 +11,15 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { cn } from '@/lib/utils';
-import { Phone } from 'lucide-react';
+import { Phone, Menu } from 'lucide-react';
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 
 interface NavigationMenuProps {
   trackLinkClick: (linkName: string) => void;
@@ -40,7 +48,8 @@ const UDTNavigationMenu: React.FC<NavigationMenuProps> = ({ trackLinkClick, trac
             </span>
           </div>
           
-          <div className="hidden md:flex items-center">
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center">
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
@@ -114,7 +123,8 @@ const UDTNavigationMenu: React.FC<NavigationMenuProps> = ({ trackLinkClick, trac
               </NavigationMenuList>
             </NavigationMenu>
             
-            <div className="ml-4 flex items-center">
+            {/* Phone number - hidden on smaller screens */}
+            <div className="ml-4 hidden xl:flex items-center">
               <Phone className="h-5 w-5 mr-2 text-orange-600" />
               <a href="tel:+48123456789" className="text-gray-700 font-medium hover:text-orange-600 transition-colors">
                 +48 123 456 789
@@ -129,13 +139,89 @@ const UDTNavigationMenu: React.FC<NavigationMenuProps> = ({ trackLinkClick, trac
             </Button>
           </div>
           
-          <Button 
-            size="sm"
-            className="md:hidden bg-orange-600 hover:bg-orange-700"
-            onClick={() => trackCTAClick('mobile-nav-contact', 'contact-form')}
-          >
-            Kontakt
-          </Button>
+          {/* Mobile Hamburger Menu */}
+          <div className="lg:hidden">
+            <Drawer>
+              <DrawerTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-6 w-6" />
+                </Button>
+              </DrawerTrigger>
+              <DrawerContent>
+                <DrawerHeader>
+                  <DrawerTitle>Menu</DrawerTitle>
+                </DrawerHeader>
+                <div className="p-4 space-y-4">
+                  <a 
+                    href="#" 
+                    className="block py-2 text-lg font-medium"
+                    onClick={() => trackLinkClick('home')}
+                  >
+                    Strona główna
+                  </a>
+                  <div className="space-y-2">
+                    <div className="text-lg font-medium">Szkolenia</div>
+                    <a 
+                      href="#offerings" 
+                      className="block py-1 pl-4 text-gray-600"
+                      onClick={() => trackLinkClick('forklift')}
+                    >
+                      Wózki widłowe
+                    </a>
+                    <a 
+                      href="#offerings" 
+                      className="block py-1 pl-4 text-gray-600"
+                      onClick={() => trackLinkClick('platforms')}
+                    >
+                      Podesty ruchome
+                    </a>
+                    <a 
+                      href="#offerings" 
+                      className="block py-1 pl-4 text-gray-600"
+                      onClick={() => trackLinkClick('cranes')}
+                    >
+                      Suwnice
+                    </a>
+                  </div>
+                  <a 
+                    href="#process" 
+                    className="block py-2 text-lg font-medium"
+                    onClick={() => trackCTAClick('nav-process', 'process')}
+                  >
+                    Proces
+                  </a>
+                  <a 
+                    href="#faq" 
+                    className="block py-2 text-lg font-medium"
+                    onClick={() => trackCTAClick('nav-faq', 'faq')}
+                  >
+                    FAQ
+                  </a>
+                  <a 
+                    href="#contact-form" 
+                    className="block py-2 text-lg font-medium"
+                    onClick={() => trackCTAClick('nav-contact', 'contact-form')}
+                  >
+                    Kontakt
+                  </a>
+                  <div className="flex items-center py-2">
+                    <Phone className="h-5 w-5 mr-2 text-orange-600" />
+                    <a href="tel:+48123456789" className="text-gray-700 font-medium">
+                      +48 123 456 789
+                    </a>
+                  </div>
+                  <DrawerClose asChild>
+                    <Button 
+                      className="w-full bg-orange-600 hover:bg-orange-700"
+                      onClick={() => trackCTAClick('mobile-nav-contact', 'contact-form')}
+                    >
+                      Zapisz się na szkolenie
+                    </Button>
+                  </DrawerClose>
+                </div>
+              </DrawerContent>
+            </Drawer>
+          </div>
         </div>
       </div>
     </div>
