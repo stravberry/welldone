@@ -32,7 +32,7 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
       >
         {/* Sequential growing background circle effect */}
         <div 
-          className="absolute inset-0 rounded-full bg-orange-400"
+          className="absolute top-0 left-0 h-12 w-12 rounded-full bg-orange-400"
           style={{
             opacity: isInView ? 0.3 : 0,
             transform: isInView ? 'scale(1)' : 'scale(0)',
