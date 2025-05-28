@@ -28,26 +28,26 @@ const QuickContactForm: React.FC<QuickContactFormProps> = ({
   };
 
   return (
-    <div className="w-full lg:w-2/5 bg-white p-6 sm:p-8 rounded-lg shadow-lg mx-auto lg:mx-0 max-w-md lg:max-w-none min-h-[320px]">
+    <div className="w-full lg:w-2/5 bg-white p-6 sm:p-8 rounded-lg shadow-lg mx-auto lg:mx-0 max-w-md lg:max-w-none">
       <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-6 text-center lg:text-left">
         Zostaw kontakt, oddzwonimy!
       </h3>
-      <form onSubmit={handleFormSubmit} className="space-y-6">
-        <div className="space-y-3">
+      <form onSubmit={handleFormSubmit} className="space-y-5">
+        <div className="space-y-2">
           <Label htmlFor="quick-name" className="text-gray-700 text-sm font-medium block">
             Imię i nazwisko
           </Label>
           <Input 
             id="quick-name" 
             placeholder="Jan Kowalski" 
-            className="w-full h-12 text-base px-4 py-3 border-gray-300 focus:border-orange-500 focus:ring-orange-500" 
+            className="w-full h-12 text-base px-4 py-3 border-gray-300 focus:border-orange-500 focus:ring-orange-500 rounded-md" 
             name="name"
             value={formData.name}
             onChange={handleInputChange}
             required
           />
         </div>
-        <div className="space-y-3">
+        <div className="space-y-2">
           <Label htmlFor="quick-phone" className="text-gray-700 text-sm font-medium block">
             Telefon
           </Label>
@@ -55,7 +55,7 @@ const QuickContactForm: React.FC<QuickContactFormProps> = ({
             id="quick-phone" 
             type="tel"
             placeholder="123 456 789" 
-            className="w-full h-12 text-base px-4 py-3 border-gray-300 focus:border-orange-500 focus:ring-orange-500" 
+            className="w-full h-12 text-base px-4 py-3 border-gray-300 focus:border-orange-500 focus:ring-orange-500 rounded-md" 
             name="phone"
             value={formData.phone}
             onChange={handleInputChange}
@@ -64,12 +64,12 @@ const QuickContactForm: React.FC<QuickContactFormProps> = ({
         </div>
         <Button 
           type="submit"
-          className="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 text-base h-12 mt-8"
+          className="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 text-base h-12 mt-6"
           onClick={handleButtonClick}
         >
           Zamów bezpłatną konsultację
         </Button>
-        <p className="text-sm text-gray-500 text-center leading-relaxed mt-4">
+        <p className="text-sm text-gray-500 text-center leading-relaxed mt-3">
           Skontaktujemy się w ciągu 24 godzin
         </p>
       </form>
