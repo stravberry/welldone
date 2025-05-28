@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -125,24 +124,23 @@ const HomePage = () => {
     }
   ];
 
-  // Simplified StatCard with proper animation handling
+  // Fixed StatCard with simplified animation logic
   const StatCard = ({ value, label, delay }: { value: number; label: string; delay: number }) => {
     const { elementRef, count } = useCounterAnimation<HTMLDivElement>(value, 2000);
-    const index = delay / 150; // Calculate index from delay
+    const index = Math.floor(delay / 150);
     const isVisible = visibleItems.includes(index);
+    
+    console.log(`StatCard ${label}: index=${index}, isVisible=${isVisible}, visibleItems=`, visibleItems);
     
     return (
       <div 
         ref={elementRef}
-        className={`bg-orange-50 rounded-lg p-6 text-center transition-all duration-700 ${
-          isVisible 
-            ? 'opacity-100 translate-y-0 animate-fade-in-up' 
-            : 'opacity-0 translate-y-5'
-        }`}
+        className="bg-orange-50 rounded-lg p-6 text-center"
         style={{ 
-          animationDelay: `${delay}ms`,
-          // Ensure element is always visible as fallback
-          opacity: isVisible ? undefined : 0
+          opacity: isVisible ? 1 : 0,
+          transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+          transition: 'all 0.6s ease-out',
+          transitionDelay: `${delay}ms`
         }}
       >
         <div className="text-3xl font-bold text-orange-600 mb-2">
@@ -246,10 +244,10 @@ const HomePage = () => {
             </div>
             <div className="relative" ref={statsRef}>
               <div className="grid grid-cols-2 gap-4">
-                <StatCard value={10} label="lat doświadczenia" delay={100} />
-                <StatCard value={500} label="zadowolonych firm" delay={250} />
-                <StatCard value={1000} label="zrealizowanych szkoleń" delay={400} />
-                <StatCard value={80} label="zleceń dla produkcji" delay={550} />
+                <StatCard value={10} label="lat doświadczenia" delay={0} />
+                <StatCard value={500} label="zadowolonych firm" delay={150} />
+                <StatCard value={1000} label="zrealizowanych szkoleń" delay={300} />
+                <StatCard value={80} label="zleceń dla produkcji" delay={450} />
               </div>
             </div>
           </div>
