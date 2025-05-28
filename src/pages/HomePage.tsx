@@ -8,6 +8,8 @@ import Testimonial from '@/components/Testimonial';
 import FAQ from '@/components/FAQ';
 import ProcessStep from '@/components/ProcessStep';
 import { useScrollAnimation, useStaggeredAnimation, useCounterAnimation } from '@/hooks/useScrollAnimation';
+import AuditCard from '@/components/AuditCard';
+import AuditStatsCounter from '@/components/AuditStatsCounter';
 
 const HomePage = () => {
   const { elementRef: statsRef, visibleItems } = useStaggeredAnimation<HTMLDivElement>(4, 150);
@@ -319,31 +321,118 @@ const HomePage = () => {
       </section>
 
       {/* Free Audit CTA */}
-      <section className="py-16 bg-orange-600 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl font-bold mb-4">Skorzystaj z bezpłatnego audytu</h2>
-              <p className="text-lg mb-6">
-                Zastanawiasz się, czy Twoje szkolenia są odpowiednio dobrane i czy nie przepłacasz za uzyskiwanie uprawnień pracowników? Skorzystaj z bezpłatnego audytu i dowiedz się, jak możemy pomóc.
-              </p>
-              <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-gray-100">
-                <Link to="/bezplatny-audyt">Zamów bezpłatny audyt</Link>
-              </Button>
+      <section className="py-16 lg:py-24 relative overflow-hidden">
+        {/* Background with gradient and geometric shapes */}
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-600 via-orange-500 to-orange-700" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-white/10 rounded-full blur-2xl animate-float" style={{ animationDelay: '2s' }} />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Header with animation */}
+          <div className="text-center mb-12 lg:mb-16">
+            <div 
+              className="inline-block mb-4"
+              style={{
+                opacity: 1,
+                transform: 'translateY(0)',
+                transition: 'all 0.8s ease-out'
+              }}
+            >
+              <span className="bg-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide">
+                Bezpłatna analiza
+              </span>
             </div>
-            <div className="space-y-4">
-              <div className="bg-orange-500 rounded-lg p-4">
-                <h3 className="font-semibold mb-2">Ocena aktualnych szkoleń</h3>
-                <p>Przeanalizujemy, czy obecne szkolenia spełniają wszystkie wymagania prawne oraz czy odpowiadają na realne potrzeby Twojej firmy.</p>
+            <h2 
+              className="text-4xl lg:text-5xl font-bold text-white mb-6"
+              style={{
+                opacity: 1,
+                transform: 'translateY(0)',
+                transition: 'all 0.8s ease-out',
+                transitionDelay: '200ms'
+              }}
+            >
+              Skorzystaj z bezpłatnego audytu
+            </h2>
+            <p 
+              className="text-xl text-orange-50 max-w-3xl mx-auto leading-relaxed"
+              style={{
+                opacity: 1,
+                transform: 'translateY(0)',
+                transition: 'all 0.8s ease-out',
+                transitionDelay: '400ms'
+              }}
+            >
+              Zastanawiasz się, czy Twoje szkolenia są odpowiednio dobrane i czy nie przepłacasz za uzyskiwanie uprawnień pracowników? Skorzystaj z bezpłatnego audytu i dowiedz się, jak możemy pomóc.
+            </p>
+          </div>
+
+          {/* Stats Section */}
+          <div 
+            className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-16"
+            style={{
+              opacity: 1,
+              transform: 'translateY(0)',
+              transition: 'all 0.8s ease-out',
+              transitionDelay: '600ms'
+            }}
+          >
+            <AuditStatsCounter value={150} label="Przeprowadzonych audytów" suffix="+" index={0} />
+            <AuditStatsCounter value={95} label="Zadowolonych klientów" suffix="%" index={1} />
+            <AuditStatsCounter value={30} label="Średnia oszczędność" suffix="%" index={2} />
+            <AuditStatsCounter value={48} label="Godzin na audyt" suffix="h" index={3} />
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            {/* Left side - CTA */}
+            <div 
+              className="order-2 lg:order-1"
+              style={{
+                opacity: 1,
+                transform: 'translateX(0)',
+                transition: 'all 1s ease-out',
+                transitionDelay: '800ms'
+              }}
+            >
+              <div className="space-y-6">
+                <h3 className="text-2xl font-bold text-white mb-4">
+                  Odkryj potencjał oszczędności w swojej firmie
+                </h3>
+                <p className="text-orange-50 text-lg leading-relaxed">
+                  Nasz bezpłatny audyt pomoże Ci zidentyfikować obszary, w których możesz zoptymalizować koszty szkoleń i poprawić efektywność procesu certyfikacji pracowników.
+                </p>
+                <div className="relative inline-block group">
+                  <div className="absolute inset-0 bg-white rounded-lg blur opacity-25 group-hover:opacity-50 transition-opacity duration-300" />
+                  <Button asChild size="lg" className="relative bg-white text-orange-600 hover:bg-orange-50 font-bold text-lg px-8 py-4 shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 hover:-translate-y-1">
+                    <Link to="/bezplatny-audyt">
+                      Zamów bezpłatny audyt
+                      <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                    </Link>
+                  </Button>
+                </div>
               </div>
-              <div className="bg-orange-500 rounded-lg p-4">
-                <h3 className="font-semibold mb-2">Weryfikacja uprawnień pracowników</h3>
-                <p>Sprawdzimy, czy wszyscy pracownicy posiadają wymagane uprawnienia do obsługi sprzętu i urządzeń.</p>
-              </div>
-              <div className="bg-orange-500 rounded-lg p-4">
-                <h3 className="font-semibold mb-2">Optymalizacja kosztów</h3>
-                <p>Pomożemy zidentyfikować, czy nie przepłacasz za szkolenia i certyfikacje, oraz wskażemy obszary, w których możesz zredukować koszty.</p>
-              </div>
+            </div>
+
+            {/* Right side - Cards */}
+            <div className="order-1 lg:order-2 space-y-6">
+              <AuditCard
+                title="Ocena aktualnych szkoleń"
+                description="Przeanalizujemy, czy obecne szkolenia spełniają wszystkie wymagania prawne oraz czy odpowiadają na realne potrzeby Twojej firmy."
+                icon="check"
+                index={0}
+              />
+              <AuditCard
+                title="Weryfikacja uprawnień pracowników"
+                description="Sprawdzimy, czy wszyscy pracownicy posiadają wymagane uprawnienia do obsługi sprzętu i urządzeń."
+                icon="users"
+                index={1}
+              />
+              <AuditCard
+                title="Optymalizacja kosztów"
+                description="Pomożemy zidentyfikować, czy nie przepłacasz za szkolenia i certyfikacje, oraz wskażemy obszary, w których możesz zredukować koszty."
+                icon="dollar-sign"
+                index={2}
+              />
             </div>
           </div>
         </div>
