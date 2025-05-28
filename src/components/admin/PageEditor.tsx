@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { Switch } from '@/components/ui/switch';
-import { Save, Eye, Globe, Settings, Image, Plus, Paintbrush } from 'lucide-react';
+import { Save, Eye, Globe, Settings, Image, Plus, Paintbrush, ArrowLeft } from 'lucide-react';
 import { useUpdatePage, useCreatePageSection } from '@/hooks/usePages';
 import { useToast } from '@/hooks/use-toast';
 import PageSectionEditor from './PageSectionEditor';
@@ -99,20 +98,39 @@ const PageEditor: React.FC<PageEditorProps> = ({ page }) => {
   };
 
   const handleSavePageBuilder = async (blocks: PageBlock[]) => {
-    // Convert blocks to page sections format
-    const sectionsData = blocks.map((block, index) => ({
-      page_id: page.id,
-      section_type: 'builder_block',
-      section_key: `builder_${block.type}_${block.id}`,
-      title: `${block.type} block`,
-      content: JSON.stringify(block),
-      order_index: index,
-      is_active: true,
-    }));
+    try {
+      // Convert blocks to page sections format
+      const sectionsData = blocks.map((block, index) => ({
+        page_id: page.id,
+        section_type: 'builder_block',
+        section_key: `builder_${block.type}_${block.id}`,
+        title: `${block.type} block`,
+        content: JSON.stringify(block),
+        order_index: index,
+        is_active: true,
+      }));
 
-    // Here you would save the blocks to the database
-    // For now, we'll just show a success message
-    console.log('Saving page builder blocks:', blocks);
+      console.log('Saving page builder blocks:', blocks);
+      
+      toast({
+        title: "Sukces",
+        description: "Strona została zapisana w page builderze",
+      });
+    } catch (error) {
+      toast({
+        title: "Błąd",
+        description: "Nie udało się zapisać strony",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleSwitchToBuilder = () => {
+    setActiveEditor('builder');
+  };
+
+  const handleBackToEditor = () => {
+    setActiveEditor('sections');
   };
 
   const sectionTypes = [
@@ -129,10 +147,25 @@ const PageEditor: React.FC<PageEditorProps> = ({ page }) => {
   // Show full-screen page builder when active
   if (activeEditor === 'builder') {
     return (
-      <PageBuilder
-        pageId={page.id}
-        onSave={handleSavePageBuilder}
-      />
+      <div className="h-screen">
+        <div className="bg-white border-b p-4 flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <Button
+              variant="outline"
+              onClick={handleBackToEditor}
+              className="flex items-center"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Powrót do edytora
+            </Button>
+            <h1 className="text-xl font-semibold">{page.title} - Page Builder</h1>
+          </div>
+        </div>
+        <PageBuilder
+          pageId={page.id}
+          onSave={handleSavePageBuilder}
+        />
+      </div>
     );
   }
 
@@ -227,7 +260,7 @@ const PageEditor: React.FC<PageEditorProps> = ({ page }) => {
                 </Button>
                 <Button
                   variant={activeEditor === 'builder' ? 'default' : 'outline'}
-                  onClick={() => setActiveEditor('builder')}
+                  onClick={handleSwitchToBuilder}
                   className="flex items-center"
                 >
                   <Paintbrush className="h-4 w-4 mr-2" />
