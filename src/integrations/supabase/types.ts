@@ -9,6 +9,204 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      page_media: {
+        Row: {
+          alt_text: string | null
+          created_at: string
+          file_path: string
+          file_size: number | null
+          filename: string
+          id: string
+          mime_type: string | null
+          original_name: string
+          page_id: string | null
+          uploaded_by: string | null
+        }
+        Insert: {
+          alt_text?: string | null
+          created_at?: string
+          file_path: string
+          file_size?: number | null
+          filename: string
+          id?: string
+          mime_type?: string | null
+          original_name: string
+          page_id?: string | null
+          uploaded_by?: string | null
+        }
+        Update: {
+          alt_text?: string | null
+          created_at?: string
+          file_path?: string
+          file_size?: number | null
+          filename?: string
+          id?: string
+          mime_type?: string | null
+          original_name?: string
+          page_id?: string | null
+          uploaded_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "page_media_page_id_fkey"
+            columns: ["page_id"]
+            isOneToOne: false
+            referencedRelation: "pages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      page_sections: {
+        Row: {
+          button_text: string | null
+          button_url: string | null
+          content: string | null
+          created_at: string
+          id: string
+          image_url: string | null
+          is_active: boolean
+          order_index: number
+          page_id: string
+          section_key: string
+          section_type: string
+          settings: Json | null
+          subtitle: string | null
+          title: string | null
+          updated_at: string
+          video_url: string | null
+        }
+        Insert: {
+          button_text?: string | null
+          button_url?: string | null
+          content?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          order_index?: number
+          page_id: string
+          section_key: string
+          section_type: string
+          settings?: Json | null
+          subtitle?: string | null
+          title?: string | null
+          updated_at?: string
+          video_url?: string | null
+        }
+        Update: {
+          button_text?: string | null
+          button_url?: string | null
+          content?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          order_index?: number
+          page_id?: string
+          section_key?: string
+          section_type?: string
+          settings?: Json | null
+          subtitle?: string | null
+          title?: string | null
+          updated_at?: string
+          video_url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "page_sections_page_id_fkey"
+            columns: ["page_id"]
+            isOneToOne: false
+            referencedRelation: "pages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      page_versions: {
+        Row: {
+          content_snapshot: Json
+          created_at: string
+          created_by: string | null
+          id: string
+          page_id: string
+          version_number: number
+        }
+        Insert: {
+          content_snapshot: Json
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          page_id: string
+          version_number: number
+        }
+        Update: {
+          content_snapshot?: Json
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          page_id?: string
+          version_number?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "page_versions_page_id_fkey"
+            columns: ["page_id"]
+            isOneToOne: false
+            referencedRelation: "pages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pages: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          id: string
+          meta_description: string | null
+          meta_keywords: string | null
+          meta_title: string | null
+          og_description: string | null
+          og_image: string | null
+          og_title: string | null
+          slug: string
+          status: string
+          title: string
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          meta_description?: string | null
+          meta_keywords?: string | null
+          meta_title?: string | null
+          og_description?: string | null
+          og_image?: string | null
+          og_title?: string | null
+          slug: string
+          status?: string
+          title: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          meta_description?: string | null
+          meta_keywords?: string | null
+          meta_title?: string | null
+          og_description?: string | null
+          og_image?: string | null
+          og_title?: string | null
+          slug?: string
+          status?: string
+          title?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
