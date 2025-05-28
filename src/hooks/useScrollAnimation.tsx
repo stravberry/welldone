@@ -24,9 +24,9 @@ export const useScrollAnimation = <T extends HTMLElement = HTMLElement>(options:
     const element = elementRef.current;
     if (!element) return;
 
-    // Use lower threshold for mobile devices
+    // Better mobile optimization
     const isMobile = window.innerWidth < 768;
-    const adjustedThreshold = isMobile ? Math.min(threshold, 0.05) : threshold;
+    const adjustedThreshold = isMobile ? Math.min(threshold, 0.02) : threshold;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -41,7 +41,7 @@ export const useScrollAnimation = <T extends HTMLElement = HTMLElement>(options:
       },
       {
         threshold: adjustedThreshold,
-        rootMargin,
+        rootMargin: isMobile ? '50px' : rootMargin,
       }
     );
 
@@ -68,9 +68,9 @@ export const useStaggeredAnimation = <T extends HTMLElement = HTMLElement>(itemC
         return;
       }
 
-      // Increase delay for mobile devices for better performance
+      // Much better mobile optimization
       const isMobile = window.innerWidth < 768;
-      const adjustedDelay = isMobile ? Math.max(delay, 250) : delay;
+      const adjustedDelay = isMobile ? 50 : delay; // Much faster on mobile
 
       for (let i = 0; i < itemCount; i++) {
         setTimeout(() => {
@@ -99,9 +99,9 @@ export const useCounterAnimation = <T extends HTMLElement = HTMLElement>(endValu
       let startTime: number;
       const startValue = 0;
       
-      // Shorter duration for mobile devices
+      // Much shorter duration for mobile
       const isMobile = window.innerWidth < 768;
-      const adjustedDuration = isMobile ? Math.min(duration, 1000) : duration;
+      const adjustedDuration = isMobile ? 800 : duration;
 
       const animate = (currentTime: number) => {
         if (!startTime) startTime = currentTime;
