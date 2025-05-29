@@ -1,5 +1,4 @@
-
-import React, { useEffect, useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import EnhancedQuoteHero from '@/components/QuotePageComponents/EnhancedQuoteHero';
 import EnhancedQuoteForm from '@/components/QuotePageComponents/EnhancedQuoteForm';
 import ProcessVisualization from '@/components/QuotePageComponents/ProcessVisualization';
@@ -7,11 +6,6 @@ import TrustSection from '@/components/QuotePageComponents/TrustSection';
 
 const QuotePage = () => {
   const formRef = useRef<HTMLDivElement>(null);
-
-  // Scroll to top when component mounts
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   const scrollToForm = () => {
     formRef.current?.scrollIntoView({ 

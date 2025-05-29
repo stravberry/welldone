@@ -1,4 +1,3 @@
-
 import { HelmetProvider } from 'react-helmet-async';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { Toaster } from 'sonner';
@@ -8,6 +7,8 @@ import RouteChangeTracker from '@/components/RouteChangeTracker';
 import ScrollTracker from '@/components/ScrollTracker';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import Navbar from '@/components/Navbar';
+import PageTransition from '@/components/PageTransition';
+import useScrollToTop from '@/hooks/useScrollToTop';
 
 // Pages
 import Index from '@/pages/Index';
@@ -42,57 +43,68 @@ import SettingsPage from '@/pages/admin/SettingsPage';
 // Create a query client instance
 const queryClient = new QueryClient();
 
+// Component that handles scroll to top functionality
+const AppContent = () => {
+  useScrollToTop();
+  
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <Navbar />
+      <Toaster />
+      <RouteChangeTracker />
+      <ScrollTracker />
+      <div className="pt-16 sm:pt-16 md:pt-16 lg:pt-16">
+        <PageTransition>
+          <Routes>
+            {/* Existing routes */}
+            <Route path="/" element={<Index />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/o-nas" element={<AboutPage />} />
+            <Route path="/uslugi" element={<ServicesPage />} />
+            <Route path="/uslugi/:serviceId" element={<ServiceDetailPage />} />
+            <Route path="/realizacje" element={<RealizationsPage />} />
+            <Route path="/kontakt" element={<ContactPage />} />
+            <Route path="/wycena" element={<QuotePage />} />
+            <Route path="/sep" element={<SepPage />} />
+            <Route path="/uslugi/sep" element={<SepPage />} />
+            <Route path="/udt-konserwatorze" element={<UdtKonserwatorzePage />} />
+            <Route path="/uslugi/udt-konserwatorzy" element={<UdtKonserwatorzePage />} />
+            <Route path="/udt-szkolenia" element={<UdtLandingPage />} />
+            <Route path="/szkolenie-wozki-unoszace" element={<WozkiUnoszacePage />} />
+            <Route path="/wiedza" element={<KnowledgePage />} />
+            <Route path="/bezplatny-audyt" element={<FreeAuditPage />} />
+            <Route path="/eventy" element={<EventyPage />} />
+            <Route path="/lutowanie" element={<LutowaniePage />} />
+            <Route path="/uslugi/lutowanie" element={<LutowaniePage />} />
+            <Route path="/cms-login" element={<CMSLoginPage />} />
+            
+            {/* Admin routes */}
+            <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
+              <Route index element={<AdminDashboard />} />
+              <Route path="users" element={<UserManagement />} />
+              <Route path="blog" element={<BlogManagement />} />
+              <Route path="blog/new" element={<BlogPostEditor />} />
+              <Route path="blog/edit/:id" element={<BlogPostEditor />} />
+              <Route path="pages" element={<PagesManagement />} />
+              <Route path="media" element={<MediaManagement />} />
+              <Route path="settings" element={<SettingsPage />} />
+            </Route>
+            
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </PageTransition>
+      </div>
+    </div>
+  );
+};
+
 function App() {
   return (
     <HelmetProvider>
       <AuthProvider>
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
-            <div className="min-h-screen bg-gray-50">
-              <Navbar />
-              <Toaster />
-              <RouteChangeTracker />
-              <ScrollTracker />
-              <div className="pt-16 sm:pt-16 md:pt-16 lg:pt-16">
-                <Routes>
-                  {/* Existing routes */}
-                  <Route path="/" element={<Index />} />
-                  <Route path="/home" element={<HomePage />} />
-                  <Route path="/o-nas" element={<AboutPage />} />
-                  <Route path="/uslugi" element={<ServicesPage />} />
-                  <Route path="/uslugi/:serviceId" element={<ServiceDetailPage />} />
-                  <Route path="/realizacje" element={<RealizationsPage />} />
-                  <Route path="/kontakt" element={<ContactPage />} />
-                  <Route path="/wycena" element={<QuotePage />} />
-                  <Route path="/sep" element={<SepPage />} />
-                  <Route path="/uslugi/sep" element={<SepPage />} />
-                  <Route path="/udt-konserwatorze" element={<UdtKonserwatorzePage />} />
-                  <Route path="/uslugi/udt-konserwatorzy" element={<UdtKonserwatorzePage />} />
-                  <Route path="/udt-szkolenia" element={<UdtLandingPage />} />
-                  <Route path="/szkolenie-wozki-unoszace" element={<WozkiUnoszacePage />} />
-                  <Route path="/wiedza" element={<KnowledgePage />} />
-                  <Route path="/bezplatny-audyt" element={<FreeAuditPage />} />
-                  <Route path="/eventy" element={<EventyPage />} />
-                  <Route path="/lutowanie" element={<LutowaniePage />} />
-                  <Route path="/uslugi/lutowanie" element={<LutowaniePage />} />
-                  <Route path="/cms-login" element={<CMSLoginPage />} />
-                  
-                  {/* Admin routes */}
-                  <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
-                    <Route index element={<AdminDashboard />} />
-                    <Route path="users" element={<UserManagement />} />
-                    <Route path="blog" element={<BlogManagement />} />
-                    <Route path="blog/new" element={<BlogPostEditor />} />
-                    <Route path="blog/edit/:id" element={<BlogPostEditor />} />
-                    <Route path="pages" element={<PagesManagement />} />
-                    <Route path="media" element={<MediaManagement />} />
-                    <Route path="settings" element={<SettingsPage />} />
-                  </Route>
-                  
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </div>
-            </div>
+            <AppContent />
           </BrowserRouter>
         </QueryClientProvider>
       </AuthProvider>
