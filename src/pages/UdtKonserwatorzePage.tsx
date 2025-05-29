@@ -5,11 +5,13 @@ import { Button } from '@/components/ui/button';
 import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/useScrollAnimation';
 import useEventTracking from '@/hooks/useEventTracking';
 import useScrollToTop from '@/hooks/useScrollToTop';
+import ContactForm from '@/components/ContactForm';
 
 const UdtKonserwatorzePage = () => {
   const { trackEvent } = useEventTracking();
   const [showContactForm, setShowContactForm] = useState(false);
   const [showAllItems, setShowAllItems] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState<string>('');
   
   useScrollToTop();
 
@@ -106,6 +108,14 @@ const UdtKonserwatorzePage = () => {
 
   const isItemVisible = (index: number, visibleItems: number[]) => {
     return showAllItems || visibleItems.includes(index);
+  };
+
+  const handleCourseRegistration = (courseTitle: string) => {
+    setSelectedCourse(courseTitle);
+    const contactSection = document.getElementById('contact-form');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -226,7 +236,10 @@ const UdtKonserwatorzePage = () => {
                     </div>
                   ))}
                 </div>
-                <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                <Button 
+                  className="w-full bg-blue-600 hover:bg-blue-700"
+                  onClick={() => handleCourseRegistration(course.title)}
+                >
                   Zapisz się na kurs
                 </Button>
               </div>
@@ -254,6 +267,17 @@ const UdtKonserwatorzePage = () => {
               </div>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* Contact Form Section */}
+      <div id="contact-form" className="bg-gray-50 py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <ContactForm 
+            title="Zapisz się na kurs konserwatorski"
+            subtitle="Wypełnij formularz, a nasz konsultant skontaktuje się z Tobą w ciągu 24 godzin"
+            initialMessage={selectedCourse ? `Jestem zainteresowany kursem ${selectedCourse}` : ''}
+          />
         </div>
       </div>
 
