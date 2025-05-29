@@ -14,9 +14,9 @@ interface KnowledgeStatsCounterProps {
 const KnowledgeStatsCounter: React.FC<KnowledgeStatsCounterProps> = ({ stats }) => {
   const parseNumber = (str: string) => parseInt(str.replace(/,/g, ''));
   
-  const { elementRef: subsRef, count: subsCount } = useCounterAnimation(parseNumber(stats.subscriberCount), 2000);
-  const { elementRef: videosRef, count: videosCount } = useCounterAnimation(parseNumber(stats.videoCount), 1500);
-  const { elementRef: viewsRef, count: viewsCount } = useCounterAnimation(parseNumber(stats.viewCount), 2500);
+  const { elementRef: subsRef, count: subsCount } = useCounterAnimation<HTMLDivElement>(parseNumber(stats.subscriberCount), 2000);
+  const { elementRef: videosRef, count: videosCount } = useCounterAnimation<HTMLDivElement>(parseNumber(stats.videoCount), 1500);
+  const { elementRef: viewsRef, count: viewsCount } = useCounterAnimation<HTMLDivElement>(parseNumber(stats.viewCount), 2500);
 
   const formatNumber = (num: number) => {
     if (num >= 1000) {

@@ -21,7 +21,7 @@ interface KnowledgeVideoCardProps {
 }
 
 const KnowledgeVideoCard: React.FC<KnowledgeVideoCardProps> = ({ video, index }) => {
-  const { elementRef, isInView } = useScrollAnimation({
+  const { elementRef, isInView } = useScrollAnimation<HTMLDivElement>({
     threshold: 0.1,
     rootMargin: '50px',
   });

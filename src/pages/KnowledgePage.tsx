@@ -15,9 +15,9 @@ import KnowledgeLoadingSkeleton from '@/components/KnowledgeLoadingSkeleton';
 const KnowledgePage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const { videos, channelStats, loading, error } = useYouTubeVideos();
-  const { elementRef: heroRef, isInView: heroInView } = useScrollAnimation({ threshold: 0.3 });
-  const { elementRef: tabsRef, isInView: tabsInView } = useScrollAnimation({ threshold: 0.1 });
-  const { elementRef: blogRef, visibleItems: visibleBlogItems } = useStaggeredAnimation(6, 150);
+  const { elementRef: heroRef, isInView: heroInView } = useScrollAnimation<HTMLDivElement>({ threshold: 0.3 });
+  const { elementRef: tabsRef, isInView: tabsInView } = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 });
+  const { elementRef: blogRef, visibleItems: visibleBlogItems } = useStaggeredAnimation<HTMLDivElement>(6, 150);
 
   const filteredVideos = videos.filter(video =>
     video.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -389,7 +389,7 @@ const KnowledgePage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-orange-100 rounded-full -translate-y-16 translate-x-16"></div>
-            <div className="absolute bottom-0 left-0 w-24 h-24 bg-orange-100 rounded-full translate-y-12 -translate-x-12"></div>
+            <div className="absolute top-3/4 right-1/4 w-24 h-24 bg-orange-100 rounded-full translate-y-12 -translate-x-12"></div>
             
             <div className="text-center mb-8 relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
