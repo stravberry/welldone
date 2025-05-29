@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Phone, Mail, Wrench, CheckCircle, Award, Users, Shield, Target, Zap } from 'lucide-react';
@@ -164,10 +163,10 @@ const UdtKonserwatorzePage = () => {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="border-2 border-white text-white hover:bg-white hover:text-blue-600 hover:scale-105 transition-all duration-300"
+                  className="border-2 border-white text-blue-600 bg-white hover:bg-blue-50 hover:scale-105 transition-all duration-300"
                 >
                   <Mail className="mr-2 h-5 w-5" />
-                  Pobierz program
+                  Błyskawiczna wycena
                 </Button>
               </div>
             </div>
@@ -278,7 +277,7 @@ const UdtKonserwatorzePage = () => {
             <Button 
               size="lg" 
               variant="outline" 
-              className="border-2 border-white text-white hover:bg-white hover:text-blue-600 hover:scale-105 transition-all duration-300"
+              className="border-2 border-white text-blue-600 bg-white hover:bg-blue-50 hover:scale-105 transition-all duration-300"
             >
               Skontaktuj się z nami
             </Button>

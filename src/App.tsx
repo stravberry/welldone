@@ -1,3 +1,4 @@
+
 import { HelmetProvider } from 'react-helmet-async';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { Toaster } from 'sonner';
@@ -65,6 +66,7 @@ function App() {
                   <Route path="/wycena" element={<QuotePage />} />
                   <Route path="/sep" element={<SepPage />} />
                   <Route path="/udt-konserwatorze" element={<UdtKonserwatorzePage />} />
+                  <Route path="/uslugi/udt-konserwatorzy" element={<UdtKonserwatorzePage />} />
                   <Route path="/udt-szkolenia" element={<UdtLandingPage />} />
                   <Route path="/szkolenie-wozki-unoszace" element={<WozkiUnoszacePage />} />
                   <Route path="/wiedza" element={<KnowledgePage />} />
