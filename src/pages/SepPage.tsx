@@ -129,44 +129,65 @@ const SepPage = () => {
           <div className="absolute bottom-10 right-10 w-24 h-24 bg-white rounded-full animate-pulse delay-1000"></div>
         </div>
 
-        {/* Large Background Electrical Symbol */}
-        <div className={`absolute inset-0 flex justify-center items-center transition-all duration-800 ${
-          heroInView || showAllItems ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        {/* Large Background Electrical Circuit Symbol */}
+        <div className={`absolute right-0 top-0 bottom-0 flex justify-end items-center pr-8 transition-all duration-800 ${
+          heroInView || showAllItems ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
         }`}>
           <svg
             width="1800"
             height="1800"
-            viewBox="0 0 300 300"
+            viewBox="0 0 400 400"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="opacity-10"
+            className="opacity-8"
           >
-            <path
-              d="M120 50L180 150H150L180 250L120 150H150L120 50Z"
-              fill="currentColor"
-              className="text-yellow-200"
-            />
-            <circle
-              cx="150"
-              cy="150"
-              r="140"
-              stroke="currentColor"
-              strokeWidth="2"
-              fill="none"
-              className="text-yellow-200"
-              strokeDasharray="10,5"
-            />
-            <circle
-              cx="150"
-              cy="150"
-              r="100"
-              stroke="currentColor"
-              strokeWidth="1"
-              fill="none"
-              className="text-yellow-200"
-              strokeDasharray="5,3"
-              opacity="0.5"
-            />
+            {/* Circuit Board Pattern */}
+            <g className="text-yellow-200">
+              {/* Main Circuit Lines */}
+              <path d="M50 100 L350 100" stroke="currentColor" strokeWidth="4" opacity="0.6"/>
+              <path d="M50 200 L350 200" stroke="currentColor" strokeWidth="4" opacity="0.6"/>
+              <path d="M50 300 L350 300" stroke="currentColor" strokeWidth="4" opacity="0.6"/>
+              
+              {/* Vertical Connections */}
+              <path d="M100 50 L100 350" stroke="currentColor" strokeWidth="3" opacity="0.5"/>
+              <path d="M200 50 L200 350" stroke="currentColor" strokeWidth="3" opacity="0.5"/>
+              <path d="M300 50 L300 350" stroke="currentColor" strokeWidth="3" opacity="0.5"/>
+              
+              {/* Resistor Symbols */}
+              <rect x="90" y="90" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.7"/>
+              <path d="M85 100 L90 100 M110 100 L115 100" stroke="currentColor" strokeWidth="2" opacity="0.7"/>
+              
+              <rect x="190" y="190" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.7"/>
+              <path d="M185 200 L190 200 M210 200 L215 200" stroke="currentColor" strokeWidth="2" opacity="0.7"/>
+              
+              <rect x="290" y="290" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.7"/>
+              <path d="M285 300 L290 300 M310 300 L315 300" stroke="currentColor" strokeWidth="2" opacity="0.7"/>
+              
+              {/* Capacitor Symbols */}
+              <g opacity="0.6">
+                <path d="M190 95 L190 105" stroke="currentColor" strokeWidth="3"/>
+                <path d="M210 95 L210 105" stroke="currentColor" strokeWidth="3"/>
+                <path d="M185 100 L190 100 M210 100 L215 100" stroke="currentColor" strokeWidth="2"/>
+              </g>
+              
+              {/* Power Symbol */}
+              <circle cx="200" cy="200" r="25" fill="none" stroke="currentColor" strokeWidth="3" opacity="0.5"/>
+              <path d="M200 180 L200 220 M190 200 L210 200" stroke="currentColor" strokeWidth="2" opacity="0.7"/>
+              
+              {/* Lightning Bolt in Center */}
+              <path d="M190 170 L210 190 L195 190 L205 210 L185 190 L200 190 L190 170Z" 
+                    fill="currentColor" opacity="0.4"/>
+              
+              {/* Connection Points */}
+              <circle cx="100" cy="100" r="3" fill="currentColor" opacity="0.8"/>
+              <circle cx="200" cy="100" r="3" fill="currentColor" opacity="0.8"/>
+              <circle cx="300" cy="100" r="3" fill="currentColor" opacity="0.8"/>
+              <circle cx="100" cy="200" r="3" fill="currentColor" opacity="0.8"/>
+              <circle cx="300" cy="200" r="3" fill="currentColor" opacity="0.8"/>
+              <circle cx="100" cy="300" r="3" fill="currentColor" opacity="0.8"/>
+              <circle cx="200" cy="300" r="3" fill="currentColor" opacity="0.8"/>
+              <circle cx="300" cy="300" r="3" fill="currentColor" opacity="0.8"/>
+            </g>
           </svg>
         </div>
 
@@ -224,7 +245,7 @@ const SepPage = () => {
               </div>
             </div>
 
-            {/* Remove the small electrical symbol from the right column since we now have the large background one */}
+            {/* Right column - kept empty since we moved the symbol to background */}
           </div>
         </div>
       </div>
