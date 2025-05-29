@@ -19,7 +19,12 @@ interface FAQProps {
 }
 
 const FAQ: React.FC<FAQProps> = ({ title = "Najczęściej zadawane pytania", items }) => {
-  const { elementRef: titleRef, isInView: titleInView } = useScrollAnimation<HTMLHeadingElement>();
+  const { elementRef: titleRef, isInView: titleInView } = useScrollAnimation<HTMLHeadingElement>({
+    threshold: 0.2,
+    rootMargin: '50px',
+    triggerOnce: true
+  });
+  
   const { elementRef: itemsRef, visibleItems } = useStaggeredAnimation<HTMLDivElement>(items.length, 100);
 
   return (
@@ -45,7 +50,7 @@ const FAQ: React.FC<FAQProps> = ({ title = "Najczęściej zadawane pytania", ite
                     : 'opacity-0 translate-y-5'
                 }`}
                 style={{ 
-                  transitionDelay: visibleItems.includes(index) ? '0ms' : `${index * 100}ms` 
+                  transitionDelay: `${index * 100}ms`
                 }}
               >
                 <AccordionTrigger className="px-4 sm:px-6 py-3 sm:py-4 hover:no-underline text-left text-sm sm:text-base lg:text-lg font-medium transition-colors duration-300 hover:text-orange-600">

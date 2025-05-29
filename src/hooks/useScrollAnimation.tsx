@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react';
 
 interface UseScrollAnimationOptions {
@@ -24,9 +23,10 @@ export const useScrollAnimation = <T extends HTMLElement = HTMLElement>(options:
     const element = elementRef.current;
     if (!element) return;
 
-    // Better mobile optimization
+    // Better mobile optimization - more aggressive thresholds
     const isMobile = window.innerWidth < 768;
-    const adjustedThreshold = isMobile ? Math.min(threshold, 0.02) : threshold;
+    const adjustedThreshold = isMobile ? Math.min(threshold, 0.05) : threshold;
+    const adjustedRootMargin = isMobile ? '100px' : rootMargin;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -41,13 +41,17 @@ export const useScrollAnimation = <T extends HTMLElement = HTMLElement>(options:
       },
       {
         threshold: adjustedThreshold,
-        rootMargin: isMobile ? '50px' : rootMargin,
+        rootMargin: adjustedRootMargin,
       }
     );
 
-    observer.observe(element);
+    // Small delay to ensure element is properly rendered
+    const timeoutId = setTimeout(() => {
+      observer.observe(element);
+    }, 100);
 
     return () => {
+      clearTimeout(timeoutId);
       if (element) {
         observer.unobserve(element);
       }
@@ -60,7 +64,11 @@ export const useScrollAnimation = <T extends HTMLElement = HTMLElement>(options:
 export const useStaggeredAnimation = <T extends HTMLElement = HTMLElement>(itemCount: number, delay: number = 200) => {
   const [visibleItems, setVisibleItems] = useState<number[]>([]);
   const [hasTriggered, setHasTriggered] = useState(false);
-  const { elementRef, isInView } = useScrollAnimation<T>();
+  const { elementRef, isInView } = useScrollAnimation<T>({
+    threshold: 0.1,
+    rootMargin: '100px',
+    triggerOnce: true
+  });
 
   useEffect(() => {
     if (isInView && !hasTriggered) {
@@ -73,9 +81,9 @@ export const useStaggeredAnimation = <T extends HTMLElement = HTMLElement>(itemC
         return;
       }
 
-      // Much better mobile optimization
+      // Better mobile optimization - much faster animations
       const isMobile = window.innerWidth < 768;
-      const adjustedDelay = isMobile ? 50 : delay; // Much faster on mobile
+      const adjustedDelay = isMobile ? 30 : delay;
 
       const timeouts: NodeJS.Timeout[] = [];
       
