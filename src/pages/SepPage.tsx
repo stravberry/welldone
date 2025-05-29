@@ -184,14 +184,14 @@ const SepPage = () => {
               </div>
             </div>
 
-            {/* Large Lightning Bolt Icon - 300% bigger */}
-            <div className={`flex justify-center items-center h-96 overflow-hidden transition-all duration-800 ${
+            {/* Lightning Bolt Icon - Fixed size and positioning */}
+            <div className={`flex justify-center items-center h-80 overflow-hidden transition-all duration-800 ${
               heroInView || showAllItems ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
             }`}>
               <div className="relative flex justify-center items-center">
                 <svg
-                  width="1800"
-                  height="1800"
+                  width="400"
+                  height="400"
                   viewBox="0 0 100 100"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -212,11 +212,11 @@ const SepPage = () => {
                   />
                 </svg>
                 
-                {/* Energy particles - adjusted for new size */}
-                <div className="absolute top-64 right-64 w-5 h-5 bg-white rounded-full animate-ping opacity-75"></div>
-                <div className="absolute bottom-80 left-64 w-4 h-4 bg-yellow-200 rounded-full animate-pulse delay-300"></div>
-                <div className="absolute top-128 left-96 w-3 h-3 bg-white rounded-full animate-ping delay-700"></div>
-                <div className="absolute top-80 right-96 w-4 h-4 bg-yellow-300 rounded-full animate-pulse delay-500"></div>
+                {/* Energy particles - fixed positioning */}
+                <div className="absolute top-16 right-16 w-5 h-5 bg-white rounded-full animate-ping opacity-75"></div>
+                <div className="absolute bottom-20 left-16 w-4 h-4 bg-yellow-200 rounded-full animate-pulse delay-300"></div>
+                <div className="absolute top-32 left-24 w-3 h-3 bg-white rounded-full animate-ping delay-700"></div>
+                <div className="absolute top-20 right-24 w-4 h-4 bg-yellow-300 rounded-full animate-pulse delay-500"></div>
               </div>
             </div>
           </div>
