@@ -129,6 +129,47 @@ const SepPage = () => {
           <div className="absolute bottom-10 right-10 w-24 h-24 bg-white rounded-full animate-pulse delay-1000"></div>
         </div>
 
+        {/* Large Background Electrical Symbol */}
+        <div className={`absolute inset-0 flex justify-center items-center transition-all duration-800 ${
+          heroInView || showAllItems ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
+          <svg
+            width="1800"
+            height="1800"
+            viewBox="0 0 300 300"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="opacity-10"
+          >
+            <path
+              d="M120 50L180 150H150L180 250L120 150H150L120 50Z"
+              fill="currentColor"
+              className="text-yellow-200"
+            />
+            <circle
+              cx="150"
+              cy="150"
+              r="140"
+              stroke="currentColor"
+              strokeWidth="2"
+              fill="none"
+              className="text-yellow-200"
+              strokeDasharray="10,5"
+            />
+            <circle
+              cx="150"
+              cy="150"
+              r="100"
+              stroke="currentColor"
+              strokeWidth="1"
+              fill="none"
+              className="text-yellow-200"
+              strokeDasharray="5,3"
+              opacity="0.5"
+            />
+          </svg>
+        </div>
+
         <div className="max-w-7xl mx-auto relative z-10">
           <div className={`flex items-center space-x-2 text-yellow-100 mb-8 transition-all duration-600 ${
             heroInView || showAllItems ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
@@ -183,46 +224,7 @@ const SepPage = () => {
               </div>
             </div>
 
-            {/* Electrical Symbol */}
-            <div className={`hidden lg:flex justify-center items-center transition-all duration-800 ${
-              heroInView || showAllItems ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}>
-              <svg
-                width="300"
-                height="300"
-                viewBox="0 0 300 300"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="opacity-20"
-              >
-                <path
-                  d="M120 50L180 150H150L180 250L120 150H150L120 50Z"
-                  fill="currentColor"
-                  className="text-yellow-200"
-                />
-                <circle
-                  cx="150"
-                  cy="150"
-                  r="140"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  fill="none"
-                  className="text-yellow-200"
-                  strokeDasharray="10,5"
-                />
-                <circle
-                  cx="150"
-                  cy="150"
-                  r="100"
-                  stroke="currentColor"
-                  strokeWidth="1"
-                  fill="none"
-                  className="text-yellow-200"
-                  strokeDasharray="5,3"
-                  opacity="0.5"
-                />
-              </svg>
-            </div>
+            {/* Remove the small electrical symbol from the right column since we now have the large background one */}
           </div>
         </div>
       </div>
