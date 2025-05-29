@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Phone, Mail, Zap, CheckCircle, Award, Users, Shield, Target, Star } from 'lucide-react';
@@ -184,7 +185,7 @@ const SepPage = () => {
               </div>
             </div>
 
-            {/* Modern Electric Icon - positioned on the right side of content */}
+            {/* Modern Power Plug Icon - positioned on the right side of content */}
             <div className={`flex justify-center items-center transition-all duration-800 ${
               heroInView || showAllItems ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
             }`}>
@@ -197,26 +198,52 @@ const SepPage = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   className="text-yellow-100"
                 >
-                  {/* Modern Lightning Bolt */}
-                  <path 
-                    d="M35 20 L30 45 L45 45 L25 80 L65 35 L50 35 L70 20 Z" 
+                  {/* Power Plug Body */}
+                  <rect 
+                    x="25" 
+                    y="40" 
+                    width="50" 
+                    height="35" 
+                    rx="8" 
                     fill="currentColor" 
                     opacity="0.9"
                   />
-                  {/* Glow effect */}
+                  
+                  {/* Plug Prongs */}
+                  <rect x="35" y="25" width="6" height="18" rx="3" fill="currentColor" opacity="0.9"/>
+                  <rect x="59" y="25" width="6" height="18" rx="3" fill="currentColor" opacity="0.9"/>
+                  
+                  {/* Ground Pin */}
+                  <rect x="47" y="30" width="6" height="12" rx="3" fill="currentColor" opacity="0.7"/>
+                  
+                  {/* Cable */}
                   <path 
-                    d="M35 20 L30 45 L45 45 L25 80 L65 35 L50 35 L70 20 Z" 
+                    d="M50 75 Q55 80 50 85 Q45 90 50 95" 
+                    stroke="currentColor" 
+                    strokeWidth="4" 
+                    fill="none" 
+                    opacity="0.8"
+                  />
+                  
+                  {/* Glow effect */}
+                  <rect 
+                    x="25" 
+                    y="40" 
+                    width="50" 
+                    height="35" 
+                    rx="8" 
                     stroke="white" 
                     strokeWidth="2" 
                     fill="none" 
-                    opacity="0.7"
+                    opacity="0.6"
                   />
                 </svg>
                 
-                {/* Floating particles for modern effect */}
-                <div className="absolute top-4 right-4 w-2 h-2 bg-white rounded-full animate-ping opacity-75"></div>
-                <div className="absolute bottom-6 left-6 w-1.5 h-1.5 bg-yellow-200 rounded-full animate-pulse delay-300"></div>
-                <div className="absolute top-12 left-8 w-1 h-1 bg-white rounded-full animate-ping delay-700"></div>
+                {/* Floating energy particles */}
+                <div className="absolute top-2 right-6 w-2 h-2 bg-white rounded-full animate-ping opacity-75"></div>
+                <div className="absolute bottom-8 left-4 w-1.5 h-1.5 bg-yellow-200 rounded-full animate-pulse delay-300"></div>
+                <div className="absolute top-16 left-12 w-1 h-1 bg-white rounded-full animate-ping delay-700"></div>
+                <div className="absolute top-8 right-12 w-1.5 h-1.5 bg-yellow-300 rounded-full animate-pulse delay-500"></div>
               </div>
             </div>
           </div>
@@ -345,3 +372,4 @@ const SepPage = () => {
 };
 
 export default SepPage;
+
