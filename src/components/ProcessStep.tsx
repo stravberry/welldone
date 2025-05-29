@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
@@ -32,13 +33,7 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
           }
           
           @keyframes pulseGlow {
-            0% {
-              box-shadow: 
-                0 0 0 0 rgba(255, 102, 0, 0),
-                0 4px 15px rgba(255, 102, 0, 0),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            }
-            4% {
+            0%, 75% {
               box-shadow: 
                 0 0 0 0 rgba(255, 102, 0, 0.4),
                 0 4px 15px rgba(255, 102, 0, 0.2),
@@ -55,33 +50,6 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
               box-shadow: 
                 0 0 10px 4px rgba(255, 102, 0, 0.5),
                 0 4px 20px rgba(255, 102, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            }
-            20% {
-              box-shadow: 
-                0 0 0 0 rgba(255, 102, 0, 0.4),
-                0 4px 15px rgba(255, 102, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            }
-            75%, 100% {
-              box-shadow: 
-                0 0 0 0 rgba(255, 102, 0, 0.4),
-                0 4px 15px rgba(255, 102, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            }
-          }
-
-          @keyframes glowFadeIn {
-            from {
-              box-shadow: 
-                0 0 0 0 rgba(255, 102, 0, 0),
-                0 4px 15px rgba(255, 102, 0, 0),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            }
-            to {
-              box-shadow: 
-                0 0 0 0 rgba(255, 102, 0, 0.4),
-                0 4px 15px rgba(255, 102, 0, 0.2),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
             }
           }
@@ -106,13 +74,8 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
           <div 
             className="relative flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 text-white font-bold transition-all duration-300 overflow-hidden"
             style={{
-              animation: isInView ? 
-                `glowFadeIn 0.8s ease-out ${index * 0.8}s forwards, pulseGlow 4.8s ease-in-out infinite ${index * 0.8 + 0.8}s` : 
-                'none',
-              willChange: 'box-shadow',
-              boxShadow: !isInView ? 
-                '0 0 0 0 rgba(255, 102, 0, 0), 0 4px 15px rgba(255, 102, 0, 0), inset 0 1px 0 rgba(255, 255, 255, 0.3)' : 
-                undefined
+              animation: isInView ? `pulseGlow 4.8s ease-in-out infinite ${index * 0.8}s` : 'none',
+              willChange: 'box-shadow'
             }}
           >
             {/* Inner highlight for depth */}
@@ -156,3 +119,4 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
 };
 
 export default ProcessStep;
+
