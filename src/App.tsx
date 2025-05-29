@@ -7,6 +7,7 @@ import RouteChangeTracker from '@/components/RouteChangeTracker';
 import ScrollTracker from '@/components/ScrollTracker';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import PageTransition from '@/components/PageTransition';
 import useScrollToTop from '@/hooks/useScrollToTop';
 
@@ -29,6 +30,9 @@ import EventyPage from '@/pages/EventyPage';
 import LutowaniePage from '@/pages/LutowaniePage';
 import CMSLoginPage from '@/pages/CMSLoginPage';
 import NotFound from '@/pages/NotFound';
+import PrivacyPolicyPage from '@/pages/PrivacyPolicyPage';
+import TermsPage from '@/pages/TermsPage';
+import SitemapPage from '@/pages/SitemapPage';
 
 // Admin
 import AdminLayout from '@/pages/admin/AdminLayout';
@@ -90,10 +94,16 @@ const AppContent = () => {
               <Route path="settings" element={<SettingsPage />} />
             </Route>
             
+            {/* New footer pages */}
+            <Route path="/polityka-prywatnosci" element={<PrivacyPolicyPage />} />
+            <Route path="/regulamin" element={<TermsPage />} />
+            <Route path="/mapa-strony" element={<SitemapPage />} />
+            
             <Route path="*" element={<NotFound />} />
           </Routes>
         </PageTransition>
       </div>
+      <Footer />
     </div>
   );
 };
