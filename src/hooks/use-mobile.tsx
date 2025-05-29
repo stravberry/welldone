@@ -83,3 +83,19 @@ export function useDeviceSize() {
     isDesktop: !isMobile && !isTablet
   }
 }
+
+// New hook for responsive animations
+export function useResponsiveAnimation() {
+  const { isMobile, isTablet } = useDeviceSize()
+  
+  return {
+    // Shorter durations for mobile devices
+    duration: isMobile ? 400 : isTablet ? 600 : 800,
+    // Reduced delays for mobile
+    delay: isMobile ? 100 : isTablet ? 150 : 200,
+    // Less aggressive transforms for mobile
+    transform: isMobile ? 'translateY(20px)' : 'translateY(30px)',
+    // Simpler easing for mobile
+    easing: isMobile ? 'ease-out' : 'cubic-bezier(0.4, 0, 0.2, 1)'
+  }
+}
