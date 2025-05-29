@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Phone, Mail, Wrench, CheckCircle, Award, Users, Shield, Target, Zap } from 'lucide-react';
@@ -126,6 +125,60 @@ const UdtKonserwatorzePage = () => {
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-32 h-32 bg-white rounded-full animate-pulse"></div>
           <div className="absolute bottom-10 right-10 w-24 h-24 bg-white rounded-full animate-pulse delay-1000"></div>
+        </div>
+
+        {/* Large Background Tools Icon */}
+        <div className={`absolute -right-32 top-0 bottom-0 flex justify-end items-center transition-all duration-800 ${
+          heroInView || showAllItems ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+        }`}>
+          <svg
+            width="1600"
+            height="1600"
+            viewBox="0 0 400 400"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="opacity-6"
+          >
+            <g className="text-blue-200">
+              {/* Wrench */}
+              <path d="M80 120 L150 190 L170 170 L180 180 L190 170 L210 190 L200 200 L180 180 L170 190 L140 160 L100 120 C90 110 80 110 80 120Z" 
+                    fill="currentColor" opacity="0.7"/>
+              <circle cx="95" cy="135" r="8" fill="none" stroke="currentColor" strokeWidth="3" opacity="0.8"/>
+              
+              {/* Screwdriver */}
+              <rect x="250" y="80" width="8" height="120" rx="4" fill="currentColor" opacity="0.6" transform="rotate(45 254 140)"/>
+              <rect x="246" y="76" width="16" height="20" rx="2" fill="currentColor" opacity="0.8" transform="rotate(45 254 86)"/>
+              <path d="M280 170 L320 210" stroke="currentColor" strokeWidth="4" strokeLinecap="round" opacity="0.7"/>
+              
+              {/* Gear - Large */}
+              <circle cx="200" cy="250" r="40" fill="none" stroke="currentColor" strokeWidth="6" opacity="0.5"/>
+              <circle cx="200" cy="250" r="15" fill="currentColor" opacity="0.6"/>
+              {/* Gear teeth */}
+              <rect x="195" y="200" width="10" height="15" fill="currentColor" opacity="0.7"/>
+              <rect x="195" y="285" width="10" height="15" fill="currentColor" opacity="0.7"/>
+              <rect x="240" y="245" width="15" height="10" fill="currentColor" opacity="0.7"/>
+              <rect x="145" y="245" width="15" height="10" fill="currentColor" opacity="0.7"/>
+              <rect x="224" y="214" width="12" height="12" fill="currentColor" opacity="0.7" transform="rotate(45 230 220)"/>
+              <rect x="164" y="214" width="12" height="12" fill="currentColor" opacity="0.7" transform="rotate(-45 170 220)"/>
+              <rect x="224" y="274" width="12" height="12" fill="currentColor" opacity="0.7" transform="rotate(-45 230 280)"/>
+              <rect x="164" y="274" width="12" height="12" fill="currentColor" opacity="0.7" transform="rotate(45 170 280)"/>
+              
+              {/* Small gear */}
+              <circle cx="140" cy="300" r="20" fill="none" stroke="currentColor" strokeWidth="3" opacity="0.6"/>
+              <circle cx="140" cy="300" r="8" fill="currentColor" opacity="0.7"/>
+              <rect x="137" y="275" width="6" height="8" fill="currentColor" opacity="0.6"/>
+              <rect x="137" y="317" width="6" height="8" fill="currentColor" opacity="0.6"/>
+              <rect x="155" y="297" width="8" height="6" fill="currentColor" opacity="0.6"/>
+              <rect x="117" y="297" width="8" height="6" fill="currentColor" opacity="0.6"/>
+              
+              {/* Nuts and bolts */}
+              <polygon points="320,120 330,110 340,120 340,130 330,140 320,130" fill="currentColor" opacity="0.5"/>
+              <circle cx="330" cy="125" r="3" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.7"/>
+              
+              <polygon points="300,320 310,310 320,320 320,330 310,340 300,330" fill="currentColor" opacity="0.5"/>
+              <circle cx="310" cy="325" r="3" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.7"/>
+            </g>
+          </svg>
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10">

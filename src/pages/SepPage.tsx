@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Phone, Mail, Zap, CheckCircle, Award, Users, Shield, Target, Star } from 'lucide-react';
@@ -129,8 +130,8 @@ const SepPage = () => {
           <div className="absolute bottom-10 right-10 w-24 h-24 bg-white rounded-full animate-pulse delay-1000"></div>
         </div>
 
-        {/* Large Background Electrical Circuit Symbol */}
-        <div className={`absolute right-0 top-0 bottom-0 flex justify-end items-center pr-8 transition-all duration-800 ${
+        {/* Large Background Electrical Circuit Symbol - moved further right */}
+        <div className={`absolute -right-32 top-0 bottom-0 flex justify-end items-center transition-all duration-800 ${
           heroInView || showAllItems ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
         }`}>
           <svg
@@ -139,7 +140,7 @@ const SepPage = () => {
             viewBox="0 0 400 400"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="opacity-8"
+            className="opacity-6"
           >
             {/* Circuit Board Pattern */}
             <g className="text-yellow-200">
