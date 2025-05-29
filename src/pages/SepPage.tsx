@@ -129,13 +129,13 @@ const SepPage = () => {
           <div className="absolute bottom-10 right-10 w-24 h-24 bg-white rounded-full animate-pulse delay-1000"></div>
         </div>
 
-        {/* Lightning Bolt Background Icon - positioned more to the left */}
-        <div className={`absolute right-32 top-0 bottom-0 flex justify-center items-center transition-all duration-800 ${
+        {/* Lightning Bolt Background Icon - positioned more to the left and larger */}
+        <div className={`absolute right-16 top-0 bottom-0 flex justify-center items-center transition-all duration-800 ${
           heroInView || showAllItems ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
         }`}>
           <svg
-            width="600"
-            height="600"
+            width="800"
+            height="800"
             viewBox="0 0 200 200"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
