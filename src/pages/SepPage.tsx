@@ -177,9 +177,12 @@ const SepPage = () => {
                   size="lg" 
                   variant="outline" 
                   className="border-2 border-white text-yellow-600 bg-white hover:bg-yellow-50 hover:scale-105 transition-all duration-300"
+                  asChild
                 >
-                  <Mail className="mr-2 h-5 w-5" />
-                  Błyskawiczna wycena
+                  <Link to="/wycena">
+                    <Mail className="mr-2 h-5 w-5" />
+                    Błyskawiczna wycena
+                  </Link>
                 </Button>
               </div>
             </div>
@@ -327,8 +330,11 @@ const SepPage = () => {
               size="lg" 
               variant="outline" 
               className="border-2 border-white text-yellow-600 bg-white hover:bg-yellow-50 hover:scale-105 transition-all duration-300"
+              asChild
             >
-              Skontaktuj się z nami
+              <Link to="/wycena">
+                Skontaktuj się z nami
+              </Link>
             </Button>
           </div>
         </div>
