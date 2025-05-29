@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ServiceCard from '@/components/ServiceCard';
@@ -254,7 +253,7 @@ const ServicesPage = () => {
             <Button
               size="lg"
               variant="outline"
-              className="border-white text-white hover:bg-white hover:text-orange-600 hover:scale-105 transition-all duration-300"
+              className="border-white text-white hover:bg-white hover:text-orange-600 hover:border-white hover:scale-105 transition-all duration-300"
               trackingLabel="free-audit-from-services"
             >
               Bezpłatny audyt potrzeb
