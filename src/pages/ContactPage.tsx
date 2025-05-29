@@ -253,20 +253,6 @@ const ContactPage = () => {
               </Card>
             ))}
           </div>
-
-          <div className={`mt-12 text-center transition-all duration-800 delay-800 ${
-            servicesInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}>
-            <div className="bg-white p-6 rounded-lg shadow-md inline-block">
-              <p className="text-gray-700 font-medium mb-2">
-                <CheckCircle className="h-5 w-5 text-green-500 inline mr-2" />
-                Gwarancja jakości potwierdzona certyfikatami i referencjami
-              </p>
-              <p className="text-sm text-gray-500">
-                Wszystkie nasze usługi są objęte gwarancją satysfakcji klienta
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -305,20 +291,6 @@ const ContactPage = () => {
                 <p className="text-gray-600">{advantage.description}</p>
               </div>
             ))}
-          </div>
-
-          <div className={`mt-16 bg-white rounded-lg p-8 shadow-md transition-all duration-800 delay-600 ${
-            advantagesInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}>
-            <h3 className="text-2xl font-bold text-center mb-8">Co oferujemy?</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {/*{features.map((feature, index) => (*/}
-              {/*  <div key={index} className="flex items-center space-x-3">*/}
-              {/*    <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />*/}
-              {/*    <span className="text-gray-700">{feature}</span>*/}
-              {/*  </div>*/}
-              {/*))}*/}
-            </div>
           </div>
         </div>
       </section>
