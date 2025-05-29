@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from 'react';
 
 interface UseScrollAnimationOptions {
@@ -25,11 +26,23 @@ export const useScrollAnimation = <T extends HTMLElement = HTMLElement>(options:
 
     // Better mobile optimization - more aggressive thresholds
     const isMobile = window.innerWidth < 768;
-    const adjustedThreshold = isMobile ? Math.min(threshold, 0.05) : threshold;
-    const adjustedRootMargin = isMobile ? '100px' : rootMargin;
+    const adjustedThreshold = isMobile ? Math.min(threshold, 0.02) : threshold;
+    const adjustedRootMargin = isMobile ? '50px' : rootMargin;
+
+    console.log('useScrollAnimation setup:', {
+      isMobile,
+      threshold,
+      adjustedThreshold,
+      adjustedRootMargin
+    });
 
     const observer = new IntersectionObserver(
       ([entry]) => {
+        console.log('Intersection observed:', {
+          isIntersecting: entry.isIntersecting,
+          elementId: element.id || element.className
+        });
+        
         if (entry.isIntersecting) {
           setIsInView(true);
           if (triggerOnce) {
@@ -48,7 +61,7 @@ export const useScrollAnimation = <T extends HTMLElement = HTMLElement>(options:
     // Small delay to ensure element is properly rendered
     const timeoutId = setTimeout(() => {
       observer.observe(element);
-    }, 100);
+    }, 50);
 
     return () => {
       clearTimeout(timeoutId);
@@ -65,12 +78,19 @@ export const useStaggeredAnimation = <T extends HTMLElement = HTMLElement>(itemC
   const [visibleItems, setVisibleItems] = useState<number[]>([]);
   const [hasTriggered, setHasTriggered] = useState(false);
   const { elementRef, isInView } = useScrollAnimation<T>({
-    threshold: 0.1,
-    rootMargin: '100px',
+    threshold: 0.05,
+    rootMargin: '50px',
     triggerOnce: true
   });
 
   useEffect(() => {
+    console.log('useStaggeredAnimation:', {
+      isInView,
+      hasTriggered,
+      itemCount,
+      visibleItems: visibleItems.length
+    });
+
     if (isInView && !hasTriggered) {
       setHasTriggered(true);
       

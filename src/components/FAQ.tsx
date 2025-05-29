@@ -20,12 +20,18 @@ interface FAQProps {
 
 const FAQ: React.FC<FAQProps> = ({ title = "Najczęściej zadawane pytania", items }) => {
   const { elementRef: titleRef, isInView: titleInView } = useScrollAnimation<HTMLHeadingElement>({
-    threshold: 0.2,
-    rootMargin: '50px',
-    triggerOnce: true
+    threshold: 0.1,
+    rootMargin: '100px',
+    triggerOnce: false
   });
   
   const { elementRef: itemsRef, visibleItems } = useStaggeredAnimation<HTMLDivElement>(items.length, 100);
+
+  console.log('FAQ Debug:', {
+    titleInView,
+    visibleItems,
+    itemsLength: items.length
+  });
 
   return (
     <div className="py-8 sm:py-12 lg:py-16 bg-gray-50">
@@ -33,7 +39,7 @@ const FAQ: React.FC<FAQProps> = ({ title = "Najczęściej zadawane pytania", ite
         <h2 
           ref={titleRef}
           className={`text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-6 sm:mb-8 lg:mb-12 transition-all duration-700 ${
-            titleInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            titleInView ? 'opacity-100 translate-y-0' : 'opacity-100 translate-y-0'
           }`}
         >
           {title}
@@ -44,10 +50,10 @@ const FAQ: React.FC<FAQProps> = ({ title = "Najczęściej zadawane pytania", ite
               <AccordionItem 
                 key={index} 
                 value={`item-${index}`} 
-                className={`bg-white rounded-lg shadow-sm border border-gray-100 transition-all duration-700 hover:shadow-md hover:border-gray-200 ${
+                className={`bg-white rounded-lg shadow-sm border border-gray-100 transition-all duration-500 hover:shadow-md hover:border-gray-200 ${
                   visibleItems.includes(index) 
                     ? 'opacity-100 translate-y-0' 
-                    : 'opacity-0 translate-y-5'
+                    : 'opacity-100 translate-y-0'
                 }`}
                 style={{ 
                   transitionDelay: `${index * 100}ms`
