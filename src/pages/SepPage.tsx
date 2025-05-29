@@ -183,50 +183,39 @@ const SepPage = () => {
               </div>
             </div>
 
-            {/* Zigzag Lightning Bolt Icon - positioned on the right side of content */}
+            {/* Simple Large Lightning Bolt Icon */}
             <div className={`flex justify-center items-center transition-all duration-800 ${
               heroInView || showAllItems ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
             }`}>
               <div className="relative">
                 <svg
-                  width="500"
-                  height="500"
+                  width="600"
+                  height="600"
                   viewBox="0 0 100 100"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                   className="text-yellow-100"
                 >
-                  {/* Zigzag Lightning Bolt */}
+                  {/* Simple Lightning Bolt */}
                   <path 
-                    d="M25 10 L35 25 L30 35 L40 45 L30 55 L45 65 L35 75 L50 90 L75 60 L60 55 L70 45 L55 35 L65 25 L50 15 L25 10 Z" 
+                    d="M30 10 L25 50 L45 50 L15 90 L70 40 L50 40 L80 10 Z" 
                     fill="currentColor" 
                     opacity="0.9"
                   />
                   
-                  {/* Inner highlight */}
+                  {/* Inner glow */}
                   <path 
-                    d="M30 15 L38 28 L33 35 L43 45 L33 52 L43 62 L38 70 L48 82 L68 58 L58 53 L65 45 L55 38 L62 28 L52 18 L30 15 Z" 
+                    d="M35 15 L30 45 L45 45 L25 80 L65 45 L50 45 L70 15 Z" 
                     fill="white" 
-                    opacity="0.3"
-                  />
-                  
-                  {/* Outer glow effect */}
-                  <path 
-                    d="M25 10 L35 25 L30 35 L40 45 L30 55 L45 65 L35 75 L50 90 L75 60 L60 55 L70 45 L55 35 L65 25 L50 15 L25 10 Z" 
-                    stroke="white" 
-                    strokeWidth="3" 
-                    fill="none" 
-                    opacity="0.6"
+                    opacity="0.4"
                   />
                 </svg>
                 
-                {/* Enhanced energy particles */}
-                <div className="absolute top-12 right-12 w-4 h-4 bg-white rounded-full animate-ping opacity-75"></div>
-                <div className="absolute bottom-16 left-12 w-3 h-3 bg-yellow-200 rounded-full animate-pulse delay-300"></div>
-                <div className="absolute top-24 left-20 w-2 h-2 bg-white rounded-full animate-ping delay-700"></div>
-                <div className="absolute top-16 right-20 w-3 h-3 bg-yellow-300 rounded-full animate-pulse delay-500"></div>
-                <div className="absolute bottom-24 right-16 w-2 h-2 bg-white rounded-full animate-ping delay-1000"></div>
-                <div className="absolute top-32 left-16 w-1.5 h-1.5 bg-yellow-100 rounded-full animate-pulse delay-200"></div>
+                {/* Simple energy particles */}
+                <div className="absolute top-16 right-16 w-5 h-5 bg-white rounded-full animate-ping opacity-75"></div>
+                <div className="absolute bottom-20 left-16 w-4 h-4 bg-yellow-200 rounded-full animate-pulse delay-300"></div>
+                <div className="absolute top-32 left-24 w-3 h-3 bg-white rounded-full animate-ping delay-700"></div>
+                <div className="absolute top-20 right-24 w-4 h-4 bg-yellow-300 rounded-full animate-pulse delay-500"></div>
               </div>
             </div>
           </div>
