@@ -6,94 +6,88 @@ import { Eye, Code, Edit3 } from 'lucide-react';
 import PageSectionEditor from './PageSectionEditor';
 import HTMLCodeEditor from './HTMLCodeEditor';
 import LivePageBuilder from './LivePageBuilder';
+import { usePageSections } from '@/hooks/usePages';
+import type { Tables } from '@/integrations/supabase/types';
+
+type Page = Tables<'pages'> & {
+  page_sections: Tables<'page_sections'>[];
+};
 
 interface PageEditorProps {
-  pageId: string;
+  page: Page;
   onSave?: (content: any) => void;
 }
 
 type EditorMode = 'sections' | 'code' | 'live-builder';
 
-const PageEditor: React.FC<PageEditorProps> = ({ pageId, onSave }) => {
+const PageEditor: React.FC<PageEditorProps> = ({ page, onSave }) => {
   const [activeEditor, setActiveEditor] = useState<EditorMode>('sections');
-  const [pageContent, setPageContent] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [headCode, setHeadCode] = useState('');
+  const [bodyCode, setBodyCode] = useState('');
   const [hasChanges, setHasChanges] = useState(false);
 
-  useEffect(() => {
-    loadPageContent();
-  }, [pageId]);
+  const { data: pageSections, isLoading } = usePageSections(page.id);
 
-  const loadPageContent = async () => {
-    setIsLoading(true);
-    try {
-      const response = await fetch(`/api/pages/${pageId}`);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      setPageContent(data.content);
-    } catch (error) {
-      console.error("Could not load page content:", error);
-    } finally {
-      setIsLoading(false);
-      setHasChanges(false);
+  const handleCodeSave = () => {
+    // Handle saving the HTML code
+    if (onSave) {
+      onSave({ headCode, bodyCode });
     }
+    setHasChanges(false);
   };
 
-  const handleSave = async () => {
-    setIsLoading(true);
-    try {
-      const response = await fetch(`/api/pages/${pageId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ content: pageContent }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      setHasChanges(false);
-      if (onSave) {
-        onSave(pageContent);
-      }
-    } catch (error) {
-      console.error("Could not save page content:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleContentChange = (content: any) => {
-    setPageContent(content);
-    setHasChanges(true);
+  const handleSectionDelete = (sectionId: string) => {
+    // This will be handled by the individual PageSectionEditor components
+    console.log('Deleting section:', sectionId);
   };
 
   const renderEditor = () => {
     if (activeEditor === 'sections') {
       return (
-        <PageSectionEditor
-          content={pageContent}
-          onChange={handleContentChange}
-        />
+        <div className="space-y-4 p-4">
+          {isLoading ? (
+            <div className="flex items-center justify-center h-64">
+              <div className="text-lg">Ładowanie sekcji...</div>
+            </div>
+          ) : pageSections && pageSections.length > 0 ? (
+            pageSections.map((section) => (
+              <PageSectionEditor
+                key={section.id}
+                section={section}
+                onDelete={handleSectionDelete}
+              />
+            ))
+          ) : (
+            <div className="text-center py-8 text-gray-500">
+              <p>Brak sekcji na tej stronie</p>
+            </div>
+          )}
+        </div>
       );
     } else if (activeEditor === 'code') {
       return (
-        <HTMLCodeEditor
-          content={pageContent?.html || ''}
-          onChange={(html) => handleContentChange({ ...pageContent, html })}
-        />
+        <div className="p-4">
+          <HTMLCodeEditor
+            headCode={headCode}
+            bodyCode={bodyCode}
+            onHeadCodeChange={(code) => {
+              setHeadCode(code);
+              setHasChanges(true);
+            }}
+            onBodyCodeChange={(code) => {
+              setBodyCode(code);
+              setHasChanges(true);
+            }}
+            onSave={handleCodeSave}
+          />
+        </div>
       );
     } else {
       return (
         <LivePageBuilder
-          pageId={pageId}
+          pageId={page.id}
           onSave={async (blocks) => {
             const content = { blocks };
-            handleContentChange(content);
             if (onSave) {
               await onSave(content);
             }
@@ -103,40 +97,35 @@ const PageEditor: React.FC<PageEditorProps> = ({ pageId, onSave }) => {
     }
   };
 
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="text-lg">Ładowanie edytora...</div>
-      </div>
-    );
-  }
-
   return (
     <div className="h-full flex flex-col">
       <div className="flex items-center justify-between p-4 border-b">
-        <Tabs value={activeEditor} onValueChange={(value) => setActiveEditor(value as EditorMode)}>
-          <TabsList>
-            <TabsTrigger value="sections" className="flex items-center gap-2">
-              <Edit3 className="w-4 h-4" />
-              Sekcje
-            </TabsTrigger>
-            <TabsTrigger value="code" className="flex items-center gap-2">
-              <Code className="w-4 h-4" />
-              Kod HTML
-            </TabsTrigger>
-            <TabsTrigger value="live-builder" className="flex items-center gap-2">
-              <Eye className="w-4 h-4" />
-              Live Builder
-            </TabsTrigger>
-          </TabsList>
-        </Tabs>
+        <div className="flex items-center space-x-4">
+          <h1 className="text-xl font-semibold">{page.title}</h1>
+          <Tabs value={activeEditor} onValueChange={(value) => setActiveEditor(value as EditorMode)}>
+            <TabsList>
+              <TabsTrigger value="sections" className="flex items-center gap-2">
+                <Edit3 className="w-4 h-4" />
+                Sekcje
+              </TabsTrigger>
+              <TabsTrigger value="code" className="flex items-center gap-2">
+                <Code className="w-4 h-4" />
+                Kod HTML
+              </TabsTrigger>
+              <TabsTrigger value="live-builder" className="flex items-center gap-2">
+                <Eye className="w-4 h-4" />
+                Live Builder
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
+        </div>
 
         <div className="flex items-center gap-2">
           {hasChanges && (
             <span className="text-sm text-orange-600">Niezapisane zmiany</span>
           )}
           <Button 
-            onClick={handleSave}
+            onClick={handleCodeSave}
             disabled={!hasChanges}
             className="bg-orange-600 hover:bg-orange-700"
           >
@@ -145,7 +134,7 @@ const PageEditor: React.FC<PageEditorProps> = ({ pageId, onSave }) => {
         </div>
       </div>
 
-      <div className="flex-1 overflow-hidden">
+      <div className="flex-1 overflow-auto">
         {renderEditor()}
       </div>
     </div>
