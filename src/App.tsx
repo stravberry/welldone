@@ -65,6 +65,7 @@ function App() {
                   <Route path="/kontakt" element={<ContactPage />} />
                   <Route path="/wycena" element={<QuotePage />} />
                   <Route path="/sep" element={<SepPage />} />
+                  <Route path="/uslugi/sep" element={<SepPage />} />
                   <Route path="/udt-konserwatorze" element={<UdtKonserwatorzePage />} />
                   <Route path="/uslugi/udt-konserwatorzy" element={<UdtKonserwatorzePage />} />
                   <Route path="/udt-szkolenia" element={<UdtLandingPage />} />

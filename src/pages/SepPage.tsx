@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Phone, Mail, Zap, CheckCircle, Award, Users, Shield, Target, Star } from 'lucide-react';
@@ -176,10 +175,10 @@ const SepPage = () => {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="border-2 border-white text-white hover:bg-white hover:text-yellow-600 hover:scale-105 transition-all duration-300"
+                  className="border-2 border-white text-yellow-600 bg-white hover:bg-yellow-50 hover:scale-105 transition-all duration-300"
                 >
                   <Mail className="mr-2 h-5 w-5" />
-                  Pobierz program
+                  Błyskawiczna wycena
                 </Button>
               </div>
             </div>
@@ -290,7 +289,7 @@ const SepPage = () => {
             <Button 
               size="lg" 
               variant="outline" 
-              className="border-2 border-white text-white hover:bg-white hover:text-yellow-600 hover:scale-105 transition-all duration-300"
+              className="border-2 border-white text-yellow-600 bg-white hover:bg-yellow-50 hover:scale-105 transition-all duration-300"
             >
               Skontaktuj się z nami
             </Button>
