@@ -94,9 +94,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                 size="lg" 
                 variant="outline" 
                 className="border-white text-orange-600 hover:bg-white hover:text-orange-600 hover:scale-105 transition-all duration-300"
+                asChild
               >
-                <Mail className="mr-2 h-5 w-5" />
-                Pobierz program
+                <Link to="/wycena">
+                  <Mail className="mr-2 h-5 w-5" />
+                  Bezpłatna wycena
+                </Link>
               </Button>
             </div>
           </div>
