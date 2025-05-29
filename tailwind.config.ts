@@ -327,6 +327,72 @@ export default {
 						opacity: '1',
 						transform: 'translateX(0)'
 					}
+				},
+				'enhanced-float': {
+					'0%, 100%': {
+						transform: 'translateY(0px) rotate(0deg)'
+					},
+					'33%': {
+						transform: 'translateY(-10px) rotate(1deg)'
+					},
+					'66%': {
+						transform: 'translateY(-5px) rotate(-1deg)'
+					}
+				},
+				'slide-up': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(50px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				'slide-down': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(-50px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				'zoom-in': {
+					'0%': {
+						opacity: '0',
+						transform: 'scale(0.8)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'scale(1)'
+					}
+				},
+				'bounce-in': {
+					'0%': {
+						opacity: '0',
+						transform: 'scale(0.3)'
+					},
+					'50%': {
+						opacity: '1',
+						transform: 'scale(1.05)'
+					},
+					'70%': {
+						transform: 'scale(0.9)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'scale(1)'
+					}
+				},
+				'wiggle': {
+					'0%, 100%': {
+						transform: 'rotate(-3deg)'
+					},
+					'50%': {
+						transform: 'rotate(3deg)'
+					}
 				}
 			},
 			animation: {
@@ -350,7 +416,13 @@ export default {
 				'draw-line': 'draw-line 1s ease-out',
 				'magnetic': 'magnetic 0.3s ease-out',
 				'star-fill': 'star-fill 0.5s ease-out',
-				'table-row': 'table-row 0.6s ease-out'
+				'table-row': 'table-row 0.6s ease-out',
+				'enhanced-float': 'enhanced-float 6s ease-in-out infinite',
+				'slide-up': 'slide-up 0.8s ease-out',
+				'slide-down': 'slide-down 0.8s ease-out',
+				'zoom-in': 'zoom-in 0.6s ease-out',
+				'bounce-in': 'bounce-in 0.8s ease-out',
+				'wiggle': 'wiggle 1s ease-in-out infinite'
 			}
 		}
 	},
