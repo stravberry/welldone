@@ -10,37 +10,37 @@ const AnimatedBenefitsSection: React.FC = () => {
     {
       title: "Ocena aktualnych szkoleń",
       description: "Przeanalizujemy, czy obecne szkolenia spełniają wszystkie wymagania prawne oraz czy odpowiadają na realne potrzeby Twojej firmy.",
-      icon: <ClipboardCheck size={48} className="text-orange-500" />,
+      icon: <ClipboardCheck size={48} className="text-orange-600" />,
       gradient: "from-orange-500 to-red-500"
     },
     {
       title: "Weryfikacja uprawnień",
       description: "Sprawdzimy, czy wszyscy pracownicy posiadają wymagane uprawnienia do obsługi sprzętu i urządzeń w Twojej firmie.",
-      icon: <Search size={48} className="text-blue-500" />,
+      icon: <Search size={48} className="text-blue-600" />,
       gradient: "from-blue-500 to-cyan-500"
     },
     {
       title: "Optymalizacja kosztów",
       description: "Pomożemy zidentyfikować, czy nie przepłacasz za szkolenia i certyfikacje oraz wskażemy obszary oszczędności.",
-      icon: <TrendingUp size={48} className="text-green-500" />,
+      icon: <TrendingUp size={48} className="text-green-600" />,
       gradient: "from-green-500 to-emerald-500"
     },
     {
       title: "Dostosowanie szkoleń",
       description: "Oferujemy indywidualnie dobrane programy szkoleniowe, które idealnie pasują do specyfiki Twojej działalności.",
-      icon: <FileSearch size={48} className="text-purple-500" />,
+      icon: <FileSearch size={48} className="text-purple-600" />,
       gradient: "from-purple-500 to-violet-500"
     },
     {
       title: "Analiza bezpieczeństwa",
       description: "Sprawdzimy zgodność z przepisami BHP i zidentyfikujemy potencjalne ryzyka w procesach szkoleniowych.",
-      icon: <Shield size={48} className="text-amber-500" />,
+      icon: <Shield size={48} className="text-amber-600" />,
       gradient: "from-amber-500 to-yellow-500"
     },
     {
       title: "Planowanie harmonogramu",
       description: "Pomożemy w utworzeniu optymalnego harmonogramu szkoleń, minimalizując przestoje w produkcji.",
-      icon: <Clock size={48} className="text-indigo-500" />,
+      icon: <Clock size={48} className="text-indigo-600" />,
       gradient: "from-indigo-500 to-blue-600"
     }
   ];
@@ -65,7 +65,7 @@ const AnimatedBenefitsSection: React.FC = () => {
           {benefits.map((benefit, index) => (
             <div
               key={index}
-              className={`group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transform transition-all duration-500 ${
+              className={`group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transform transition-all duration-500 border border-gray-100 ${
                 visibleItems.includes(index) || showAllFallback
                   ? 'opacity-100 translate-y-0 scale-100'
                   : 'opacity-0 translate-y-8 scale-95'
@@ -75,18 +75,18 @@ const AnimatedBenefitsSection: React.FC = () => {
               }}
             >
               {/* Gradient background overlay */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${benefit.gradient} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300`}></div>
+              <div className={`absolute inset-0 bg-gradient-to-br ${benefit.gradient} opacity-0 group-hover:opacity-8 rounded-2xl transition-opacity duration-300`}></div>
               
-              {/* Icon with gradient background */}
-              <div className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${benefit.gradient} bg-opacity-10 mb-6 group-hover:scale-110 transition-transform duration-300`}>
+              {/* Icon with improved visibility */}
+              <div className={`inline-flex p-6 rounded-2xl bg-gradient-to-br ${benefit.gradient} bg-opacity-15 mb-6 group-hover:scale-110 transition-transform duration-300 shadow-md`}>
                 {benefit.icon}
               </div>
               
-              <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-orange-600 transition-colors duration-300">
+              <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-orange-700 transition-colors duration-300">
                 {benefit.title}
               </h3>
               
-              <p className="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
+              <p className="text-gray-700 leading-relaxed group-hover:text-gray-800 transition-colors duration-300">
                 {benefit.description}
               </p>
               
