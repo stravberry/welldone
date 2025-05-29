@@ -9,15 +9,15 @@ const StatsCounter: React.FC = () => {
 
   return (
     <div className="grid grid-cols-3 gap-4 text-center">
-      <div ref={studentsRef}>
+      <div ref={studentsRef} className="opacity-100">
         <div className="text-2xl sm:text-3xl font-bold text-white">{studentsCount}+</div>
         <div className="text-blue-100 text-sm">Przeszkolonych operatorów</div>
       </div>
-      <div ref={coursesRef}>
+      <div ref={coursesRef} className="opacity-100">
         <div className="text-2xl sm:text-3xl font-bold text-white">{coursesCount}+</div>
         <div className="text-blue-100 text-sm">Przeprowadzonych kursów</div>
       </div>
-      <div ref={successRef}>
+      <div ref={successRef} className="opacity-100">
         <div className="text-2xl sm:text-3xl font-bold text-white">{successCount}%</div>
         <div className="text-blue-100 text-sm">Zdawalność</div>
       </div>

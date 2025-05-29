@@ -9,7 +9,7 @@ interface WhyChooseUsSectionProps {
 
 const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({ trackCTAClick }) => {
   const { elementRef: titleRef, isInView: titleInView } = useScrollAnimation<HTMLDivElement>();
-  const { elementRef: cardsRef, visibleItems } = useStaggeredAnimation<HTMLDivElement>(4, 100);
+  const { elementRef: cardsRef, visibleItems, showAllFallback } = useStaggeredAnimation<HTMLDivElement>(4, 150);
   const { elementRef: ctaRef, isInView: ctaInView } = useScrollAnimation<HTMLDivElement>();
 
   const reasons = [
@@ -35,6 +35,8 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({ trackCTAClick }
     }
   ];
 
+  console.log('WhyChooseUsSection render:', { visibleItems, showAllFallback });
+
   return (
     <section id="why-us" className="py-12 sm:py-16 lg:py-20 bg-white">
       <div className="container mx-auto px-4">
@@ -52,20 +54,31 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({ trackCTAClick }
         </div>
         
         <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12">
-          {reasons.map((reason, index) => (
-            <div 
-              key={index} 
-              className={`bg-gray-50 p-6 rounded-lg transition-all duration-600 hover:shadow-lg hover:bg-white group cursor-pointer border border-transparent hover:border-blue-200 ${
-                visibleItems.includes(index) 
-                  ? 'opacity-100 translate-y-0' 
-                  : 'opacity-0 translate-y-5'
-              }`}
-            >
-              <div className="text-4xl mb-4 transition-transform duration-200 group-hover:scale-110">{reason.icon}</div>
-              <h3 className="text-xl font-bold mb-2 transition-colors duration-200 group-hover:text-blue-600">{reason.title}</h3>
-              <p className="text-gray-600 transition-colors duration-200 group-hover:text-gray-700">{reason.description}</p>
-            </div>
-          ))}
+          {reasons.map((reason, index) => {
+            const isVisible = visibleItems.includes(index) || showAllFallback;
+            console.log(`Card ${index}: isVisible=${isVisible}`);
+            
+            return (
+              <div 
+                key={index} 
+                className={`bg-gray-50 p-6 rounded-lg transition-all duration-600 hover:shadow-lg hover:bg-white group cursor-pointer border border-transparent hover:border-blue-200 ${
+                  isVisible 
+                    ? 'opacity-100 translate-y-0' 
+                    : 'opacity-0 translate-y-5'
+                }`}
+                style={{
+                  // Fallback styles to ensure visibility
+                  opacity: isVisible ? 1 : (showAllFallback ? 1 : 0),
+                  transform: isVisible ? 'translateY(0)' : (showAllFallback ? 'translateY(0)' : 'translateY(20px)'),
+                  transitionDelay: isVisible ? `${index * 100}ms` : '0ms'
+                }}
+              >
+                <div className="text-4xl mb-4 transition-transform duration-200 group-hover:scale-110">{reason.icon}</div>
+                <h3 className="text-xl font-bold mb-2 transition-colors duration-200 group-hover:text-blue-600">{reason.title}</h3>
+                <p className="text-gray-600 transition-colors duration-200 group-hover:text-gray-700">{reason.description}</p>
+              </div>
+            );
+          })}
         </div>
         
         <div 
