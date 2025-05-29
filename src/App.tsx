@@ -1,9 +1,8 @@
-// ... keep existing code (imports and other components)
 import { HelmetProvider } from 'react-helmet-async';
 import { Routes, Route } from 'react-router-dom';
 import { Toaster } from 'sonner';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from '@/contexts/AuthContext';
-import { QueryClient } from '@/components/QueryClient';
 import RouteChangeTracker from '@/components/RouteChangeTracker';
 import ScrollTracker from '@/components/ScrollTracker';
 import ProtectedRoute from '@/components/ProtectedRoute';
@@ -38,11 +37,14 @@ import PagesManagement from '@/pages/admin/PagesManagement';
 import MediaManagement from '@/pages/admin/MediaManagement';
 import SettingsPage from '@/pages/admin/SettingsPage';
 
+// Create a query client instance
+const queryClient = new QueryClient();
+
 function App() {
   return (
     <HelmetProvider>
       <AuthProvider>
-        <QueryClient>
+        <QueryClientProvider client={queryClient}>
           <div className="min-h-screen bg-gray-50">
             <Toaster />
             <RouteChangeTracker />
@@ -82,7 +84,7 @@ function App() {
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
-        </QueryClient>
+        </QueryClientProvider>
       </AuthProvider>
     </HelmetProvider>
   );
