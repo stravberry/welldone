@@ -59,6 +59,7 @@ export const useScrollAnimation = <T extends HTMLElement = HTMLElement>(options:
 export const useStaggeredAnimation = <T extends HTMLElement = HTMLElement>(itemCount: number, delay: number = 100) => {
   const [visibleItems, setVisibleItems] = useState<number[]>([]);
   const [hasTriggered, setHasTriggered] = useState(false);
+  const [showAllFallback, setShowAllFallback] = useState(false);
   const { elementRef, isInView } = useScrollAnimation<T>({
     threshold: 0.02,
     rootMargin: '100px',
@@ -66,12 +67,19 @@ export const useStaggeredAnimation = <T extends HTMLElement = HTMLElement>(itemC
   });
 
   useEffect(() => {
+    // Fallback timer to show all items after 2 seconds
+    const fallbackTimer = setTimeout(() => {
+      setShowAllFallback(true);
+    }, 2000);
+
     if (isInView && !hasTriggered) {
       setHasTriggered(true);
       
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion) {
         setVisibleItems(Array.from({ length: itemCount }, (_, i) => i));
+        setShowAllFallback(true);
+        clearTimeout(fallbackTimer);
         return;
       }
 
@@ -89,11 +97,16 @@ export const useStaggeredAnimation = <T extends HTMLElement = HTMLElement>(itemC
 
       return () => {
         timeouts.forEach(timeout => clearTimeout(timeout));
+        clearTimeout(fallbackTimer);
       };
     }
+
+    return () => {
+      clearTimeout(fallbackTimer);
+    };
   }, [isInView, itemCount, delay, hasTriggered]);
 
-  return { elementRef, visibleItems };
+  return { elementRef, visibleItems, showAllFallback };
 };
 
 export const useCounterAnimation = <T extends HTMLElement = HTMLElement>(endValue: number, duration: number = 1000) => {
