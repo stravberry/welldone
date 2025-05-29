@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Phone, Mail, Zap, CheckCircle, Award, Users, Shield, Target, Star } from 'lucide-react';
@@ -123,14 +124,14 @@ const SepPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div ref={heroRef} className="relative bg-gradient-to-br from-yellow-600 via-yellow-500 to-yellow-400 py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <div ref={heroRef} className="relative bg-gradient-to-br from-yellow-600 via-yellow-500 to-yellow-400 py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-32 h-32 bg-white rounded-full animate-pulse"></div>
           <div className="absolute bottom-10 right-10 w-24 h-24 bg-white rounded-full animate-pulse delay-1000"></div>
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className={`flex items-center space-x-2 text-yellow-100 mb-8 transition-all duration-600 ${
+          <div className={`flex items-center space-x-2 text-yellow-100 mb-4 transition-all duration-600 ${
             heroInView || showAllItems ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
           }`}>
             <Link to="/" className="hover:text-white transition-colors">Strona główna</Link>
@@ -140,7 +141,7 @@ const SepPage = () => {
             <span className="text-white font-medium">Uprawnienia SEP</span>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div>
               <div className={`inline-block bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full text-sm font-medium mb-6 transition-all duration-800 ${
                 heroInView || showAllItems ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
@@ -183,14 +184,14 @@ const SepPage = () => {
               </div>
             </div>
 
-            {/* Simple Large Lightning Bolt Icon */}
-            <div className={`flex justify-center items-center transition-all duration-800 ${
+            {/* Large Lightning Bolt Icon - 300% bigger */}
+            <div className={`flex justify-center items-center h-96 overflow-hidden transition-all duration-800 ${
               heroInView || showAllItems ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
             }`}>
-              <div className="relative">
+              <div className="relative flex justify-center items-center">
                 <svg
-                  width="600"
-                  height="600"
+                  width="1800"
+                  height="1800"
                   viewBox="0 0 100 100"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -211,11 +212,11 @@ const SepPage = () => {
                   />
                 </svg>
                 
-                {/* Simple energy particles */}
-                <div className="absolute top-16 right-16 w-5 h-5 bg-white rounded-full animate-ping opacity-75"></div>
-                <div className="absolute bottom-20 left-16 w-4 h-4 bg-yellow-200 rounded-full animate-pulse delay-300"></div>
-                <div className="absolute top-32 left-24 w-3 h-3 bg-white rounded-full animate-ping delay-700"></div>
-                <div className="absolute top-20 right-24 w-4 h-4 bg-yellow-300 rounded-full animate-pulse delay-500"></div>
+                {/* Energy particles - adjusted for new size */}
+                <div className="absolute top-64 right-64 w-5 h-5 bg-white rounded-full animate-ping opacity-75"></div>
+                <div className="absolute bottom-80 left-64 w-4 h-4 bg-yellow-200 rounded-full animate-pulse delay-300"></div>
+                <div className="absolute top-128 left-96 w-3 h-3 bg-white rounded-full animate-ping delay-700"></div>
+                <div className="absolute top-80 right-96 w-4 h-4 bg-yellow-300 rounded-full animate-pulse delay-500"></div>
               </div>
             </div>
           </div>
