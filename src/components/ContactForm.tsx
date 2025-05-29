@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -11,14 +11,22 @@ import useEventTracking from '@/hooks/useEventTracking';
 interface ContactFormProps {
   title?: string;
   subtitle?: string;
+  initialMessage?: string;
 }
 
 const ContactForm: React.FC<ContactFormProps> = ({ 
   title = "Skontaktuj się z nami", 
-  subtitle = "Wypełnij formularz, a nasz zespół skontaktuje się z Tobą najszybciej jak to możliwe."
+  subtitle = "Wypełnij formularz, a nasz zespół skontaktuje się z Tobą najszybciej jak to możliwe.",
+  initialMessage = ""
 }) => {
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm();
   const { trackEvent } = useEventTracking();
+
+  useEffect(() => {
+    if (initialMessage) {
+      setValue('message', initialMessage);
+    }
+  }, [initialMessage, setValue]);
 
   const onSubmit = (data: any) => {
     console.log(data);

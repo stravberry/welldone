@@ -6,11 +6,13 @@ import { Button } from '@/components/ui/button';
 import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/useScrollAnimation';
 import useEventTracking from '@/hooks/useEventTracking';
 import useScrollToTop from '@/hooks/useScrollToTop';
+import ContactForm from '@/components/ContactForm';
 
 const LutowaniePage = () => {
   const { trackEvent } = useEventTracking();
   const [showContactForm, setShowContactForm] = useState(false);
   const [showAllItems, setShowAllItems] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState<string>('');
   
   useScrollToTop();
 
@@ -110,6 +112,14 @@ const LutowaniePage = () => {
     return showAllItems || visibleItems.includes(index);
   };
 
+  const handleCourseRegistration = (courseTitle: string) => {
+    setSelectedCourse(courseTitle);
+    const contactSection = document.getElementById('contact-form');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -157,7 +167,12 @@ const LutowaniePage = () => {
                 <Button 
                   size="lg" 
                   className="bg-white text-red-600 hover:bg-red-50 hover:scale-105 transition-all duration-300 shadow-xl"
-                  onClick={() => setShowContactForm(true)}
+                  onClick={() => {
+                    const contactSection = document.getElementById('contact-form');
+                    if (contactSection) {
+                      contactSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
                 >
                   <Phone className="mr-2 h-5 w-5" />
                   Zapisz się na kurs
@@ -165,10 +180,10 @@ const LutowaniePage = () => {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="border-2 border-white text-white hover:bg-white hover:text-red-600 hover:scale-105 transition-all duration-300"
+                  className="border-2 border-white text-red-600 bg-white hover:bg-red-50 hover:scale-105 transition-all duration-300"
                 >
                   <Mail className="mr-2 h-5 w-5" />
-                  Pobierz program
+                  Błyskawiczna wycena
                 </Button>
               </div>
             </div>
@@ -228,7 +243,10 @@ const LutowaniePage = () => {
                     </div>
                   ))}
                 </div>
-                <Button className="w-full bg-red-600 hover:bg-red-700">
+                <Button 
+                  className="w-full bg-red-600 hover:bg-red-700"
+                  onClick={() => handleCourseRegistration(course.title)}
+                >
                   Zapisz się na kurs
                 </Button>
               </div>
@@ -259,6 +277,17 @@ const LutowaniePage = () => {
         </div>
       </div>
 
+      {/* Contact Form Section */}
+      <div id="contact-form" className="bg-gray-50 py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <ContactForm 
+            title="Zapisz się na kurs lutowania"
+            subtitle="Wypełnij formularz, a nasz konsultant skontaktuje się z Tobą w ciągu 24 godzin"
+            initialMessage={selectedCourse ? `Jestem zainteresowany kursem ${selectedCourse}` : ''}
+          />
+        </div>
+      </div>
+
       {/* CTA Section */}
       <div className="relative bg-gradient-to-r from-red-600 to-red-500 py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
@@ -272,14 +301,19 @@ const LutowaniePage = () => {
             <Button 
               size="lg" 
               className="bg-white text-red-600 hover:bg-red-50 hover:scale-105 transition-all duration-300 shadow-xl"
-              onClick={() => setShowContactForm(true)}
+              onClick={() => {
+                const contactSection = document.getElementById('contact-form');
+                if (contactSection) {
+                  contactSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
             >
               Zapisz się teraz
             </Button>
             <Button 
               size="lg" 
               variant="outline" 
-              className="border-2 border-white text-white hover:bg-white hover:text-red-600 hover:scale-105 transition-all duration-300"
+              className="border-2 border-white text-red-600 bg-white hover:bg-red-50 hover:scale-105 transition-all duration-300"
             >
               Skontaktuj się z nami
             </Button>

@@ -39,7 +39,7 @@ const Navbar = () => {
     { title: 'Uprawnienia UDT dla operatorów', href: '/uslugi/udt-operatorzy' },
     { title: 'Uprawnienia UDT dla konserwatorów', href: '/udt-konserwatorze' },
     { title: 'Uprawnienia SEP', href: '/sep' },
-    { title: 'Szkolenia z lutowania', href: '/uslugi/lutowanie' },
+    { title: 'Szkolenia z lutowania', href: '/lutowanie' },
     { title: 'Eventy edukacyjne', href: '/uslugi/eventy' },
   ];
 

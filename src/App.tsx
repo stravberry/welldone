@@ -74,6 +74,7 @@ function App() {
                   <Route path="/bezplatny-audyt" element={<FreeAuditPage />} />
                   <Route path="/eventy" element={<EventyPage />} />
                   <Route path="/lutowanie" element={<LutowaniePage />} />
+                  <Route path="/uslugi/lutowanie" element={<LutowaniePage />} />
                   <Route path="/cms-login" element={<CMSLoginPage />} />
                   
                   {/* Admin routes */}
