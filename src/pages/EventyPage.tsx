@@ -5,11 +5,27 @@ import { Button } from '@/components/ui/button';
 import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/useScrollAnimation';
 import useEventTracking from '@/hooks/useEventTracking';
 import useScrollToTop from '@/hooks/useScrollToTop';
+import EventyContactForm from './components/EventyContactForm';
+
+interface FormData {
+  name: string;
+  company: string;
+  email: string;
+  phone: string;
+  message: string;
+}
 
 const EventyPage = () => {
   const { trackEvent } = useEventTracking();
   const [showContactForm, setShowContactForm] = useState(false);
   const [showAllItems, setShowAllItems] = useState(false);
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    company: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
   
   useScrollToTop();
 
@@ -25,6 +41,37 @@ const EventyPage = () => {
     }, 2000);
     return () => clearTimeout(fallbackTimer);
   }, []);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle form submission here
+    console.log('Form submitted:', formData);
+    trackEvent({
+      category: 'form',
+      action: 'submit',
+      label: 'eventy-contact-form'
+    });
+  };
+
+  const scrollToContactForm = (courseName: string) => {
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.scrollIntoView({ behavior: 'smooth' });
+      // Auto-fill message with course name
+      setFormData(prev => ({
+        ...prev,
+        message: `Jestem zainteresowany kursem ${courseName}`
+      }));
+    }
+  };
 
   const services = [
     {
@@ -248,7 +295,12 @@ const EventyPage = () => {
                 <Button 
                   size="lg" 
                   className="bg-white text-purple-600 hover:bg-purple-50 hover:scale-105 transition-all duration-300 shadow-xl"
-                  onClick={() => setShowContactForm(true)}
+                  onClick={() => {
+                    const contactForm = document.getElementById('contact-form');
+                    if (contactForm) {
+                      contactForm.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
                 >
                   <Phone className="mr-2 h-5 w-5" />
                   Skontaktuj się z nami
@@ -256,10 +308,13 @@ const EventyPage = () => {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="border-2 border-white text-white hover:bg-white hover:text-purple-600 hover:scale-105 transition-all duration-300"
+                  className="border-2 border-white text-purple-600 hover:bg-white hover:text-purple-600 hover:scale-105 transition-all duration-300"
+                  asChild
                 >
-                  <Mail className="mr-2 h-5 w-5" />
-                  Otrzymaj wycenę
+                  <Link to="/wycena">
+                    <Mail className="mr-2 h-5 w-5" />
+                    Błyskawiczna wycena
+                  </Link>
                 </Button>
               </div>
             </div>
@@ -319,8 +374,11 @@ const EventyPage = () => {
                     </div>
                   ))}
                 </div>
-                <Button className="w-full bg-purple-600 hover:bg-purple-700">
-                  Zamów event
+                <Button 
+                  className="w-full bg-purple-600 hover:bg-purple-700"
+                  onClick={() => scrollToContactForm(service.title)}
+                >
+                  Zapisz się na kurs
                 </Button>
               </div>
             </div>
@@ -363,20 +421,35 @@ const EventyPage = () => {
             <Button 
               size="lg" 
               className="bg-white text-purple-600 hover:bg-purple-50 hover:scale-105 transition-all duration-300 shadow-xl"
-              onClick={() => setShowContactForm(true)}
+              onClick={() => {
+                const contactForm = document.getElementById('contact-form');
+                if (contactForm) {
+                  contactForm.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
             >
               Skontaktuj się z nami
             </Button>
             <Button 
               size="lg" 
               variant="outline" 
-              className="border-2 border-white text-white hover:bg-white hover:text-purple-600 hover:scale-105 transition-all duration-300"
+              className="border-2 border-white text-purple-600 hover:bg-white hover:text-purple-600 hover:scale-105 transition-all duration-300"
+              asChild
             >
-              Otrzymaj wycenę
+              <Link to="/wycena">
+                Błyskawiczna wycena
+              </Link>
             </Button>
           </div>
         </div>
       </div>
+
+      {/* Contact Form Section */}
+      <EventyContactForm 
+        formData={formData}
+        handleInputChange={handleInputChange}
+        handleSubmit={handleSubmit}
+      />
 
       <Link 
         to="/uslugi" 
