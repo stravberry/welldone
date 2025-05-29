@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Phone, Mail, Zap, CheckCircle, Award, Users, Shield, Target, Star } from 'lucide-react';
@@ -129,37 +130,6 @@ const SepPage = () => {
           <div className="absolute bottom-10 right-10 w-24 h-24 bg-white rounded-full animate-pulse delay-1000"></div>
         </div>
 
-        {/* Lightning Bolt Background Icon - positioned more to the left and larger */}
-        <div className={`absolute right-16 top-0 bottom-0 flex justify-center items-center transition-all duration-800 ${
-          heroInView || showAllItems ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-        }`}>
-          <svg
-            width="800"
-            height="800"
-            viewBox="0 0 200 200"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="opacity-8"
-          >
-            <g className="text-yellow-200">
-              {/* Simple Lightning Bolt */}
-              <path 
-                d="M80 20 L60 90 L90 90 L70 180 L120 70 L95 70 L120 20 Z" 
-                fill="currentColor" 
-                opacity="0.6"
-              />
-              {/* Lightning glow effect */}
-              <path 
-                d="M80 20 L60 90 L90 90 L70 180 L120 70 L95 70 L120 20 Z" 
-                stroke="currentColor" 
-                strokeWidth="4" 
-                fill="none" 
-                opacity="0.4"
-              />
-            </g>
-          </svg>
-        </div>
-
         <div className="max-w-7xl mx-auto relative z-10">
           <div className={`flex items-center space-x-2 text-yellow-100 mb-8 transition-all duration-600 ${
             heroInView || showAllItems ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
@@ -214,7 +184,41 @@ const SepPage = () => {
               </div>
             </div>
 
-            {/* Right column - kept empty since we moved the symbol to background */}
+            {/* Modern Electric Icon - positioned on the right side of content */}
+            <div className={`flex justify-center items-center transition-all duration-800 ${
+              heroInView || showAllItems ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+            }`}>
+              <div className="relative">
+                <svg
+                  width="300"
+                  height="300"
+                  viewBox="0 0 100 100"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="text-yellow-100"
+                >
+                  {/* Modern Lightning Bolt */}
+                  <path 
+                    d="M35 20 L30 45 L45 45 L25 80 L65 35 L50 35 L70 20 Z" 
+                    fill="currentColor" 
+                    opacity="0.9"
+                  />
+                  {/* Glow effect */}
+                  <path 
+                    d="M35 20 L30 45 L45 45 L25 80 L65 35 L50 35 L70 20 Z" 
+                    stroke="white" 
+                    strokeWidth="2" 
+                    fill="none" 
+                    opacity="0.7"
+                  />
+                </svg>
+                
+                {/* Floating particles for modern effect */}
+                <div className="absolute top-4 right-4 w-2 h-2 bg-white rounded-full animate-ping opacity-75"></div>
+                <div className="absolute bottom-6 left-6 w-1.5 h-1.5 bg-yellow-200 rounded-full animate-pulse delay-300"></div>
+                <div className="absolute top-12 left-8 w-1 h-1 bg-white rounded-full animate-ping delay-700"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
