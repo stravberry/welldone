@@ -59,9 +59,9 @@ const InteractiveProcessSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={elementRef}>
-        <div className="text-center mb-16">
+    <section className="py-24 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12" ref={elementRef}>
+        <div className="text-center mb-20">
           <h2 className={`text-3xl md:text-4xl font-bold text-gray-900 mb-6 transition-all duration-800 ${
             isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
           }`}>
@@ -76,21 +76,21 @@ const InteractiveProcessSection: React.FC = () => {
         </div>
 
         {/* Desktop Timeline */}
-        <div className="hidden lg:block mb-16">
-          <div className="relative">
+        <div className="hidden lg:block mb-20">
+          <div className="relative px-8 py-12">
             {/* Progress line */}
-            <div className="absolute top-16 left-0 w-full h-1 bg-gray-300 rounded-full">
+            <div className="absolute top-20 left-8 right-8 h-1 bg-gray-300 rounded-full">
               <div 
                 className="h-full bg-gradient-to-r from-orange-500 to-amber-500 rounded-full transition-all duration-1000 ease-out"
                 style={{ width: `${((activeStep + 1) / steps.length) * 100}%` }}
               ></div>
             </div>
 
-            <div className="grid grid-cols-4 gap-8 relative z-10">
+            <div className="grid grid-cols-4 gap-12 relative z-10">
               {steps.map((step, index) => (
                 <div
                   key={index}
-                  className={`text-center cursor-pointer transition-all duration-500 ${
+                  className={`text-center cursor-pointer transition-all duration-500 px-4 ${
                     isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                   }`}
                   style={{ transitionDelay: `${index * 200}ms` }}
@@ -98,7 +98,7 @@ const InteractiveProcessSection: React.FC = () => {
                   onMouseEnter={() => setActiveStep(index)}
                 >
                   {/* Step number and icon */}
-                  <div className={`mx-auto w-16 h-16 rounded-full flex items-center justify-center mb-4 transition-all duration-300 shadow-lg ${
+                  <div className={`mx-auto w-20 h-20 rounded-full flex items-center justify-center mb-6 transition-all duration-300 shadow-lg ${
                     activeStep >= index 
                       ? 'bg-gradient-to-br from-orange-500 to-amber-500 text-white scale-110' 
                       : 'bg-white text-gray-500 border-2 border-gray-300 hover:border-orange-300'
@@ -107,7 +107,7 @@ const InteractiveProcessSection: React.FC = () => {
                   </div>
 
                   {/* Step title */}
-                  <h3 className={`text-lg font-semibold mb-2 transition-colors duration-300 px-2 ${
+                  <h3 className={`text-lg font-semibold mb-4 transition-colors duration-300 px-2 ${
                     activeStep >= index ? 'text-orange-600' : 'text-gray-700'
                   }`}>
                     {step.title}
@@ -123,17 +123,17 @@ const InteractiveProcessSection: React.FC = () => {
           </div>
 
           {/* Active step details */}
-          <div className="mt-16 bg-white rounded-2xl p-8 shadow-xl border border-gray-200">
-            <div className="flex items-center mb-6">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center text-white mr-4 shadow-md">
+          <div className="mt-20 bg-white rounded-2xl p-10 shadow-xl border border-gray-200">
+            <div className="flex items-center mb-8">
+              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center text-white mr-6 shadow-md">
                 {steps[activeStep].icon}
               </div>
               <h3 className="text-2xl font-bold text-gray-900">{steps[activeStep].title}</h3>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {steps[activeStep].details.map((detail, index) => (
-                <div key={index} className="flex items-center p-3 rounded-lg bg-orange-50">
-                  <ChevronRight className="h-5 w-5 text-orange-500 mr-3 flex-shrink-0" />
+                <div key={index} className="flex items-center p-4 rounded-lg bg-orange-50">
+                  <ChevronRight className="h-5 w-5 text-orange-500 mr-4 flex-shrink-0" />
                   <span className="text-gray-700 font-medium">{detail}</span>
                 </div>
               ))}
@@ -142,26 +142,26 @@ const InteractiveProcessSection: React.FC = () => {
         </div>
 
         {/* Mobile Layout */}
-        <div className="lg:hidden space-y-6">
+        <div className="lg:hidden space-y-8">
           {steps.map((step, index) => (
             <div
               key={index}
-              className={`bg-white rounded-2xl p-6 shadow-lg border border-gray-200 transition-all duration-500 ${
+              className={`bg-white rounded-2xl p-8 shadow-lg border border-gray-200 transition-all duration-500 ${
                 isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
               style={{ transitionDelay: `${index * 200}ms` }}
             >
               <div className="flex items-start">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center text-white mr-4 flex-shrink-0 shadow-md">
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center text-white mr-6 flex-shrink-0 shadow-md">
                   <span className="text-lg font-bold">{step.number}</span>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{step.title}</h3>
-                  <p className="text-gray-600 mb-4 leading-relaxed">{step.description}</p>
-                  <div className="space-y-2">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4">{step.title}</h3>
+                  <p className="text-gray-600 mb-6 leading-relaxed">{step.description}</p>
+                  <div className="space-y-3">
                     {step.details.map((detail, detailIndex) => (
-                      <div key={detailIndex} className="flex items-center p-2 rounded bg-orange-50">
-                        <ChevronRight className="h-4 w-4 text-orange-500 mr-2 flex-shrink-0" />
+                      <div key={detailIndex} className="flex items-center p-3 rounded bg-orange-50">
+                        <ChevronRight className="h-4 w-4 text-orange-500 mr-3 flex-shrink-0" />
                         <span className="text-sm text-gray-700 font-medium">{detail}</span>
                       </div>
                     ))}
