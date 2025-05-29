@@ -1,15 +1,18 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Award, Users, Briefcase, BarChart, CheckCircle, BookOpen, Clock, ThumbsUp } from 'lucide-react';
+import { ArrowRight, Award, Users, Briefcase, BarChart, CheckCircle, BookOpen, Clock, ThumbsUp, Zap, Target, Star } from 'lucide-react';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import ServiceCard from '@/components/ServiceCard';
-import Testimonial from '@/components/Testimonial';
 import FAQ from '@/components/FAQ';
 import ProcessStep from '@/components/ProcessStep';
 import { useScrollAnimation, useStaggeredAnimation, useCounterAnimation } from '@/hooks/useScrollAnimation';
 import AuditCard from '@/components/AuditCard';
 import AuditStatsCounter from '@/components/AuditStatsCounter';
+import PartnersSection from '@/components/PartnersSection';
+import EnhancedTestimonialsSection from '@/components/EnhancedTestimonialsSection';
+import BottomQuoteForm from '@/components/BottomQuoteForm';
 
 const HomePage = () => {
   const { elementRef: statsRef, visibleItems, showAllFallback } = useStaggeredAnimation<HTMLDivElement>(4, 300);
@@ -62,7 +65,7 @@ const HomePage = () => {
     },
     {
       question: "Jak wygląda proces współpracy?",
-      answer: "Proces współpracy jest uzależniony od sytuacji klienta. Jeśli klient wie jakiego typu rozwiązań potrzebuje, dostaraczmy błyskawiczną wycenę która pozwala mu zrozumieć pełny koszt współpracy. Natomiast dla firm które potrzebują kompleksowego wsparcia i identyfikacji możliwych sposobów optymalizacji kosztów szkoleń rekomendujemy rozpoczęcie od audytu, który pozwala nam na zrozumienie potrzeb szkoleniowych firmy."
+      answer: "Proces współpracy jest uzależniony od sytuacji klienta. Jeśli klient wie jakiego typu rozwiązań potrzebuje, dostarczamy błyskawiczną wycenę która pozwala mu zrozumieć pełny koszt współpracy. Natomiast dla firm które potrzebują kompleksowego wsparcia i identyfikacji możliwych sposobów optymalizacji kosztów szkoleń rekomendujemy rozpoczęcie od audytu, który pozwala nam na zrozumienie potrzeb szkoleniowych firmy."
     },
     {
       question: "Jakie doświadczenie posiada Wasz zespół?",
@@ -105,9 +108,9 @@ const HomePage = () => {
   
   const benefits = [
     {
-      title: "Elastyczny harmonogram",
-      description: "Dostosowujemy terminy szkoleń do Twojego harmonogramu pracy.",
-      icon: <Clock size={24} className="text-orange-500" />
+      title: "Błyskawiczne wyceny",
+      description: "Otrzymaj szczegółową wycenę w ciągu 15 minut w godzinach pracy.",
+      icon: <Zap size={24} className="text-orange-500" />
     },
     {
       title: "Doświadczeni trenerzy",
@@ -117,75 +120,101 @@ const HomePage = () => {
     {
       title: "Szkolenia szyte na miarę",
       description: "Każde szkolenie jest dopasowane do specyficznych potrzeb Twojej firmy.",
-      icon: <CheckCircle size={24} className="text-orange-500" />
+      icon: <Target size={24} className="text-orange-500" />
     },
     {
-      title: "Najwyższa jakość",
-      description: "Gwarantujemy najwyższą jakość szkoleń i wsparcie na każdym etapie.",
-      icon: <ThumbsUp size={24} className="text-orange-500" />
+      title: "Gwarancja jakości",
+      description: "Certyfikowane szkolenia zgodne z wymogami UDT i SEP oraz najwyższymi standardami.",
+      icon: <Star size={24} className="text-orange-500" />
     }
   ];
 
   // Improved StatCard with proper fallback logic
   const StatCard = ({ value, label, delay }: { value: number; label: string; delay: number }) => {
     const { elementRef, count } = useCounterAnimation<HTMLDivElement>(value, 2000);
-    const index = Math.floor(delay / 300); // Updated to match new delay
+    const index = Math.floor(delay / 300);
     const isVisible = visibleItems.includes(index) || showAllFallback;
-    
-    console.log(`StatCard ${label}: index=${index}, isVisible=${isVisible}, visibleItems=`, visibleItems, 'showAllFallback=', showAllFallback);
     
     return (
       <div 
         ref={elementRef}
-        className="bg-orange-50 rounded-lg p-6 text-center"
+        className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center border border-white/20 hover:bg-white/15 transition-all duration-300"
         style={{ 
-          opacity: 1, // Always show card
-          transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+          opacity: 1,
+          transform: isVisible ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.95)',
           transition: 'all 0.6s ease-out',
           transitionDelay: isVisible ? `${delay}ms` : '0ms'
         }}
       >
-        <div className="text-3xl font-bold text-orange-600 mb-2">
+        <div className="text-4xl font-bold text-white mb-2">
           {isVisible ? count : value}{value >= 1000 ? '+' : value === 80 || value === 96 ? '%' : '+'}
         </div>
-        <div className="text-gray-600">{label}</div>
+        <div className="text-orange-100 font-medium">{label}</div>
       </div>
     );
   };
 
   return (
     <div>
-      {/* Hero Section */}
-      <section className="hero-gradient text-white py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Enhanced Hero Section */}
+      <section className="relative overflow-hidden">
+        {/* Enhanced gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-600 via-orange-500 to-red-500" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+        
+        {/* Animated background elements */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-white/10 rounded-full blur-2xl animate-float" style={{ animationDelay: '2s' }} />
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                Pomagamy firmom produkcyjnym działać bez ryzyka
+              <div className="mb-6">
+                <span className="bg-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide animate-pulse-slow">
+                  ✓ Zaufane przez liderów rynku
+                </span>
+              </div>
+              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                Pomagamy firmom produkcyjnym 
+                <span className="bg-gradient-to-r from-yellow-200 to-orange-200 bg-clip-text text-transparent"> działać bez ryzyka</span>
               </h1>
-              <p className="text-lg mb-8">
+              <p className="text-xl text-orange-50 mb-8 leading-relaxed">
                 Zapewniamy pełną zgodność uprawnień UDT i SEP dla pracowników. Stosujemy procesowe podejście, które umożliwia precyzyjne dopasowanie szkoleń do indywidualnych potrzeb klienta.
               </p>
+              
+              {/* Enhanced stats in hero */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8" ref={statsRef}>
+                <StatCard value={10} label="lat doświadczenia" delay={0} />
+                <StatCard value={500} label="zadowolonych firm" delay={300} />
+                <StatCard value={1000} label="zrealizowanych szkoleń" delay={600} />
+                <StatCard value={96} label="zadowolonych klientów" delay={900} />
+              </div>
+              
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-gray-100">
-                  <Link to="/o-nas">Dlaczego My?</Link>
+                <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-orange-50 font-bold shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 hover:-translate-y-1">
+                  <Link to="/wycena">
+                    <Zap className="mr-2 h-5 w-5" />
+                    Błyskawiczna Wycena
+                  </Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="bg-orange-500 text-white hover:bg-orange-600 border-orange-500 hover:border-orange-600">
-                  <Link to="/wycena">Błyskawiczna Wycena</Link>
+                <Button asChild size="lg" variant="outline" className="bg-transparent text-white border-white hover:bg-white hover:text-orange-600 font-bold">
+                  <Link to="/o-nas">Dlaczego My?</Link>
                 </Button>
               </div>
             </div>
             <div className="flex items-center justify-center">
               <div className="w-full max-w-md">
                 <AspectRatio ratio={16/9}>
-                  <iframe 
-                    src="https://www.youtube.com/embed/8QDIVIU9QZQ" 
-                    title="Well-Done.pl Company Presentation" 
-                    className="w-full h-full border-none" 
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowFullScreen
-                  ></iframe>
+                  <div className="bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 overflow-hidden shadow-2xl">
+                    <iframe 
+                      src="https://www.youtube.com/embed/8QDIVIU9QZQ" 
+                      title="Well-Done.pl Company Presentation" 
+                      className="w-full h-full border-none" 
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                      allowFullScreen
+                    ></iframe>
+                  </div>
                 </AspectRatio>
               </div>
             </div>
@@ -193,13 +222,23 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-16 bg-gray-50">
+      {/* Partners Section */}
+      <PartnersSection />
+
+      {/* Enhanced Services Section */}
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-orange-25">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Nasze Usługi</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Oferujemy kompleksowe szkolenia dla firm produkcyjnych, które chcą zapewnić swoim pracownikom niezbędne uprawnienia.
+          <div className="text-center mb-16">
+            <div className="inline-block mb-4">
+              <span className="bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide">
+                Nasze usługi
+              </span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Kompleksowe szkolenia dla firm produkcyjnych
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Oferujemy pełen zakres szkoleń, które zapewnią Twoim pracownikom niezbędne uprawnienia i certyfikaty.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -214,41 +253,40 @@ const HomePage = () => {
               />
             ))}
           </div>
+          
+          {/* CTA for services */}
+          <div className="text-center mt-12">
+            <Button asChild size="lg" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105">
+              <Link to="/uslugi">
+                Zobacz wszystkie usługi
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 
       {/* Why Choose Us Section */}
-      <WhyChooseUsSection benefits={benefits} statsRef={statsRef} visibleItems={visibleItems} StatCard={StatCard} showAllFallback={showAllFallback} />
+      <WhyChooseUsSection benefits={benefits} />
 
       {/* Process Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div 
-            className="text-center mb-12"
-            style={{
-              opacity: 1,
-              transform: 'translateY(0)',
-              transition: 'all 0.8s ease-out'
-            }}
-          >
-            <div className="relative inline-block">
-              <span className="text-orange-600 font-medium text-sm uppercase tracking-wide animate-pulse-slow">
+          <div className="text-center mb-16">
+            <div className="inline-block mb-4">
+              <span className="bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide">
                 Jak to działa?
               </span>
-              <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 animate-shimmer" />
             </div>
-            <h2 className="text-3xl font-bold mb-4 mt-4">
-              <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                Jak wygląda proces współpracy?
-              </span>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Jak wygląda proces współpracy?
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Nasze podejście jest oparte na jasno określonym procesie, który zapewnia skuteczne i efektywne szkolenia.
             </p>
           </div>
           
           <div className="relative">
-            {/* Background decoration */}
             <div className="absolute inset-0 bg-gradient-to-r from-orange-50 via-white to-orange-50 rounded-3xl opacity-50" />
             
             <div className="relative grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-4 p-8">
@@ -264,194 +302,62 @@ const HomePage = () => {
             </div>
           </div>
           
-          <div 
-            className="text-center mt-12"
-            style={{
-              opacity: 1,
-              transform: 'translateY(0)',
-              transition: 'all 0.8s ease-out',
-              transitionDelay: '1.8s'
-            }}
-          >
-            <div className="relative inline-block group">
-              <Button asChild size="lg" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105 relative overflow-hidden">
-                <Link to="/wycena">
-                  <span className="relative z-10">Uzyskaj Błyskawiczną Wycenę</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </Link>
-              </Button>
-              
-              {/* Animated background glow */}
-              <div className="absolute inset-0 bg-orange-400 rounded-lg opacity-30 blur-lg scale-110 group-hover:scale-125 transition-transform duration-500" />
-            </div>
+          <div className="text-center mt-12">
+            <Button asChild size="lg" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105">
+              <Link to="/wycena">
+                <Zap className="mr-2 h-5 w-5" />
+                Uzyskaj Błyskawiczną Wycenę
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Co mówią nasi klienci</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Współpracujemy z czołowymi firmami produkcyjnymi. Poznaj opinie naszych klientów.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Testimonial
-              quote="Dzięki współpracy z firmą, nasi pracownicy uzyskali certyfikaty UDT, co pozwoliło nam na podniesienie standardów bezpieczeństwa w firmie."
-              author="Jan Kowalski"
-              role="Specjalista BHP"
-              company="Firma X"
-            />
-            <Testimonial
-              quote="Profesjonalne szkolenia, które dostosowali do naszych potrzeb. Współpraca była szybka i bezproblemowa."
-              author="Anna Nowak"
-              role="HR Manager"
-              company="Firma Y"
-            />
-            <Testimonial
-              quote="Bezpłatny audyt pomógł nam zoptymalizować proces szkoleniowy, co przełożyło się na realne oszczędności."
-              author="Piotr Wiśniewski"
-              role="Dyrektor Operacyjny"
-              company="Firma Z"
-            />
-          </div>
-        </div>
-      </section>
+      {/* Enhanced Testimonials Section */}
+      <EnhancedTestimonialsSection />
 
-      {/* Free Audit CTA */}
-      <section className="py-12 lg:py-16 relative overflow-hidden">
-        {/* Background with gradient and geometric shapes */}
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-600 via-orange-500 to-orange-700" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-white/10 rounded-full blur-2xl animate-float" style={{ animationDelay: '2s' }} />
+      {/* Free Audit CTA - shortened version */}
+      <section className="py-16 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black" />
+        <div className="absolute inset-0 bg-gradient-to-t from-orange-900/20 to-transparent" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Header with animation */}
-          <div className="text-center mb-8 lg:mb-12">
-            <div 
-              className="inline-block mb-4"
-              style={{
-                opacity: 1,
-                transform: 'translateY(0)',
-                transition: 'all 0.8s ease-out'
-              }}
-            >
-              <span className="bg-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide">
-                Bezpłatna analiza
-              </span>
-            </div>
-            <h2 
-              className="text-4xl lg:text-5xl font-bold text-white mb-6"
-              style={{
-                opacity: 1,
-                transform: 'translateY(0)',
-                transition: 'all 0.8s ease-out',
-                transitionDelay: '200ms'
-              }}
-            >
+          <div className="text-center">
+            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
               Skorzystaj z bezpłatnego audytu
             </h2>
-            <p 
-              className="text-xl text-orange-50 max-w-3xl mx-auto leading-relaxed"
-              style={{
-                opacity: 1,
-                transform: 'translateY(0)',
-                transition: 'all 0.8s ease-out',
-                transitionDelay: '400ms'
-              }}
-            >
-              Zastanawiasz się, czy Twoje szkolenia są odpowiednio dobrane i czy nie przepłacasz za uzyskiwanie uprawnień pracowników? Skorzystaj z bezpłatnego audytu i dowiedz się, jak możemy pomóc.
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+              Zastanawiasz się, czy Twoje szkolenia są odpowiednio dobrane? Skorzystaj z bezpłatnego audytu i odkryj potencjał oszczędności.
             </p>
-          </div>
-
-          {/* Stats Section */}
-          <div 
-            className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-12"
-            style={{
-              opacity: 1,
-              transform: 'translateY(0)',
-              transition: 'all 0.8s ease-out',
-              transitionDelay: '600ms'
-            }}
-          >
-            <AuditStatsCounter value={150} label="Przeprowadzonych audytów" suffix="+" index={0} />
-            <AuditStatsCounter value={95} label="Zadowolonych klientów" suffix="%" index={1} />
-            <AuditStatsCounter value={30} label="Średnia oszczędność" suffix="%" index={2} />
-            <AuditStatsCounter value={48} label="Godzin na audyt" suffix="h" index={3} />
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            {/* Left side - CTA */}
-            <div 
-              className="order-2 lg:order-1"
-              style={{
-                opacity: 1,
-                transform: 'translateX(0)',
-                transition: 'all 1s ease-out',
-                transitionDelay: '800ms'
-              }}
-            >
-              <div className="space-y-6">
-                <h3 className="text-2xl font-bold text-white mb-4">
-                  Odkryj potencjał oszczędności w swojej firmie
-                </h3>
-                <p className="text-orange-50 text-lg leading-relaxed">
-                  Nasz bezpłatny audyt pomoże Ci zidentyfikować obszary, w których możesz zoptymalizować koszty szkoleń i poprawić efektywność procesu certyfikacji pracowników.
-                </p>
-                <div className="relative inline-block group">
-                  <div className="absolute inset-0 bg-white rounded-lg blur opacity-25 group-hover:opacity-50 transition-opacity duration-300" />
-                  <Button asChild size="lg" className="relative bg-white text-orange-600 hover:bg-orange-50 font-bold text-lg px-8 py-4 shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 hover:-translate-y-1">
-                    <Link to="/bezplatny-audyt">
-                      Zamów bezpłatny audyt
-                      <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-                    </Link>
-                  </Button>
-                </div>
-              </div>
+            
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              <AuditStatsCounter value={150} label="Przeprowadzonych audytów" suffix="+" index={0} />
+              <AuditStatsCounter value={95} label="Zadowolonych klientów" suffix="%" index={1} />
+              <AuditStatsCounter value={30} label="Średnia oszczędność" suffix="%" index={2} />
+              <AuditStatsCounter value={48} label="Godzin na audyt" suffix="h" index={3} />
             </div>
 
-            {/* Right side - Cards */}
-            <div className="order-1 lg:order-2 space-y-6">
-              <AuditCard
-                title="Ocena aktualnych szkoleń"
-                description="Przeanalizujemy, czy obecne szkolenia spełniają wszystkie wymagania prawne oraz czy odpowiadają na realne potrzeby Twojej firmy."
-                icon="check"
-                index={0}
-              />
-              <AuditCard
-                title="Weryfikacja uprawnień pracowników"
-                description="Sprawdzimy, czy wszyscy pracownicy posiadają wymagane uprawnienia do obsługi sprzętu i urządzeń."
-                icon="users"
-                index={1}
-              />
-              <AuditCard
-                title="Optymalizacja kosztów"
-                description="Pomożemy zidentyfikować, czy nie przepłacasz za szkolenia i certyfikacje, oraz wskażemy obszary, w których możesz zredukować koszty."
-                icon="dollar-sign"
-                index={2}
-              />
-            </div>
+            <Button asChild size="lg" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold text-lg px-8 py-4 shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105">
+              <Link to="/bezplatny-audyt">
+                Zamów bezpłatny audyt
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
 
       {/* FAQ Section */}
       <FAQ items={faqItems} />
+
+      {/* Bottom Quote Form */}
+      <BottomQuoteForm />
     </div>
   );
 };
 
-// Updated WhyChooseUsSection with improved props
-const WhyChooseUsSection = React.memo(({ benefits, statsRef, visibleItems, StatCard, showAllFallback }: { 
-  benefits: any[]; 
-  statsRef: React.RefObject<HTMLDivElement>; 
-  visibleItems: number[]; 
-  StatCard: any;
-  showAllFallback: boolean;
-}) => {
+// Updated WhyChooseUsSection
+const WhyChooseUsSection = React.memo(({ benefits }: { benefits: any[] }) => {
   const { elementRef: titleRef, isInView: titleInView } = useScrollAnimation<HTMLDivElement>({ 
     triggerOnce: true,
     threshold: 0.3
@@ -468,9 +374,9 @@ const WhyChooseUsSection = React.memo(({ benefits, statsRef, visibleItems, StatC
   });
 
   return (
-    <section className="py-16">
+    <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
             <div 
               ref={titleRef}
@@ -480,8 +386,15 @@ const WhyChooseUsSection = React.memo(({ benefits, statsRef, visibleItems, StatC
                 transform: titleInView ? 'translateY(0)' : 'translateY(30px)'
               }}
             >
-              <h2 className="text-3xl font-bold mb-6">Dlaczego warto z nami współpracować?</h2>
-              <p className="text-gray-600 mb-8">
+              <div className="inline-block mb-4">
+                <span className="bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide">
+                  Dlaczego My?
+                </span>
+              </div>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                Dlaczego warto z nami współpracować?
+              </h2>
+              <p className="text-xl text-gray-600 mb-8">
                 Wyróżniamy się elastycznością i zdolnością adaptacji do potrzeb klienta. Oferujemy szkolenia dostosowane do harmonogramu firm, możliwość szkoleń stacjonarnych, online oraz hybrydowych.
               </p>
             </div>
@@ -490,18 +403,18 @@ const WhyChooseUsSection = React.memo(({ benefits, statsRef, visibleItems, StatC
               {benefits.map((benefit, index) => (
                 <div 
                   key={index} 
-                  className="flex transition-all duration-700"
+                  className="flex items-start p-6 bg-gradient-to-r from-orange-50 to-transparent rounded-2xl hover:from-orange-100 transition-all duration-300"
                   style={{
                     opacity: benefitsInView ? 1 : 0,
                     transform: benefitsInView ? 'translateX(0)' : 'translateX(-30px)',
                     transitionDelay: benefitsInView ? `${index * 200}ms` : '0ms'
                   }}
                 >
-                  <div className="flex-shrink-0 mr-4 transition-transform duration-300 hover:scale-110">
+                  <div className="flex-shrink-0 mr-4 p-3 bg-orange-500 rounded-xl text-white transition-transform duration-300 hover:scale-110">
                     {benefit.icon}
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">{benefit.title}</h3>
+                    <h3 className="font-bold text-gray-900 text-lg mb-2">{benefit.title}</h3>
                     <p className="text-gray-600">{benefit.description}</p>
                   </div>
                 </div>
@@ -517,7 +430,7 @@ const WhyChooseUsSection = React.memo(({ benefits, statsRef, visibleItems, StatC
                 transitionDelay: buttonInView ? '800ms' : '0ms'
               }}
             >
-              <Button asChild className="hover:scale-105 transition-transform duration-300">
+              <Button asChild size="lg" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white hover:scale-105 transition-transform duration-300">
                 <Link to="/o-nas">
                   Poznaj nas lepiej <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
@@ -525,12 +438,31 @@ const WhyChooseUsSection = React.memo(({ benefits, statsRef, visibleItems, StatC
             </div>
           </div>
           
-          <div className="relative" ref={statsRef}>
-            <div className="grid grid-cols-2 gap-4">
-              <StatCard value={10} label="lat doświadczenia" delay={0} />
-              <StatCard value={500} label="zadowolonych firm" delay={300} />
-              <StatCard value={1000} label="zrealizowanych szkoleń" delay={600} />
-              <StatCard value={80} label="zleceń dla produkcji" delay={900} />
+          <div className="relative">
+            <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-3xl p-8 text-white transform rotate-3 hover:rotate-0 transition-transform duration-500">
+              <div className="space-y-6">
+                <div className="flex items-center">
+                  <Clock className="w-8 h-8 mr-4" />
+                  <div>
+                    <div className="text-2xl font-bold">15 minut</div>
+                    <div className="text-orange-100">Na wycenę</div>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <Users className="w-8 h-8 mr-4" />
+                  <div>
+                    <div className="text-2xl font-bold">500+</div>
+                    <div className="text-orange-100">Zadowolonych firm</div>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <Award className="w-8 h-8 mr-4" />
+                  <div>
+                    <div className="text-2xl font-bold">10 lat</div>
+                    <div className="text-orange-100">Doświadczenia</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
