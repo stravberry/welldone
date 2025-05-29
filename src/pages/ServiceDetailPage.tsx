@@ -15,6 +15,8 @@ interface Course {
   price: string;
   features: string[];
   badge?: string;
+  image: string;
+  imageAlt: string;
 }
 
 interface FAQ {
@@ -59,7 +61,9 @@ const ServiceDetailPage = () => {
       participants: 'do 12 osób',
       price: '450 zł',
       features: ['Teoria i praktyka', 'Egzamin UDT', 'Certyfikat', 'Materiały szkoleniowe'],
-      badge: 'Najpopularniejsze'
+      badge: 'Najpopularniejsze',
+      image: '/lovable-uploads/657768d6-dc5a-419b-80b8-b664af6c6775.png',
+      imageAlt: 'Operator wózka widłowego podczas pracy w magazynie'
     },
     {
       id: 'podesty-ruchome',
@@ -68,7 +72,9 @@ const ServiceDetailPage = () => {
       duration: '14 godzin',
       participants: 'do 10 osób',
       price: '520 zł',
-      features: ['Bezpieczeństwo pracy', 'Praktyka na różnych modelach', 'Egzamin UDT', 'Wsparcie po kursie']
+      features: ['Bezpieczeństwo pracy', 'Praktyka na różnych modelach', 'Egzamin UDT', 'Wsparcie po kursie'],
+      image: '/lovable-uploads/e53f9387-8eab-484e-95d8-dae5efb914a0.png',
+      imageAlt: 'Podest ruchomy nożycowy używany podczas prac na wysokości'
     },
     {
       id: 'suwnice',
@@ -78,7 +84,9 @@ const ServiceDetailPage = () => {
       participants: 'do 8 osób',
       price: '680 zł',
       features: ['Zaawansowana praktyka', 'Różne typy urządzeń', 'Egzamin UDT', 'Certyfikat'],
-      badge: 'Zaawansowane'
+      badge: 'Zaawansowane',
+      image: '/lovable-uploads/f9dc5911-3540-4c1c-91a0-f031a4e94698.png',
+      imageAlt: 'Suwnica przemysłowa w hali produkcyjnej'
     },
     {
       id: 'ukladnice',
@@ -87,7 +95,9 @@ const ServiceDetailPage = () => {
       duration: '12 godzin',
       participants: 'do 15 osób',
       price: '380 zł',
-      features: ['Systemy magazynowe', 'Praktyczne ćwiczenia', 'Egzamin UDT', 'Materiały']
+      features: ['Systemy magazynowe', 'Praktyczne ćwiczenia', 'Egzamin UDT', 'Materiały'],
+      image: '/lovable-uploads/2d3fe45c-4078-43ab-b479-ea144210537f.png',
+      imageAlt: 'Układnica magazynowa wysokiego składowania w nowoczesnym magazynie'
     }
   ];
 
@@ -440,16 +450,31 @@ const EnhancedCourseCard: React.FC<{
       }}
       onClick={onClick}
     >
-      <div className="relative p-6 bg-gradient-to-br from-orange-500 to-orange-600">
+      {/* Course Image Section */}
+      <div className="relative h-48 overflow-hidden">
+        <img 
+          src={course.image} 
+          alt={course.imageAlt}
+          className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+        
+        {/* Badge */}
         {course.badge && (
-          <div className="absolute top-4 right-4 bg-white text-orange-600 px-3 py-1 rounded-full text-sm font-medium">
+          <div className="absolute top-4 right-4 bg-white text-orange-600 px-3 py-1 rounded-full text-sm font-medium shadow-lg">
             {course.badge}
           </div>
         )}
-        <h3 className="text-2xl font-bold text-white mb-2">{course.title}</h3>
-        <p className="text-orange-100">{course.description}</p>
+        
+        {/* Course Title Overlay */}
+        <div className="absolute bottom-4 left-4 right-4">
+          <h3 className="text-2xl font-bold text-white mb-2">{course.title}</h3>
+          <p className="text-orange-100 text-sm line-clamp-2">{course.description}</p>
+        </div>
       </div>
 
+      {/* Course Content */}
       <div className="p-6">
         <div className="grid grid-cols-3 gap-4 mb-6">
           <div className="text-center">
