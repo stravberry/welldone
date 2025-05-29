@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
@@ -18,15 +19,28 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
     <>
       <style>
         {`
-          @keyframes pulseLoop {
+          @keyframes pulseGlow {
             0%, 75% {
               transform: scale(1);
+              box-shadow: 
+                0 0 0 0 rgba(255, 102, 0, 0.4),
+                0 4px 15px rgba(255, 102, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
             }
             8.33% {
               transform: scale(1.2);
+              box-shadow: 
+                0 0 20px 8px rgba(255, 102, 0, 0.6),
+                0 0 40px 15px rgba(255, 102, 0, 0.3),
+                0 8px 25px rgba(255, 102, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
             }
             16.66% {
               transform: scale(1);
+              box-shadow: 
+                0 0 10px 4px rgba(255, 102, 0, 0.5),
+                0 4px 20px rgba(255, 102, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
             }
           }
         `}
@@ -35,18 +49,27 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
         ref={elementRef}
         className="process-step flex md:block relative group"
       >
-        {/* Simple scaling circle with number - looped animation */}
+        {/* Enhanced glowing circle with lightbulb effect */}
         <div 
           className="relative z-10"
           style={{
             opacity: isInView ? 1 : 0,
-            animation: isInView ? `pulseLoop 4.8s ease-in-out infinite ${index * 0.8}s` : 'none',
-            transition: 'opacity 0.5s ease-out'
+            animation: isInView ? `pulseGlow 4.8s ease-in-out infinite ${index * 0.8}s` : 'none',
+            transition: 'opacity 0.5s ease-out',
+            transformOrigin: 'center',
+            willChange: 'transform, box-shadow'
           }}
         >
-          {/* Main circle */}
-          <div className="relative flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 text-white font-bold shadow-lg transition-all duration-300">
-            <span className="text-lg">{number}</span>
+          {/* Main circle with enhanced styling */}
+          <div className="relative flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 text-white font-bold transition-all duration-300 overflow-hidden">
+            {/* Inner highlight for depth */}
+            <div className="absolute inset-0.5 rounded-full bg-gradient-to-br from-orange-300 to-transparent opacity-50" />
+            
+            {/* Number */}
+            <span className="text-lg relative z-10 drop-shadow-sm">{number}</span>
+            
+            {/* Subtle inner glow */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/20 to-transparent" />
           </div>
         </div>
         
