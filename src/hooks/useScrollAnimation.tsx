@@ -1,5 +1,5 @@
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 
 interface UseScrollAnimationOptions {
   threshold?: number;
@@ -9,12 +9,11 @@ interface UseScrollAnimationOptions {
 }
 
 export const useScrollAnimation = <T extends HTMLElement = HTMLElement>(options: UseScrollAnimationOptions = {}) => {
-  const { threshold = 0.1, rootMargin = '0px', triggerOnce = true, reducedMotion = false } = options;
+  const { threshold = 0.05, rootMargin = '50px', triggerOnce = true, reducedMotion = false } = options;
   const [isInView, setIsInView] = useState(false);
   const elementRef = useRef<T>(null);
 
   useEffect(() => {
-    // Check if user prefers reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion || reducedMotion) {
       setIsInView(true);
@@ -24,25 +23,12 @@ export const useScrollAnimation = <T extends HTMLElement = HTMLElement>(options:
     const element = elementRef.current;
     if (!element) return;
 
-    // Better mobile optimization - more aggressive thresholds
     const isMobile = window.innerWidth < 768;
-    const adjustedThreshold = isMobile ? Math.min(threshold, 0.02) : threshold;
-    const adjustedRootMargin = isMobile ? '50px' : rootMargin;
-
-    console.log('useScrollAnimation setup:', {
-      isMobile,
-      threshold,
-      adjustedThreshold,
-      adjustedRootMargin
-    });
+    const adjustedThreshold = isMobile ? 0.01 : threshold;
+    const adjustedRootMargin = isMobile ? '100px' : rootMargin;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        console.log('Intersection observed:', {
-          isIntersecting: entry.isIntersecting,
-          elementId: element.id || element.className
-        });
-        
         if (entry.isIntersecting) {
           setIsInView(true);
           if (triggerOnce) {
@@ -58,13 +44,9 @@ export const useScrollAnimation = <T extends HTMLElement = HTMLElement>(options:
       }
     );
 
-    // Small delay to ensure element is properly rendered
-    const timeoutId = setTimeout(() => {
-      observer.observe(element);
-    }, 50);
+    observer.observe(element);
 
     return () => {
-      clearTimeout(timeoutId);
       if (element) {
         observer.unobserve(element);
       }
@@ -74,88 +56,52 @@ export const useScrollAnimation = <T extends HTMLElement = HTMLElement>(options:
   return { elementRef, isInView };
 };
 
-export const useStaggeredAnimation = <T extends HTMLElement = HTMLElement>(itemCount: number, delay: number = 200) => {
+export const useStaggeredAnimation = <T extends HTMLElement = HTMLElement>(itemCount: number, delay: number = 100) => {
   const [visibleItems, setVisibleItems] = useState<number[]>([]);
   const [hasTriggered, setHasTriggered] = useState(false);
-  const [showAllFallback, setShowAllFallback] = useState(false);
   const { elementRef, isInView } = useScrollAnimation<T>({
-    threshold: 0.05,
-    rootMargin: '50px',
+    threshold: 0.02,
+    rootMargin: '100px',
     triggerOnce: true
   });
 
   useEffect(() => {
-    console.log('useStaggeredAnimation:', {
-      isInView,
-      hasTriggered,
-      itemCount,
-      visibleItems: visibleItems.length
-    });
-
     if (isInView && !hasTriggered) {
       setHasTriggered(true);
       
-      // Check if user prefers reduced motion
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion) {
         setVisibleItems(Array.from({ length: itemCount }, (_, i) => i));
         return;
       }
 
-      // Better mobile optimization - much faster animations
       const isMobile = window.innerWidth < 768;
-      const adjustedDelay = isMobile ? 100 : delay;
+      const adjustedDelay = isMobile ? 50 : delay;
 
       const timeouts: NodeJS.Timeout[] = [];
       
-      // Add all items with staggered timing
       for (let i = 0; i < itemCount; i++) {
         const timeout = setTimeout(() => {
-          setVisibleItems(prev => {
-            if (!prev.includes(i)) {
-              return [...prev, i];
-            }
-            return prev;
-          });
+          setVisibleItems(prev => [...prev, i]);
         }, i * adjustedDelay);
         timeouts.push(timeout);
       }
 
-      // Fallback: ensure all items are visible after a reasonable time
-      const fallbackTimeout = setTimeout(() => {
-        setVisibleItems(Array.from({ length: itemCount }, (_, i) => i));
-        setShowAllFallback(true);
-      }, itemCount * adjustedDelay + 1000);
-
       return () => {
         timeouts.forEach(timeout => clearTimeout(timeout));
-        clearTimeout(fallbackTimeout);
       };
     }
   }, [isInView, itemCount, delay, hasTriggered]);
 
-  // Always ensure we return all items if something goes wrong
-  useEffect(() => {
-    if (hasTriggered && visibleItems.length === 0) {
-      const emergencyTimeout = setTimeout(() => {
-        setVisibleItems(Array.from({ length: itemCount }, (_, i) => i));
-        setShowAllFallback(true);
-      }, 2000);
-
-      return () => clearTimeout(emergencyTimeout);
-    }
-  }, [hasTriggered, visibleItems.length, itemCount]);
-
-  return { elementRef, visibleItems, showAllFallback };
+  return { elementRef, visibleItems };
 };
 
-export const useCounterAnimation = <T extends HTMLElement = HTMLElement>(endValue: number, duration: number = 1500) => {
+export const useCounterAnimation = <T extends HTMLElement = HTMLElement>(endValue: number, duration: number = 1000) => {
   const [count, setCount] = useState(0);
   const { elementRef, isInView } = useScrollAnimation<T>();
 
   useEffect(() => {
     if (isInView) {
-      // Check if user prefers reduced motion
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion) {
         setCount(endValue);
@@ -164,10 +110,8 @@ export const useCounterAnimation = <T extends HTMLElement = HTMLElement>(endValu
 
       let startTime: number;
       const startValue = 0;
-      
-      // Much shorter duration for mobile
       const isMobile = window.innerWidth < 768;
-      const adjustedDuration = isMobile ? 800 : duration;
+      const adjustedDuration = isMobile ? 600 : duration;
 
       const animate = (currentTime: number) => {
         if (!startTime) startTime = currentTime;

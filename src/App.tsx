@@ -11,6 +11,10 @@ import HomePage from "@/pages/HomePage";
 import AboutPage from "@/pages/AboutPage";
 import ServicesPage from "@/pages/ServicesPage";
 import ServiceDetailPage from "@/pages/ServiceDetailPage";
+import UdtKonserwatorzePage from "@/pages/UdtKonserwatorzePage";
+import SepPage from "@/pages/SepPage";
+import LutowaniePage from "@/pages/LutowaniePage";
+import EventyPage from "@/pages/EventyPage";
 import FreeAuditPage from "@/pages/FreeAuditPage";
 import RealizationsPage from "@/pages/RealizationsPage";
 import KnowledgePage from "@/pages/KnowledgePage";
@@ -107,6 +111,51 @@ const App = () => (
                   <Navbar />
                   <main className="flex-grow pt-16">
                     <ServiceDetailPage />
+                  </main>
+                  <Footer />
+                  <CMSLoginPanel />
+                </div>
+              } />
+
+              {/* New Service Detail Pages */}
+              <Route path="/uslugi/udt-konserwatorzy" element={
+                <div className="flex flex-col min-h-screen">
+                  <Navbar />
+                  <main className="flex-grow pt-16">
+                    <UdtKonserwatorzePage />
+                  </main>
+                  <Footer />
+                  <CMSLoginPanel />
+                </div>
+              } />
+
+              <Route path="/uslugi/sep" element={
+                <div className="flex flex-col min-h-screen">
+                  <Navbar />
+                  <main className="flex-grow pt-16">
+                    <SepPage />
+                  </main>
+                  <Footer />
+                  <CMSLoginPanel />
+                </div>
+              } />
+
+              <Route path="/uslugi/lutowanie" element={
+                <div className="flex flex-col min-h-screen">
+                  <Navbar />
+                  <main className="flex-grow pt-16">
+                    <LutowaniePage />
+                  </main>
+                  <Footer />
+                  <CMSLoginPanel />
+                </div>
+              } />
+
+              <Route path="/uslugi/eventy" element={
+                <div className="flex flex-col min-h-screen">
+                  <Navbar />
+                  <main className="flex-grow pt-16">
+                    <EventyPage />
                   </main>
                   <Footer />
                   <CMSLoginPanel />
