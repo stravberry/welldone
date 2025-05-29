@@ -66,11 +66,12 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({ trackLinkClick, trackCT
               Zadzwoń
             </Button>
             <Button 
+              asChild
               size="sm"
-              onClick={() => trackCTAClick('nav-contact', 'contact-form')}
               className="bg-blue-600 hover:bg-blue-700"
+              onClick={() => trackCTAClick('nav-contact', 'contact-form')}
             >
-              Skontaktuj się
+              <Link to="/kontakt">Skontaktuj się</Link>
             </Button>
           </div>
           
@@ -113,6 +114,7 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({ trackLinkClick, trackCT
                   Zadzwoń
                 </Button>
                 <Button 
+                  asChild
                   size="sm" 
                   className="w-full bg-blue-600 hover:bg-blue-700"
                   onClick={() => {
@@ -120,7 +122,7 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({ trackLinkClick, trackCT
                     setIsOpen(false);
                   }}
                 >
-                  Skontaktuj się
+                  <Link to="/kontakt">Skontaktuj się</Link>
                 </Button>
               </div>
             </div>

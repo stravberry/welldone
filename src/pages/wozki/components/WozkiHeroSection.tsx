@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import type { FormData } from '../types';
 import StatsCounter from './StatsCounter';
@@ -36,11 +37,12 @@ const WozkiHeroSection: React.FC<WozkiHeroSectionProps> = ({
             </p>
             <div className="flex flex-wrap gap-4">
               <Button 
+                asChild
                 size="lg" 
-                onClick={() => trackCTAClick('hero-contact', 'contact-form')}
                 className="bg-white text-blue-600 hover:bg-blue-100 transition-all duration-200"
+                onClick={() => trackCTAClick('hero-contact', 'contact-form')}
               >
-                Skontaktuj się z nami
+                <Link to="/kontakt">Skontaktuj się z nami</Link>
               </Button>
               <Button 
                 size="lg" 

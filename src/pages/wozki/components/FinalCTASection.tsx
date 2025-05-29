@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
@@ -26,11 +27,12 @@ const FinalCTASection: React.FC<FinalCTASectionProps> = ({ trackCTAClick }) => {
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <Button
+            asChild
             size="lg"
             className="bg-white text-blue-600 hover:bg-blue-100 text-sm sm:text-base px-6 sm:px-8 py-2 sm:py-3 transition-all duration-200"
             onClick={() => trackCTAClick('final-contact', 'contact-form')}
           >
-            Skontaktuj się z nami
+            <Link to="/kontakt">Skontaktuj się z nami</Link>
           </Button>
           <Button
             size="lg"

@@ -23,7 +23,6 @@ const ContactForm: React.FC<ContactFormProps> = ({
   const onSubmit = (data: any) => {
     console.log(data);
 
-    // Śledzenie zdarzenia wysłania formularza
     trackEvent({
       category: 'form',
       action: 'submit',
@@ -35,19 +34,11 @@ const ContactForm: React.FC<ContactFormProps> = ({
       }
     });
 
-    // W rzeczywistej implementacji tutaj byłby kod do wysyłania danych na serwer
-    // np. fetch('/api/contact', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(data)
-    // })
-    
     toast.success("Formularz został wysłany! Skontaktujemy się wkrótce.");
     reset();
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    // Śledzenie interakcji z polami formularza
     trackEvent({
       category: 'form',
       action: 'input',
@@ -61,7 +52,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
+    <div className="bg-white rounded-lg shadow-md p-6 md:p-8 transition-all duration-300 hover:shadow-lg">
       <h2 className="text-2xl font-bold mb-2">{title}</h2>
       <p className="text-gray-600 mb-6">{subtitle}</p>
       
@@ -72,44 +63,10 @@ const ContactForm: React.FC<ContactFormProps> = ({
             <Input
               id="name"
               placeholder="Jan Kowalski"
-              {...register("name", { required: "To pole jest wymagane" })}
-              className={errors.name ? "border-red-500" : ""}
+              {...register("name")}
               onChange={handleInputChange}
+              className="transition-all duration-300 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 hover:border-orange-300"
             />
-            {errors.name && <p className="text-red-500 text-sm">{errors.name.message as string}</p>}
-          </div>
-          
-          <div className="space-y-2">
-            <Label htmlFor="company">Nazwa firmy</Label>
-            <Input
-              id="company"
-              placeholder="Firma Sp. z o.o."
-              {...register("company", { required: "To pole jest wymagane" })}
-              className={errors.company ? "border-red-500" : ""}
-              onChange={handleInputChange}
-            />
-            {errors.company && <p className="text-red-500 text-sm">{errors.company.message as string}</p>}
-          </div>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-2">
-            <Label htmlFor="email">Adres e-mail</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="jan.kowalski@firma.pl"
-              {...register("email", { 
-                required: "To pole jest wymagane",
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "Nieprawidłowy adres e-mail"
-                }
-              })}
-              className={errors.email ? "border-red-500" : ""}
-              onChange={handleInputChange}
-            />
-            {errors.email && <p className="text-red-500 text-sm">{errors.email.message as string}</p>}
           </div>
           
           <div className="space-y-2">
@@ -117,22 +74,40 @@ const ContactForm: React.FC<ContactFormProps> = ({
             <Input
               id="phone"
               placeholder="+48 123 456 789"
-              {...register("phone", { required: "To pole jest wymagane" })}
-              className={errors.phone ? "border-red-500" : ""}
+              {...register("phone")}
               onChange={handleInputChange}
+              className="transition-all duration-300 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 hover:border-orange-300"
             />
-            {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message as string}</p>}
           </div>
         </div>
         
         <div className="space-y-2">
-          <Label htmlFor="message">Wiadomość</Label>
+          <Label htmlFor="email">Adres e-mail *</Label>
+          <Input
+            id="email"
+            type="email"
+            placeholder="jan.kowalski@firma.pl"
+            {...register("email", { 
+              required: "Adres e-mail jest wymagany",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Nieprawidłowy adres e-mail"
+              }
+            })}
+            className={`transition-all duration-300 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 hover:border-orange-300 ${errors.email ? "border-red-500" : ""}`}
+            onChange={handleInputChange}
+          />
+          {errors.email && <p className="text-red-500 text-sm">{errors.email.message as string}</p>}
+        </div>
+        
+        <div className="space-y-2">
+          <Label htmlFor="message">Wiadomość *</Label>
           <Textarea
             id="message"
             placeholder="Opisz czego potrzebujesz..."
             rows={5}
-            {...register("message", { required: "To pole jest wymagane" })}
-            className={errors.message ? "border-red-500" : ""}
+            {...register("message", { required: "Wiadomość jest wymagana" })}
+            className={`transition-all duration-300 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 hover:border-orange-300 ${errors.message ? "border-red-500" : ""}`}
             onChange={handleInputChange}
           />
           {errors.message && <p className="text-red-500 text-sm">{errors.message.message as string}</p>}
@@ -140,7 +115,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
         
         <Button 
           type="submit" 
-          className="w-full"
+          className="w-full bg-orange-600 hover:bg-orange-700 transition-all duration-300 hover:scale-105 hover:shadow-lg"
           onClick={() => trackEvent({
             category: 'button',
             action: 'click',
@@ -153,6 +128,9 @@ const ContactForm: React.FC<ContactFormProps> = ({
         >
           Wyślij wiadomość
         </Button>
+        <p className="text-xs text-gray-500 text-center">
+          * Pola wymagane
+        </p>
       </form>
     </div>
   );

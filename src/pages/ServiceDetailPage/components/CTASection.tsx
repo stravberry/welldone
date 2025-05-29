@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
 interface CTASectionProps {
@@ -27,12 +28,12 @@ const CTASection: React.FC<CTASectionProps> = ({ onContactClick }) => {
             Zapisz się teraz
           </Button>
           <Button 
+            asChild
             size="lg" 
             variant="outline" 
             className="border-2 border-white bg-transparent text-white hover:bg-white hover:text-orange-600 hover:scale-105 transition-all duration-300 font-semibold"
-            onClick={onContactClick}
           >
-            Skontaktuj się z nami
+            <Link to="/kontakt">Skontaktuj się z nami</Link>
           </Button>
         </div>
       </div>
