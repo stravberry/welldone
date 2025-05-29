@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
@@ -19,16 +20,26 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
     <>
       <style>
         {`
-          @keyframes pulseGlow {
+          @keyframes pulseScale {
             0%, 75% {
               transform: scale(1);
+            }
+            8.33% {
+              transform: scale(1.2);
+            }
+            16.66% {
+              transform: scale(1);
+            }
+          }
+          
+          @keyframes pulseGlow {
+            0%, 75% {
               box-shadow: 
                 0 0 0 0 rgba(255, 102, 0, 0.4),
                 0 4px 15px rgba(255, 102, 0, 0.2),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
             }
             8.33% {
-              transform: scale(1.2);
               box-shadow: 
                 0 0 20px 8px rgba(255, 102, 0, 0.6),
                 0 0 40px 15px rgba(255, 102, 0, 0.3),
@@ -36,7 +47,6 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
                 inset 0 1px 0 rgba(255, 255, 255, 0.4);
             }
             16.66% {
-              transform: scale(1);
               box-shadow: 
                 0 0 10px 4px rgba(255, 102, 0, 0.5),
                 0 4px 20px rgba(255, 102, 0, 0.3),
@@ -54,14 +64,20 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
           className="relative z-10"
           style={{
             opacity: isInView ? 1 : 0,
-            animation: isInView ? `pulseGlow 4.8s ease-in-out infinite ${index * 0.8}s` : 'none',
+            animation: isInView ? `pulseScale 4.8s ease-in-out infinite ${index * 0.8}s` : 'none',
             transition: 'opacity 0.5s ease-out',
             transformOrigin: 'center',
-            willChange: 'transform, box-shadow'
+            willChange: 'transform'
           }}
         >
-          {/* Main circle with enhanced styling */}
-          <div className="relative flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 text-white font-bold transition-all duration-300 overflow-hidden">
+          {/* Main circle with enhanced styling and glow animation */}
+          <div 
+            className="relative flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 text-white font-bold transition-all duration-300 overflow-hidden"
+            style={{
+              animation: isInView ? `pulseGlow 4.8s ease-in-out infinite ${index * 0.8}s` : 'none',
+              willChange: 'box-shadow'
+            }}
+          >
             {/* Inner highlight for depth */}
             <div className="absolute inset-0.5 rounded-full bg-gradient-to-br from-orange-300 to-transparent opacity-50" />
             
@@ -103,3 +119,4 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
 };
 
 export default ProcessStep;
+
