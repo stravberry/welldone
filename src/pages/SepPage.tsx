@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Phone, Mail, Zap, CheckCircle, Award, Users, Shield, Target, Star } from 'lucide-react';
@@ -124,7 +123,7 @@ const SepPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div ref={heroRef} className="relative bg-gradient-to-br from-yellow-600 via-yellow-500 to-yellow-400 py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <div ref={heroRef} className="relative bg-gradient-to-br from-yellow-600 via-yellow-500 to-yellow-400 py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-32 h-32 bg-white rounded-full animate-pulse"></div>
           <div className="absolute bottom-10 right-10 w-24 h-24 bg-white rounded-full animate-pulse delay-1000"></div>
@@ -184,14 +183,14 @@ const SepPage = () => {
               </div>
             </div>
 
-            {/* Giant Lightning Bolt Icon with overflow hidden */}
-            <div className={`flex justify-center items-center transition-all duration-800 overflow-hidden ${
+            {/* Simple Large Lightning Bolt Icon */}
+            <div className={`flex justify-center items-center transition-all duration-800 ${
               heroInView || showAllItems ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
             }`}>
               <div className="relative">
                 <svg
-                  width="4200"
-                  height="4200"
+                  width="600"
+                  height="600"
                   viewBox="0 0 100 100"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
