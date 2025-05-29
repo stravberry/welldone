@@ -30,6 +30,7 @@ const CTASection: React.FC<CTASectionProps> = ({ onContactClick }) => {
             size="lg" 
             variant="outline" 
             className="border-2 border-white bg-transparent text-white hover:bg-white hover:text-orange-600 hover:scale-105 transition-all duration-300 font-semibold"
+            onClick={onContactClick}
           >
             Skontaktuj się z nami
           </Button>

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Phone, Mail } from 'lucide-react';
@@ -6,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/useScrollAnimation';
 import useEventTracking from '@/hooks/useEventTracking';
 import useScrollToTop from '@/hooks/useScrollToTop';
+import { toast } from 'sonner';
 
 // Component imports
 import EnhancedCourseCard, { type Course } from './ServiceDetailPage/components/EnhancedCourseCard';
@@ -13,12 +13,28 @@ import StatPreviewCard from './ServiceDetailPage/components/StatPreviewCard';
 import BenefitsSection from './ServiceDetailPage/components/BenefitsSection';
 import FAQSection from './ServiceDetailPage/components/FAQSection';
 import CTASection from './ServiceDetailPage/components/CTASection';
+import ContactFormSection from './ServiceDetailPage/components/ContactFormSection';
+
+interface FormData {
+  name: string;
+  company: string;
+  email: string;
+  phone: string;
+  message: string;
+}
 
 const ServiceDetailPage = () => {
   const { serviceId } = useParams<{ serviceId: string }>();
   const { trackEvent } = useEventTracking();
   const [showContactForm, setShowContactForm] = useState(false);
   const [showAllItems, setShowAllItems] = useState(false);
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    company: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
   
   useScrollToTop();
 
@@ -106,6 +122,44 @@ const ServiceDetailPage = () => {
     });
   };
 
+  const handleCourseEnrollment = (courseTitle: string) => {
+    setFormData(prev => ({ 
+      ...prev, 
+      message: `Jestem zainteresowany szkoleniem: ${courseTitle}` 
+    }));
+    
+    trackEvent({
+      category: 'engagement',
+      action: 'click',
+      label: `enroll-course-${courseTitle}`,
+      additionalData: {
+        courseTitle,
+        page: 'service-detail'
+      }
+    });
+
+    // Scroll to contact form
+    document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Form submitted:', formData);
+    toast.success("Formularz został wysłany! Skontaktujemy się wkrótce.");
+    setFormData({
+      name: '',
+      company: '',
+      email: '',
+      phone: '',
+      message: ''
+    });
+  };
+
   // Helper function to determine if item should be visible
   const isItemVisible = (index: number, visibleItems: number[]) => {
     return showAllItems || visibleItems.includes(index);
@@ -175,7 +229,7 @@ const ServiceDetailPage = () => {
                 <Button 
                   size="lg" 
                   className="bg-white text-orange-600 hover:bg-orange-50 hover:scale-105 transition-all duration-300 shadow-xl"
-                  onClick={() => setShowContactForm(true)}
+                  onClick={() => handleCourseEnrollment('Uprawnienia UDT dla operatorów')}
                 >
                   <Phone className="mr-2 h-5 w-5" />
                   Zapisz się na kurs
@@ -224,7 +278,8 @@ const ServiceDetailPage = () => {
               course={course} 
               index={index} 
               isVisible={isItemVisible(index, visibleCourses)} 
-              onClick={() => handleCourseClick(course.id)} 
+              onClick={() => handleCourseClick(course.id)}
+              onEnroll={() => handleCourseEnrollment(course.title)}
             />
           ))}
         </div>
@@ -236,8 +291,15 @@ const ServiceDetailPage = () => {
       {/* FAQ Section */}
       <FAQSection />
 
+      {/* Contact Form Section */}
+      <ContactFormSection 
+        formData={formData}
+        handleInputChange={handleInputChange}
+        handleSubmit={handleSubmit}
+      />
+
       {/* CTA Section */}
-      <CTASection onContactClick={() => setShowContactForm(true)} />
+      <CTASection onContactClick={() => handleCourseEnrollment('Uprawnienia UDT dla operatorów')} />
 
       {/* Floating Back Button */}
       <Link 
