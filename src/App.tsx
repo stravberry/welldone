@@ -1,6 +1,5 @@
-
 import { HelmetProvider } from 'react-helmet-async';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { Toaster } from 'sonner';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from '@/contexts/AuthContext';
@@ -46,45 +45,47 @@ function App() {
     <HelmetProvider>
       <AuthProvider>
         <QueryClientProvider client={queryClient}>
-          <div className="min-h-screen bg-gray-50">
-            <Toaster />
-            <RouteChangeTracker />
-            <ScrollTracker />
-            <Routes>
-              {/* Existing routes */}
-              <Route path="/" element={<Index />} />
-              <Route path="/home" element={<HomePage />} />
-              <Route path="/o-nas" element={<AboutPage />} />
-              <Route path="/uslugi" element={<ServicesPage />} />
-              <Route path="/uslugi/:serviceId" element={<ServiceDetailPage />} />
-              <Route path="/realizacje" element={<RealizationsPage />} />
-              <Route path="/kontakt" element={<ContactPage />} />
-              <Route path="/wycena" element={<QuotePage />} />
-              <Route path="/sep" element={<SepPage />} />
-              <Route path="/udt-konserwatorze" element={<UdtKonserwatorzePage />} />
-              <Route path="/udt-szkolenia" element={<UdtLandingPage />} />
-              <Route path="/szkolenie-wozki-unoszace" element={<WozkiUnoszacePage />} />
-              <Route path="/wiedza" element={<KnowledgePage />} />
-              <Route path="/bezplatny-audyt" element={<FreeAuditPage />} />
-              <Route path="/eventy" element={<EventyPage />} />
-              <Route path="/lutowanie" element={<LutowaniePage />} />
-              <Route path="/cms-login" element={<CMSLoginPage />} />
-              
-              {/* Admin routes */}
-              <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
-                <Route index element={<AdminDashboard />} />
-                <Route path="users" element={<UserManagement />} />
-                <Route path="blog" element={<BlogManagement />} />
-                <Route path="blog/new" element={<BlogPostEditor />} />
-                <Route path="blog/edit/:id" element={<BlogPostEditor />} />
-                <Route path="pages" element={<PagesManagement />} />
-                <Route path="media" element={<MediaManagement />} />
-                <Route path="settings" element={<SettingsPage />} />
-              </Route>
-              
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </div>
+          <BrowserRouter>
+            <div className="min-h-screen bg-gray-50">
+              <Toaster />
+              <RouteChangeTracker />
+              <ScrollTracker />
+              <Routes>
+                {/* Existing routes */}
+                <Route path="/" element={<Index />} />
+                <Route path="/home" element={<HomePage />} />
+                <Route path="/o-nas" element={<AboutPage />} />
+                <Route path="/uslugi" element={<ServicesPage />} />
+                <Route path="/uslugi/:serviceId" element={<ServiceDetailPage />} />
+                <Route path="/realizacje" element={<RealizationsPage />} />
+                <Route path="/kontakt" element={<ContactPage />} />
+                <Route path="/wycena" element={<QuotePage />} />
+                <Route path="/sep" element={<SepPage />} />
+                <Route path="/udt-konserwatorze" element={<UdtKonserwatorzePage />} />
+                <Route path="/udt-szkolenia" element={<UdtLandingPage />} />
+                <Route path="/szkolenie-wozki-unoszace" element={<WozkiUnoszacePage />} />
+                <Route path="/wiedza" element={<KnowledgePage />} />
+                <Route path="/bezplatny-audyt" element={<FreeAuditPage />} />
+                <Route path="/eventy" element={<EventyPage />} />
+                <Route path="/lutowanie" element={<LutowaniePage />} />
+                <Route path="/cms-login" element={<CMSLoginPage />} />
+                
+                {/* Admin routes */}
+                <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
+                  <Route index element={<AdminDashboard />} />
+                  <Route path="users" element={<UserManagement />} />
+                  <Route path="blog" element={<BlogManagement />} />
+                  <Route path="blog/new" element={<BlogPostEditor />} />
+                  <Route path="blog/edit/:id" element={<BlogPostEditor />} />
+                  <Route path="pages" element={<PagesManagement />} />
+                  <Route path="media" element={<MediaManagement />} />
+                  <Route path="settings" element={<SettingsPage />} />
+                </Route>
+                
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </div>
+          </BrowserRouter>
         </QueryClientProvider>
       </AuthProvider>
     </HelmetProvider>
