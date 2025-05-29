@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, Users, Award, CheckCircle, Phone, Mail, ChevronDown, ChevronUp, Star, Shield, Target, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -29,24 +30,34 @@ const ServiceDetailPage = () => {
   const { trackEvent } = useEventTracking();
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
   const [showContactForm, setShowContactForm] = useState(false);
+  const [showAllItems, setShowAllItems] = useState(false);
   
   useScrollToTop();
 
-  // Animation hooks
+  // Animation hooks with better fallbacks
   const { elementRef: heroRef, isInView: heroInView } = useScrollAnimation<HTMLDivElement>({
-    threshold: 0.2,
+    threshold: 0.1,
     triggerOnce: true
   });
-  const { elementRef: coursesRef, visibleItems: visibleCourses } = useStaggeredAnimation<HTMLDivElement>(4, 200);
-  const { elementRef: benefitsRef, visibleItems: visibleBenefits } = useStaggeredAnimation<HTMLDivElement>(6, 150);
+  const { elementRef: coursesRef, visibleItems: visibleCourses } = useStaggeredAnimation<HTMLDivElement>(4, 150);
+  const { elementRef: benefitsRef, visibleItems: visibleBenefits } = useStaggeredAnimation<HTMLDivElement>(6, 100);
   const { elementRef: statsRef, isInView: statsInView } = useScrollAnimation<HTMLDivElement>({
-    threshold: 0.3,
+    threshold: 0.2,
     triggerOnce: true
   });
   const { elementRef: faqRef, isInView: faqInView } = useScrollAnimation<HTMLDivElement>({
-    threshold: 0.2,
+    threshold: 0.1,
     triggerOnce: true
   });
+
+  // Fallback mechanism - show all items after 3 seconds
+  useEffect(() => {
+    const fallbackTimer = setTimeout(() => {
+      setShowAllItems(true);
+    }, 3000);
+
+    return () => clearTimeout(fallbackTimer);
+  }, []);
 
   const courses: Course[] = [
     {
@@ -176,6 +187,11 @@ const ServiceDetailPage = () => {
     setOpenFAQ(openFAQ === index ? null : index);
   };
 
+  // Helper function to determine if item should be visible
+  const isItemVisible = (index: number, visibleItems: number[]) => {
+    return showAllItems || visibleItems.includes(index);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Enhanced Hero Section */}
@@ -190,12 +206,9 @@ const ServiceDetailPage = () => {
         <div className="max-w-7xl mx-auto relative z-10">
           {/* Animated Breadcrumb */}
           <div 
-            className="flex items-center space-x-2 text-orange-100 mb-8"
-            style={{
-              opacity: heroInView ? 1 : 0,
-              transform: heroInView ? 'translateY(0)' : 'translateY(-20px)',
-              transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)'
-            }}
+            className={`flex items-center space-x-2 text-orange-100 mb-8 transition-all duration-600 ${
+              heroInView || showAllItems ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+            }`}
           >
             <Link to="/" className="hover:text-white transition-colors">Strona główna</Link>
             <span>/</span>
@@ -207,50 +220,38 @@ const ServiceDetailPage = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <div 
-                className="inline-block bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-medium mb-6"
-                style={{
-                  opacity: heroInView ? 1 : 0,
-                  transform: heroInView ? 'translateY(0)' : 'translateY(20px)',
-                  transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-                  transitionDelay: '200ms'
-                }}
+                className={`inline-block bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-medium mb-6 transition-all duration-800 ${
+                  heroInView || showAllItems ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+                }`}
+                style={{ transitionDelay: '200ms' }}
               >
                 ⚡ Certyfikowane szkolenia UDT
               </div>
 
               <h1 
-                className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight"
-                style={{
-                  opacity: heroInView ? 1 : 0,
-                  transform: heroInView ? 'translateY(0)' : 'translateY(30px)',
-                  transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-                  transitionDelay: '400ms'
-                }}
+                className={`text-4xl md:text-6xl font-bold text-white mb-6 leading-tight transition-all duration-800 ${
+                  heroInView || showAllItems ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
+                style={{ transitionDelay: '400ms' }}
               >
                 Uprawnienia UDT dla <span className="text-orange-200">Operatorów</span>
               </h1>
 
               <p 
-                className="text-xl text-orange-100 mb-8 leading-relaxed"
-                style={{
-                  opacity: heroInView ? 1 : 0,
-                  transform: heroInView ? 'translateY(0)' : 'translateY(20px)',
-                  transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-                  transitionDelay: '600ms'
-                }}
+                className={`text-xl text-orange-100 mb-8 leading-relaxed transition-all duration-800 ${
+                  heroInView || showAllItems ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+                }`}
+                style={{ transitionDelay: '600ms' }}
               >
                 Zdobądź oficjalne uprawnienia do obsługi urządzeń technicznych. 
                 Profesjonalne szkolenia z najwyższą zdawalnością w regionie.
               </p>
 
               <div 
-                className="flex flex-col sm:flex-row gap-4"
-                style={{
-                  opacity: heroInView ? 1 : 0,
-                  transform: heroInView ? 'translateY(0)' : 'translateY(20px)',
-                  transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-                  transitionDelay: '800ms'
-                }}
+                className={`flex flex-col sm:flex-row gap-4 transition-all duration-800 ${
+                  heroInView || showAllItems ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+                }`}
+                style={{ transitionDelay: '800ms' }}
               >
                 <Button 
                   size="lg" 
@@ -273,16 +274,13 @@ const ServiceDetailPage = () => {
 
             {/* Animated stats preview */}
             <div 
-              className="grid grid-cols-2 gap-6"
-              style={{
-                opacity: heroInView ? 1 : 0,
-                transform: heroInView ? 'translateX(0)' : 'translateX(40px)',
-                transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-                transitionDelay: '600ms'
-              }}
+              className={`grid grid-cols-2 gap-6 transition-all duration-800 ${
+                heroInView || showAllItems ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+              }`}
+              style={{ transitionDelay: '600ms' }}
             >
               {stats.slice(0, 4).map((stat, index) => (
-                <StatPreviewCard key={index} stat={stat} index={index} isVisible={heroInView} />
+                <StatPreviewCard key={index} stat={stat} index={index} isVisible={heroInView || showAllItems} />
               ))}
             </div>
           </div>
@@ -306,7 +304,7 @@ const ServiceDetailPage = () => {
               key={course.id} 
               course={course} 
               index={index} 
-              isVisible={visibleCourses.includes(index)} 
+              isVisible={isItemVisible(index, visibleCourses)} 
               onClick={() => handleCourseClick(course.id)} 
             />
           ))}
@@ -329,11 +327,12 @@ const ServiceDetailPage = () => {
             {benefits.map((benefit, index) => (
               <div 
                 key={index} 
-                className="text-center p-6 rounded-xl bg-orange-50 hover:bg-orange-100 transition-all duration-300 hover:scale-105"
-                style={{
-                  opacity: visibleBenefits.includes(index) ? 1 : 0,
-                  transform: visibleBenefits.includes(index) ? 'translateY(0)' : 'translateY(30px)',
-                  transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)'
+                className={`text-center p-6 rounded-xl bg-orange-50 hover:bg-orange-100 transition-all duration-500 hover:scale-105 ${
+                  isItemVisible(index, visibleBenefits) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
+                style={{ 
+                  transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                  transitionDelay: `${index * 100}ms`
                 }}
               >
                 <div className="text-orange-600 mb-4 mx-auto w-12 h-12 bg-orange-200 rounded-full flex items-center justify-center">
@@ -362,11 +361,10 @@ const ServiceDetailPage = () => {
           {faqs.map((faq, index) => (
             <div 
               key={index} 
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300"
+              className={`bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-500 ${
+                faqInView || showAllItems ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+              }`}
               style={{
-                opacity: faqInView ? 1 : 0,
-                transform: faqInView ? 'translateY(0)' : 'translateY(20px)',
-                transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
                 transitionDelay: `${index * 100}ms`
               }}
             >
@@ -440,11 +438,12 @@ const EnhancedCourseCard: React.FC<{
 }> = ({ course, index, isVisible, onClick }) => {
   return (
     <div 
-      className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 cursor-pointer"
+      className={`bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 cursor-pointer ${
+        isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-10 scale-95'
+      }`}
       style={{
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translateY(0) scale(1)' : 'translateY(40px) scale(0.95)',
-        transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)'
+        transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+        transitionDelay: `${index * 150}ms`
       }}
       onClick={onClick}
     >
@@ -512,11 +511,10 @@ const StatPreviewCard: React.FC<{
   return (
     <div 
       ref={elementRef}
-      className="text-center p-4 bg-white bg-opacity-20 rounded-xl backdrop-blur-sm"
+      className={`text-center p-4 bg-white bg-opacity-20 rounded-xl backdrop-blur-sm transition-all duration-600 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+      }`}
       style={{
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-        transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
         transitionDelay: `${index * 100 + 800}ms`
       }}
     >
