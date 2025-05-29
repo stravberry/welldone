@@ -4,10 +4,14 @@ import { Link } from 'react-router-dom';
 import ServiceCard from '@/components/ServiceCard';
 import { Wrench, Wrench as Tool, Zap, Flame, Users } from 'lucide-react';
 import useEventTracking from '@/hooks/useEventTracking';
+import useScrollToTop from '@/hooks/useScrollToTop';
 import { Button } from '@/components/ui/button';
 
 const ServicesPage = () => {
   const { trackEvent } = useEventTracking();
+  
+  // Automatyczne przewijanie na górę przy zmianie strony
+  useScrollToTop();
   
   const services = [
     {

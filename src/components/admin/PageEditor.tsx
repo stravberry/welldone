@@ -1,415 +1,149 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Badge } from '@/components/ui/badge';
-import { Switch } from '@/components/ui/switch';
-import { Save, Eye, Globe, Settings, Image, Plus, Paintbrush, ArrowLeft } from 'lucide-react';
-import { useUpdatePage, useCreatePageSection } from '@/hooks/usePages';
-import { useToast } from '@/hooks/use-toast';
+import { Eye, Code, Edit3 } from 'lucide-react';
 import PageSectionEditor from './PageSectionEditor';
+import HTMLCodeEditor from './HTMLCodeEditor';
 import LivePageBuilder from './LivePageBuilder';
-import type { Tables } from '@/integrations/supabase/types';
-import type { PageBlock } from './PageBuilder/types';
-
-type Page = Tables<'pages'> & {
-  page_sections: Tables<'page_sections'>[];
-};
 
 interface PageEditorProps {
-  page: Page;
+  pageId: string;
+  onSave?: (content: any) => void;
 }
 
-type EditorMode = 'sections' | 'builder';
+type EditorMode = 'sections' | 'code' | 'live-builder';
 
-const PageEditor: React.FC<PageEditorProps> = ({ page }) => {
-  const [pageData, setPageData] = useState({
-    title: page.title,
-    slug: page.slug,
-    meta_title: page.meta_title || '',
-    meta_description: page.meta_description || '',
-    meta_keywords: page.meta_keywords || '',
-    og_title: page.og_title || '',
-    og_description: page.og_description || '',
-    og_image: page.og_image || '',
-    status: page.status,
-  });
-
-  const [newSectionType, setNewSectionType] = useState('');
+const PageEditor: React.FC<PageEditorProps> = ({ pageId, onSave }) => {
   const [activeEditor, setActiveEditor] = useState<EditorMode>('sections');
-  const updatePage = useUpdatePage();
-  const createSection = useCreatePageSection();
-  const { toast } = useToast();
+  const [pageContent, setPageContent] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasChanges, setHasChanges] = useState(false);
 
-  const handlePageSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
+  useEffect(() => {
+    loadPageContent();
+  }, [pageId]);
+
+  const loadPageContent = async () => {
+    setIsLoading(true);
     try {
-      await updatePage.mutateAsync({
-        id: page.id,
-        updates: {
-          ...pageData,
-          updated_at: new Date().toISOString(),
-        }
-      });
-      
-      toast({
-        title: "Sukces",
-        description: "Strona została zaktualizowana",
-      });
+      const response = await fetch(`/api/pages/${pageId}`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      setPageContent(data.content);
     } catch (error) {
-      toast({
-        title: "Błąd",
-        description: "Nie udało się zaktualizować strony",
-        variant: "destructive",
-      });
+      console.error("Could not load page content:", error);
+      // Optionally set an error state to display an error message
+    } finally {
+      setIsLoading(false);
+      setHasChanges(false);
     }
   };
 
-  const handleAddSection = async () => {
-    if (!newSectionType) return;
-    
+  const handleSave = async () => {
+    setIsLoading(true);
     try {
-      await createSection.mutateAsync({
-        page_id: page.id,
-        section_type: newSectionType,
-        section_key: `${newSectionType}_${Date.now()}`,
-        title: `Nowa sekcja ${newSectionType}`,
-        content: '<p>Treść sekcji...</p>',
-        order_index: (page.page_sections?.length || 0) + 1,
-        is_active: true,
+      const response = await fetch(`/api/pages/${pageId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ content: pageContent }),
       });
-      
-      setNewSectionType('');
-      toast({
-        title: "Sukces",
-        description: "Nowa sekcja została dodana",
-      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      setHasChanges(false);
+      if (onSave) {
+        onSave(pageContent);
+      }
     } catch (error) {
-      toast({
-        title: "Błąd",
-        description: "Nie udało się dodać sekcji",
-        variant: "destructive",
-      });
+      console.error("Could not save page content:", error);
+      // Optionally set an error state to display an error message
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const handleSavePageBuilder = async (blocks: PageBlock[]) => {
-    try {
-      // Convert blocks to page sections format
-      const sectionsData = blocks.map((block, index) => ({
-        page_id: page.id,
-        section_type: 'builder_block',
-        section_key: `builder_${block.type}_${block.id}`,
-        title: `${block.type} block`,
-        content: JSON.stringify(block),
-        order_index: index,
-        is_active: true,
-      }));
-
-      console.log('Saving page builder blocks:', blocks);
-      
-      toast({
-        title: "Sukces",
-        description: "Strona została zapisana w page builderze",
-      });
-    } catch (error) {
-      toast({
-        title: "Błąd",
-        description: "Nie udało się zapisać strony",
-        variant: "destructive",
-      });
-    }
+  const handleContentChange = (content: any) => {
+    setPageContent(content);
+    setHasChanges(true);
   };
 
-  const handleSwitchToBuilder = () => {
-    setActiveEditor('builder');
-  };
-
-  const handleBackToEditor = () => {
-    setActiveEditor('sections');
-  };
-
-  const sectionTypes = [
-    { value: 'hero', label: 'Hero/Nagłówek' },
-    { value: 'about', label: 'O nas' },
-    { value: 'services', label: 'Usługi' },
-    { value: 'testimonials', label: 'Opinie' },
-    { value: 'contact', label: 'Kontakt' },
-    { value: 'cta', label: 'Call to Action' },
-    { value: 'faq', label: 'FAQ' },
-    { value: 'gallery', label: 'Galeria' },
-  ];
-
-  // Show full-screen live page builder when active
-  if (activeEditor === 'builder') {
-    return (
-      <div className="h-screen">
-        <div className="bg-white border-b p-4 flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <Button
-              variant="outline"
-              onClick={handleBackToEditor}
-              className="flex items-center"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Powrót do edytora
-            </Button>
-            <h1 className="text-xl font-semibold">{page.title} - Live Page Builder</h1>
-          </div>
-        </div>
-        <LivePageBuilder
-          pageId={page.id}
-          onSave={handleSavePageBuilder}
+  const renderEditor = () => {
+    if (activeEditor === 'sections') {
+      return (
+        <PageSectionEditor
+          pageId={pageId}
+          content={pageContent}
+          onChange={handleContentChange}
         />
+      );
+    } else if (activeEditor === 'code') {
+      return (
+        <HTMLCodeEditor
+          initialContent={pageContent?.html || ''}
+          onChange={(html) => handleContentChange({ ...pageContent, html })}
+        />
+      );
+    } else {
+      return (
+        <LivePageBuilder
+          pageId={pageId}
+          onSave={onSave}
+        />
+      );
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-lg">Ładowanie edytora...</div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-2xl font-bold">{page.title}</h1>
-          <div className="flex items-center space-x-2 mt-2">
-            <Badge variant={page.status === 'published' ? 'default' : 'secondary'}>
-              {page.status === 'published' ? 'Opublikowana' : 'Szkic'}
-            </Badge>
-            <span className="text-sm text-gray-500">{page.slug}</span>
-          </div>
-        </div>
-        <div className="flex space-x-2">
-          <Button variant="outline">
-            <Eye className="h-4 w-4 mr-2" />
-            Podgląd
-          </Button>
-          <Button onClick={handlePageSubmit} disabled={updatePage.isPending}>
-            <Save className="h-4 w-4 mr-2" />
-            {updatePage.isPending ? 'Zapisywanie...' : 'Zapisz'}
+    <div className="h-full flex flex-col">
+      <div className="flex items-center justify-between p-4 border-b">
+        <Tabs value={activeEditor} onValueChange={(value) => setActiveEditor(value as EditorMode)}>
+          <TabsList>
+            <TabsTrigger value="sections" className="flex items-center gap-2">
+              <Edit3 className="w-4 h-4" />
+              Sekcje
+            </TabsTrigger>
+            <TabsTrigger value="code" className="flex items-center gap-2">
+              <Code className="w-4 h-4" />
+              Kod HTML
+            </TabsTrigger>
+            <TabsTrigger value="live-builder" className="flex items-center gap-2">
+              <Eye className="w-4 h-4" />
+              Live Builder
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
+
+        <div className="flex items-center gap-2">
+          {hasChanges && (
+            <span className="text-sm text-orange-600">Niezapisane zmiany</span>
+          )}
+          <Button 
+            onClick={handleSave}
+            disabled={!hasChanges}
+            className="bg-orange-600 hover:bg-orange-700"
+          >
+            Zapisz zmiany
           </Button>
         </div>
       </div>
 
-      <Tabs defaultValue="content" className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="content">Treść</TabsTrigger>
-          <TabsTrigger value="seo">SEO</TabsTrigger>
-          <TabsTrigger value="settings">Ustawienia</TabsTrigger>
-          <TabsTrigger value="media">Media</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="content" className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <Settings className="h-5 w-5 mr-2" />
-                Podstawowe informacje
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <Label htmlFor="title">Tytuł strony</Label>
-                  <Input
-                    id="title"
-                    value={pageData.title}
-                    onChange={(e) => setPageData({ ...pageData, title: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="slug">Slug (URL)</Label>
-                  <Input
-                    id="slug"
-                    value={pageData.slug}
-                    onChange={(e) => setPageData({ ...pageData, slug: e.target.value })}
-                  />
-                </div>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Switch
-                  id="status"
-                  checked={pageData.status === 'published'}
-                  onCheckedChange={(checked) => 
-                    setPageData({ ...pageData, status: checked ? 'published' : 'draft' })
-                  }
-                />
-                <Label htmlFor="status">
-                  {pageData.status === 'published' ? 'Opublikowana' : 'Szkic'}
-                </Label>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Editor Mode Selector */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Tryb edycji</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex space-x-4">
-                <Button
-                  variant={activeEditor === 'sections' ? 'default' : 'outline'}
-                  onClick={() => setActiveEditor('sections')}
-                  className="flex items-center"
-                >
-                  <Settings className="h-4 w-4 mr-2" />
-                  Sekcje (klasyczny)
-                </Button>
-                <Button
-                  variant={activeEditor === 'builder' ? 'default' : 'outline'}
-                  onClick={handleSwitchToBuilder}
-                  className="flex items-center"
-                >
-                  <Paintbrush className="h-4 w-4 mr-2" />
-                  Live Page Builder (wizualny)
-                </Button>
-              </div>
-              <p className="text-sm text-gray-500 mt-2">
-                {activeEditor === 'sections' 
-                  ? 'Edytuj sekcje strony za pomocą formularzy'
-                  : 'Buduj stronę wizualnie z live preview i edycją inline'
-                }
-              </p>
-            </CardContent>
-          </Card>
-
-          {/* Classic Sections Editor */}
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle>Sekcje strony</CardTitle>
-              <div className="flex items-center space-x-2">
-                <select
-                  value={newSectionType}
-                  onChange={(e) => setNewSectionType(e.target.value)}
-                  className="px-3 py-1 border rounded-md text-sm"
-                >
-                  <option value="">Wybierz typ sekcji</option>
-                  {sectionTypes.map(type => (
-                    <option key={type.value} value={type.value}>{type.label}</option>
-                  ))}
-                </select>
-                <Button onClick={handleAddSection} size="sm" disabled={!newSectionType}>
-                  <Plus className="h-4 w-4 mr-1" />
-                  Dodaj
-                </Button>
-              </div>
-            </CardHeader>
-            <CardContent>
-              {page.page_sections
-                ?.sort((a, b) => a.order_index - b.order_index)
-                .map(section => (
-                  <PageSectionEditor
-                    key={section.id}
-                    section={section}
-                  />
-                ))}
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="seo" className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <Globe className="h-5 w-5 mr-2" />
-                Ustawienia SEO
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <Label htmlFor="meta-title">Meta Title</Label>
-                <Input
-                  id="meta-title"
-                  value={pageData.meta_title}
-                  onChange={(e) => setPageData({ ...pageData, meta_title: e.target.value })}
-                  placeholder="Tytuł w wynikach wyszukiwania"
-                />
-              </div>
-              <div>
-                <Label htmlFor="meta-description">Meta Description</Label>
-                <Textarea
-                  id="meta-description"
-                  value={pageData.meta_description}
-                  onChange={(e) => setPageData({ ...pageData, meta_description: e.target.value })}
-                  placeholder="Opis w wynikach wyszukiwania"
-                />
-              </div>
-              <div>
-                <Label htmlFor="meta-keywords">Meta Keywords</Label>
-                <Input
-                  id="meta-keywords"
-                  value={pageData.meta_keywords}
-                  onChange={(e) => setPageData({ ...pageData, meta_keywords: e.target.value })}
-                  placeholder="Słowa kluczowe oddzielone przecinkami"
-                />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Open Graph (Social Media)</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <Label htmlFor="og-title">OG Title</Label>
-                <Input
-                  id="og-title"
-                  value={pageData.og_title}
-                  onChange={(e) => setPageData({ ...pageData, og_title: e.target.value })}
-                  placeholder="Tytuł w social media"
-                />
-              </div>
-              <div>
-                <Label htmlFor="og-description">OG Description</Label>
-                <Textarea
-                  id="og-description"
-                  value={pageData.og_description}
-                  onChange={(e) => setPageData({ ...pageData, og_description: e.target.value })}
-                  placeholder="Opis w social media"
-                />
-              </div>
-              <div>
-                <Label htmlFor="og-image">OG Image URL</Label>
-                <Input
-                  id="og-image"
-                  value={pageData.og_image}
-                  onChange={(e) => setPageData({ ...pageData, og_image: e.target.value })}
-                  placeholder="URL obrazu w social media"
-                />
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="settings">
-          <Card>
-            <CardHeader>
-              <CardTitle>Ustawienia strony</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-500">Ustawienia zaawansowane będą dostępne wkrótce.</p>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="media">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <Image className="h-5 w-5 mr-2" />
-                Galeria mediów
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-500">Zarządzanie mediami będzie dostępne wkrótce.</p>
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
+      <div className="flex-1 overflow-hidden">
+        {renderEditor()}
+      </div>
     </div>
   );
 };

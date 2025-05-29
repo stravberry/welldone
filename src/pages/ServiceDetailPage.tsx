@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Check } from 'lucide-react';
 import FAQ from '@/components/FAQ';
+import useScrollToTop from '@/hooks/useScrollToTop';
 
 interface ServiceDetail {
   title: string;
@@ -15,6 +16,9 @@ interface ServiceDetail {
 
 const ServiceDetailPage = () => {
   const { serviceId } = useParams<{ serviceId: string }>();
+  
+  // Automatyczne przewijanie na górę przy zmianie strony
+  useScrollToTop();
   
   const servicesData: Record<string, ServiceDetail> = {
     'udt-operatorzy': {
