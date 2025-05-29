@@ -183,7 +183,7 @@ const ServiceDetailPage = () => {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="border-white text-white hover:bg-white hover:text-orange-600 hover:scale-105 transition-all duration-300"
+                  className="border-white text-orange-600 hover:bg-white hover:text-orange-600 hover:scale-105 transition-all duration-300"
                 >
                   <Mail className="mr-2 h-5 w-5" />
                   Pobierz program
