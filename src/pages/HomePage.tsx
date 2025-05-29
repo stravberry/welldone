@@ -12,7 +12,7 @@ import AuditCard from '@/components/AuditCard';
 import AuditStatsCounter from '@/components/AuditStatsCounter';
 
 const HomePage = () => {
-  const { elementRef: statsRef, visibleItems } = useStaggeredAnimation<HTMLDivElement>(4, 150);
+  const { elementRef: statsRef, visibleItems, showAllFallback } = useStaggeredAnimation<HTMLDivElement>(4, 300);
 
   const services = [
     {
@@ -126,27 +126,27 @@ const HomePage = () => {
     }
   ];
 
-  // Fixed StatCard with simplified animation logic
+  // Improved StatCard with proper fallback logic
   const StatCard = ({ value, label, delay }: { value: number; label: string; delay: number }) => {
     const { elementRef, count } = useCounterAnimation<HTMLDivElement>(value, 2000);
-    const index = Math.floor(delay / 150);
-    const isVisible = visibleItems.includes(index);
+    const index = Math.floor(delay / 300); // Updated to match new delay
+    const isVisible = visibleItems.includes(index) || showAllFallback;
     
-    console.log(`StatCard ${label}: index=${index}, isVisible=${isVisible}, visibleItems=`, visibleItems);
+    console.log(`StatCard ${label}: index=${index}, isVisible=${isVisible}, visibleItems=`, visibleItems, 'showAllFallback=', showAllFallback);
     
     return (
       <div 
         ref={elementRef}
         className="bg-orange-50 rounded-lg p-6 text-center"
         style={{ 
-          opacity: isVisible ? 1 : 0,
+          opacity: 1, // Always show card
           transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
           transition: 'all 0.6s ease-out',
-          transitionDelay: `${delay}ms`
+          transitionDelay: isVisible ? `${delay}ms` : '0ms'
         }}
       >
         <div className="text-3xl font-bold text-orange-600 mb-2">
-          {isVisible ? count : 0}{value >= 1000 ? '+' : value === 80 || value === 96 ? '%' : '+'}
+          {isVisible ? count : value}{value >= 1000 ? '+' : value === 80 || value === 96 ? '%' : '+'}
         </div>
         <div className="text-gray-600">{label}</div>
       </div>
@@ -218,7 +218,7 @@ const HomePage = () => {
       </section>
 
       {/* Why Choose Us Section */}
-      <WhyChooseUsSection benefits={benefits} statsRef={statsRef} visibleItems={visibleItems} StatCard={StatCard} />
+      <WhyChooseUsSection benefits={benefits} statsRef={statsRef} visibleItems={visibleItems} StatCard={StatCard} showAllFallback={showAllFallback} />
 
       {/* Process Section */}
       <section className="py-16 bg-gray-50">
@@ -444,12 +444,13 @@ const HomePage = () => {
   );
 };
 
-// Extracted WhyChooseUsSection as a separate component with animations
-const WhyChooseUsSection = React.memo(({ benefits, statsRef, visibleItems, StatCard }: { 
+// Updated WhyChooseUsSection with improved props
+const WhyChooseUsSection = React.memo(({ benefits, statsRef, visibleItems, StatCard, showAllFallback }: { 
   benefits: any[]; 
   statsRef: React.RefObject<HTMLDivElement>; 
   visibleItems: number[]; 
   StatCard: any;
+  showAllFallback: boolean;
 }) => {
   const { elementRef: titleRef, isInView: titleInView } = useScrollAnimation<HTMLDivElement>({ 
     triggerOnce: true,
@@ -527,9 +528,9 @@ const WhyChooseUsSection = React.memo(({ benefits, statsRef, visibleItems, StatC
           <div className="relative" ref={statsRef}>
             <div className="grid grid-cols-2 gap-4">
               <StatCard value={10} label="lat doświadczenia" delay={0} />
-              <StatCard value={500} label="zadowolonych firm" delay={150} />
-              <StatCard value={1000} label="zrealizowanych szkoleń" delay={300} />
-              <StatCard value={80} label="zleceń dla produkcji" delay={450} />
+              <StatCard value={500} label="zadowolonych firm" delay={300} />
+              <StatCard value={1000} label="zrealizowanych szkoleń" delay={600} />
+              <StatCard value={80} label="zleceń dla produkcji" delay={900} />
             </div>
           </div>
         </div>

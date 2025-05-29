@@ -77,6 +77,7 @@ export const useScrollAnimation = <T extends HTMLElement = HTMLElement>(options:
 export const useStaggeredAnimation = <T extends HTMLElement = HTMLElement>(itemCount: number, delay: number = 200) => {
   const [visibleItems, setVisibleItems] = useState<number[]>([]);
   const [hasTriggered, setHasTriggered] = useState(false);
+  const [showAllFallback, setShowAllFallback] = useState(false);
   const { elementRef, isInView } = useScrollAnimation<T>({
     threshold: 0.05,
     rootMargin: '50px',
@@ -103,24 +104,49 @@ export const useStaggeredAnimation = <T extends HTMLElement = HTMLElement>(itemC
 
       // Better mobile optimization - much faster animations
       const isMobile = window.innerWidth < 768;
-      const adjustedDelay = isMobile ? 30 : delay;
+      const adjustedDelay = isMobile ? 100 : delay;
 
       const timeouts: NodeJS.Timeout[] = [];
       
+      // Add all items with staggered timing
       for (let i = 0; i < itemCount; i++) {
         const timeout = setTimeout(() => {
-          setVisibleItems(prev => [...prev, i]);
+          setVisibleItems(prev => {
+            if (!prev.includes(i)) {
+              return [...prev, i];
+            }
+            return prev;
+          });
         }, i * adjustedDelay);
         timeouts.push(timeout);
       }
 
+      // Fallback: ensure all items are visible after a reasonable time
+      const fallbackTimeout = setTimeout(() => {
+        setVisibleItems(Array.from({ length: itemCount }, (_, i) => i));
+        setShowAllFallback(true);
+      }, itemCount * adjustedDelay + 1000);
+
       return () => {
         timeouts.forEach(timeout => clearTimeout(timeout));
+        clearTimeout(fallbackTimeout);
       };
     }
   }, [isInView, itemCount, delay, hasTriggered]);
 
-  return { elementRef, visibleItems };
+  // Always ensure we return all items if something goes wrong
+  useEffect(() => {
+    if (hasTriggered && visibleItems.length === 0) {
+      const emergencyTimeout = setTimeout(() => {
+        setVisibleItems(Array.from({ length: itemCount }, (_, i) => i));
+        setShowAllFallback(true);
+      }, 2000);
+
+      return () => clearTimeout(emergencyTimeout);
+    }
+  }, [hasTriggered, visibleItems.length, itemCount]);
+
+  return { elementRef, visibleItems, showAllFallback };
 };
 
 export const useCounterAnimation = <T extends HTMLElement = HTMLElement>(endValue: number, duration: number = 1500) => {
