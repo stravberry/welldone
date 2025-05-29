@@ -238,14 +238,12 @@ const ContactPage = () => {
                       <service.icon className="h-6 w-6 text-orange-600" />
                     </div>
                     <div className="flex-1">
-                      <div className="flex items-center justify-between mb-2">
-                        <h3 className="text-lg font-semibold text-gray-900 group-hover:text-orange-600 transition-colors duration-300">
-                          {service.title}
-                        </h3>
-                        <span className="text-xs bg-orange-100 text-orange-600 px-2 py-1 rounded-full font-medium">
-                          {service.highlight}
-                        </span>
-                      </div>
+                      <h3 className="text-lg font-semibold text-gray-900 group-hover:text-orange-600 transition-colors duration-300 mb-2">
+                        {service.title}
+                      </h3>
+                      <span className="text-xs bg-orange-100 text-orange-600 px-2 py-1 rounded-full font-medium inline-block mb-3">
+                        {service.highlight}
+                      </span>
                       <p className="text-gray-600 text-sm leading-relaxed">
                         {service.description}
                       </p>
