@@ -6,6 +6,7 @@ import { AuthProvider } from '@/contexts/AuthContext';
 import RouteChangeTracker from '@/components/RouteChangeTracker';
 import ScrollTracker from '@/components/ScrollTracker';
 import ProtectedRoute from '@/components/ProtectedRoute';
+import Navbar from '@/components/Navbar';
 
 // Pages
 import Index from '@/pages/Index';
@@ -47,6 +48,7 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
             <div className="min-h-screen bg-gray-50">
+              <Navbar />
               <Toaster />
               <RouteChangeTracker />
               <ScrollTracker />
