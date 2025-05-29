@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, Users, Award, CheckCircle, Phone, Mail, ChevronDown, ChevronUp, Star, Shield, Target, Zap } from 'lucide-react';
@@ -157,7 +156,7 @@ const ServiceDetailPage = () => {
 
   const handleCourseClick = (courseId: string) => {
     trackEvent({
-      category: 'course',
+      category: 'engagement',
       action: 'click',
       label: `udt-course-${courseId}`,
       additionalData: { courseId, page: 'service-detail' }
