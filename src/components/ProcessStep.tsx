@@ -1,5 +1,4 @@
 
-
 import React from 'react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
@@ -25,7 +24,7 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
               transform: scale(1);
             }
             8.33% {
-              transform: scale(1.2);
+              transform: scale(1.1);
             }
             16.66% {
               transform: scale(1);
@@ -64,7 +63,7 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
           className="relative z-10"
           style={{
             opacity: isInView ? 1 : 0,
-            animation: isInView ? `pulseScale 4.8s ease-in-out infinite ${index * 0.8}s` : 'none',
+            animation: isInView ? `pulseScale 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite ${index * 0.8}s` : 'none',
             transition: 'opacity 0.5s ease-out',
             transformOrigin: 'center',
             willChange: 'transform'
@@ -74,7 +73,7 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
           <div 
             className="relative flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 text-white font-bold transition-all duration-300 overflow-hidden"
             style={{
-              animation: isInView ? `pulseGlow 4.8s ease-in-out infinite ${index * 0.8}s` : 'none',
+              animation: isInView ? `pulseGlow 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite ${index * 0.8}s` : 'none',
               willChange: 'box-shadow'
             }}
           >
@@ -119,4 +118,3 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
 };
 
 export default ProcessStep;
-
