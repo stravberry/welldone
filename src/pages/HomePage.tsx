@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -12,6 +13,7 @@ import AuditStatsCounter from '@/components/AuditStatsCounter';
 import PartnersSection from '@/components/PartnersSection';
 import EnhancedTestimonialsSection from '@/components/EnhancedTestimonialsSection';
 import BottomQuoteForm from '@/components/BottomQuoteForm';
+import WhyChooseUsSection from '@/components/WhyChooseUsSection';
 
 const HomePage = () => {
   const { elementRef: statsRef, visibleItems, showAllFallback } = useStaggeredAnimation<HTMLDivElement>(4, 300);
@@ -251,7 +253,13 @@ const HomePage = () => {
       </section>
 
       {/* Why Choose Us Section */}
-      <WhyChooseUsSection benefits={benefits} statsRef={statsRef} visibleItems={visibleItems} StatCard={StatCard} showAllFallback={showAllFallback} />
+      <WhyChooseUsSection 
+        benefits={benefits} 
+        statsRef={statsRef} 
+        visibleItems={visibleItems} 
+        StatCard={StatCard} 
+        showAllFallback={showAllFallback} 
+      />
 
       {/* Enhanced Process Section */}
       <section className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
@@ -391,7 +399,5 @@ const HomePage = () => {
     </div>
   );
 };
-
-// ... keep existing code (WhyChooseUsSection component)
 
 export default HomePage;
