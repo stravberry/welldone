@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/useScrollAnimation';
 import useEventTracking from '@/hooks/useEventTracking';
 import useScrollToTop from '@/hooks/useScrollToTop';
-import EventyContactForm from './components/EventyContactForm';
+import EventyContactForm from './EventyPage/components/EventyContactForm';
 
 interface FormData {
   name: string;
