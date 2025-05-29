@@ -28,7 +28,7 @@ const FAQ: React.FC<FAQProps> = ({ title = "Najczęściej zadawane pytania", ite
         <h2 
           ref={titleRef}
           className={`text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-6 sm:mb-8 lg:mb-12 transition-all duration-700 ${
-            titleInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'
+            titleInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
           {title}
@@ -41,10 +41,12 @@ const FAQ: React.FC<FAQProps> = ({ title = "Najczęściej zadawane pytania", ite
                 value={`item-${index}`} 
                 className={`bg-white rounded-lg shadow-sm border border-gray-100 transition-all duration-700 hover:shadow-md hover:border-gray-200 ${
                   visibleItems.includes(index) 
-                    ? 'animate-fade-in-up opacity-100' 
+                    ? 'opacity-100 translate-y-0' 
                     : 'opacity-0 translate-y-5'
                 }`}
-                style={{ animationDelay: `${index * 0.1}s` }}
+                style={{ 
+                  transitionDelay: visibleItems.includes(index) ? '0ms' : `${index * 100}ms` 
+                }}
               >
                 <AccordionTrigger className="px-4 sm:px-6 py-3 sm:py-4 hover:no-underline text-left text-sm sm:text-base lg:text-lg font-medium transition-colors duration-300 hover:text-orange-600">
                   {item.question}

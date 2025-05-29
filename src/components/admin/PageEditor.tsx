@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -34,7 +35,6 @@ const PageEditor: React.FC<PageEditorProps> = ({ pageId, onSave }) => {
       setPageContent(data.content);
     } catch (error) {
       console.error("Could not load page content:", error);
-      // Optionally set an error state to display an error message
     } finally {
       setIsLoading(false);
       setHasChanges(false);
@@ -62,7 +62,6 @@ const PageEditor: React.FC<PageEditorProps> = ({ pageId, onSave }) => {
       }
     } catch (error) {
       console.error("Could not save page content:", error);
-      // Optionally set an error state to display an error message
     } finally {
       setIsLoading(false);
     }
@@ -77,7 +76,6 @@ const PageEditor: React.FC<PageEditorProps> = ({ pageId, onSave }) => {
     if (activeEditor === 'sections') {
       return (
         <PageSectionEditor
-          pageId={pageId}
           content={pageContent}
           onChange={handleContentChange}
         />
@@ -85,7 +83,7 @@ const PageEditor: React.FC<PageEditorProps> = ({ pageId, onSave }) => {
     } else if (activeEditor === 'code') {
       return (
         <HTMLCodeEditor
-          initialContent={pageContent?.html || ''}
+          content={pageContent?.html || ''}
           onChange={(html) => handleContentChange({ ...pageContent, html })}
         />
       );
@@ -93,7 +91,13 @@ const PageEditor: React.FC<PageEditorProps> = ({ pageId, onSave }) => {
       return (
         <LivePageBuilder
           pageId={pageId}
-          onSave={onSave}
+          onSave={async (blocks) => {
+            const content = { blocks };
+            handleContentChange(content);
+            if (onSave) {
+              await onSave(content);
+            }
+          }}
         />
       );
     }

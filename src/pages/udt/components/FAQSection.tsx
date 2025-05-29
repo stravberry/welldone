@@ -46,7 +46,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({ trackCTAClick }) => {
         <div 
           ref={titleRef}
           className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${
-            titleInView ? 'animate-fade-in-up' : 'opacity-0 translate-y-10'
+            titleInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
           <span className="text-orange-600 font-medium text-sm sm:text-base animate-pulse-slow">FAQ</span>
@@ -64,10 +64,12 @@ const FAQSection: React.FC<FAQSectionProps> = ({ trackCTAClick }) => {
                 value={`item-${index}`} 
                 className={`border border-gray-200 rounded-lg bg-white shadow-sm transition-all duration-700 hover:shadow-lg hover:border-orange-200 group ${
                   visibleItems.includes(index) 
-                    ? 'animate-fade-in-up opacity-100' 
+                    ? 'opacity-100 translate-y-0' 
                     : 'opacity-0 translate-y-5'
                 }`}
-                style={{ animationDelay: `${index * 0.15}s` }}
+                style={{ 
+                  transitionDelay: visibleItems.includes(index) ? '0ms' : `${index * 150}ms` 
+                }}
               >
                 <AccordionTrigger className="text-base sm:text-lg font-medium text-left px-4 sm:px-6 py-3 sm:py-4 hover:no-underline transition-all duration-300 group-hover:text-orange-600 group-hover:bg-orange-50/50">
                   {faq.question}

@@ -48,7 +48,9 @@ export const useScrollAnimation = <T extends HTMLElement = HTMLElement>(options:
     observer.observe(element);
 
     return () => {
-      observer.unobserve(element);
+      if (element) {
+        observer.unobserve(element);
+      }
     };
   }, [threshold, rootMargin, triggerOnce, reducedMotion]);
 
@@ -57,10 +59,13 @@ export const useScrollAnimation = <T extends HTMLElement = HTMLElement>(options:
 
 export const useStaggeredAnimation = <T extends HTMLElement = HTMLElement>(itemCount: number, delay: number = 200) => {
   const [visibleItems, setVisibleItems] = useState<number[]>([]);
+  const [hasTriggered, setHasTriggered] = useState(false);
   const { elementRef, isInView } = useScrollAnimation<T>();
 
   useEffect(() => {
-    if (isInView) {
+    if (isInView && !hasTriggered) {
+      setHasTriggered(true);
+      
       // Check if user prefers reduced motion
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion) {
@@ -72,13 +77,20 @@ export const useStaggeredAnimation = <T extends HTMLElement = HTMLElement>(itemC
       const isMobile = window.innerWidth < 768;
       const adjustedDelay = isMobile ? 50 : delay; // Much faster on mobile
 
+      const timeouts: NodeJS.Timeout[] = [];
+      
       for (let i = 0; i < itemCount; i++) {
-        setTimeout(() => {
+        const timeout = setTimeout(() => {
           setVisibleItems(prev => [...prev, i]);
         }, i * adjustedDelay);
+        timeouts.push(timeout);
       }
+
+      return () => {
+        timeouts.forEach(timeout => clearTimeout(timeout));
+      };
     }
-  }, [isInView, itemCount, delay]);
+  }, [isInView, itemCount, delay, hasTriggered]);
 
   return { elementRef, visibleItems };
 };
