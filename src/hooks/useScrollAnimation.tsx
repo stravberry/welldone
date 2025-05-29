@@ -8,7 +8,7 @@ interface UseScrollAnimationOptions {
   reducedMotion?: boolean;
 }
 
-export const useScrollAnimation = <T extends HTMLElement = HTMLElement>(options: UseScrollAnimationOptions = {}) => {
+export const useScrollAnimation = <T extends HTMLElement = HTMLDivElement>(options: UseScrollAnimationOptions = {}) => {
   const { threshold = 0.05, rootMargin = '50px', triggerOnce = true, reducedMotion = false } = options;
   const [isInView, setIsInView] = useState(false);
   const elementRef = useRef<T>(null);
@@ -27,7 +27,6 @@ export const useScrollAnimation = <T extends HTMLElement = HTMLElement>(options:
     const adjustedThreshold = isMobile ? 0.01 : threshold;
     const adjustedRootMargin = isMobile ? '100px' : rootMargin;
 
-    // Fallback timer - show elements after 2 seconds regardless
     const fallbackTimer = setTimeout(() => {
       console.log('Fallback timer triggered - showing element');
       setIsInView(true);
@@ -65,18 +64,17 @@ export const useScrollAnimation = <T extends HTMLElement = HTMLElement>(options:
   return { elementRef, isInView };
 };
 
-export const useStaggeredAnimation = <T extends HTMLElement = HTMLElement>(itemCount: number, delay: number = 100) => {
+export const useStaggeredAnimation = <T extends HTMLElement = HTMLDivElement>(itemCount: number, delay: number = 100) => {
   const [visibleItems, setVisibleItems] = useState<number[]>([]);
   const [hasTriggered, setHasTriggered] = useState(false);
   const [showAllFallback, setShowAllFallback] = useState(false);
   const { elementRef, isInView } = useScrollAnimation<T>({
-    threshold: 0.01, // Lower threshold for better detection
-    rootMargin: '150px', // Larger margin
+    threshold: 0.01,
+    rootMargin: '150px',
     triggerOnce: true
   });
 
   useEffect(() => {
-    // Aggressive fallback timer - show all items after 1.5 seconds
     const fallbackTimer = setTimeout(() => {
       console.log('Staggered animation fallback triggered');
       setShowAllFallback(true);
@@ -119,7 +117,6 @@ export const useStaggeredAnimation = <T extends HTMLElement = HTMLElement>(itemC
     };
   }, [isInView, itemCount, delay, hasTriggered]);
 
-  // Additional safety check - if we're in view but no items are visible after 3 seconds, force show all
   useEffect(() => {
     if (isInView && visibleItems.length === 0 && !showAllFallback) {
       const emergencyTimer = setTimeout(() => {
@@ -135,7 +132,7 @@ export const useStaggeredAnimation = <T extends HTMLElement = HTMLElement>(itemC
   return { elementRef, visibleItems, showAllFallback };
 };
 
-export const useCounterAnimation = <T extends HTMLElement = HTMLElement>(endValue: number, duration: number = 1000) => {
+export const useCounterAnimation = <T extends HTMLElement = HTMLDivElement>(endValue: number, duration: number = 1000) => {
   const [count, setCount] = useState(0);
   const { elementRef, isInView } = useScrollAnimation<T>({
     threshold: 0.1,
