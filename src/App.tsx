@@ -1,3 +1,4 @@
+
 import { HelmetProvider } from 'react-helmet-async';
 import { Routes, Route } from 'react-router-dom';
 import { Toaster } from 'sonner';
@@ -28,7 +29,7 @@ import CMSLoginPage from '@/pages/CMSLoginPage';
 import NotFound from '@/pages/NotFound';
 
 // Admin
-import AdminLayout from '@/components/admin/AdminLayout';
+import AdminLayout from '@/pages/admin/AdminLayout';
 import AdminDashboard from '@/pages/admin/AdminDashboard';
 import UserManagement from '@/pages/admin/UserManagement';
 import BlogManagement from '@/pages/admin/BlogManagement';
