@@ -76,14 +76,14 @@ const ServicesPage = () => {
     { icon: <CheckCircle className="h-6 w-6" />, text: 'Wsparcie po kursie' }
   ];
 
-  const { elementRef: heroRef, isInView: heroInView } = useScrollAnimation({
+  const { elementRef: heroRef, isInView: heroInView } = useScrollAnimation<HTMLDivElement>({
     threshold: 0.2,
     triggerOnce: true
   });
 
-  const { elementRef: servicesRef, visibleItems } = useStaggeredAnimation(services.length, 150);
+  const { elementRef: servicesRef, visibleItems } = useStaggeredAnimation<HTMLDivElement>(services.length, 150);
 
-  const { elementRef: statsRef, isInView: statsInView } = useScrollAnimation({
+  const { elementRef: statsRef, isInView: statsInView } = useScrollAnimation<HTMLDivElement>({
     threshold: 0.3,
     triggerOnce: true
   });
@@ -331,7 +331,7 @@ const StatCounter: React.FC<{
   index: number;
   isVisible: boolean;
 }> = ({ stat, index, isVisible }) => {
-  const { elementRef, count } = useCounterAnimation(stat.value, 2000);
+  const { elementRef, count } = useCounterAnimation<HTMLDivElement>(stat.value, 2000);
   
   return (
     <div 
