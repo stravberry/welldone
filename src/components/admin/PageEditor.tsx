@@ -11,7 +11,7 @@ import { Save, Eye, Globe, Settings, Image, Plus, Paintbrush, ArrowLeft } from '
 import { useUpdatePage, useCreatePageSection } from '@/hooks/usePages';
 import { useToast } from '@/hooks/use-toast';
 import PageSectionEditor from './PageSectionEditor';
-import PageBuilder from './PageBuilder';
+import LivePageBuilder from './LivePageBuilder';
 import type { Tables } from '@/integrations/supabase/types';
 import type { PageBlock } from './PageBuilder/types';
 
@@ -144,7 +144,7 @@ const PageEditor: React.FC<PageEditorProps> = ({ page }) => {
     { value: 'gallery', label: 'Galeria' },
   ];
 
-  // Show full-screen page builder when active
+  // Show full-screen live page builder when active
   if (activeEditor === 'builder') {
     return (
       <div className="h-screen">
@@ -158,10 +158,10 @@ const PageEditor: React.FC<PageEditorProps> = ({ page }) => {
               <ArrowLeft className="h-4 w-4 mr-2" />
               Powrót do edytora
             </Button>
-            <h1 className="text-xl font-semibold">{page.title} - Page Builder</h1>
+            <h1 className="text-xl font-semibold">{page.title} - Live Page Builder</h1>
           </div>
         </div>
-        <PageBuilder
+        <LivePageBuilder
           pageId={page.id}
           onSave={handleSavePageBuilder}
         />
@@ -264,13 +264,13 @@ const PageEditor: React.FC<PageEditorProps> = ({ page }) => {
                   className="flex items-center"
                 >
                   <Paintbrush className="h-4 w-4 mr-2" />
-                  Page Builder (wizualny)
+                  Live Page Builder (wizualny)
                 </Button>
               </div>
               <p className="text-sm text-gray-500 mt-2">
                 {activeEditor === 'sections' 
                   ? 'Edytuj sekcje strony za pomocą formularzy'
-                  : 'Zbuduj stronę wizualnie przeciągając bloki'
+                  : 'Buduj stronę wizualnie z live preview i edycją inline'
                 }
               </p>
             </CardContent>
