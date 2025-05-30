@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import useEventTracking from '@/hooks/useEventTracking';
@@ -16,6 +16,7 @@ interface ServiceCardProps {
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, link, index = 0 }) => {
   const { trackEvent } = useEventTracking();
+  const navigate = useNavigate();
   const { elementRef, isInView } = useScrollAnimation<HTMLDivElement>({
     threshold: 0.2,
     triggerOnce: true
@@ -28,13 +29,20 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, lin
       label: `service-card-${title}`,
       additionalData: {
         serviceTitle: title,
-        destination: link
+        destination: finalLink
       }
     });
+
+    // Navigate to the page and scroll to top
+    navigate(finalLink);
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   };
 
   // Determine the correct link - if it's "Eventy edukacyjne", use /eventy
-  const finalLink = title === "Eventy edukacyjne" ? "/eventy" : link;
+  // If it's "Szkolenia z lutowania", use /lutowanie
+  const finalLink = title === "Eventy edukacyjne" ? "/eventy" 
+                   : title === "Szkolenia z lutowania" ? "/lutowanie" 
+                   : link;
   
   return (
     <div 
@@ -57,14 +65,13 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, lin
         {description}
       </p>
       <Button 
-        asChild 
         variant="outline" 
         className="mt-auto transition-all duration-300 hover:bg-orange-50 hover:border-orange-300 hover:shadow-md" 
         onClick={handleClick}
       >
-        <Link to={finalLink} className="flex items-center justify-center">
+        <span className="flex items-center justify-center">
           Dowiedz się więcej <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-        </Link>
+        </span>
       </Button>
     </div>
   );
