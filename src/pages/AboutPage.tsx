@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -14,7 +13,7 @@ import ComparisonSection from '@/components/ComparisonSection';
 import EnhancedTestimonialsSection from '@/components/EnhancedTestimonialsSection';
 import PartnersSection from '@/components/PartnersSection';
 import CertificationsSection from '@/components/CertificationsSection';
-import ValuesJourneySection from '@/components/ValuesJourneySection';
+import SimpleValuesSection from '@/components/SimpleValuesSection';
 import GuaranteesSection from '@/components/GuaranteesSection';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
@@ -118,8 +117,8 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Values Journey Section - completely redesigned */}
-      <ValuesJourneySection />
+      {/* Simple Values Section - replaced the complex ValuesJourneySection */}
+      <SimpleValuesSection />
 
       {/* Certifications Section - new trust factor */}
       <CertificationsSection />
