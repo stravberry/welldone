@@ -41,12 +41,10 @@ const Navbar = () => {
 
   const services = [
     { title: 'Uprawnienia UDT dla operatorów', href: '/uslugi/udt-operatorzy' },
-    { title: 'Szkolenia UDT', href: '/udt-szkolenia' },
     { title: 'Uprawnienia UDT dla konserwatorów', href: '/udt-konserwatorze' },
     { title: 'Uprawnienia SEP', href: '/sep' },
     { title: 'Szkolenia z lutowania', href: '/lutowanie' },
     { title: 'Eventy edukacyjne', href: '/eventy' },
-    { title: 'Szkolenie wózki unoszące', href: '/szkolenie-wozki-unoszace' },
   ];
 
   return (
