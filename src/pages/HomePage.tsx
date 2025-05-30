@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -21,6 +22,11 @@ const HomePage = () => {
 
   const handleQuoteClick = () => {
     navigate('/wycena');
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  };
+
+  const handleAuditClick = () => {
+    navigate('/bezplatny-audyt');
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   };
 
@@ -362,11 +368,13 @@ const HomePage = () => {
                   </p>
                   <div className="relative inline-block group">
                     <div className="absolute inset-0 bg-white rounded-lg blur opacity-25 group-hover:opacity-50 transition-opacity duration-300" />
-                    <Button asChild size="lg" className="relative bg-white text-orange-600 hover:bg-orange-50 font-bold text-lg px-8 py-4 shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 hover:-translate-y-1">
-                      <Link to="/bezplatny-audyt">
-                        Zamów bezpłatny audyt
-                        <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-                      </Link>
+                    <Button 
+                      size="lg" 
+                      className="relative bg-white text-orange-600 hover:bg-orange-50 font-bold text-lg px-8 py-4 shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 hover:-translate-y-1"
+                      onClick={handleAuditClick}
+                    >
+                      Zamów bezpłatny audyt
+                      <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                     </Button>
                   </div>
                 </div>
