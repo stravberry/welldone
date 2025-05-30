@@ -5,6 +5,7 @@ import { ArrowLeft } from 'lucide-react';
 import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/useScrollAnimation';
 import useEventTracking from '@/hooks/useEventTracking';
 import useScrollToTop from '@/hooks/useScrollToTop';
+import Navbar from '@/components/Navbar';
 import EventyContactForm from './EventyPage/components/EventyContactForm';
 import EventyHeroSection from './EventyPage/components/EventyHeroSection';
 import EventyServicesSection from './EventyPage/components/EventyServicesSection';
@@ -83,8 +84,10 @@ const EventyPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Navbar />
+      
       {/* Hero Section */}
-      <div ref={heroRef}>
+      <div ref={heroRef} className="mt-16">
         <EventyHeroSection 
           heroInView={heroInView}
           showAllItems={showAllItems}

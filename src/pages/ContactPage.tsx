@@ -1,5 +1,6 @@
 
 import React from 'react';
+import Navbar from '@/components/Navbar';
 import ContactHero from './ContactPage/components/ContactHero';
 import ContactInfo from './ContactPage/components/ContactInfo';
 import ServiceStandards from './ContactPage/components/ServiceStandards';
@@ -10,6 +11,7 @@ import ContactCTA from './ContactPage/components/ContactCTA';
 const ContactPage = () => {
   return (
     <div>
+      <Navbar />
       <ContactHero />
       <ContactInfo />
       <ServiceStandards />

@@ -1,4 +1,6 @@
+
 import React, { useRef, useEffect } from 'react';
+import Navbar from '@/components/Navbar';
 import EnhancedQuoteHero from '@/components/QuotePageComponents/EnhancedQuoteHero';
 import EnhancedQuoteForm from '@/components/QuotePageComponents/EnhancedQuoteForm';
 import ProcessVisualization from '@/components/QuotePageComponents/ProcessVisualization';
@@ -16,6 +18,8 @@ const QuotePage = () => {
 
   return (
     <div className="min-h-screen">
+      <Navbar />
+      
       {/* Enhanced Hero Section */}
       <EnhancedQuoteHero onScrollToForm={scrollToForm} />
       

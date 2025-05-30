@@ -1,16 +1,19 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Phone, Mail, Zap, CheckCircle, Award, Users, Shield, Target, Star } from 'lucide-react';
+import { ArrowLeft, Phone, Mail, Zap, CheckCircle, Award, Users, Shield, Target, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/useScrollAnimation';
 import useEventTracking from '@/hooks/useEventTracking';
 import useScrollToTop from '@/hooks/useScrollToTop';
+import ContactForm from '@/components/ContactForm';
+import Navbar from '@/components/Navbar';
 
 const SepPage = () => {
   const { trackEvent } = useEventTracking();
   const [showContactForm, setShowContactForm] = useState(false);
   const [showAllItems, setShowAllItems] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState<string>('');
   
   useScrollToTop();
 
@@ -18,7 +21,7 @@ const SepPage = () => {
     threshold: 0.1,
     triggerOnce: true
   });
-  const { elementRef: coursesRef, visibleItems: visibleCourses } = useStaggeredAnimation<HTMLDivElement>(4, 150);
+  const { elementRef: coursesRef, visibleItems: visibleCourses } = useStaggeredAnimation<HTMLDivElement>(3, 150);
 
   useEffect(() => {
     const fallbackTimer = setTimeout(() => {
@@ -30,90 +33,72 @@ const SepPage = () => {
   const courses = [
     {
       id: 'sep-do-1kv',
-      title: 'SEP do 1kV',
-      description: 'Uprawnienia elektryczne SEP do 1kV - podstawowe uprawnienia elektryczne.',
+      title: 'Uprawnienia SEP do 1 kV',
+      description: 'Podstawowe uprawnienia elektryczne do pracy przy urządzeniach do 1000V.',
       duration: '40 godzin',
       participants: 'do 12 osób',
-      price: '850 zł',
-      features: ['Teoria elektrotechniki', 'Przepisy bezpieczeństwa', 'Egzamin UDT', 'Certyfikat SEP'],
+      price: '450 zł',
+      features: ['Teoria elektrotechniki', 'Przepisy BHP', 'Egzamin SEP', 'Legitymacja SEP'],
       badge: 'Podstawowe',
-      image: '/lovable-uploads/a2c8c546-13e6-445b-9832-abf375420d6c.png',
-      imageAlt: 'Elektryk pracujący z instalacją do 1kV'
+      image: '/lovable-uploads/657768d6-dc5a-419b-80b8-b664af6c6775.png',
+      imageAlt: 'Elektryk przy pracy do 1kV'
     },
     {
-      id: 'sep-powyżej-1kv',
-      title: 'SEP powyżej 1kV',
-      description: 'Uprawnienia elektryczne SEP powyżej 1kV - wysokie napięcie.',
-      duration: '50 godzin',
+      id: 'sep-do-10kv',
+      title: 'Uprawnienia SEP do 10 kV',
+      description: 'Rozszerzone uprawnienia elektryczne do pracy przy urządzeniach do 10kV.',
+      duration: '80 godzin',
       participants: 'do 10 osób',
-      price: '1200 zł',
-      features: ['Wysokie napięcie', 'Zaawansowane procedury', 'Egzamin UDT', 'Certyfikat SEP'],
+      price: '850 zł',
+      features: ['Zaawansowana teoria', 'Pomiary elektryczne', 'Egzamin SEP', 'Certyfikat średniego napięcia'],
       badge: 'Zaawansowane',
-      image: '/lovable-uploads/a2c8c546-13e6-445b-9832-abf375420d6c.png',
-      imageAlt: 'Elektryk przy instalacji wysokiego napięcia'
+      image: '/lovable-uploads/e53f9387-8eab-484e-95d8-dae5efb914a0.png',
+      imageAlt: 'Elektryk przy instalacji do 10kV'
     },
     {
-      id: 'sep-eksploatacyjne',
-      title: 'SEP eksploatacyjne',
-      description: 'Uprawnienia eksploatacyjne SEP - obsługa urządzeń elektrycznych.',
-      duration: '35 godzin',
-      participants: 'do 15 osób',
-      price: '750 zł',
-      features: ['Eksploatacja urządzeń', 'Konserwacja', 'Egzamin UDT', 'Certyfikat'],
-      image: '/lovable-uploads/a2c8c546-13e6-445b-9832-abf375420d6c.png',
-      imageAlt: 'Elektryk podczas eksploatacji urządzeń'
-    },
-    {
-      id: 'sep-odswiezajace',
-      title: 'Szkolenia odświeżające SEP',
-      description: 'Okresowe szkolenia odświeżające uprawnienia SEP.',
-      duration: '8 godzin',
-      participants: 'do 20 osób',
-      price: '320 zł',
-      features: ['Aktualizacja przepisów', 'Nowe technologie', 'Potwierdzenie uprawnień', 'Certyfikat'],
-      badge: 'Odświeżające',
-      image: '/lovable-uploads/a2c8c546-13e6-445b-9832-abf375420d6c.png',
-      imageAlt: 'Szkolenie odświeżające SEP'
+      id: 'sep-eksploatacja',
+      title: 'SEP Eksploatacja',
+      description: 'Uprawnienia do eksploatacji urządzeń i instalacji elektrycznych.',
+      duration: '60 godzin',
+      participants: 'do 8 osób',
+      price: '650 zł',
+      features: ['Eksploatacja urządzeń', 'Konserwacja instalacji', 'Egzamin SEP', 'Uprawnienia eksploatacyjne'],
+      badge: 'Ekspert',
+      image: '/lovable-uploads/f9dc5911-3540-4c1c-91a0-f031a4e94698.png',
+      imageAlt: 'Eksploatacja instalacji elektrycznych'
     }
-  ];
-
-  const stats = [
-    { value: 2000, label: 'Posiadaczy uprawnień SEP', suffix: '+' },
-    { value: 98, label: 'Zdawalność egzaminów', suffix: '%' },
-    { value: 12, label: 'Lat doświadczenia', suffix: '+' },
-    { value: 300, label: 'Firm współpracujących', suffix: '+' }
   ];
 
   const benefits = [
     {
       icon: <Award className="h-6 w-6" />,
-      title: '98% zdawalność',
-      description: 'Najwyższa zdawalność egzaminów SEP w regionie'
+      title: '92% zdawalność',
+      description: 'Wysokie wyniki naszych kursantów na egzaminach SEP'
     },
     {
       icon: <Users className="h-6 w-6" />,
-      title: 'Certyfikowani instruktorzy',
-      description: 'Kadra z aktywnymi uprawnieniami i doświadczeniem'
+      title: 'Doświadczeni instruktorzy',
+      description: 'Praktycy z wieloletnim doświadczeniem w elektrotechnice'
     },
     {
       icon: <Shield className="h-6 w-6" />,
-      title: 'Nowoczesne laboratoria',
-      description: 'Szkolenia na rzeczywistych instalacjach elektrycznych'
+      title: 'Nowoczesne laboratorium',
+      description: 'Szkolenia na profesjonalnym sprzęcie elektrycznym'
     },
     {
       icon: <Target className="h-6 w-6" />,
+      title: 'Małe grupy szkoleniowe',
+      description: 'Maksymalnie 12 osób - indywidualne podejście'
+    },
+    {
+      icon: <CheckCircle className="h-6 w-6" />,
+      title: 'Kompleksowe materiały',
+      description: 'Wszystkie niezbędne materiały szkoleniowe w cenie'
+    },
+    {
+      icon: <Clock className="h-6 w-6" />,
       title: 'Elastyczne terminy',
-      description: 'Kursy dostosowane do potrzeb uczestników'
-    },
-    {
-      icon: <Star className="h-6 w-6" />,
-      title: 'Uznanie UDT',
-      description: 'Oficjalne uprawnienia elektryczne w całej Polsce'
-    },
-    {
-      icon: <Zap className="h-6 w-6" />,
-      title: 'Praktyczne podejście',
-      description: 'Nacisk na praktyczne zastosowanie wiedzy'
+      description: 'Dostosujemy terminy do potrzeb Twojej firmy'
     }
   ];
 
@@ -121,17 +106,34 @@ const SepPage = () => {
     return showAllItems || visibleItems.includes(index);
   };
 
+  const handleCourseRegistration = (courseTitle: string) => {
+    setSelectedCourse(courseTitle);
+    const contactSection = document.getElementById('contact-form');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
+      <Navbar />
+      
       {/* Hero Section */}
-      <div ref={heroRef} className="relative bg-gradient-to-br from-yellow-600 via-yellow-500 to-yellow-400 py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <div ref={heroRef} className="relative bg-gradient-to-br from-yellow-600 via-yellow-500 to-orange-400 py-20 px-4 sm:px-6 lg:px-8 overflow-hidden mt-16">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-32 h-32 bg-white rounded-full animate-pulse"></div>
           <div className="absolute bottom-10 right-10 w-24 h-24 bg-white rounded-full animate-pulse delay-1000"></div>
         </div>
 
+        {/* Large Background Electric Icon */}
+        <div className={`absolute -right-32 top-0 bottom-0 flex justify-end items-center transition-all duration-800 ${
+          heroInView || showAllItems ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+        }`}>
+          <Zap className="w-96 h-96 text-yellow-200 opacity-20" />
+        </div>
+
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className={`flex items-center space-x-2 text-yellow-100 mb-4 transition-all duration-600 ${
+          <div className={`flex items-center space-x-2 text-yellow-100 mb-8 transition-all duration-600 ${
             heroInView || showAllItems ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
           }`}>
             <Link to="/" className="hover:text-white transition-colors">Strona główna</Link>
@@ -141,7 +143,7 @@ const SepPage = () => {
             <span className="text-white font-medium">Uprawnienia SEP</span>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <div className={`inline-block bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full text-sm font-medium mb-6 transition-all duration-800 ${
                 heroInView || showAllItems ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
@@ -159,7 +161,7 @@ const SepPage = () => {
                 heroInView || showAllItems ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
               }`}>
                 Zdobądź uprawnienia elektryczne SEP. Profesjonalne szkolenia 
-                z najwyższą zdawalnością egzaminów w regionie.
+                z elektrotechniki i bezpieczeństwa pracy przy urządzeniach elektrycznych.
               </p>
 
               <div className={`flex flex-col sm:flex-row gap-4 transition-all duration-800 ${
@@ -186,42 +188,6 @@ const SepPage = () => {
                 </Button>
               </div>
             </div>
-
-            {/* Lightning Bolt Icon - Fixed size and positioning */}
-            <div className={`flex justify-center items-center h-80 overflow-hidden transition-all duration-800 ${
-              heroInView || showAllItems ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-            }`}>
-              <div className="relative flex justify-center items-center">
-                <svg
-                  width="400"
-                  height="400"
-                  viewBox="0 0 100 100"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="text-yellow-100"
-                >
-                  {/* Simple Lightning Bolt */}
-                  <path 
-                    d="M30 10 L25 50 L45 50 L15 90 L70 40 L50 40 L80 10 Z" 
-                    fill="currentColor" 
-                    opacity="0.9"
-                  />
-                  
-                  {/* Inner glow */}
-                  <path 
-                    d="M35 15 L30 45 L45 45 L25 80 L65 45 L50 45 L70 15 Z" 
-                    fill="white" 
-                    opacity="0.4"
-                  />
-                </svg>
-                
-                {/* Energy particles - fixed positioning */}
-                <div className="absolute top-16 right-16 w-5 h-5 bg-white rounded-full animate-ping opacity-75"></div>
-                <div className="absolute bottom-20 left-16 w-4 h-4 bg-yellow-200 rounded-full animate-pulse delay-300"></div>
-                <div className="absolute top-32 left-24 w-3 h-3 bg-white rounded-full animate-ping delay-700"></div>
-                <div className="absolute top-20 right-24 w-4 h-4 bg-yellow-300 rounded-full animate-pulse delay-500"></div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -233,11 +199,11 @@ const SepPage = () => {
             Dostępne kursy SEP
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Kompletna oferta szkoleń elektrycznych SEP - od podstawowych do zaawansowanych uprawnień.
+            Kompleksowe szkolenia elektryczne dostosowane do różnych poziomów zaawansowania.
           </p>
         </div>
 
-        <div ref={coursesRef} className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div ref={coursesRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {courses.map((course, index) => (
             <div key={course.id} className={`bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 hover:scale-105 ${
               isItemVisible(index, visibleCourses) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
@@ -278,7 +244,10 @@ const SepPage = () => {
                     </div>
                   ))}
                 </div>
-                <Button className="w-full bg-yellow-600 hover:bg-yellow-700">
+                <Button 
+                  className="w-full bg-yellow-600 hover:bg-yellow-700"
+                  onClick={() => handleCourseRegistration(course.title)}
+                >
                   Zapisz się na kurs
                 </Button>
               </div>
@@ -309,14 +278,25 @@ const SepPage = () => {
         </div>
       </div>
 
+      {/* Contact Form Section */}
+      <div id="contact-form" className="bg-gray-50 py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <ContactForm 
+            title="Zapisz się na kurs SEP"
+            subtitle="Wypełnij formularz, a nasz konsultant skontaktuje się z Tobą w ciągu 24 godzin"
+            initialMessage={selectedCourse ? `Jestem zainteresowany kursem ${selectedCourse}` : ''}
+          />
+        </div>
+      </div>
+
       {/* CTA Section */}
-      <div className="relative bg-gradient-to-r from-yellow-600 to-yellow-500 py-20 px-4 sm:px-6 lg:px-8">
+      <div className="relative bg-gradient-to-r from-yellow-600 to-orange-500 py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-            Zdobądź uprawnienia elektryczne SEP
+            Zdobądź uprawnienia SEP już dziś
           </h2>
           <p className="text-xl text-yellow-100 max-w-3xl mx-auto mb-8">
-            Rozpocznij karierę w branży elektrycznej z oficjalnymi uprawnieniami SEP.
+            Dołącz do tysięcy osób, które zdobyły uprawnienia elektryczne SEP dzięki naszym szkoleniom.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 

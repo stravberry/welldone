@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { toast } from "sonner";
 import useEventTracking from '@/hooks/useEventTracking';
 import { supabase } from '@/integrations/supabase/client';
+import Navbar from '@/components/Navbar';
 import WozkiHeroSection from './wozki/components/WozkiHeroSection';
 import WozkiOfferingsSection from './wozki/components/WozkiOfferingsSection';
 import SafetySection from './wozki/components/SafetySection';
@@ -202,6 +203,7 @@ const WozkiUnoszacePage = () => {
         </script>
       </Helmet>
       
+      <Navbar />
       <NavigationMenu trackLinkClick={trackLinkClick} trackCTAClick={trackCTAClick} />
       
       <div className="pt-16">

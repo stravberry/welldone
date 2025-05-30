@@ -1,5 +1,6 @@
 
 import React from 'react';
+import Navbar from '@/components/Navbar';
 import AuditHeroSection from './FreeAuditPage/components/AuditHeroSection';
 import AnimatedBenefitsSection from './FreeAuditPage/components/AnimatedBenefitsSection';
 import InteractiveProcessSection from './FreeAuditPage/components/InteractiveProcessSection';
@@ -16,6 +17,7 @@ const FreeAuditPage = () => {
 
   return (
     <div>
+      <Navbar />
       <AuditHeroSection onCTAClick={scrollToForm} />
       <AnimatedBenefitsSection />
       <InteractiveProcessSection />

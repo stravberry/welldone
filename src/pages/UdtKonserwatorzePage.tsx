@@ -6,6 +6,7 @@ import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/useScrollAnim
 import useEventTracking from '@/hooks/useEventTracking';
 import useScrollToTop from '@/hooks/useScrollToTop';
 import ContactForm from '@/components/ContactForm';
+import Navbar from '@/components/Navbar';
 
 const UdtKonserwatorzePage = () => {
   const { trackEvent } = useEventTracking();
@@ -120,13 +121,10 @@ const UdtKonserwatorzePage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Navbar />
+      
       {/* Hero Section */}
-      <div ref={heroRef} className="relative bg-gradient-to-br from-blue-600 via-blue-500 to-blue-400 py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-10 w-32 h-32 bg-white rounded-full animate-pulse"></div>
-          <div className="absolute bottom-10 right-10 w-24 h-24 bg-white rounded-full animate-pulse delay-1000"></div>
-        </div>
-
+      <div ref={heroRef} className="relative bg-gradient-to-br from-blue-600 via-blue-500 to-blue-400 py-20 px-4 sm:px-6 lg:px-8 overflow-hidden mt-16">
         {/* Large Background Tools Icon */}
         <div className={`absolute -right-32 top-0 bottom-0 flex justify-end items-center transition-all duration-800 ${
           heroInView || showAllItems ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'

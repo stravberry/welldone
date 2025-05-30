@@ -1,8 +1,10 @@
+
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { toast } from "sonner";
 import useEventTracking from '@/hooks/useEventTracking';
 import { supabase } from '@/integrations/supabase/client';
+import Navbar from '@/components/Navbar';
 import HeroSection from './udt/components/HeroSection';
 import OfferingsSection from './udt/components/OfferingsSection';
 import WhyChooseUsSection from './udt/components/WhyChooseUsSection';
@@ -206,6 +208,8 @@ const UdtLandingPage = () => {
           {JSON.stringify(structuredData)}
         </script>
       </Helmet>
+      
+      <Navbar />
       
       <NavigationMenu trackLinkClick={trackLinkClick} trackCTAClick={trackCTAClick} />
       
