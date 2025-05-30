@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
@@ -15,21 +14,27 @@ const UdtOperatorzyPage = () => {
       description: "Szkolenie na uprawnienia do obsługi wózków widłowych wszystkich typów",
       duration: "16 godzin",
       price: "od 450 zł",
-      icon: <Truck className="h-8 w-8 text-orange-500" />
+      icon: <Truck className="h-8 w-8 text-orange-500" />,
+      image: "/lovable-uploads/a2c8c546-13e6-445b-9832-abf375420d6c.png",
+      alt: "Wózek widłowy w magazynie"
     },
     {
       title: "Podesty ruchome",
       description: "Kurs operatora podestów ruchomych i platform roboczych",
       duration: "16 godzin", 
       price: "od 500 zł",
-      icon: <Settings className="h-8 w-8 text-orange-500" />
+      icon: <Settings className="h-8 w-8 text-orange-500" />,
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
+      alt: "Podest ruchomy nożycowy na budowie"
     },
     {
       title: "Suwnice",
       description: "Szkolenie operatorów suwnic i żurawi stacjonarnych",
       duration: "24 godziny",
       price: "od 650 zł", 
-      icon: <HardHat className="h-8 w-8 text-orange-500" />
+      icon: <HardHat className="h-8 w-8 text-orange-500" />,
+      image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80",
+      alt: "Suwnica przemysłowa w hali produkcyjnej"
     }
   ];
 
@@ -90,9 +95,106 @@ const UdtOperatorzyPage = () => {
       <Navbar />
       
       <div className="pt-16">
-        {/* Hero Section */}
+        {/* Hero Section with Background Illustration */}
         <section className="hero-gradient text-white py-20 md:py-32 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-orange-600/20 via-transparent to-orange-500/20" />
+          
+          {/* Background Forklift and Warehouse Illustration */}
+          <div className="absolute -right-32 top-0 bottom-0 flex justify-end items-center transition-all duration-800 opacity-100 translate-x-0">
+            <svg
+              width="1600"
+              height="1600"
+              viewBox="0 0 400 400"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="opacity-10"
+            >
+              <g className="text-orange-200">
+                {/* Warehouse shelves in background */}
+                <rect x="50" y="80" width="8" height="120" fill="currentColor" opacity="0.3"/>
+                <rect x="50" y="80" width="40" height="8" fill="currentColor" opacity="0.3"/>
+                <rect x="50" y="120" width="40" height="8" fill="currentColor" opacity="0.3"/>
+                <rect x="50" y="160" width="40" height="8" fill="currentColor" opacity="0.3"/>
+                <rect x="50" y="200" width="40" height="8" fill="currentColor" opacity="0.3"/>
+                
+                <rect x="70" y="100" width="6" height="15" fill="currentColor" opacity="0.4"/>
+                <rect x="78" y="100" width="6" height="15" fill="currentColor" opacity="0.4"/>
+                <rect x="70" y="140" width="6" height="15" fill="currentColor" opacity="0.4"/>
+                <rect x="78" y="140" width="6" height="15" fill="currentColor" opacity="0.4"/>
+                <rect x="70" y="180" width="6" height="15" fill="currentColor" opacity="0.4"/>
+
+                {/* Main forklift body */}
+                <rect x="180" y="220" width="80" height="40" rx="4" fill="currentColor" opacity="0.8"/>
+                
+                {/* Forklift cabin */}
+                <rect x="200" y="200" width="40" height="20" rx="2" fill="currentColor" opacity="0.7"/>
+                <rect x="210" y="205" width="20" height="15" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.6"/>
+                
+                {/* Operator silhouette */}
+                <circle cx="220" cy="208" r="4" fill="currentColor" opacity="0.9"/>
+                <rect x="218" y="212" width="4" height="8" fill="currentColor" opacity="0.9"/>
+                
+                {/* Forklift mast */}
+                <rect x="175" y="120" width="6" height="100" fill="currentColor" opacity="0.8"/>
+                <rect x="183" y="120" width="6" height="100" fill="currentColor" opacity="0.8"/>
+                
+                {/* Forklift forks */}
+                <rect x="170" y="180" width="25" height="4" fill="currentColor" opacity="0.9"/>
+                <rect x="170" y="188" width="25" height="4" fill="currentColor" opacity="0.9"/>
+                
+                {/* Pallet on forks */}
+                <rect x="150" y="170" width="30" height="18" rx="2" fill="currentColor" opacity="0.6"/>
+                <rect x="152" y="175" width="4" height="8" fill="currentColor" opacity="0.4"/>
+                <rect x="158" y="175" width="4" height="8" fill="currentColor" opacity="0.4"/>
+                <rect x="164" y="175" width="4" height="8" fill="currentColor" opacity="0.4"/>
+                <rect x="170" y="175" width="4" height="8" fill="currentColor" opacity="0.4"/>
+                <rect x="176" y="175" width="4" height="8" fill="currentColor" opacity="0.4"/>
+                
+                {/* Boxes on pallet */}
+                <rect x="152" y="165" width="12" height="10" fill="currentColor" opacity="0.7"/>
+                <rect x="166" y="165" width="12" height="10" fill="currentColor" opacity="0.7"/>
+                
+                {/* Forklift wheels */}
+                <circle cx="190" cy="268" r="8" fill="currentColor" opacity="0.8"/>
+                <circle cx="230" cy="268" r="8" fill="currentColor" opacity="0.8"/>
+                <circle cx="250" cy="268" r="6" fill="currentColor" opacity="0.8"/>
+                
+                {/* Wheel details */}
+                <circle cx="190" cy="268" r="4" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.6"/>
+                <circle cx="230" cy="268" r="4" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.6"/>
+                <circle cx="250" cy="268" r="3" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.6"/>
+                
+                {/* Counterweight */}
+                <rect x="245" y="235" width="20" height="25" rx="2" fill="currentColor" opacity="0.7"/>
+                
+                {/* Safety elements */}
+                <circle cx="320" cy="120" r="15" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.4"/>
+                <path d="M320 110 L320 130 M310 120 L330 120" stroke="currentColor" strokeWidth="2" opacity="0.5"/>
+                
+                {/* Warning triangle */}
+                <path d="M300 300 L315 280 L330 300 Z" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.4"/>
+                <circle cx="315" cy="290" r="2" fill="currentColor" opacity="0.5"/>
+                <path d="M315 285 L315 295" stroke="currentColor" strokeWidth="1" opacity="0.5"/>
+                
+                {/* Movement arrows */}
+                <path d="M280 160 Q300 140 320 160" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.4"/>
+                <polygon points="315,158 325,160 315,162" fill="currentColor" opacity="0.4"/>
+                
+                {/* Additional warehouse elements */}
+                <rect x="350" y="200" width="6" height="80" fill="currentColor" opacity="0.3"/>
+                <rect x="350" y="200" width="30" height="6" fill="currentColor" opacity="0.3"/>
+                <rect x="350" y="230" width="30" height="6" fill="currentColor" opacity="0.3"/>
+                <rect x="350" y="260" width="30" height="6" fill="currentColor" opacity="0.3"/>
+                
+                {/* Ground/floor markings */}
+                <path d="M120 280 L380 280" stroke="currentColor" strokeWidth="2" opacity="0.3" strokeDasharray="10,5"/>
+                
+                {/* Hydraulic lines */}
+                <path d="M181 180 Q185 160 181 140" stroke="currentColor" strokeWidth="1" fill="none" opacity="0.5"/>
+                <path d="M187 180 Q191 160 187 140" stroke="currentColor" strokeWidth="1" fill="none" opacity="0.5"/>
+              </g>
+            </svg>
+          </div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -148,7 +250,7 @@ const UdtOperatorzyPage = () => {
           </div>
         </section>
 
-        {/* Courses Section */}
+        {/* Courses Section with Images */}
         <section className="py-20 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
@@ -160,23 +262,35 @@ const UdtOperatorzyPage = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {courses.map((course, index) => (
-                <div key={index} className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                  <div className="mb-6">{course.icon}</div>
-                  <h3 className="text-2xl font-bold mb-4">{course.title}</h3>
-                  <p className="text-gray-600 mb-6">{course.description}</p>
-                  <div className="space-y-2 mb-6">
-                    <div className="flex justify-between">
-                      <span className="text-gray-500">Czas trwania:</span>
-                      <span className="font-semibold">{course.duration}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-500">Cena:</span>
-                      <span className="font-semibold text-orange-600">{course.price}</span>
+                <div key={index} className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                  <div className="relative h-48 overflow-hidden">
+                    <img 
+                      src={course.image} 
+                      alt={course.alt} 
+                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                    <div className="absolute top-4 left-4 bg-orange-500 text-white p-2 rounded-lg">
+                      {course.icon}
                     </div>
                   </div>
-                  <Button asChild className="w-full bg-orange-500 hover:bg-orange-600">
-                    <Link to="/wycena">Zapisz się na kurs</Link>
-                  </Button>
+                  <div className="p-8">
+                    <h3 className="text-2xl font-bold mb-4">{course.title}</h3>
+                    <p className="text-gray-600 mb-6">{course.description}</p>
+                    <div className="space-y-2 mb-6">
+                      <div className="flex justify-between">
+                        <span className="text-gray-500">Czas trwania:</span>
+                        <span className="font-semibold">{course.duration}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-500">Cena:</span>
+                        <span className="font-semibold text-orange-600">{course.price}</span>
+                      </div>
+                    </div>
+                    <Button asChild className="w-full bg-orange-500 hover:bg-orange-600 transition-all duration-200">
+                      <Link to="/wycena">Zapisz się na kurs</Link>
+                    </Button>
+                  </div>
                 </div>
               ))}
             </div>
