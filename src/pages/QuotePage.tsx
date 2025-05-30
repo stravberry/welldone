@@ -18,7 +18,7 @@ const QuotePage = () => {
   return (
     <div>
       <Navbar />
-      <EnhancedQuoteHero onCTAClick={scrollToForm} />
+      <EnhancedQuoteHero onScrollToForm={scrollToForm} />
       <ProcessVisualization />
       <TrustSection />
       <div id="quote-form">
