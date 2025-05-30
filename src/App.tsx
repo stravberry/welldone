@@ -14,11 +14,13 @@ import QuotePage from './pages/QuotePage';
 import RealizationsPage from './pages/RealizationsPage';
 import KnowledgePage from './pages/KnowledgePage';
 import WozkiUnoszacePage from './pages/WozkiUnoszacePage';
-import UdtLandingPage from './pages/UdtLandingPage';
+import UdtOperatorzyPage from './pages/UdtOperatorzyPage';
+import UdtSzkoleniaPage from './pages/UdtSzkoleniaPage';
 import UdtKonserwatorzePage from './pages/UdtKonserwatorzePage';
 import SepPage from './pages/SepPage';
 import LutowaniePage from './pages/LutowaniePage';
 import EventyPage from './pages/EventyPage';
+import SitemapPage from './pages/SitemapPage';
 import NotFound from './pages/NotFound';
 import AdminLayout from './pages/admin/AdminLayout';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -45,13 +47,17 @@ function App() {
               <Route path="/realizacje" element={<RealizationsPage />} />
               <Route path="/wiedza" element={<KnowledgePage />} />
               
-              {/* Service Subpages - All UDT, SEP, Lutowanie, Eventy, Wózki */}
-              <Route path="/uslugi/udt-operatorzy" element={<UdtLandingPage />} />
+              {/* Service Subpages */}
+              <Route path="/uslugi/udt-operatorzy" element={<UdtOperatorzyPage />} />
+              <Route path="/udt-szkolenia" element={<UdtSzkoleniaPage />} />
               <Route path="/udt-konserwatorze" element={<UdtKonserwatorzePage />} />
               <Route path="/sep" element={<SepPage />} />
               <Route path="/lutowanie" element={<LutowaniePage />} />
               <Route path="/eventy" element={<EventyPage />} />
               <Route path="/szkolenie-wozki-unoszace" element={<WozkiUnoszacePage />} />
+              
+              {/* Additional Pages */}
+              <Route path="/mapa-strony" element={<SitemapPage />} />
               
               {/* CMS Login */}
               <Route path="/cms-login" element={<CMSLoginPage />} />

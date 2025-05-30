@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import { Link } from 'react-router-dom';
@@ -16,12 +17,12 @@ const SitemapPage = () => {
 
   const services = [
     { title: 'Uprawnienia UDT dla operatorów', href: '/uslugi/udt-operatorzy', description: 'Szkolenia operatorów urządzeń transportu bliskiego' },
+    { title: 'Szkolenia UDT', href: '/udt-szkolenia', description: 'Kompleksowe szkolenia UDT - wózki, podesty, suwnice' },
     { title: 'Uprawnienia UDT dla konserwatorów', href: '/udt-konserwatorze', description: 'Szkolenia konserwatorów urządzeń UDT' },
     { title: 'Uprawnienia SEP', href: '/sep', description: 'Szkolenia elektryczne SEP' },
     { title: 'Szkolenia z lutowania', href: '/lutowanie', description: 'Profesjonalne szkolenia lutowania' },
     { title: 'Eventy edukacyjne', href: '/eventy', description: 'Wydarzenia i konferencje branżowe' },
     { title: 'Szkolenie wózki unoszące', href: '/szkolenie-wozki-unoszace', description: 'Specjalistyczne szkolenia wózków unoszących' },
-    { title: 'Szkolenia UDT', href: '/udt-szkolenia', description: 'Kompleksowe szkolenia UDT' },
   ];
 
   const additionalPages = [

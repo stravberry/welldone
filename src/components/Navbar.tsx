@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
@@ -44,6 +45,7 @@ const Navbar = () => {
 
   const services = [
     { title: 'Uprawnienia UDT dla operatorów', href: '/uslugi/udt-operatorzy' },
+    { title: 'Szkolenia UDT', href: '/udt-szkolenia' },
     { title: 'Uprawnienia UDT dla konserwatorów', href: '/udt-konserwatorze' },
     { title: 'Uprawnienia SEP', href: '/sep' },
     { title: 'Szkolenia z lutowania', href: '/lutowanie' },
