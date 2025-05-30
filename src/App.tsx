@@ -31,8 +31,8 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <HelmetProvider>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <Router>
             <Routes>
@@ -47,7 +47,7 @@ function App() {
               <Route path="/realizacje" element={<RealizationsPage />} />
               <Route path="/wiedza" element={<KnowledgePage />} />
               
-              {/* Service Subpages */}
+              {/* Service Subpages - All UDT, SEP, Lutowanie, Eventy, Wózki */}
               <Route path="/uslugi/udt-operatorzy" element={<UdtLandingPage />} />
               <Route path="/udt-konserwatorze" element={<UdtKonserwatorzePage />} />
               <Route path="/sep" element={<SepPage />} />
@@ -77,8 +77,8 @@ function App() {
             </Routes>
           </Router>
         </AuthProvider>
-      </HelmetProvider>
-    </QueryClientProvider>
+      </QueryClientProvider>
+    </HelmetProvider>
   );
 }
 

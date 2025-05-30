@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
@@ -48,6 +49,7 @@ const Navbar = () => {
     { title: 'Uprawnienia SEP', href: '/sep' },
     { title: 'Szkolenia z lutowania', href: '/lutowanie' },
     { title: 'Eventy edukacyjne', href: '/eventy' },
+    { title: 'Szkolenie wózki unoszące', href: '/szkolenie-wozki-unoszace' },
   ];
 
   return (
@@ -107,6 +109,9 @@ const Navbar = () => {
               </NavigationMenuList>
             </NavigationMenu>
             
+            <Link to="/cennik" className="px-2 xl:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
+              Cennik
+            </Link>
             <Link to="/bezplatny-audyt" className="px-2 xl:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
               Bezpłatny Audyt
             </Link>
@@ -160,6 +165,7 @@ const Navbar = () => {
             { to: '/', label: 'Home', delay: 0 },
             { to: '/o-nas', label: 'O Nas', delay: 50 },
             { to: '/uslugi', label: 'Usługi', delay: 100 },
+            { to: '/cennik', label: 'Cennik', delay: 125 },
             { to: '/bezplatny-audyt', label: 'Bezpłatny Audyt', delay: 150 },
             { to: '/realizacje', label: 'Realizacje', delay: 200 },
             { to: '/wiedza', label: 'Wiedza', delay: 250 }
@@ -184,6 +190,9 @@ const Navbar = () => {
           
           {/* Services Submenu with Animation */}
           <div className="border-l-2 border-orange-200 ml-3">
+            <div className="px-3 py-1 text-xs font-semibold text-orange-600 uppercase tracking-wider">
+              Nasze Usługi:
+            </div>
             {services.map((service, index) => (
               <Link
                 key={service.href}
