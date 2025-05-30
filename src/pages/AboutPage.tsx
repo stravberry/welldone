@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { Award, Users, Target, Building, CheckCircle, Clock } from 'lucide-react';
 import AnimatedProcessSection from '@/components/AnimatedProcessSection';
+import ContactForm from '@/components/ContactForm';
 
 const AboutPage = () => {
   const values = [
@@ -91,7 +92,7 @@ const AboutPage = () => {
             </div>
             <div className="relative">
               <img 
-                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" 
+                src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=800&q=80" 
                 alt="Magazyn przemysłowy z wózkami widłowymi" 
                 className="w-full h-full object-cover rounded-lg shadow-lg"
               />
@@ -132,12 +133,13 @@ const AboutPage = () => {
       {/* Animated Process Section */}
       <AnimatedProcessSection />
 
-      {/* CTA Section */}
+      {/* Contact Form Section */}
       <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Button asChild size="lg" className="bg-orange-500 hover:bg-orange-600">
-            <Link to="/kontakt">Skontaktuj się z nami</Link>
-          </Button>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ContactForm 
+            title="Skontaktuj się z nami"
+            subtitle="Masz pytania o nasze usługi? Wypełnij formularz poniżej, a nasz zespół skontaktuje się z Tobą w ciągu 24 godzin."
+          />
         </div>
       </section>
 
