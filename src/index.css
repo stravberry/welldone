@@ -104,7 +104,6 @@
     font-family: 'Outfit', sans-serif;
     margin: 0;
     padding: 0;
-    padding-top: 64px; /* Proper padding for 64px navbar height */
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -143,18 +142,6 @@
       transition-duration: 0.01ms !important;
     }
   }
-}
-
-/* Fix NavigationMenu spacing issues */
-[data-radix-navigation-menu-viewport] {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.navigation-menu-trigger {
-  min-height: 48px !important;
-  display: flex !important;
-  align-items: center !important;
 }
 
 /* Enhanced Hero gradient background */
