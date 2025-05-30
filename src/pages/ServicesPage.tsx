@@ -1,338 +1,227 @@
+
 import React from 'react';
-import Navbar from '@/components/Navbar';
 import { Link } from 'react-router-dom';
-import ServiceCard from '@/components/ServiceCard';
-import { Wrench, Wrench as Tool, Zap, Flame, Users, Star, Award, Shield, CheckCircle } from 'lucide-react';
-import useEventTracking from '@/hooks/useEventTracking';
-import useScrollToTop from '@/hooks/useScrollToTop';
 import { Button } from '@/components/ui/button';
-import { useScrollAnimation, useStaggeredAnimation, useCounterAnimation } from '@/hooks/useScrollAnimation';
+import { Award, Users, Briefcase, BarChart, BookOpen, ArrowRight, CheckCircle, Clock, ThumbsUp, Shield } from 'lucide-react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import ServiceCard from '@/components/ServiceCard';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const ServicesPage = () => {
-  const { trackEvent } = useEventTracking();
+  const { elementRef: servicesRef, isVisible: servicesVisible } = useScrollAnimation<HTMLDivElement>();
+  const { elementRef: benefitsRef, isVisible: benefitsVisible } = useScrollAnimation<HTMLDivElement>();
 
-  // Automatyczne przewijanie na górę przy zmianie strony
-  useScrollToTop();
+  const services = [
+    {
+      title: "Uprawnienia UDT dla operatorów",
+      description: "Szkolenia i certyfikacja dla operatorów urządzeń transportu bliskiego, takich jak wózki widłowe, suwnice i podesty ruchome.",
+      icon: <Award size={40} className="text-orange-500" />,
+      link: "/uslugi/udt-operatorzy",
+      features: ["Wózki widłowe", "Suwnice", "Podesty ruchome", "Certyfikaty UDT"]
+    },
+    {
+      title: "Uprawnienia UDT dla konserwatorów",
+      description: "Kursy dla konserwatorów urządzeń transportu bliskiego, takich jak suwnice i żurawie. Teoria online, praktyka stacjonarna.",
+      icon: <Briefcase size={40} className="text-orange-500" />,
+      link: "/udt-konserwatorze",
+      features: ["Suwnice i żurawie", "Teoria online", "Praktyka stacjonarna", "Certyfikacja UDT"]
+    },
+    {
+      title: "Uprawnienia SEP",
+      description: "Szkolenia i certyfikacja w zakresie uprawnień SEP: elektryczne, cieplne i gazowe dla pracowników obsługujących specjalistyczne urządzenia.",
+      icon: <BookOpen size={40} className="text-orange-500" />,
+      link: "/sep",
+      features: ["Uprawnienia elektryczne", "Uprawnienia cieplne", "Uprawnienia gazowe", "Certyfikaty SEP"]
+    },
+    {
+      title: "Szkolenia z lutowania",
+      description: "Profesjonalne kursy dla firm zajmujących się procesami lutowania. Podnosimy jakość produkcji i redukujemy liczbę błędów.",
+      icon: <BarChart size={40} className="text-orange-500" />,
+      link: "/lutowanie",
+      features: ["Techniki lutowania", "Kontrola jakości", "Redukcja błędów", "Certyfikacja"]
+    },
+    {
+      title: "Eventy edukacyjne",
+      description: "Organizacja wydarzeń edukacyjnych dla firm, które chcą zwiększyć świadomość pracowników w zakresie bezpieczeństwa technicznego.",
+      icon: <Users size={40} className="text-orange-500" />,
+      link: "/eventy",
+      features: ["Wydarzenia edukacyjne", "Bezpieczeństwo", "Świadomość pracowników", "Organizacja eventów"]
+    },
+    {
+      title: "Szkolenia na wózki unoszące",
+      description: "Specjalistyczne szkolenia dla operatorów wózków unoszących. Bezpieczna obsługa i certyfikacja zgodna z przepisami.",
+      icon: <Shield size={40} className="text-orange-500" />,
+      link: "/szkolenie-wozki-unoszace",
+      features: ["Wózki unoszące", "Bezpieczna obsługa", "Praktyczne ćwiczenia", "Certyfikacja"]
+    }
+  ];
 
-  const services = [{
-    title: 'Uprawnienia UDT dla operatorów',
-    description: 'Profesjonalne szkolenia i certyfikacja dla operatorów urządzeń technicznych pod nadzorem UDT. Wózki widłowe, podesty ruchome i więcej.',
-    icon: <Tool className="h-8 w-8" />,
-    link: '/uslugi/udt-operatorzy',
-    imageSrc: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80',
-    badge: 'Popularne',
-    features: ['96% zdawalność', 'Certyfikat UDT', 'Praktyczne szkolenia']
-  }, {
-    title: 'Uprawnienia UDT dla konserwatorów',
-    description: 'Kompleksowe szkolenia dla konserwatorów urządzeń technicznych z certyfikacją UDT i praktycznymi warsztatami.',
-    icon: <Wrench className="h-8 w-8" />,
-    link: '/uslugi/udt-konserwatorzy',
-    imageSrc: 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=800&q=80',
-    badge: 'Zaawansowane',
-    features: ['Doświadczeni trenerzy', 'Nowoczesny sprzęt', 'Małe grupy']
-  }, {
-    title: 'Uprawnienia SEP',
-    description: 'Zdobądź uprawnienia elektryczne SEP pod okiem doświadczonych specjalistów z wieloletnim doświadczeniem w branży.',
-    icon: <Zap className="h-8 w-8" />,
-    link: '/uslugi/sep',
-    imageSrc: 'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&w=800&q=80',
-    badge: 'Certyfikowane',
-    features: ['SEP do 1kV', 'SEP powyżej 1kV', 'Egzaminy UDT']
-  }, {
-    title: 'Szkolenia z lutowania',
-    description: 'Praktyczne warsztaty z lutowania prowadzone przez ekspertów w dziedzinie elektroniki i mikromontażu.',
-    icon: <Flame className="h-8 w-8" />,
-    link: '/uslugi/lutowanie',
-    imageSrc: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80',
-    badge: 'Praktyczne',
-    features: ['Hands-on learning', 'Nowoczesne stanowiska', 'Certyfikat ukończenia']
-  }, {
-    title: 'Eventy edukacyjne',
-    description: 'Organizujemy profesjonalne wydarzenia edukacyjne i szkoleniowe dostosowane do potrzeb Twojej firmy.',
-    icon: <Users className="h-8 w-8" />,
-    link: '/uslugi/eventy',
-    imageSrc: 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=800&q=80',
-    badge: 'Na zamówienie',
-    features: ['Indywidualne podejście', 'Własne materiały', 'Zespół ekspertów']
-  }];
-  const stats = [{
-    value: 1500,
-    label: 'Zadowolonych uczestników',
-    suffix: '+'
-  }, {
-    value: 96,
-    label: 'Zdawalność egzaminów',
-    suffix: '%'
-  }, {
-    value: 10,
-    label: 'Lat doświadczenia',
-    suffix: '+'
-  }, {
-    value: 200,
-    label: 'Firm partnerskich',
-    suffix: '+'
-  }];
-  const features = [{
-    icon: <Star className="h-6 w-6" />,
-    text: 'Doświadczeni instruktorzy'
-  }, {
-    icon: <Award className="h-6 w-6" />,
-    text: 'Certyfikowane kursy'
-  }, {
-    icon: <Shield className="h-6 w-6" />,
-    text: 'Gwarancja jakości'
-  }, {
-    icon: <CheckCircle className="h-6 w-6" />,
-    text: 'Wsparcie po kursie'
-  }];
-
-  const {
-    elementRef: heroRef,
-    isInView: heroInView
-  } = useScrollAnimation<HTMLDivElement>({
-    threshold: 0.2,
-    triggerOnce: true
-  });
-
-  const {
-    elementRef: servicesRef,
-    visibleItems
-  } = useStaggeredAnimation<HTMLDivElement>(services.length, 150);
-
-  const {
-    elementRef: statsRef,
-    isInView: statsInView
-  } = useScrollAnimation<HTMLDivElement>({
-    threshold: 0.3,
-    triggerOnce: true
-  });
-
-  const handleServiceClick = (serviceName: string) => {
-    trackEvent({
-      category: 'navigation',
-      action: 'click',
-      label: `service-card-${serviceName}`,
-      additionalData: {
-        serviceTitle: serviceName
-      }
-    });
-  };
+  const benefits = [
+    {
+      icon: <Clock size={24} className="text-orange-500" />,
+      title: "Elastyczny harmonogram",
+      description: "Dostosowujemy terminy szkoleń do Twojego harmonogramu pracy i potrzeb firmy."
+    },
+    {
+      icon: <Award size={24} className="text-orange-500" />,
+      title: "Doświadczeni trenerzy",
+      description: "Nasi trenerzy to specjaliści z wieloletnim doświadczeniem w branży produkcyjnej."
+    },
+    {
+      icon: <CheckCircle size={24} className="text-orange-500" />,
+      title: "Szkolenia szyte na miarę",
+      description: "Każde szkolenie jest dopasowane do specyficznych potrzeb Twojej firmy."
+    },
+    {
+      icon: <ThumbsUp size={24} className="text-orange-500" />,
+      title: "Najwyższa jakość",
+      description: "Gwarantujemy najwyższą jakość szkoleń i wsparcie na każdym etapie współpracy."
+    }
+  ];
 
   return (
     <div>
       <Navbar />
-      <div className="min-h-screen bg-gray-50 pt-16">
-        {/* Enhanced Hero Section */}
-        <div ref={heroRef} className="relative bg-gradient-to-br from-orange-600 via-orange-500 to-orange-400 py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-          {/* Animated background elements */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-20 left-10 w-32 h-32 bg-white rounded-full animate-pulse"></div>
-            <div className="absolute bottom-20 right-10 w-24 h-24 bg-white rounded-full animate-pulse delay-1000"></div>
-            <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-white rounded-full animate-pulse delay-500"></div>
-          </div>
-          
-          <div className="max-w-7xl mx-auto relative z-10">
-            <div className="text-center" style={{
-              opacity: heroInView ? 1 : 0,
-              transform: heroInView ? 'translateY(0)' : 'translateY(30px)',
-              transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
-            }}>
-              <div className="inline-block bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
-                ✨ Certyfikowane szkolenia techniczne
-              </div>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight" style={{
-                opacity: heroInView ? 1 : 0,
-                transform: heroInView ? 'translateY(0)' : 'translateY(20px)',
-                transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-                transitionDelay: '200ms'
-              }}>
-                Nasze <span className="text-orange-200">Usługi</span>
-              </h1>
-              <p className="text-xl md:text-2xl text-orange-100 mb-8 max-w-3xl mx-auto" style={{
-                opacity: heroInView ? 1 : 0,
-                transform: heroInView ? 'translateY(0)' : 'translateY(20px)',
-                transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-                transitionDelay: '400ms'
-              }}>
-                Kompleksowe szkolenia i certyfikacje dla profesjonalistów. 
-                Rozwijaj swoje umiejętności z najlepszymi w branży.
-              </p>
-              
-              {/* Features list */}
-              <div className="flex flex-wrap justify-center gap-4 mb-8" style={{
-                opacity: heroInView ? 1 : 0,
-                transform: heroInView ? 'translateY(0)' : 'translateY(20px)',
-                transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-                transitionDelay: '600ms'
-              }}>
-                {features.map((feature, index) => (
-                  <div key={index} className="flex items-center space-x-2 bg-white bg-opacity-20 rounded-full px-4 py-2 text-white">
-                    {feature.icon}
-                    <span className="text-sm font-medium">{feature.text}</span>
-                  </div>
-                ))}
-              </div>
+      
+      {/* Hero Section */}
+      <section className="hero-gradient text-white py-20 md:py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-orange-600/20 via-transparent to-orange-500/20" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-white/10 rounded-full blur-2xl animate-float" style={{ animationDelay: '2s' }} />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center max-w-4xl mx-auto">
+            <div className="inline-block mb-6">
+              <span className="bg-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide">
+                Nasze usługi
+              </span>
             </div>
-          </div>
-        </div>
-
-        {/* Services Grid with Staggered Animation */}
-        <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
-          <div ref={servicesRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <div key={service.link} style={{
-                opacity: visibleItems.includes(index) ? 1 : 0,
-                transform: visibleItems.includes(index) ? 'translateY(0) scale(1)' : 'translateY(40px) scale(0.95)',
-                transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)'
-              }}>
-                <EnhancedServiceCard {...service} index={index} onServiceClick={handleServiceClick} />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Stats Section */}
-        <div ref={statsRef} className="bg-white py-16 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-12" style={{
-              opacity: statsInView ? 1 : 0,
-              transform: statsInView ? 'translateY(0)' : 'translateY(30px)',
-              transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
-            }}>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Dlaczego warto z nami współpracować?
-              </h2>
-              <p className="text-lg text-gray-600">
-                Nasze osiągnięcia mówią same za siebie
-              </p>
-            </div>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-              {stats.map((stat, index) => (
-                <StatCounter key={index} stat={stat} index={index} isVisible={statsInView} />
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Enhanced CTA Section */}
-        <div className="relative bg-gradient-to-r from-orange-600 to-orange-500 py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-          <div className="absolute inset-0 bg-black opacity-10"></div>
-          <div className="max-w-7xl mx-auto text-center relative z-10">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              Nie znalazłeś tego, czego szukasz?
-            </h2>
-            <p className="text-xl text-orange-100 max-w-3xl mx-auto mb-8">
-              Skontaktuj się z nami, aby omówić spersonalizowane rozwiązanie dla Twojej firmy. 
-              Oferujemy również szkolenia na zamówienie.
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+              Kompleksowe szkolenia
+              <span className="block bg-gradient-to-r from-orange-200 to-white bg-clip-text text-transparent">
+                dla firm produkcyjnych
+              </span>
+            </h1>
+            <p className="text-xl mb-8 text-orange-50 leading-relaxed max-w-3xl mx-auto">
+              Zapewniamy pełną zgodność uprawnień UDT i SEP dla pracowników. Nasze szkolenia są dopasowane 
+              do indywidualnych potrzeb każdej firmy i przeprowadzane przez doświadczonych ekspertów.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-white text-orange-600 hover:bg-orange-50 hover:scale-105 transition-all duration-300 shadow-xl" trackingLabel="contact-us-from-services">
-                Skontaktuj się z nami
+            <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+              <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-orange-50 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl text-lg px-8 py-4">
+                <Link to="/wycena">Uzyskaj wycenę</Link>
               </Button>
-              <Button size="lg" variant="outline" trackingLabel="free-audit-from-services" className="border-white hover:bg-white hover:border-white hover:scale-105 transition-all duration-300 text-[#ff6200]">
-                Bezpłatny audyt potrzeb
+              <Button asChild size="lg" variant="outline" className="bg-orange-500/20 text-white hover:bg-orange-400/30 border-white/30 hover:border-white/50 backdrop-blur-sm transform hover:scale-105 transition-all duration-300 text-lg px-8 py-4">
+                <Link to="/bezplatny-audyt">
+                  Bezpłatny audyt
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
               </Button>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  );
-};
+      </section>
 
-// Enhanced Service Card Component
-const EnhancedServiceCard: React.FC<{
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  link: string;
-  imageSrc: string;
-  badge: string;
-  features: string[];
-  index: number;
-  onServiceClick: (title: string) => void;
-}> = ({
-  title,
-  description,
-  icon,
-  link,
-  imageSrc,
-  badge,
-  features,
-  onServiceClick
-}) => {
-  const handleClick = () => {
-    onServiceClick(title);
-  };
+      {/* Services Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="inline-block mb-4">
+              <span className="bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide">
+                Pełna oferta
+              </span>
+            </div>
+            <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-gray-900">
+              Nasze specjalizacje
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Oferujemy szeroki zakres szkoleń technicznych i certyfikacji dla sektora produkcyjnego.
+            </p>
+          </div>
 
-  return (
-    <Link to={link} onClick={handleClick} className="block group">
-      <div className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-500 hover:shadow-2xl hover:scale-105 hover:-translate-y-2">
-        <div className="relative h-48 overflow-hidden">
-          <img src={imageSrc} alt={title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-          <div className="absolute top-4 left-4 bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-            {badge}
-          </div>
-          <div className="absolute bottom-4 left-4 text-white">
-            {icon}
-          </div>
-        </div>
-        <div className="p-6">
-          <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors duration-300">
-            {title}
-          </h3>
-          <p className="text-gray-600 mb-4 leading-relaxed">
-            {description}
-          </p>
-          <div className="space-y-2 mb-4">
-            {features.map((feature, index) => (
-              <div key={index} className="flex items-center text-sm text-gray-500">
-                <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                {feature}
+          <div 
+            ref={servicesRef}
+            className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-1000 ${
+              servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+          >
+            {services.map((service, index) => (
+              <div key={index} className="transform hover:scale-105 transition-all duration-300">
+                <ServiceCard
+                  title={service.title}
+                  description={service.description}
+                  icon={service.icon}
+                  link={service.link}
+                  index={index}
+                />
               </div>
             ))}
           </div>
-          <div className="flex items-center text-orange-600 font-medium group-hover:text-orange-700 transition-colors duration-300">
-            Dowiedz się więcej 
-            <span className="ml-2 transform group-hover:translate-x-1 transition-transform duration-300">→</span>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="inline-block mb-4">
+              <span className="bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide">
+                Dlaczego my?
+              </span>
+            </div>
+            <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-gray-900">
+              Korzyści ze współpracy
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Nasze doświadczenie i profesjonalne podejście gwarantują najwyższą jakość szkoleń.
+            </p>
+          </div>
+
+          <div 
+            ref={benefitsRef}
+            className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 transition-all duration-1000 ${
+              benefitsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+          >
+            {benefits.map((benefit, index) => (
+              <div 
+                key={index}
+                className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-orange-200 transform hover:scale-105"
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                <div className="mb-4">{benefit.icon}</div>
+                <h3 className="text-xl font-bold mb-2 text-gray-900">{benefit.title}</h3>
+                <p className="text-gray-600">{benefit.description}</p>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
-    </Link>
-  );
-};
+      </section>
 
-// Animated Stats Counter Component
-const StatCounter: React.FC<{
-  stat: {
-    value: number;
-    label: string;
-    suffix: string;
-  };
-  index: number;
-  isVisible: boolean;
-}> = ({
-  stat,
-  index,
-  isVisible
-}) => {
-  const {
-    elementRef,
-    count
-  } = useCounterAnimation<HTMLDivElement>(stat.value, 2000);
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-br from-orange-500 to-orange-600 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl lg:text-4xl font-bold mb-6">
+            Rozpocznij współpracę już dziś
+          </h2>
+          <p className="text-xl mb-8 text-orange-50 max-w-3xl mx-auto">
+            Skontaktuj się z nami, aby otrzymać spersonalizowaną ofertę szkoleń dla Twojej firmy.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+            <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-orange-50 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl text-lg px-8 py-4">
+              <Link to="/kontakt">Skontaktuj się z nami</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="bg-orange-400/20 text-white hover:bg-orange-300/30 border-white/30 hover:border-white/50 backdrop-blur-sm transform hover:scale-105 transition-all duration-300 text-lg px-8 py-4">
+              <Link to="/wycena">
+                Uzyskaj wycenę
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
 
-  return (
-    <div ref={elementRef} className="text-center p-6 bg-orange-50 rounded-xl" style={{
-      opacity: isVisible ? 1 : 0,
-      transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-      transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
-      transitionDelay: isVisible ? `${index * 150}ms` : '0ms'
-    }}>
-      <div className="text-3xl md:text-4xl font-bold text-orange-600 mb-2">
-        {count}{stat.suffix}
-      </div>
-      <div className="text-gray-600 font-medium">{stat.label}</div>
+      <Footer />
     </div>
   );
 };

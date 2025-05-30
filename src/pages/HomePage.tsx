@@ -14,6 +14,7 @@ import EnhancedTestimonialsSection from '@/components/EnhancedTestimonialsSectio
 import BottomQuoteForm from '@/components/BottomQuoteForm';
 import WhyChooseUsSection from '@/components/WhyChooseUsSection';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 const HomePage = () => {
   const { elementRef: statsRef, visibleItems, showAllFallback } = useStaggeredAnimation<HTMLDivElement>(4, 300);
@@ -409,6 +410,7 @@ const HomePage = () => {
           <BottomQuoteForm />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

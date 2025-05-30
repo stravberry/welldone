@@ -1,95 +1,105 @@
+
 import React from 'react';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 const TermsPage = () => {
   return (
     <div>
       <Navbar />
-      <div className="min-h-screen bg-gray-50 py-12 pt-28">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-lg shadow-sm p-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-8">Regulamin</h1>
-            
+      
+      <div className="pt-16">
+        <section className="py-20 bg-white">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h1 className="text-4xl font-bold text-gray-900 mb-4">
+                Regulamin
+              </h1>
+              <p className="text-xl text-gray-600">
+                Warunki świadczenia usług szkoleniowych
+              </p>
+            </div>
+
             <div className="prose prose-lg max-w-none">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">§ 1 Postanowienia ogólne</h2>
-              <p className="mb-6">
-                1. Niniejszy Regulamin określa zasady korzystania z usług świadczonych przez 
+              <h2>§ 1. Postanowienia ogólne</h2>
+              <p>
+                Niniejszy Regulamin określa warunki świadczenia usług szkoleniowych przez 
                 Centrum Kompetencji Zawodowych Well-Done.pl Paweł Gerus.
               </p>
-              <p className="mb-6">
-                2. Usługodawca: Centrum Kompetencji Zawodowych Well-Done.pl Paweł Gerus, 
-                ul. Drzewieckiego 19/11, 54-129 Wrocław, NIP: 884-248-74-55.
-              </p>
 
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">§ 2 Zakres usług</h2>
-              <p className="mb-6">
-                Usługodawca świadczy następujące usługi:
-              </p>
-              <ul className="list-disc pl-6 mb-6">
-                <li>Szkolenia z zakresu uprawnień UDT dla operatorów</li>
-                <li>Szkolenia z zakresu uprawnień UDT dla konserwatorów</li>
+              <h2>§ 2. Definicje</h2>
+              <ul>
+                <li><strong>Usługodawca</strong> - Centrum Kompetencji Zawodowych Well-Done.pl Paweł Gerus</li>
+                <li><strong>Klient</strong> - osoba fizyczna, prawna lub jednostka organizacyjna korzystająca z usług</li>
+                <li><strong>Szkolenie</strong> - usługa edukacyjna świadczona przez Usługodawcę</li>
+                <li><strong>Umowa</strong> - umowa o świadczenie usług szkoleniowych</li>
+              </ul>
+
+              <h2>§ 3. Zakres usług</h2>
+              <p>Usługodawca świadczy następujące usługi:</p>
+              <ul>
+                <li>Szkolenia z zakresu uprawnień UDT dla operatorów i konserwatorów</li>
                 <li>Szkolenia z zakresu uprawnień SEP</li>
                 <li>Szkolenia z lutowania</li>
                 <li>Eventy edukacyjne</li>
-                <li>Bezpłatne audyty firm</li>
+                <li>Audyty potrzeb szkoleniowych</li>
               </ul>
 
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">§ 3 Warunki świadczenia usług</h2>
-              <p className="mb-6">
-                1. Usługi świadczone są na podstawie umowy zawartej między Usługodawcą a Klientem.
-              </p>
-              <p className="mb-6">
-                2. Szczegółowe warunki realizacji usług określane są w ofercie handlowej 
-                lub umowie o świadczenie usług.
-              </p>
-              <p className="mb-6">
-                3. Klient zobowiązuje się do terminowego uregulowania należności za świadczone usługi.
+              <h2>§ 4. Warunki uczestnictwa</h2>
+              <p>Warunkiem uczestnictwa w szkoleniach jest:</p>
+              <ul>
+                <li>Zawarcie umowy o świadczenie usług</li>
+                <li>Uiszczenie opłaty za szkolenie</li>
+                <li>Spełnienie wymagań formalnych określonych dla danego szkolenia</li>
+                <li>Aktywne uczestnictwo w zajęciach</li>
+              </ul>
+
+              <h2>§ 5. Opłaty i płatności</h2>
+              <p>
+                Opłaty za szkolenia określane są w indywidualnych wycenach. 
+                Płatność następuje zgodnie z warunkami określonymi w umowie.
               </p>
 
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">§ 4 Prawa i obowiązki stron</h2>
-              <p className="mb-6">
-                1. Usługodawca zobowiązuje się do świadczenia usług z należytą starannością, 
-                zgodnie z aktualnym stanem wiedzy technicznej.
-              </p>
-              <p className="mb-6">
-                2. Klient zobowiązuje się do współpracy przy realizacji usług oraz 
-                przekazania niezbędnych informacji.
+              <h2>§ 6. Rezygnacja i zwroty</h2>
+              <p>
+                Warunki rezygnacji ze szkolenia i zwrotu opłat określane są 
+                indywidualnie w umowie o świadczenie usług.
               </p>
 
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">§ 5 Odpowiedzialność</h2>
-              <p className="mb-6">
-                1. Usługodawca ponosi odpowiedzialność za jakość świadczonych usług zgodnie 
-                z obowiązującymi przepisami prawa.
-              </p>
-              <p className="mb-6">
-                2. Odpowiedzialność Usługodawcy ograniczona jest do wysokości wynagrodzenia 
-                otrzymanego za daną usługę.
+              <h2>§ 7. Certyfikaty i dokumenty</h2>
+              <p>
+                Po ukończeniu szkolenia i zdaniu egzaminu, uczestnicy otrzymują 
+                odpowiednie certyfikaty lub zaświadczenia zgodnie z obowiązującymi przepisami.
               </p>
 
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">§ 6 Postanowienia końcowe</h2>
-              <p className="mb-6">
-                1. W sprawach nieuregulowanych niniejszym Regulaminem stosuje się przepisy 
-                Kodeksu Cywilnego.
-              </p>
-              <p className="mb-6">
-                2. Wszelkie spory rozstrzygane będą przez sąd właściwy dla siedziby Usługodawcy.
-              </p>
-              <p className="mb-6">
-                3. Regulamin wchodzi w życie z dniem publikacji na stronie internetowej.
+              <h2>§ 8. Odpowiedzialność</h2>
+              <p>
+                Usługodawca ponosi odpowiedzialność za jakość świadczonych usług 
+                zgodnie z obowiązującymi przepisami prawa.
               </p>
 
-              <div className="mt-8 p-4 bg-orange-50 rounded-lg">
-                <p className="text-sm text-gray-600">
-                  <strong>Kontakt:</strong><br />
-                  E-mail: pgerus@well-done.pl<br />
-                  Telefon: 504-305-437<br />
-                  Adres: ul. Drzewieckiego 19/11, 54-129 Wrocław
-                </p>
-              </div>
+              <h2>§ 9. Reklamacje</h2>
+              <p>
+                Reklamacje dotyczące świadczonych usług można składać:
+                <br />
+                - E-mail: pgerus@well-done.pl
+                <br />
+                - Telefon: 504-305-437
+                <br />
+                - Pisemnie na adres: ul. Drzewieckiego 19/11, 54-129 Wrocław
+              </p>
+
+              <h2>§ 10. Postanowienia końcowe</h2>
+              <p>
+                W sprawach nieuregulowanych niniejszym Regulaminem stosuje się 
+                przepisy Kodeksu Cywilnego oraz inne obowiązujące przepisy prawa polskiego.
+              </p>
             </div>
           </div>
-        </div>
+        </section>
       </div>
+
+      <Footer />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 
 import React from 'react';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import ContactHero from './ContactPage/components/ContactHero';
 import ContactInfo from './ContactPage/components/ContactInfo';
 import ServiceStandards from './ContactPage/components/ServiceStandards';
@@ -18,6 +19,7 @@ const ContactPage = () => {
       <ContactAdvantages />
       <ContactMap />
       <ContactCTA />
+      <Footer />
     </div>
   );
 };

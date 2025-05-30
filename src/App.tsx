@@ -23,6 +23,8 @@ import SepPage from './pages/SepPage';
 import LutowaniePage from './pages/LutowaniePage';
 import EventyPage from './pages/EventyPage';
 import SitemapPage from './pages/SitemapPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import TermsPage from './pages/TermsPage';
 import NotFound from './pages/NotFound';
 import AdminLayout from './pages/admin/AdminLayout';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -62,6 +64,8 @@ function App() {
                 
                 {/* Additional Pages */}
                 <Route path="/mapa-strony" element={<SitemapPage />} />
+                <Route path="/polityka-prywatnosci" element={<PrivacyPolicyPage />} />
+                <Route path="/regulamin" element={<TermsPage />} />
                 
                 {/* CMS Login */}
                 <Route path="/cms-login" element={<CMSLoginPage />} />

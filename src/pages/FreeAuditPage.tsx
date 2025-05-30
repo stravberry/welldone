@@ -1,6 +1,7 @@
 
 import React from 'react';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import AuditHeroSection from './FreeAuditPage/components/AuditHeroSection';
 import AnimatedBenefitsSection from './FreeAuditPage/components/AnimatedBenefitsSection';
 import InteractiveProcessSection from './FreeAuditPage/components/InteractiveProcessSection';
@@ -25,6 +26,7 @@ const FreeAuditPage = () => {
       <div id="audit-form">
         <InteractiveContactForm />
       </div>
+      <Footer />
     </div>
   );
 };
