@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
@@ -109,9 +108,6 @@ const Navbar = () => {
               </NavigationMenuList>
             </NavigationMenu>
             
-            <Link to="/cennik" className="px-2 xl:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
-              Cennik
-            </Link>
             <Link to="/bezplatny-audyt" className="px-2 xl:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
               Bezpłatny Audyt
             </Link>
@@ -122,6 +118,7 @@ const Navbar = () => {
               Wiedza
             </Link>
           </div>
+          
           
           <div className="hidden lg:flex items-center">
             <Button asChild variant="default" className="ml-2 text-xs xl:text-sm bg-orange-500 hover:bg-orange-600 border-orange-500 hover:border-orange-600">
@@ -165,10 +162,9 @@ const Navbar = () => {
             { to: '/', label: 'Home', delay: 0 },
             { to: '/o-nas', label: 'O Nas', delay: 50 },
             { to: '/uslugi', label: 'Usługi', delay: 100 },
-            { to: '/cennik', label: 'Cennik', delay: 125 },
-            { to: '/bezplatny-audyt', label: 'Bezpłatny Audyt', delay: 150 },
-            { to: '/realizacje', label: 'Realizacje', delay: 200 },
-            { to: '/wiedza', label: 'Wiedza', delay: 250 }
+            { to: '/bezplatny-audyt', label: 'Bezpłatny Audyt', delay: 125 },
+            { to: '/realizacje', label: 'Realizacje', delay: 150 },
+            { to: '/wiedza', label: 'Wiedza', delay: 200 }
           ].map((item, index) => (
             <Link
               key={item.to}
@@ -187,6 +183,7 @@ const Navbar = () => {
               {item.label}
             </Link>
           ))}
+          
           
           {/* Services Submenu with Animation */}
           <div className="border-l-2 border-orange-200 ml-3">
