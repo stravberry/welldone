@@ -40,8 +40,10 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, lin
 
   // Determine the correct link - if it's "Eventy edukacyjne", use /eventy
   // If it's "Szkolenia z lutowania", use /lutowanie
+  // If it's "Uprawnienia UDT dla konserwatorów", use /udt-konserwatorze
   const finalLink = title === "Eventy edukacyjne" ? "/eventy" 
                    : title === "Szkolenia z lutowania" ? "/lutowanie" 
+                   : title === "Uprawnienia UDT dla konserwatorów" ? "/udt-konserwatorze"
                    : link;
   
   return (
