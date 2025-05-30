@@ -205,7 +205,7 @@ const UdtOperatorzyPage = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
                   <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-orange-50 transform hover:scale-105 transition-all duration-300">
-                    <Link to="/udt-szkolenia" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Otrzymaj Wycenę</Link>
+                    <Link to="/wycena" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Otrzymaj Wycenę</Link>
                   </Button>
                   <Button asChild size="lg" variant="outline" className="bg-orange-500/20 text-white hover:bg-orange-400/30 border-white/30 hover:border-white/50 backdrop-blur-sm">
                     <Link to="/kontakt">Skontaktuj się</Link>
@@ -295,7 +295,7 @@ const UdtOperatorzyPage = () => {
 
                     <div className="space-y-2">
                       <Button asChild className="w-full bg-orange-500 hover:bg-orange-600">
-                        <Link to="/udt-szkolenia" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Zapisz się na kurs</Link>
+                        <Link to="/wycena" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Zapisz się na kurs</Link>
                       </Button>
                       <Button asChild variant="outline" className="w-full border-orange-500 text-orange-600 hover:bg-orange-50">
                         <Link to="/kontakt">Szczegóły</Link>
@@ -342,7 +342,7 @@ const UdtOperatorzyPage = () => {
             </p>
             <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
               <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-orange-50">
-                <Link to="/udt-szkolenia" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                <Link to="/wycena" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                   Otrzymaj Wycenę
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
