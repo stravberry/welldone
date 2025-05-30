@@ -82,11 +82,11 @@ const LutowaniePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pt-16">
       <Navbar />
       
       {/* Hero Section */}
-      <div ref={heroRef} className="mt-16">
+      <div ref={heroRef}>
         <LutowanieHeroSection 
           heroInView={heroInView}
           showAllItems={showAllItems}
