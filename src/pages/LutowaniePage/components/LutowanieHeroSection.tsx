@@ -7,9 +7,14 @@ import { Button } from '@/components/ui/button';
 interface LutowanieHeroSectionProps {
   heroInView: boolean;
   showAllItems: boolean;
+  onContactClick: () => void;
 }
 
-const LutowanieHeroSection: React.FC<LutowanieHeroSectionProps> = ({ heroInView, showAllItems }) => {
+const LutowanieHeroSection: React.FC<LutowanieHeroSectionProps> = ({ 
+  heroInView, 
+  showAllItems, 
+  onContactClick 
+}) => {
   return (
     <div className="relative bg-gradient-to-br from-red-600 via-red-500 to-red-400 py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="absolute inset-0 opacity-10">
@@ -55,12 +60,7 @@ const LutowanieHeroSection: React.FC<LutowanieHeroSectionProps> = ({ heroInView,
               <Button 
                 size="lg" 
                 className="bg-white text-red-600 hover:bg-red-50 hover:scale-105 transition-all duration-300 shadow-xl"
-                onClick={() => {
-                  const contactSection = document.getElementById('contact-form');
-                  if (contactSection) {
-                    contactSection.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
+                onClick={onContactClick}
               >
                 <Phone className="mr-2 h-5 w-5" />
                 Zapisz się na kurs

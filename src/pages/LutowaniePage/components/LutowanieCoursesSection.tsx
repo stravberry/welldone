@@ -17,18 +17,70 @@ interface Course {
 }
 
 interface LutowanieCoursesSectionProps {
-  courses: Course[];
   visibleCourses: number[];
   showAllItems: boolean;
-  onCourseRegistration: (courseTitle: string) => void;
+  onCourseSelect: (courseTitle: string) => void;
 }
 
 const LutowanieCoursesSection: React.FC<LutowanieCoursesSectionProps> = ({
-  courses,
   visibleCourses,
   showAllItems,
-  onCourseRegistration
+  onCourseSelect
 }) => {
+  const courses: Course[] = [
+    {
+      id: 'podstawy-lutowania',
+      title: 'Podstawy lutowania',
+      description: 'Kurs wprowadzający do technik lutowania dla początkujących',
+      duration: '2 dni',
+      participants: '6-8 osób',
+      price: '1200 zł',
+      features: [
+        'Teoria lutowania',
+        'Podstawowe narzędzia',
+        'Praktyczne ćwiczenia',
+        'Certyfikat ukończenia'
+      ],
+      badge: 'Popularne',
+      image: '/placeholder.svg',
+      imageAlt: 'Kurs podstawy lutowania'
+    },
+    {
+      id: 'lutowanie-smd',
+      title: 'Lutowanie SMD',
+      description: 'Zaawansowane techniki lutowania elementów powierzchniowych',
+      duration: '3 dni',
+      participants: '4-6 osób',
+      price: '1800 zł',
+      features: [
+        'Lutowanie SMD',
+        'Mikrokontrolery',
+        'Nowoczesne narzędzia',
+        'Certyfikat IPC'
+      ],
+      badge: 'Zaawansowane',
+      image: '/placeholder.svg',
+      imageAlt: 'Kurs lutowania SMD'
+    },
+    {
+      id: 'lutowanie-przemyslowe',
+      title: 'Lutowanie przemysłowe',
+      description: 'Profesjonalne techniki lutowania w przemyśle elektronicznym',
+      duration: '5 dni',
+      participants: '4-8 osób',
+      price: '2500 zł',
+      features: [
+        'Standardy IPC',
+        'Kontrola jakości',
+        'Rozwiązywanie problemów',
+        'Certyfikat międzynarodowy'
+      ],
+      badge: 'Certyfikowane',
+      image: '/placeholder.svg',
+      imageAlt: 'Kurs lutowania przemysłowego'
+    }
+  ];
+
   const isItemVisible = (index: number, visibleItems: number[]) => {
     return showAllItems || visibleItems.includes(index);
   };
@@ -87,7 +139,7 @@ const LutowanieCoursesSection: React.FC<LutowanieCoursesSectionProps> = ({
               </div>
               <Button 
                 className="w-full bg-red-600 hover:bg-red-700"
-                onClick={() => onCourseRegistration(course.title)}
+                onClick={() => onCourseSelect(course.title)}
               >
                 Zapisz się na kurs
               </Button>

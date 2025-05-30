@@ -2,7 +2,11 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 
-const LutowanieCTASection: React.FC = () => {
+interface LutowanieCTASectionProps {
+  onContactClick: () => void;
+}
+
+const LutowanieCTASection: React.FC<LutowanieCTASectionProps> = ({ onContactClick }) => {
   return (
     <div className="relative bg-gradient-to-r from-red-600 to-red-500 py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto text-center">
@@ -16,12 +20,7 @@ const LutowanieCTASection: React.FC = () => {
           <Button 
             size="lg" 
             className="bg-white text-red-600 hover:bg-red-50 hover:scale-105 transition-all duration-300 shadow-xl"
-            onClick={() => {
-              const contactSection = document.getElementById('contact-form');
-              if (contactSection) {
-                contactSection.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
+            onClick={onContactClick}
           >
             Zapisz się teraz
           </Button>
@@ -29,6 +28,7 @@ const LutowanieCTASection: React.FC = () => {
             size="lg" 
             variant="outline" 
             className="border-2 border-white text-red-600 bg-white hover:bg-red-50 hover:scale-105 transition-all duration-300"
+            onClick={onContactClick}
           >
             Skontaktuj się z nami
           </Button>
