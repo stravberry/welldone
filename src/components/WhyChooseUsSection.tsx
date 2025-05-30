@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface WhyChooseUsSectionProps {
   benefits: Array<{
@@ -22,6 +21,13 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
   StatCard, 
   showAllFallback 
 }) => {
+  const navigate = useNavigate();
+
+  const handleContactClick = () => {
+    navigate('/kontakt');
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  };
+
   return (
     <section className="py-20 bg-gradient-to-br from-orange-50 to-white relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-orange-100/30 to-blue-100/20" />
@@ -75,10 +81,12 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
 
         {/* CTA */}
         <div className="text-center">
-          <Button asChild size="lg" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 text-lg px-8 py-4">
-            <Link to="/kontakt">
-              Rozpocznij współpracę z nami
-            </Link>
+          <Button 
+            size="lg" 
+            className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 text-lg px-8 py-4"
+            onClick={handleContactClick}
+          >
+            Rozpocznij współpracę z nami
           </Button>
         </div>
       </div>
