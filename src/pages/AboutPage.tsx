@@ -1,85 +1,30 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { Award, Users, Target, Building, CheckCircle, Clock, Shield, Zap, TrendingUp, Star, Heart, Lightbulb, Trophy, MapPin } from 'lucide-react';
+import { Shield } from 'lucide-react';
 import AnimatedProcessSection from '@/components/AnimatedProcessSection';
 import ContactForm from '@/components/ContactForm';
 import AnimatedCounter from '@/components/AnimatedCounter';
 import FloatingParticles from '@/components/FloatingParticles';
 import AnimatedIcon from '@/components/AnimatedIcon';
-import InteractiveValueCard from '@/components/InteractiveValueCard';
 import ComparisonSection from '@/components/ComparisonSection';
+import EnhancedTestimonialsSection from '@/components/EnhancedTestimonialsSection';
+import PartnersSection from '@/components/PartnersSection';
+import CertificationsSection from '@/components/CertificationsSection';
+import ValuesJourneySection from '@/components/ValuesJourneySection';
+import GuaranteesSection from '@/components/GuaranteesSection';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const AboutPage = () => {
   const { elementRef: heroRef, isInView: heroVisible } = useScrollAnimation();
   const { elementRef: statsRef, isInView: statsVisible } = useScrollAnimation();
-  const { elementRef: valuesRef, isInView: valuesVisible } = useScrollAnimation();
   const { elementRef: teamRef, isInView: teamVisible } = useScrollAnimation();
 
   React.useEffect(() => {
     document.title = "O nas - Profesjonalne szkolenia techniczne | Firma Szkoleniowa";
   }, []);
-
-  const values = [
-    {
-      icon: Clock,
-      title: "Elastyczność",
-      description: "Dostosowujemy się do potrzeb i harmonogramu Twojej firmy",
-      bgColor: "bg-blue-500",
-      percentage: 95,
-      frontContent: "Szybka realizacja szkoleń zgodnie z Twoim harmonogramem",
-      backContent: "Organizujemy szkolenia w weekendy, po godzinach pracy i w lokalizacjach klienta. Pełna elastyczność terminów."
-    },
-    {
-      icon: Users,
-      title: "Specjalizacja",
-      description: "Koncentrujemy się wyłącznie na branży produkcyjnej",
-      bgColor: "bg-purple-500",
-      percentage: 98,
-      frontContent: "15+ lat doświadczenia w przemyśle",
-      backContent: "Znamy specyfikę fabryk, magazynów i zakładów produkcyjnych. Nasze szkolenia są tworzone przez praktyków dla praktyków."
-    },
-    {
-      icon: Target,
-      title: "Bezpłatny audyt",
-      description: "Sprawdzimy stan uprawnień Twoich pracowników za darmo",
-      bgColor: "bg-green-500",
-      percentage: 100,
-      frontContent: "Kompleksowa analiza potrzeb szkoleniowych",
-      backContent: "Dokładnie sprawdzimy jakie uprawnienia są wymagane w Twojej firmie i zaproponujemy optymalny plan szkoleń."
-    },
-    {
-      icon: CheckCircle,
-      title: "Kompleksowa obsługa",
-      description: "Zajmiemy się wszystkim - od zapisów po certyfikaty",
-      bgColor: "bg-orange-500",
-      percentage: 100,
-      frontContent: "Od A do Z - pełna obsługa procesu szkoleniowego",
-      backContent: "Zapisy, organizacja egzaminów, dokumentacja, certyfikaty. Ty się nie martwisz o nic - my załatwiamy wszystko."
-    },
-    {
-      icon: Award,
-      title: "Doświadczenie",
-      description: "Ponad 15 lat doświadczenia w szkoleniach przemysłowych",
-      bgColor: "bg-red-500",
-      percentage: 96,
-      frontContent: "Tysiące przeszkolonych pracowników",
-      backContent: "Przez 15 lat przeszkoliliśmy ponad 5000 osób. Nasze doświadczenie to gwarancja najwyższej jakości szkoleń."
-    },
-    {
-      icon: Building,
-      title: "Różnorodność szkoleń",
-      description: "Szeroka oferta kursów i certyfikacji branżowych",
-      bgColor: "bg-blue-600",
-      percentage: 90,
-      frontContent: "UDT, SEP, lutowanie i wiele więcej",
-      backContent: "Oferujemy pełną gamę szkoleń technicznych. Jeden partner - wszystkie potrzebne uprawnienia."
-    }
-  ];
 
   const teamMembers = [
     {
@@ -117,42 +62,38 @@ const AboutPage = () => {
       <Navbar />
       
       {/* Compact Elegant Hero Section */}
-      <section className="relative min-h-[70vh] bg-gradient-to-br from-orange-600 via-orange-500 to-orange-700 overflow-hidden">
-        {/* Subtle background elements */}
+      <section className="relative min-h-[60vh] bg-gradient-to-br from-orange-600 via-orange-500 to-orange-700 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-orange-600/10 via-transparent to-orange-500/10" />
         <FloatingParticles />
         
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[70vh] flex items-center">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[60vh] flex items-center">
           <div 
             ref={heroRef}
             className={`text-center w-full transition-all duration-1000 ${
               heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
           >
-            {/* Main animated icon */}
-            <div className="flex justify-center mb-8">
-              <AnimatedIcon type="heart" size={100} className="transform hover:scale-110 transition-transform duration-300" />
+            <div className="flex justify-center mb-6">
+              <AnimatedIcon type="heart" size={80} className="transform hover:scale-110 transition-transform duration-300" />
             </div>
             
-            {/* Main heading */}
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight text-white">
+            <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-tight text-white">
               O nas
             </h1>
             
-            <p className="text-2xl md:text-3xl mb-6 text-orange-50 font-medium">
+            <p className="text-xl md:text-2xl mb-4 text-orange-50 font-medium">
               Budujemy bezpieczeństwo poprzez wiedzę
             </p>
             
-            <p className="text-lg mb-8 text-orange-100 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base mb-6 text-orange-100 max-w-2xl mx-auto leading-relaxed">
               Jesteśmy liderem w dziedzinie szkoleń technicznych. 
               Przez 15 lat pomagamy firmom rozwijać kompetencje swoich pracowników.
             </p>
 
-            {/* Simple stats row */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 max-w-2xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6 max-w-2xl mx-auto">
               {achievements.map((stat, index) => (
-                <div key={index} className="bg-white/15 backdrop-blur-sm rounded-lg p-3 text-center">
-                  <div className="text-2xl font-bold text-white mb-1">
+                <div key={index} className="bg-white/15 backdrop-blur-sm rounded-lg p-2 text-center">
+                  <div className="text-lg font-bold text-white mb-1">
                     <AnimatedCounter 
                       endValue={stat.value} 
                       suffix={stat.suffix}
@@ -164,11 +105,10 @@ const AboutPage = () => {
               ))}
             </div>
             
-            {/* Single CTA button */}
             <div className="flex justify-center">
-              <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-orange-50 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl text-lg px-8 py-4">
+              <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-orange-50 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl text-base px-6 py-3">
                 <Link to="/bezplatny-audyt">
-                  <Shield className="mr-2 h-5 w-5" />
+                  <Shield className="mr-2 h-4 w-4" />
                   Bezpłatny audyt uprawnień
                 </Link>
               </Button>
@@ -177,46 +117,20 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Interactive Values Section with Flip Cards */}
-      <section className="py-20 bg-gray-50 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-transparent to-orange-500/5" />
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center mb-16">
-            <div className="inline-block mb-4">
-              <span className="bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide">
-                Nasze wartości
-              </span>
-            </div>
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-gray-900">
-              Co napędza naszą misję
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Każda z naszych wartości przekłada się na konkretne korzyści dla Twoich pracowników
-            </p>
-          </div>
-          
-          <div 
-            ref={valuesRef}
-            className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-1000 ${
-              valuesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
-          >
-            {values.map((value, index) => (
-              <InteractiveValueCard
-                key={index}
-                icon={value.icon}
-                title={value.title}
-                description={value.description}
-                percentage={value.percentage}
-                bgColor={value.bgColor}
-                frontContent={value.frontContent}
-                backContent={value.backContent}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Values Journey Section - completely redesigned */}
+      <ValuesJourneySection />
+
+      {/* Certifications Section - new trust factor */}
+      <CertificationsSection />
+
+      {/* Enhanced Testimonials Section */}
+      <EnhancedTestimonialsSection />
+
+      {/* Partners Section */}
+      <PartnersSection />
+
+      {/* Guarantees Section - new trust factor */}
+      <GuaranteesSection />
 
       {/* Comparison Section */}
       <ComparisonSection />
@@ -319,7 +233,6 @@ const AboutPage = () => {
                 </div>
                 <p className="text-orange-100 text-lg font-medium">{stat.label}</p>
                 
-                {/* Circular progress indicator */}
                 <div className="mt-4 mx-auto w-16 h-16 relative">
                   <svg className="w-16 h-16 transform -rotate-90" viewBox="0 0 64 64">
                     <circle 
