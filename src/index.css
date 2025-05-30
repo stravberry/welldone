@@ -104,6 +104,7 @@
     font-family: 'Outfit', sans-serif;
     margin: 0;
     padding: 0;
+    padding-top: 64px; /* Account for fixed navbar height */
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -298,3 +299,4 @@ select:focus-visible {
   will-change: transform;
   transform: translate3d(0, 0, 0);
 }
+

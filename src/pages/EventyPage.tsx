@@ -86,8 +86,8 @@ const EventyPage = () => {
     <div className="min-h-screen bg-gray-50">
       <Navbar />
       
-      {/* Hero Section */}
-      <div ref={heroRef} className="mt-16">
+      {/* Hero Section - Remove mt-16 since padding-top is now handled globally */}
+      <div ref={heroRef}>
         <EventyHeroSection 
           heroInView={heroInView}
           showAllItems={showAllItems}
@@ -128,3 +128,4 @@ const EventyPage = () => {
 };
 
 export default EventyPage;
+
