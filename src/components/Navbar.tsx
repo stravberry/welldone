@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
@@ -81,16 +80,12 @@ const Navbar = () => {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <Link 
-                    to="/uslugi" 
-                    className="px-2 xl:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap"
+                  <NavigationMenuTrigger 
+                    className="px-2 xl:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap bg-transparent hover:bg-transparent data-[state=open]:bg-transparent"
+                    onClick={() => navigate('/uslugi')}
                   >
-                    <NavigationMenuTrigger>
-                      <span className="text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
-                        Usługi
-                      </span>
-                    </NavigationMenuTrigger>
-                  </Link>
+                    Usługi
+                  </NavigationMenuTrigger>
                   <NavigationMenuContent className="bg-white">
                     <ul className="grid w-[400px] gap-3 p-4">
                       {services.map((service) => (
