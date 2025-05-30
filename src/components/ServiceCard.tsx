@@ -32,6 +32,9 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, lin
       }
     });
   };
+
+  // Determine the correct link - if it's "Eventy edukacyjne", use /eventy
+  const finalLink = title === "Eventy edukacyjne" ? "/eventy" : link;
   
   return (
     <div 
@@ -59,7 +62,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, lin
         className="mt-auto transition-all duration-300 hover:bg-orange-50 hover:border-orange-300 hover:shadow-md" 
         onClick={handleClick}
       >
-        <Link to={link} className="flex items-center justify-center">
+        <Link to={finalLink} className="flex items-center justify-center">
           Dowiedz się więcej <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
         </Link>
       </Button>
