@@ -1,4 +1,5 @@
 import React from 'react';
+import Navbar from '@/components/Navbar';
 import { Link } from 'react-router-dom';
 import ServiceCard from '@/components/ServiceCard';
 import { Wrench, Wrench as Tool, Zap, Flame, Users, Star, Award, Shield, CheckCircle } from 'lucide-react';
@@ -112,31 +113,34 @@ const ServicesPage = () => {
       }
     });
   };
-  return <div className="min-h-screen bg-gray-50">
-      {/* Enhanced Hero Section */}
-      <div ref={heroRef} className="relative bg-gradient-to-br from-orange-600 via-orange-500 to-orange-400 py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        {/* Animated background elements */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-white rounded-full animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-24 h-24 bg-white rounded-full animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-white rounded-full animate-pulse delay-500"></div>
-        </div>
-        
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center" style={{
-          opacity: heroInView ? 1 : 0,
-          transform: heroInView ? 'translateY(0)' : 'translateY(30px)',
-          transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
-        }}>
-            <div className="inline-block bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
-              ✨ Certyfikowane szkolenia techniczne
-            </div>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight" style={{
+  return (
+    <div>
+      <Navbar />
+      <div className="min-h-screen bg-gray-50 pt-16">
+        {/* Enhanced Hero Section */}
+        <div ref={heroRef} className="relative bg-gradient-to-br from-orange-600 via-orange-500 to-orange-400 py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+          {/* Animated background elements */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-20 left-10 w-32 h-32 bg-white rounded-full animate-pulse"></div>
+            <div className="absolute bottom-20 right-10 w-24 h-24 bg-white rounded-full animate-pulse delay-1000"></div>
+            <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-white rounded-full animate-pulse delay-500"></div>
+          </div>
+          
+          <div className="max-w-7xl mx-auto relative z-10">
+            <div className="text-center" style={{
             opacity: heroInView ? 1 : 0,
-            transform: heroInView ? 'translateY(0)' : 'translateY(20px)',
-            transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-            transitionDelay: '200ms'
+            transform: heroInView ? 'translateY(0)' : 'translateY(30px)',
+            transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
           }}>
+              <div className="inline-block bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                ✨ Certyfikowane szkolenia techniczne
+              </div>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight" style={{
+              opacity: heroInView ? 1 : 0,
+              transform: heroInView ? 'translateY(0)' : 'translateY(20px)',
+              transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
+              transitionDelay: '200ms'
+            }}>
               Nasze <span className="text-orange-200">Usługi</span>
             </h1>
             <p className="text-xl md:text-2xl text-orange-100 mb-8 max-w-3xl mx-auto" style={{
@@ -186,41 +190,42 @@ const ServicesPage = () => {
           transform: statsInView ? 'translateY(0)' : 'translateY(30px)',
           transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
         }}>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Dlaczego warto z nami współpracować?
-            </h2>
-            <p className="text-lg text-gray-600">
-              Nasze osiągnięcia mówią same za siebie
-            </p>
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => <StatCounter key={index} stat={stat} index={index} isVisible={statsInView} />)}
-          </div>
-        </div>
-      </div>
-
-      {/* Enhanced CTA Section */}
-      <div className="relative bg-gradient-to-r from-orange-600 to-orange-500 py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="absolute inset-0 bg-black opacity-10"></div>
-        <div className="max-w-7xl mx-auto text-center relative z-10">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-            Nie znalazłeś tego, czego szukasz?
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Dlaczego warto z nami współpracować?
           </h2>
-          <p className="text-xl text-orange-100 max-w-3xl mx-auto mb-8">
-            Skontaktuj się z nami, aby omówić spersonalizowane rozwiązanie dla Twojej firmy. 
-            Oferujemy również szkolenia na zamówienie.
+          <p className="text-lg text-gray-600">
+            Nasze osiągnięcia mówią same za siebie
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-orange-600 hover:bg-orange-50 hover:scale-105 transition-all duration-300 shadow-xl" trackingLabel="contact-us-from-services">
-              Skontaktuj się z nami
-            </Button>
-            <Button size="lg" variant="outline" trackingLabel="free-audit-from-services" className="border-white hover:bg-white hover:border-white hover:scale-105 transition-all duration-300 text-[#ff6200]">
-              Bezpłatny audyt potrzeb
-            </Button>
-          </div>
+        </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          {stats.map((stat, index) => <StatCounter key={index} stat={stat} index={index} isVisible={statsInView} />)}
         </div>
       </div>
-    </div>;
+    </div>
+
+    {/* Enhanced CTA Section */}
+    <div className="relative bg-gradient-to-r from-orange-600 to-orange-500 py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <div className="absolute inset-0 bg-black opacity-10"></div>
+      <div className="max-w-7xl mx-auto text-center relative z-10">
+        <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+          Nie znalazłeś tego, czego szukasz?
+        </h2>
+        <p className="text-xl text-orange-100 max-w-3xl mx-auto mb-8">
+          Skontaktuj się z nami, aby omówić spersonalizowane rozwiązanie dla Twojej firmy. 
+          Oferujemy również szkolenia na zamówienie.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button size="lg" className="bg-white text-orange-600 hover:bg-orange-50 hover:scale-105 transition-all duration-300 shadow-xl" trackingLabel="contact-us-from-services">
+            Skontaktuj się z nami
+          </Button>
+          <Button size="lg" variant="outline" trackingLabel="free-audit-from-services" className="border-white hover:bg-white hover:border-white hover:scale-105 transition-all duration-300 text-[#ff6200]">
+            Bezpłatny audyt potrzeb
+          </Button>
+        </div>
+      </div>
+    </div>
+  </div>
+  );
 };
 
 // Enhanced Service Card Component

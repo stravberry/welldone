@@ -1,5 +1,5 @@
-
 import React from 'react';
+import Navbar from '@/components/Navbar';
 import { Link } from 'react-router-dom';
 
 const SitemapPage = () => {
@@ -31,21 +31,60 @@ const SitemapPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-lg shadow-sm p-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">Mapa Strony</h1>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Główne strony */}
-            <div>
-              <h2 className="text-2xl font-semibold text-gray-800 mb-6">Główne strony</h2>
-              <div className="space-y-4">
-                {mainPages.map((page) => (
-                  <div key={page.href} className="border-l-4 border-orange-400 pl-4">
+    <div>
+      <Navbar />
+      <div className="min-h-screen bg-gray-50 py-12 pt-28">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-lg shadow-sm p-8">
+            <h1 className="text-3xl font-bold text-gray-900 mb-8">Mapa Strony</h1>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Główne strony */}
+              <div>
+                <h2 className="text-2xl font-semibold text-gray-800 mb-6">Główne strony</h2>
+                <div className="space-y-4">
+                  {mainPages.map((page) => (
+                    <div key={page.href} className="border-l-4 border-orange-400 pl-4">
+                      <Link 
+                        to={page.href} 
+                        className="text-lg font-medium text-orange-600 hover:text-orange-700 block"
+                      >
+                        {page.title}
+                      </Link>
+                      <p className="text-gray-600 text-sm mt-1">{page.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Usługi */}
+              <div>
+                <h2 className="text-2xl font-semibold text-gray-800 mb-6">Usługi szkoleniowe</h2>
+                <div className="space-y-4">
+                  {services.map((service) => (
+                    <div key={service.href} className="border-l-4 border-blue-400 pl-4">
+                      <Link 
+                        to={service.href} 
+                        className="text-lg font-medium text-blue-600 hover:text-blue-700 block"
+                      >
+                        {service.title}
+                      </Link>
+                      <p className="text-gray-600 text-sm mt-1">{service.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Dodatkowe strony */}
+            <div className="mt-12">
+              <h2 className="text-2xl font-semibold text-gray-800 mb-6">Informacje prawne</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {additionalPages.map((page) => (
+                  <div key={page.href} className="border-l-4 border-gray-400 pl-4">
                     <Link 
                       to={page.href} 
-                      className="text-lg font-medium text-orange-600 hover:text-orange-700 block"
+                      className="text-lg font-medium text-gray-700 hover:text-gray-900 block"
                     >
                       {page.title}
                     </Link>
@@ -55,63 +94,27 @@ const SitemapPage = () => {
               </div>
             </div>
 
-            {/* Usługi */}
-            <div>
-              <h2 className="text-2xl font-semibold text-gray-800 mb-6">Usługi szkoleniowe</h2>
-              <div className="space-y-4">
-                {services.map((service) => (
-                  <div key={service.href} className="border-l-4 border-blue-400 pl-4">
-                    <Link 
-                      to={service.href} 
-                      className="text-lg font-medium text-blue-600 hover:text-blue-700 block"
-                    >
-                      {service.title}
-                    </Link>
-                    <p className="text-gray-600 text-sm mt-1">{service.description}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Dodatkowe strony */}
-          <div className="mt-12">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-6">Informacje prawne</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {additionalPages.map((page) => (
-                <div key={page.href} className="border-l-4 border-gray-400 pl-4">
-                  <Link 
-                    to={page.href} 
-                    className="text-lg font-medium text-gray-700 hover:text-gray-900 block"
-                  >
-                    {page.title}
-                  </Link>
-                  <p className="text-gray-600 text-sm mt-1">{page.description}</p>
+            {/* Kontakt */}
+            <div className="mt-12 p-6 bg-orange-50 rounded-lg">
+              <h3 className="text-xl font-semibold text-gray-800 mb-4">Kontakt</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <p className="font-medium text-gray-800">Centrum Kompetencji Zawodowych</p>
+                  <p className="text-gray-700">Well-Done.pl Paweł Gerus</p>
+                  <p className="text-gray-600">ul. Drzewieckiego 19/11</p>
+                  <p className="text-gray-600">54-129 Wrocław</p>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Kontakt */}
-          <div className="mt-12 p-6 bg-orange-50 rounded-lg">
-            <h3 className="text-xl font-semibold text-gray-800 mb-4">Kontakt</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <p className="font-medium text-gray-800">Centrum Kompetencji Zawodowych</p>
-                <p className="text-gray-700">Well-Done.pl Paweł Gerus</p>
-                <p className="text-gray-600">ul. Drzewieckiego 19/11</p>
-                <p className="text-gray-600">54-129 Wrocław</p>
-              </div>
-              <div>
-                <p className="text-gray-700">
-                  <span className="font-medium">Telefon:</span> 504-305-437
-                </p>
-                <p className="text-gray-700">
-                  <span className="font-medium">E-mail:</span> pgerus@well-done.pl
-                </p>
-                <p className="text-gray-700">
-                  <span className="font-medium">NIP:</span> 884-248-74-55
-                </p>
+                <div>
+                  <p className="text-gray-700">
+                    <span className="font-medium">Telefon:</span> 504-305-437
+                  </p>
+                  <p className="text-gray-700">
+                    <span className="font-medium">E-mail:</span> pgerus@well-done.pl
+                  </p>
+                  <p className="text-gray-700">
+                    <span className="font-medium">NIP:</span> 884-248-74-55
+                  </p>
+                </div>
               </div>
             </div>
           </div>

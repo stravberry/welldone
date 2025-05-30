@@ -1,5 +1,5 @@
-
 import React from 'react';
+import Navbar from '@/components/Navbar';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { Check, ArrowRight } from 'lucide-react';
@@ -97,182 +97,185 @@ const RealizationsPage = () => {
 
   return (
     <div>
-      {/* Hero Section */}
-      <section className="bg-orange-600 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold mb-6">Nasze realizacje</h1>
-            <p className="text-xl max-w-3xl mx-auto">
-              Zobacz wybrane projekty szkoleniowe, które zrealizowaliśmy dla firm produkcyjnych. Każdy z naszych klientów osiągnął wymierne korzyści dzięki naszemu wsparciu w obszarze szkoleń i certyfikacji.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Realizations List */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-8">
-            {realizations.map((realization, index) => (
-              <div 
-                key={index} 
-                className={`bg-white rounded-lg shadow-md overflow-hidden ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} md:flex`}
-              >
-                <div className="md:w-1/3 bg-gray-100 flex items-center justify-center p-6">
-                  {realization.image ? (
-                    <img 
-                      src={realization.image} 
-                      alt={realization.title} 
-                      className="w-full h-auto object-cover rounded" 
-                    />
-                  ) : (
-                    <div className="w-full aspect-video bg-orange-100 flex items-center justify-center rounded">
-                      <p className="text-orange-500 font-medium">Zdjęcie realizacji</p>
-                    </div>
-                  )}
-                </div>
-                <div className="md:w-2/3 p-6 md:p-8">
-                  <h2 className="text-2xl font-bold mb-4">{realization.title}</h2>
-                  <p className="text-gray-600 mb-4">{realization.description}</p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                      <h3 className="font-semibold text-gray-700">Zakres szkolenia:</h3>
-                      <p className="text-gray-600">{realization.scope}</p>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-700">Efekt:</h3>
-                      <p className="text-gray-600">{realization.effect}</p>
-                    </div>
-                  </div>
-                  <Button asChild variant="outline" className="mt-2">
-                    <Link to="/kontakt">
-                      Zapytaj o szczegóły <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Opinie klientów</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Sprawdź, co mówią o nas nasi klienci po zrealizowanych projektach.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-md">
-                <div className="mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <svg key={i} className="inline-block w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 24 24">
-                      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                    </svg>
-                  ))}
-                </div>
-                <p className="text-gray-600 italic mb-6">"{testimonial.quote}"</p>
-                <div className="flex items-center">
-                  <div className="mr-4 h-12 w-12 rounded-full bg-orange-100 flex items-center justify-center">
-                    <span className="text-orange-600 font-bold">{testimonial.author.charAt(0)}</span>
-                  </div>
-                  <div>
-                    <p className="font-semibold">{testimonial.author}</p>
-                    <p className="text-sm text-gray-600">{testimonial.role}, {testimonial.company}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits Section */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl font-bold mb-6">Dlaczego warto wybrać naszą firmę?</h2>
-              <p className="text-gray-600 mb-6">
-                Nasze doświadczenie i indywidualne podejście do każdego klienta zapewniają najwyższą jakość usług szkoleniowych. Oto kilka powodów, dla których firmy produkcyjne wybierają właśnie nas:
+      <Navbar />
+      <div className="pt-16">
+        {/* Hero Section */}
+        <section className="bg-orange-600 text-white py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <h1 className="text-4xl font-bold mb-6">Nasze realizacje</h1>
+              <p className="text-xl max-w-3xl mx-auto">
+                Zobacz wybrane projekty szkoleniowe, które zrealizowaliśmy dla firm produkcyjnych. Każdy z naszych klientów osiągnął wymierne korzyści dzięki naszemu wsparciu w obszarze szkoleń i certyfikacji.
               </p>
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <Check className="h-6 w-6 text-orange-500 mr-3 mt-0.5" />
-                  <p className="text-gray-600">Specjalizacja w szkoleniach dla firm produkcyjnych</p>
-                </li>
-                <li className="flex items-start">
-                  <Check className="h-6 w-6 text-orange-500 mr-3 mt-0.5" />
-                  <p className="text-gray-600">Doświadczeni trenerzy z praktyczną wiedzą branżową</p>
-                </li>
-                <li className="flex items-start">
-                  <Check className="h-6 w-6 text-orange-500 mr-3 mt-0.5" />
-                  <p className="text-gray-600">Elastyczne formy szkolenia dopasowane do potrzeb klienta</p>
-                </li>
-                <li className="flex items-start">
-                  <Check className="h-6 w-6 text-orange-500 mr-3 mt-0.5" />
-                  <p className="text-gray-600">Kompleksowa obsługa procesu certyfikacji</p>
-                </li>
-                <li className="flex items-start">
-                  <Check className="h-6 w-6 text-orange-500 mr-3 mt-0.5" />
-                  <p className="text-gray-600">Bezpłatny audyt szkoleniowy pozwalający na optymalizację kosztów</p>
-                </li>
-              </ul>
-              <Button asChild className="mt-8">
-                <Link to="/o-nas">
-                  Dowiedz się więcej o nas
-                </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Realizations List */}
+        <section className="py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 gap-8">
+              {realizations.map((realization, index) => (
+                <div 
+                  key={index} 
+                  className={`bg-white rounded-lg shadow-md overflow-hidden ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} md:flex`}
+                >
+                  <div className="md:w-1/3 bg-gray-100 flex items-center justify-center p-6">
+                    {realization.image ? (
+                      <img 
+                        src={realization.image} 
+                        alt={realization.title} 
+                        className="w-full h-auto object-cover rounded" 
+                      />
+                    ) : (
+                      <div className="w-full aspect-video bg-orange-100 flex items-center justify-center rounded">
+                        <p className="text-orange-500 font-medium">Zdjęcie realizacji</p>
+                      </div>
+                    )}
+                  </div>
+                  <div className="md:w-2/3 p-6 md:p-8">
+                    <h2 className="text-2xl font-bold mb-4">{realization.title}</h2>
+                    <p className="text-gray-600 mb-4">{realization.description}</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <h3 className="font-semibold text-gray-700">Zakres szkolenia:</h3>
+                        <p className="text-gray-600">{realization.scope}</p>
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-gray-700">Efekt:</h3>
+                        <p className="text-gray-600">{realization.effect}</p>
+                      </div>
+                    </div>
+                    <Button asChild variant="outline" className="mt-2">
+                      <Link to="/kontakt">
+                        Zapytaj o szczegóły <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials Section */}
+        <section className="py-16 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4">Opinie klientów</h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                Sprawdź, co mówią o nas nasi klienci po zrealizowanych projektach.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {testimonials.map((testimonial, index) => (
+                <div key={index} className="bg-white p-6 rounded-lg shadow-md">
+                  <div className="mb-4">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="inline-block w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 24 24">
+                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                      </svg>
+                    ))}
+                  </div>
+                  <p className="text-gray-600 italic mb-6">"{testimonial.quote}"</p>
+                  <div className="flex items-center">
+                    <div className="mr-4 h-12 w-12 rounded-full bg-orange-100 flex items-center justify-center">
+                      <span className="text-orange-600 font-bold">{testimonial.author.charAt(0)}</span>
+                    </div>
+                    <div>
+                      <p className="font-semibold">{testimonial.author}</p>
+                      <p className="text-sm text-gray-600">{testimonial.role}, {testimonial.company}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Benefits Section */}
+        <section className="py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-3xl font-bold mb-6">Dlaczego warto wybrać naszą firmę?</h2>
+                <p className="text-gray-600 mb-6">
+                  Nasze doświadczenie i indywidualne podejście do każdego klienta zapewniają najwyższą jakość usług szkoleniowych. Oto kilka powodów, dla których firmy produkcyjne wybierają właśnie nas:
+                </p>
+                <ul className="space-y-4">
+                  <li className="flex items-start">
+                    <Check className="h-6 w-6 text-orange-500 mr-3 mt-0.5" />
+                    <p className="text-gray-600">Specjalizacja w szkoleniach dla firm produkcyjnych</p>
+                  </li>
+                  <li className="flex items-start">
+                    <Check className="h-6 w-6 text-orange-500 mr-3 mt-0.5" />
+                    <p className="text-gray-600">Doświadczeni trenerzy z praktyczną wiedzą branżową</p>
+                  </li>
+                  <li className="flex items-start">
+                    <Check className="h-6 w-6 text-orange-500 mr-3 mt-0.5" />
+                    <p className="text-gray-600">Elastyczne formy szkolenia dopasowane do potrzeb klienta</p>
+                  </li>
+                  <li className="flex items-start">
+                    <Check className="h-6 w-6 text-orange-500 mr-3 mt-0.5" />
+                    <p className="text-gray-600">Kompleksowa obsługa procesu certyfikacji</p>
+                  </li>
+                  <li className="flex items-start">
+                    <Check className="h-6 w-6 text-orange-500 mr-3 mt-0.5" />
+                    <p className="text-gray-600">Bezpłatny audyt szkoleniowy pozwalający na optymalizację kosztów</p>
+                  </li>
+                </ul>
+                <Button asChild className="mt-8">
+                  <Link to="/o-nas">
+                    Dowiedz się więcej o nas
+                  </Link>
+                </Button>
+              </div>
+              <div className="bg-orange-50 p-8 rounded-lg shadow-md">
+                <h3 className="text-xl font-bold mb-4 text-center">Nasze liczby mówią same za siebie</h3>
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-orange-600 mb-2">500+</div>
+                    <p className="text-gray-600">zadowolonych firm</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-orange-600 mb-2">1000+</div>
+                    <p className="text-gray-600">zrealizowanych szkoleń</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-orange-600 mb-2">98%</div>
+                    <p className="text-gray-600">zdawalność egzaminów</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-orange-600 mb-2">10+</div>
+                    <p className="text-gray-600">lat doświadczenia</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-16 bg-orange-600 text-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl font-bold mb-6">Gotowy, aby rozpocząć współpracę?</h2>
+            <p className="text-xl mb-8 max-w-3xl mx-auto">
+              Skontaktuj się z nami, aby omówić Twoje potrzeby szkoleniowe i dowiedzieć się, jak możemy pomóc Twojej firmie.
+            </p>
+            <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
+              <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-gray-100">
+                <Link to="/kontakt">Skontaktuj się z nami</Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="border-white hover:bg-orange-700">
+                <Link to="/wycena">Błyskawiczna Wycena</Link>
               </Button>
             </div>
-            <div className="bg-orange-50 p-8 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold mb-4 text-center">Nasze liczby mówią same za siebie</h3>
-              <div className="grid grid-cols-2 gap-6">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-orange-600 mb-2">500+</div>
-                  <p className="text-gray-600">zadowolonych firm</p>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-orange-600 mb-2">1000+</div>
-                  <p className="text-gray-600">zrealizowanych szkoleń</p>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-orange-600 mb-2">98%</div>
-                  <p className="text-gray-600">zdawalność egzaminów</p>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-orange-600 mb-2">10+</div>
-                  <p className="text-gray-600">lat doświadczenia</p>
-                </div>
-              </div>
-            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-orange-600 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-6">Gotowy, aby rozpocząć współpracę?</h2>
-          <p className="text-xl mb-8 max-w-3xl mx-auto">
-            Skontaktuj się z nami, aby omówić Twoje potrzeby szkoleniowe i dowiedzieć się, jak możemy pomóc Twojej firmie.
-          </p>
-          <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
-            <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-gray-100">
-              <Link to="/kontakt">Skontaktuj się z nami</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="border-white hover:bg-orange-700">
-              <Link to="/wycena">Błyskawiczna Wycena</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <FAQ title="Najczęściej zadawane pytania dotyczące naszych realizacji" items={faqItems} />
+        {/* FAQ Section */}
+        <FAQ title="Najczęściej zadawane pytania dotyczące naszych realizacji" items={faqItems} />
+      </div>
     </div>
   );
 };

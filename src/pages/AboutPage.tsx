@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import Navbar from '@/components/Navbar';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -90,282 +91,285 @@ const AboutPage = () => {
 
   return (
     <div>
-      {/* Hero Section with animated background image */}
-      <section className="relative py-20 overflow-hidden">
-        {/* Background image with overlay */}
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="/public/lovable-uploads/e53f9387-8eab-484e-95d8-dae5efb914a0.png" 
-            alt="Szkolenie w fabryce" 
-            className="w-full h-full object-cover"
-            style={{
-              filter: 'blur(1px)',
-              transform: 'scale(1.05)'
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70"></div>
-        </div>
-        
-        {/* Animated floating elements - hidden on mobile for performance */}
-        <div className="hidden md:block absolute top-10 left-10 w-20 h-20 bg-orange-500/20 rounded-full animate-pulse" />
-        <div className="hidden md:block absolute bottom-20 right-20 w-32 h-32 bg-blue-500/20 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-        
-        {/* Content */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div 
-            ref={heroTextRef}
-            className="text-center"
-            style={{
-              opacity: heroTextInView ? 1 : 0,
-              transform: heroTextInView ? 'translateY(0)' : 'translateY(30px)',
-              transition: prefersReducedMotion ? 'opacity 0.5s ease' : 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-              willChange: 'transform, opacity'
-            }}
-          >
-            <h1 className="text-5xl font-bold mb-8 text-white">
-              O Nas
-            </h1>
-            <p className="text-xl max-w-3xl mx-auto text-white/90 leading-relaxed">
-              Poznaj firmę, która od lat wspiera przedsiębiorstwa produkcyjne w podnoszeniu kwalifikacji pracowników i zapewnianiu zgodności z wymogami prawnymi.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What We Do Section */}
-      <section className="py-20 bg-gradient-to-br from-white to-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div
-              ref={whatWeDoTextRef}
+      <Navbar />
+      <div className="pt-16">
+        {/* Hero Section with animated background image */}
+        <section className="relative py-20 overflow-hidden">
+          {/* Background image with overlay */}
+          <div className="absolute inset-0 z-0">
+            <img 
+              src="/public/lovable-uploads/e53f9387-8eab-484e-95d8-dae5efb914a0.png" 
+              alt="Szkolenie w fabryce" 
+              className="w-full h-full object-cover"
               style={{
-                opacity: whatWeDoTextInView ? 1 : 0,
-                transform: whatWeDoTextInView ? 'translateX(0)' : 'translateX(-30px)',
-                transition: prefersReducedMotion ? 'opacity 0.5s ease' : 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                filter: 'blur(1px)',
+                transform: 'scale(1.05)'
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70"></div>
+          </div>
+          
+          {/* Animated floating elements - hidden on mobile for performance */}
+          <div className="hidden md:block absolute top-10 left-10 w-20 h-20 bg-orange-500/20 rounded-full animate-pulse" />
+          <div className="hidden md:block absolute bottom-20 right-20 w-32 h-32 bg-blue-500/20 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
+          
+          {/* Content */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div 
+              ref={heroTextRef}
+              className="text-center"
+              style={{
+                opacity: heroTextInView ? 1 : 0,
+                transform: heroTextInView ? 'translateY(0)' : 'translateY(30px)',
+                transition: prefersReducedMotion ? 'opacity 0.5s ease' : 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
                 willChange: 'transform, opacity'
               }}
             >
-              <h2 className="text-4xl font-bold mb-8 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                Czym się zajmujemy i do kogo skierowana jest nasza usługa
-              </h2>
-              
-              <div className="space-y-6">
-                <p className="text-gray-600 leading-relaxed">
-                  Firma specjalizuje się w szkoleniach z zakresu BHP oraz uzyskiwania uprawnień UDT (operatorzy i konserwatorzy), SEP, a także szkoleniach specjalistycznych, takich jak spawalnicze oraz na wózki unoszące.
-                </p>
+              <h1 className="text-5xl font-bold mb-8 text-white">
+                O Nas
+              </h1>
+              <p className="text-xl max-w-3xl mx-auto text-white/90 leading-relaxed">
+                Poznaj firmę, która od lat wspiera przedsiębiorstwa produkcyjne w podnoszeniu kwalifikacji pracowników i zapewnianiu zgodności z wymogami prawnymi.
+              </p>
+            </div>
+          </div>
+        </section>
 
-                <p className="text-gray-600 leading-relaxed">
-                  Usługi te są skierowane głównie do dużych firm produkcyjnych (powyżej 500 pracowników), które potrzebują regularnych szkoleń dla swoich pracowników oraz zapewnienia uprawnień do obsługi nowego i używanego sprzętu.
-                </p>
+        {/* What We Do Section */}
+        <section className="py-20 bg-gradient-to-br from-white to-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+              <div
+                ref={whatWeDoTextRef}
+                style={{
+                  opacity: whatWeDoTextInView ? 1 : 0,
+                  transform: whatWeDoTextInView ? 'translateX(0)' : 'translateX(-30px)',
+                  transition: prefersReducedMotion ? 'opacity 0.5s ease' : 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                  willChange: 'transform, opacity'
+                }}
+              >
+                <h2 className="text-4xl font-bold mb-8 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                  Czym się zajmujemy i do kogo skierowana jest nasza usługa
+                </h2>
+                
+                <div className="space-y-6">
+                  <p className="text-gray-600 leading-relaxed">
+                    Firma specjalizuje się w szkoleniach z zakresu BHP oraz uzyskiwania uprawnień UDT (operatorzy i konserwatorzy), SEP, a także szkoleniach specjalistycznych, takich jak spawalnicze oraz na wózki unoszące.
+                  </p>
 
-                <p className="text-gray-600 leading-relaxed">
-                  Naszym celem jest pokazanie, że firma posiada dogłębną wiedzę na temat specyficznych potrzeb firm produkcyjnych, co stanowi jedną z głównych przewag konkurencyjnych.
-                </p>
+                  <p className="text-gray-600 leading-relaxed">
+                    Usługi te są skierowane głównie do dużych firm produkcyjnych (powyżej 500 pracowników), które potrzebują regularnych szkoleń dla swoich pracowników oraz zapewnienia uprawnień do obsługi nowego i używanego sprzętu.
+                  </p>
+
+                  <p className="text-gray-600 leading-relaxed">
+                    Naszym celem jest pokazanie, że firma posiada dogłębną wiedzę na temat specyficznych potrzeb firm produkcyjnych, co stanowi jedną z głównych przewag konkurencyjnych.
+                  </p>
+                </div>
+
+                <div className="mt-8 flex items-center space-x-4">
+                  <Button asChild className="bg-orange-500 hover:bg-orange-600 transform hover:scale-105 transition-all duration-300 shadow-lg">
+                    <Link to="/uslugi">
+                      Zobacz nasze usługi
+                    </Link>
+                  </Button>
+                </div>
               </div>
+              <div 
+                ref={whatWeDoImageRef}
+                className="rounded-xl overflow-hidden shadow-2xl group"
+                style={{
+                  opacity: whatWeDoImageInView ? 1 : 0,
+                  transform: whatWeDoImageInView ? 'translateX(0) scale(1)' : 'translateX(30px) scale(0.98)',
+                  transition: prefersReducedMotion ? 'opacity 0.5s ease' : 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                  transitionDelay: prefersReducedMotion ? '0ms' : (whatWeDoImageInView ? '200ms' : '0ms'),
+                  willChange: 'transform, opacity'
+                }}
+              >
+                <img 
+                  src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81" 
+                  alt="Szkolenie pracowników w fabryce" 
+                  className="w-full h-auto md:group-hover:scale-105 transition-transform duration-500" 
+                />
+              </div>
+            </div>
+          </div>
+        </section>
 
-              <div className="mt-8 flex items-center space-x-4">
-                <Button asChild className="bg-orange-500 hover:bg-orange-600 transform hover:scale-105 transition-all duration-300 shadow-lg">
-                  <Link to="/uslugi">
-                    Zobacz nasze usługi
+        {/* Our Advantages Section - Now using the new animated component */}
+        <AnimatedAdvantagesSection />
+
+        {/* How We Work Section */}
+        <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+              <div 
+                ref={howWeWorkImageRef}
+                className="order-2 md:order-1 rounded-xl overflow-hidden shadow-2xl group"
+                style={{
+                  opacity: howWeWorkImageInView ? 1 : 0,
+                  transform: howWeWorkImageInView ? 'translateX(0) scale(1)' : 'translateX(-30px) scale(0.98)',
+                  transition: prefersReducedMotion ? 'opacity 0.5s ease' : 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                  willChange: 'transform, opacity'
+                }}
+              >
+                <img 
+                  src="/public/lovable-uploads/657768d6-dc5a-419b-80b8-b664af6c6775.png" 
+                  alt="Inspekcja w magazynie" 
+                  className="w-full h-auto md:group-hover:scale-105 transition-transform duration-500" 
+                />
+              </div>
+              <div 
+                ref={howWeWorkTextRef}
+                className="order-1 md:order-2"
+                style={{
+                  opacity: howWeWorkTextInView ? 1 : 0,
+                  transform: howWeWorkTextInView ? 'translateX(0)' : 'translateX(30px)',
+                  transition: prefersReducedMotion ? 'opacity 0.5s ease' : 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                  transitionDelay: prefersReducedMotion ? '0ms' : (howWeWorkTextInView ? '200ms' : '0ms'),
+                  willChange: 'transform, opacity'
+                }}
+              >
+                <h2 className="text-4xl font-bold mb-8 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                  Jak działamy
+                </h2>
+                <p className="text-gray-600 mb-6 leading-relaxed">
+                  Nasze działania są dostosowane do indywidualnych potrzeb każdej firmy. Rozpoczynamy od analizy potrzeb szkoleniowych przedsiębiorstwa poprzez oferowany audyt, następnie proponujemy plan szkoleń dostosowany do specyficznych wymagań firmy, zarówno pod kątem terminów, jak i formy (stacjonarne, online, hybrydowe).
+                </p>
+                <p className="text-gray-600 mb-8 leading-relaxed">
+                  Działamy szybko i efektywnie, zapewniając pełną obsługę – od organizacji szkoleń, po finalne uzyskanie uprawnień przez pracowników.
+                </p>
+                <Button asChild variant="outline" className="border-orange-500 text-orange-600 hover:bg-orange-50 transform hover:scale-105 transition-all duration-300">
+                  <Link to="/bezplatny-audyt">
+                    Zamów bezpłatny audyt
                   </Link>
                 </Button>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Statistics Section */}
+        <section className="py-20 bg-gradient-to-br from-orange-500 to-orange-600 relative overflow-hidden">
+          {/* Background decoration - hidden on mobile */}
+          <div className="hidden md:block absolute top-0 left-0 w-96 h-96 bg-white/10 rounded-full -translate-x-48 -translate-y-48" />
+          <div className="hidden md:block absolute bottom-0 right-0 w-80 h-80 bg-white/10 rounded-full translate-x-40 translate-y-40" />
+          
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div 
-              ref={whatWeDoImageRef}
-              className="rounded-xl overflow-hidden shadow-2xl group"
+              ref={statsHeaderRef}
+              className="text-center mb-16"
               style={{
-                opacity: whatWeDoImageInView ? 1 : 0,
-                transform: whatWeDoImageInView ? 'translateX(0) scale(1)' : 'translateX(30px) scale(0.98)',
+                opacity: statsHeaderInView ? 1 : 0,
+                transform: statsHeaderInView ? 'translateY(0)' : 'translateY(20px)',
                 transition: prefersReducedMotion ? 'opacity 0.5s ease' : 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
-                transitionDelay: prefersReducedMotion ? '0ms' : (whatWeDoImageInView ? '200ms' : '0ms'),
                 willChange: 'transform, opacity'
               }}
             >
-              <img 
-                src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81" 
-                alt="Szkolenie pracowników w fabryce" 
-                className="w-full h-auto md:group-hover:scale-105 transition-transform duration-500" 
-              />
+              <h2 className="text-4xl font-bold mb-6 text-white">Statystyki</h2>
+              <p className="text-lg text-orange-100 max-w-3xl mx-auto leading-relaxed">
+                Liczby, które pokazują skalę naszej działalności i wzmacniają naszą wiarygodność.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {stats.map((stat, index) => (
+                <StatItem
+                  key={index}
+                  value={stat.value}
+                  label={stat.label}
+                />
+              ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Our Advantages Section - Now using the new animated component */}
-      <AnimatedAdvantagesSection />
+        {/* Team Section - Now using the new animated component */}
+        <AnimatedTeamSection />
 
-      {/* How We Work Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+        {/* Testimonials Section */}
+        <section className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+          {/* Background decoration - hidden on mobile */}
+          <div className="hidden md:block absolute top-20 right-20 w-40 h-40 bg-orange-100 rounded-full opacity-50" />
+          <div className="hidden md:block absolute bottom-20 left-20 w-32 h-32 bg-blue-100 rounded-full opacity-30" />
+          
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div 
-              ref={howWeWorkImageRef}
-              className="order-2 md:order-1 rounded-xl overflow-hidden shadow-2xl group"
+              ref={testimonialsHeaderRef}
+              className="text-center mb-16"
               style={{
-                opacity: howWeWorkImageInView ? 1 : 0,
-                transform: howWeWorkImageInView ? 'translateX(0) scale(1)' : 'translateX(-30px) scale(0.98)',
+                opacity: testimonialsHeaderInView ? 1 : 0,
+                transform: testimonialsHeaderInView ? 'translateY(0)' : 'translateY(20px)',
                 transition: prefersReducedMotion ? 'opacity 0.5s ease' : 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
                 willChange: 'transform, opacity'
               }}
             >
-              <img 
-                src="/public/lovable-uploads/657768d6-dc5a-419b-80b8-b664af6c6775.png" 
-                alt="Inspekcja w magazynie" 
-                className="w-full h-auto md:group-hover:scale-105 transition-transform duration-500" 
-              />
-            </div>
-            <div 
-              ref={howWeWorkTextRef}
-              className="order-1 md:order-2"
-              style={{
-                opacity: howWeWorkTextInView ? 1 : 0,
-                transform: howWeWorkTextInView ? 'translateX(0)' : 'translateX(30px)',
-                transition: prefersReducedMotion ? 'opacity 0.5s ease' : 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
-                transitionDelay: prefersReducedMotion ? '0ms' : (howWeWorkTextInView ? '200ms' : '0ms'),
-                willChange: 'transform, opacity'
-              }}
-            >
-              <h2 className="text-4xl font-bold mb-8 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                Jak działamy
+              <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                Nasi klienci i opinie
               </h2>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                Nasze działania są dostosowane do indywidualnych potrzeb każdej firmy. Rozpoczynamy od analizy potrzeb szkoleniowych przedsiębiorstwa poprzez oferowany audyt, następnie proponujemy plan szkoleń dostosowany do specyficznych wymagań firmy, zarówno pod kątem terminów, jak i formy (stacjonarne, online, hybrydowe).
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Współpracujemy z czołowymi firmami produkcyjnymi na polskim rynku. Poznaj opinie naszych klientów.
               </p>
-              <p className="text-gray-600 mb-8 leading-relaxed">
-                Działamy szybko i efektywnie, zapewniając pełną obsługę – od organizacji szkoleń, po finalne uzyskanie uprawnień przez pracowników.
-              </p>
-              <Button asChild variant="outline" className="border-orange-500 text-orange-600 hover:bg-orange-50 transform hover:scale-105 transition-all duration-300">
-                <Link to="/bezplatny-audyt">
-                  Zamów bezpłatny audyt
-                </Link>
-              </Button>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Statistics Section */}
-      <section className="py-20 bg-gradient-to-br from-orange-500 to-orange-600 relative overflow-hidden">
-        {/* Background decoration - hidden on mobile */}
-        <div className="hidden md:block absolute top-0 left-0 w-96 h-96 bg-white/10 rounded-full -translate-x-48 -translate-y-48" />
-        <div className="hidden md:block absolute bottom-0 right-0 w-80 h-80 bg-white/10 rounded-full translate-x-40 translate-y-40" />
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div 
-            ref={statsHeaderRef}
-            className="text-center mb-16"
-            style={{
-              opacity: statsHeaderInView ? 1 : 0,
-              transform: statsHeaderInView ? 'translateY(0)' : 'translateY(20px)',
-              transition: prefersReducedMotion ? 'opacity 0.5s ease' : 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
-              willChange: 'transform, opacity'
-            }}
-          >
-            <h2 className="text-4xl font-bold mb-6 text-white">Statystyki</h2>
-            <p className="text-lg text-orange-100 max-w-3xl mx-auto leading-relaxed">
-              Liczby, które pokazują skalę naszej działalności i wzmacniają naszą wiarygodność.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <StatItem
-                key={index}
-                value={stat.value}
-                label={stat.label}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <TestimonialCard
+                quote="Dzięki współpracy z firmą, nasi pracownicy uzyskali certyfikaty UDT, co pozwoliło nam na podniesienie standardów bezpieczeństwa w firmie."
+                author="Jan Kowalski"
+                role="Specjalista BHP"
+                company="Firma X"
+                index={0}
               />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section - Now using the new animated component */}
-      <AnimatedTeamSection />
-
-      {/* Testimonials Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
-        {/* Background decoration - hidden on mobile */}
-        <div className="hidden md:block absolute top-20 right-20 w-40 h-40 bg-orange-100 rounded-full opacity-50" />
-        <div className="hidden md:block absolute bottom-20 left-20 w-32 h-32 bg-blue-100 rounded-full opacity-30" />
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div 
-            ref={testimonialsHeaderRef}
-            className="text-center mb-16"
-            style={{
-              opacity: testimonialsHeaderInView ? 1 : 0,
-              transform: testimonialsHeaderInView ? 'translateY(0)' : 'translateY(20px)',
-              transition: prefersReducedMotion ? 'opacity 0.5s ease' : 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
-              willChange: 'transform, opacity'
-            }}
-          >
-            <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-              Nasi klienci i opinie
-            </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Współpracujemy z czołowymi firmami produkcyjnymi na polskim rynku. Poznaj opinie naszych klientów.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <TestimonialCard
-              quote="Dzięki współpracy z firmą, nasi pracownicy uzyskali certyfikaty UDT, co pozwoliło nam na podniesienie standardów bezpieczeństwa w firmie."
-              author="Jan Kowalski"
-              role="Specjalista BHP"
-              company="Firma X"
-              index={0}
-            />
-            <TestimonialCard
-              quote="Profesjonalne szkolenia, które dostosowali do naszych potrzeb. Współpraca była szybka i bezproblemowa."
-              author="Anna Nowak"
-              role="HR Manager"
-              company="Firma Y"
-              index={1}
-            />
-            <TestimonialCard
-              quote="Bezpłatny audyt pomógł nam zoptymalizować proces szkoleniowy, co przełożyło się na realne oszczędności."
-              author="Piotr Wiśniewski"
-              role="Dyrektor Operacyjny"
-              company="Firma Z"
-              index={2}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-orange-500 to-orange-600 text-white relative overflow-hidden">
-        {/* Background decoration - hidden on mobile */}
-        <div className="hidden md:block absolute top-0 left-0 w-80 h-80 bg-white/10 rounded-full -translate-x-40 -translate-y-40" />
-        <div className="hidden md:block absolute bottom-0 right-0 w-96 h-96 bg-white/10 rounded-full translate-x-48 translate-y-48" />
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div
-            ref={ctaRef}
-            style={{
-              opacity: ctaInView ? 1 : 0,
-              transform: ctaInView ? 'translateY(0)' : 'translateY(20px)',
-              transition: prefersReducedMotion ? 'opacity 0.5s ease' : 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
-              willChange: 'transform, opacity'
-            }}
-          >
-            <h2 className="text-4xl font-bold mb-8">Gotowy, aby rozpocząć współpracę?</h2>
-            <p className="text-xl mb-10 max-w-3xl mx-auto opacity-90 leading-relaxed">
-              Skontaktuj się z nami już dziś, aby omówić potrzeby szkoleniowe Twojej firmy i uzyskać indywidualną ofertę.
-            </p>
-            <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 justify-center">
-              <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-gray-100 transform hover:scale-105 transition-all duration-300">
-                <Link to="/kontakt">Skontaktuj się z nami</Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="border-2 border-white text-white bg-white/10 hover:bg-white hover:text-orange-600 transform hover:scale-105 transition-all duration-300">
-                <Link to="/wycena">Błyskawiczna Wycena</Link>
-              </Button>
+              <TestimonialCard
+                quote="Profesjonalne szkolenia, które dostosowali do naszych potrzeb. Współpraca była szybka i bezproblemowa."
+                author="Anna Nowak"
+                role="HR Manager"
+                company="Firma Y"
+                index={1}
+              />
+              <TestimonialCard
+                quote="Bezpłatny audyt pomógł nam zoptymalizować proces szkoleniowy, co przełożyło się na realne oszczędności."
+                author="Piotr Wiśniewski"
+                role="Dyrektor Operacyjny"
+                company="Firma Z"
+                index={2}
+              />
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* FAQ Section */}
-      <FAQ items={faqItems} />
+        {/* CTA Section */}
+        <section className="py-20 bg-gradient-to-br from-orange-500 to-orange-600 text-white relative overflow-hidden">
+          {/* Background decoration - hidden on mobile */}
+          <div className="hidden md:block absolute top-0 left-0 w-80 h-80 bg-white/10 rounded-full -translate-x-40 -translate-y-40" />
+          <div className="hidden md:block absolute bottom-0 right-0 w-96 h-96 bg-white/10 rounded-full translate-x-48 translate-y-48" />
+          
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div
+              ref={ctaRef}
+              style={{
+                opacity: ctaInView ? 1 : 0,
+                transform: ctaInView ? 'translateY(0)' : 'translateY(20px)',
+                transition: prefersReducedMotion ? 'opacity 0.5s ease' : 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                willChange: 'transform, opacity'
+              }}
+            >
+              <h2 className="text-4xl font-bold mb-8">Gotowy, aby rozpocząć współpracę?</h2>
+              <p className="text-xl mb-10 max-w-3xl mx-auto opacity-90 leading-relaxed">
+                Skontaktuj się z nami już dziś, aby omówić potrzeby szkoleniowe Twojej firmy i uzyskać indywidualną ofertę.
+              </p>
+              <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 justify-center">
+                <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-gray-100 transform hover:scale-105 transition-all duration-300">
+                  <Link to="/kontakt">Skontaktuj się z nami</Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="border-2 border-white text-white bg-white/10 hover:bg-white hover:text-orange-600 transform hover:scale-105 transition-all duration-300">
+                  <Link to="/wycena">Błyskawiczna Wycena</Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <FAQ items={faqItems} />
+      </div>
     </div>
   );
 };
