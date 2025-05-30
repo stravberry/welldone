@@ -113,12 +113,6 @@ const Navbar = () => {
             <Link to="/bezplatny-audyt" className="px-2 xl:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
               Bezpłatny Audyt
             </Link>
-            <Link to="/realizacje" className="px-2 xl:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
-              Realizacje
-            </Link>
-            <Link to="/wiedza" className="px-2 xl:px-3 py-2 text-sm font-medium text-gray-700 hover:text-orange-600 whitespace-nowrap">
-              Wiedza
-            </Link>
           </div>
           
           
@@ -164,9 +158,7 @@ const Navbar = () => {
             { to: '/', label: 'Home', delay: 0 },
             { to: '/o-nas', label: 'O Nas', delay: 50 },
             { to: '/uslugi', label: 'Usługi', delay: 100 },
-            { to: '/bezplatny-audyt', label: 'Bezpłatny Audyt', delay: 125 },
-            { to: '/realizacje', label: 'Realizacje', delay: 150 },
-            { to: '/wiedza', label: 'Wiedza', delay: 200 }
+            { to: '/bezplatny-audyt', label: 'Bezpłatny Audyt', delay: 125 }
           ].map((item, index) => (
             <Link
               key={item.to}

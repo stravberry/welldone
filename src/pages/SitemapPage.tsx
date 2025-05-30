@@ -8,8 +8,6 @@ const SitemapPage = () => {
     { title: 'Strona główna', href: '/', description: 'Główna strona Well-Done.pl' },
     { title: 'O nas', href: '/o-nas', description: 'Informacje o firmie i zespole' },
     { title: 'Usługi', href: '/uslugi', description: 'Pełna oferta szkoleń i usług' },
-    { title: 'Realizacje', href: '/realizacje', description: 'Nasze projekty i sukcesy' },
-    { title: 'Wiedza', href: '/wiedza', description: 'Artykuły, poradniki i materiały edukacyjne' },
     { title: 'Kontakt', href: '/kontakt', description: 'Dane kontaktowe i formularz' },
     { title: 'Bezpłatny audyt', href: '/bezplatny-audyt', description: 'Darmowa analiza potrzeb szkoleniowych' },
     { title: 'Błyskawiczna wycena', href: '/wycena', description: 'Szybka wycena szkoleń online' },
