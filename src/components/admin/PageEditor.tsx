@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Eye, Code, Edit3 } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Eye, Code, Edit3, Save, ArrowLeft, Monitor, Tablet, Smartphone } from 'lucide-react';
 import PageSectionEditor from './PageSectionEditor';
 import HTMLCodeEditor from './HTMLCodeEditor';
 import LivePageBuilder from './LivePageBuilder';
@@ -16,12 +17,15 @@ type Page = Tables<'pages'> & {
 interface PageEditorProps {
   page: Page;
   onSave?: (content: any) => void;
+  onBack?: () => void;
 }
 
-type EditorMode = 'sections' | 'code' | 'live-builder';
+type EditorMode = 'live-builder' | 'sections' | 'code';
+type ViewportMode = 'desktop' | 'tablet' | 'mobile';
 
-const PageEditor: React.FC<PageEditorProps> = ({ page, onSave }) => {
-  const [activeEditor, setActiveEditor] = useState<EditorMode>('sections');
+const PageEditor: React.FC<PageEditorProps> = ({ page, onSave, onBack }) => {
+  const [activeEditor, setActiveEditor] = useState<EditorMode>('live-builder');
+  const [viewportMode, setViewportMode] = useState<ViewportMode>('desktop');
   const [headCode, setHeadCode] = useState('');
   const [bodyCode, setBodyCode] = useState('');
   const [hasChanges, setHasChanges] = useState(false);
@@ -29,7 +33,6 @@ const PageEditor: React.FC<PageEditorProps> = ({ page, onSave }) => {
   const { data: pageSections, isLoading } = usePageSections(page.id);
 
   const handleCodeSave = () => {
-    // Handle saving the HTML code
     if (onSave) {
       onSave({ headCode, bodyCode });
     }
@@ -37,14 +40,42 @@ const PageEditor: React.FC<PageEditorProps> = ({ page, onSave }) => {
   };
 
   const handleSectionDelete = (sectionId: string) => {
-    // This will be handled by the individual PageSectionEditor components
     console.log('Deleting section:', sectionId);
   };
 
+  const getStatusBadge = () => {
+    if (page.status === 'published') {
+      return <Badge className="bg-green-100 text-green-800">Opublikowane</Badge>;
+    }
+    return <Badge variant="secondary">Wersja robocza</Badge>;
+  };
+
+  const getViewportIcon = () => {
+    switch (viewportMode) {
+      case 'tablet': return <Tablet className="w-4 h-4" />;
+      case 'mobile': return <Smartphone className="w-4 h-4" />;
+      default: return <Monitor className="w-4 h-4" />;
+    }
+  };
+
   const renderEditor = () => {
-    if (activeEditor === 'sections') {
+    if (activeEditor === 'live-builder') {
       return (
-        <div className="space-y-4 p-4">
+        <div className="h-full">
+          <LivePageBuilder
+            pageId={page.id}
+            onSave={async (blocks) => {
+              const content = { blocks };
+              if (onSave) {
+                await onSave(content);
+              }
+            }}
+          />
+        </div>
+      );
+    } else if (activeEditor === 'sections') {
+      return (
+        <div className="space-y-4 p-6 max-w-4xl mx-auto">
           {isLoading ? (
             <div className="flex items-center justify-center h-64">
               <div className="text-lg">Ładowanie sekcji...</div>
@@ -64,9 +95,9 @@ const PageEditor: React.FC<PageEditorProps> = ({ page, onSave }) => {
           )}
         </div>
       );
-    } else if (activeEditor === 'code') {
+    } else {
       return (
-        <div className="p-4">
+        <div className="p-6 max-w-6xl mx-auto">
           <HTMLCodeEditor
             headCode={headCode}
             bodyCode={bodyCode}
@@ -82,59 +113,106 @@ const PageEditor: React.FC<PageEditorProps> = ({ page, onSave }) => {
           />
         </div>
       );
-    } else {
-      return (
-        <LivePageBuilder
-          pageId={page.id}
-          onSave={async (blocks) => {
-            const content = { blocks };
-            if (onSave) {
-              await onSave(content);
-            }
-          }}
-        />
-      );
     }
   };
 
   return (
-    <div className="h-full flex flex-col">
-      <div className="flex items-center justify-between p-4 border-b">
+    <div className="h-full flex flex-col bg-white">
+      {/* Enhanced Header */}
+      <div className="flex items-center justify-between p-4 border-b bg-white shadow-sm">
         <div className="flex items-center space-x-4">
-          <h1 className="text-xl font-semibold">{page.title}</h1>
+          {onBack && (
+            <Button 
+              variant="ghost" 
+              size="sm"
+              onClick={onBack}
+              className="flex items-center gap-2"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Powrót
+            </Button>
+          )}
+          
+          <div className="flex items-center space-x-3">
+            <div>
+              <h1 className="text-xl font-semibold text-gray-900">{page.title}</h1>
+              <div className="flex items-center space-x-2 mt-1">
+                {getStatusBadge()}
+                <span className="text-sm text-gray-500">/{page.slug}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-4">
+          {/* Viewport Controls - only show in live-builder mode */}
+          {activeEditor === 'live-builder' && (
+            <div className="flex items-center space-x-1 bg-gray-100 rounded-lg p-1">
+              <Button
+                variant={viewportMode === 'desktop' ? 'default' : 'ghost'}
+                size="sm"
+                onClick={() => setViewportMode('desktop')}
+                className="h-8"
+              >
+                <Monitor className="w-4 h-4" />
+              </Button>
+              <Button
+                variant={viewportMode === 'tablet' ? 'default' : 'ghost'}
+                size="sm"
+                onClick={() => setViewportMode('tablet')}
+                className="h-8"
+              >
+                <Tablet className="w-4 h-4" />
+              </Button>
+              <Button
+                variant={viewportMode === 'mobile' ? 'default' : 'ghost'}
+                size="sm"
+                onClick={() => setViewportMode('mobile')}
+                className="h-8"
+              >
+                <Smartphone className="w-4 h-4" />
+              </Button>
+            </div>
+          )}
+          
+          {/* Editor Mode Tabs */}
           <Tabs value={activeEditor} onValueChange={(value) => setActiveEditor(value as EditorMode)}>
-            <TabsList>
+            <TabsList className="bg-gray-100">
+              <TabsTrigger value="live-builder" className="flex items-center gap-2">
+                <Eye className="w-4 h-4" />
+                <span className="hidden sm:inline">Live Builder</span>
+              </TabsTrigger>
               <TabsTrigger value="sections" className="flex items-center gap-2">
                 <Edit3 className="w-4 h-4" />
-                Sekcje
+                <span className="hidden sm:inline">Sekcje</span>
               </TabsTrigger>
               <TabsTrigger value="code" className="flex items-center gap-2">
                 <Code className="w-4 h-4" />
-                Kod HTML
-              </TabsTrigger>
-              <TabsTrigger value="live-builder" className="flex items-center gap-2">
-                <Eye className="w-4 h-4" />
-                Live Builder
+                <span className="hidden sm:inline">HTML</span>
               </TabsTrigger>
             </TabsList>
           </Tabs>
-        </div>
 
-        <div className="flex items-center gap-2">
-          {hasChanges && (
-            <span className="text-sm text-orange-600">Niezapisane zmiany</span>
-          )}
-          <Button 
-            onClick={handleCodeSave}
-            disabled={!hasChanges}
-            className="bg-orange-600 hover:bg-orange-700"
-          >
-            Zapisz zmiany
-          </Button>
+          {/* Action Buttons */}
+          <div className="flex items-center gap-2">
+            {hasChanges && (
+              <span className="text-sm text-orange-600">Niezapisane zmiany</span>
+            )}
+            <Button 
+              onClick={handleCodeSave}
+              disabled={!hasChanges}
+              className="bg-orange-600 hover:bg-orange-700"
+              size="sm"
+            >
+              <Save className="w-4 h-4 mr-2" />
+              Zapisz
+            </Button>
+          </div>
         </div>
       </div>
 
-      <div className="flex-1 overflow-auto">
+      {/* Editor Content */}
+      <div className="flex-1 overflow-hidden">
         {renderEditor()}
       </div>
     </div>

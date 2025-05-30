@@ -1,124 +1,53 @@
-import { HelmetProvider } from 'react-helmet-async';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import { Toaster } from 'sonner';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { AuthProvider } from '@/contexts/AuthContext';
-import RouteChangeTracker from '@/components/RouteChangeTracker';
-import ScrollTracker from '@/components/ScrollTracker';
-import ProtectedRoute from '@/components/ProtectedRoute';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import PageTransition from '@/components/PageTransition';
-import useScrollToTop from '@/hooks/useScrollToTop';
-
-// Pages
-import Index from '@/pages/Index';
-import HomePage from '@/pages/HomePage';
-import AboutPage from '@/pages/AboutPage';
-import ServicesPage from '@/pages/ServicesPage';
-import ServiceDetailPage from '@/pages/ServiceDetailPage';
-import RealizationsPage from '@/pages/RealizationsPage';
-import ContactPage from '@/pages/ContactPage';
-import QuotePage from '@/pages/QuotePage';
-import SepPage from '@/pages/SepPage';
-import UdtKonserwatorzePage from '@/pages/UdtKonserwatorzePage';
-import UdtLandingPage from '@/pages/UdtLandingPage';
-import WozkiUnoszacePage from '@/pages/WozkiUnoszacePage';
-import KnowledgePage from '@/pages/KnowledgePage';
-import FreeAuditPage from '@/pages/FreeAuditPage';
-import EventyPage from '@/pages/EventyPage';
-import LutowaniePage from '@/pages/LutowaniePage';
-import CMSLoginPage from '@/pages/CMSLoginPage';
-import NotFound from '@/pages/NotFound';
-import PrivacyPolicyPage from '@/pages/PrivacyPolicyPage';
-import TermsPage from '@/pages/TermsPage';
-import SitemapPage from '@/pages/SitemapPage';
-
-// Admin
-import AdminLayout from '@/pages/admin/AdminLayout';
-import AdminDashboard from '@/pages/admin/AdminDashboard';
-import UserManagement from '@/pages/admin/UserManagement';
-import BlogManagement from '@/pages/admin/BlogManagement';
-import BlogPostEditor from '@/pages/admin/BlogPostEditor';
-import PagesManagement from '@/pages/admin/PagesManagement';
-import MediaManagement from '@/pages/admin/MediaManagement';
-import SettingsPage from '@/pages/admin/SettingsPage';
-
-// Create a query client instance
-const queryClient = new QueryClient();
-
-// Component that handles scroll to top functionality
-const AppContent = () => {
-  useScrollToTop();
-  
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
-      <Toaster />
-      <RouteChangeTracker />
-      <ScrollTracker />
-      <div className="pt-16 sm:pt-16 md:pt-16 lg:pt-16">
-        <PageTransition>
-          <Routes>
-            {/* Existing routes */}
-            <Route path="/" element={<Index />} />
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/o-nas" element={<AboutPage />} />
-            <Route path="/uslugi" element={<ServicesPage />} />
-            <Route path="/uslugi/:serviceId" element={<ServiceDetailPage />} />
-            <Route path="/realizacje" element={<RealizationsPage />} />
-            <Route path="/kontakt" element={<ContactPage />} />
-            <Route path="/wycena" element={<QuotePage />} />
-            <Route path="/sep" element={<SepPage />} />
-            <Route path="/uslugi/sep" element={<SepPage />} />
-            <Route path="/udt-konserwatorze" element={<UdtKonserwatorzePage />} />
-            <Route path="/uslugi/udt-konserwatorzy" element={<UdtKonserwatorzePage />} />
-            <Route path="/udt-szkolenia" element={<UdtLandingPage />} />
-            <Route path="/szkolenie-wozki-unoszace" element={<WozkiUnoszacePage />} />
-            <Route path="/wiedza" element={<KnowledgePage />} />
-            <Route path="/bezplatny-audyt" element={<FreeAuditPage />} />
-            <Route path="/eventy" element={<EventyPage />} />
-            <Route path="/lutowanie" element={<LutowaniePage />} />
-            <Route path="/uslugi/lutowanie" element={<LutowaniePage />} />
-            <Route path="/cms-login" element={<CMSLoginPage />} />
-            
-            {/* Admin routes */}
-            <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
-              <Route index element={<AdminDashboard />} />
-              <Route path="users" element={<UserManagement />} />
-              <Route path="blog" element={<BlogManagement />} />
-              <Route path="blog/new" element={<BlogPostEditor />} />
-              <Route path="blog/edit/:id" element={<BlogPostEditor />} />
-              <Route path="pages" element={<PagesManagement />} />
-              <Route path="media" element={<MediaManagement />} />
-              <Route path="settings" element={<SettingsPage />} />
-            </Route>
-            
-            {/* New footer pages */}
-            <Route path="/polityka-prywatnosci" element={<PrivacyPolicyPage />} />
-            <Route path="/regulamin" element={<TermsPage />} />
-            <Route path="/mapa-strony" element={<SitemapPage />} />
-            
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </PageTransition>
-      </div>
-      <Footer />
-    </div>
-  );
-};
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
+import CMSLoginPage from './pages/CMSLoginPage';
+import HomePage from './pages/HomePage';
+import ContactPage from './pages/ContactPage';
+import AboutUsPage from './pages/AboutUsPage';
+import ServicesPage from './pages/ServicesPage';
+import PriceListPage from './pages/PriceListPage';
+import FreeAuditPage from './pages/FreeAuditPage';
+import AdminLayout from './pages/admin/AdminLayout';
+import ProtectedRoute from './components/ProtectedRoute';
+import PagesManagement from './pages/admin/PagesManagement';
+import { QueryClientProvider as QueryClient } from '@tanstack/react-query';
+import ContentStudio from './pages/admin/ContentStudio';
+import Dashboard from './pages/admin/Dashboard';
 
 function App() {
   return (
-    <HelmetProvider>
+    <QueryClient>
       <AuthProvider>
-        <QueryClientProvider client={queryClient}>
-          <BrowserRouter>
-            <AppContent />
-          </BrowserRouter>
-        </QueryClientProvider>
+        <Router>
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<HomePage />} />
+            <Route path="/kontakt" element={<ContactPage />} />
+            <Route path="/o-nas" element={<AboutUsPage />} />
+            <Route path="/uslugi" element={<ServicesPage />} />
+            <Route path="/cennik" element={<PriceListPage />} />
+            <Route path="/bezplatny-audyt" element={<FreeAuditPage />} />
+            <Route path="/cms-login" element={<CMSLoginPage />} />
+            
+            {/* Admin Routes */}
+            <Route path="/admin" element={
+              <ProtectedRoute>
+                <AdminLayout />
+              </ProtectedRoute>
+            }>
+              <Route index element={<Dashboard />} />
+              <Route path="content-studio" element={<ContentStudio />} />
+              <Route path="pages" element={<PagesManagement />} />
+              <Route path="blog" element={<div className="p-6">Blog management coming soon...</div>} />
+              <Route path="media" element={<div className="p-6">Media library coming soon...</div>} />
+              <Route path="users" element={<div className="p-6">User management coming soon...</div>} />
+              <Route path="settings" element={<div className="p-6">Settings coming soon...</div>} />
+            </Route>
+          </Routes>
+        </Router>
       </AuthProvider>
-    </HelmetProvider>
+    </QueryClient>
   );
 }
 

@@ -1,17 +1,35 @@
+
 import React from 'react';
-import { Outlet, useNavigate, Link } from 'react-router-dom';
+import { Outlet, useNavigate, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { Button } from '@/components/ui/button';
-import { LayoutDashboard, FileText, Settings, Image, LogOut, Users, Menu } from 'lucide-react';
+import { LayoutDashboard, Palette, FileText, Settings, Image, LogOut, Users, Menu } from 'lucide-react';
 
 const AdminLayout: React.FC = () => {
   const { logout, username } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
   const handleLogout = () => {
     logout();
     navigate('/');
+  };
+
+  const navigationItems = [
+    { path: '/admin', label: 'Dashboard', icon: LayoutDashboard },
+    { path: '/admin/content-studio', label: 'Content Studio', icon: Palette },
+    { path: '/admin/blog', label: 'Blog', icon: FileText },
+    { path: '/admin/media', label: 'Media Library', icon: Image },
+    { path: '/admin/users', label: 'Użytkownicy', icon: Users },
+    { path: '/admin/settings', label: 'Ustawienia', icon: Settings },
+  ];
+
+  const isActivePath = (path: string) => {
+    if (path === '/admin') {
+      return location.pathname === '/admin';
+    }
+    return location.pathname.startsWith(path);
   };
 
   return (
@@ -28,42 +46,37 @@ const AdminLayout: React.FC = () => {
         </div>
         
         <div className="flex flex-col flex-grow p-4">
-          <div className="mb-4">
+          <div className="mb-6">
             <p className="text-sm text-gray-500">Zalogowany jako:</p>
             <p className="font-medium truncate">{username}</p>
           </div>
           
-          <nav className="flex-1 space-y-1">
-            <Link to="/admin" className="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-md">
-              <LayoutDashboard className="w-5 h-5 mr-3 flex-shrink-0" />
-              <span>Dashboard</span>
-            </Link>
-            <Link to="/admin/pages" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
-              <FileText className="w-5 h-5 mr-3 flex-shrink-0" />
-              <span>Strony</span>
-            </Link>
-            <Link to="/admin/blog" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
-              <FileText className="w-5 h-5 mr-3 flex-shrink-0" />
-              <span>Blog</span>
-            </Link>
-            <Link to="/admin/media" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
-              <Image className="w-5 h-5 mr-3 flex-shrink-0" />
-              <span>Media</span>
-            </Link>
-            <Link to="/admin/users" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
-              <Users className="w-5 h-5 mr-3 flex-shrink-0" />
-              <span>Użytkownicy</span>
-            </Link>
-            <Link to="/admin/settings" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
-              <Settings className="w-5 h-5 mr-3 flex-shrink-0" />
-              <span>Ustawienia</span>
-            </Link>
+          <nav className="flex-1 space-y-2">
+            {navigationItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = isActivePath(item.path);
+              
+              return (
+                <Link 
+                  key={item.path}
+                  to={item.path} 
+                  className={`flex items-center px-4 py-3 rounded-lg transition-all duration-200 ${
+                    isActive 
+                      ? 'bg-orange-50 text-orange-700 border-l-4 border-orange-500' 
+                      : 'text-gray-700 hover:bg-gray-100'
+                  }`}
+                >
+                  <Icon className={`w-5 h-5 mr-3 flex-shrink-0 ${isActive ? 'text-orange-500' : ''}`} />
+                  <span className="font-medium">{item.label}</span>
+                </Link>
+              );
+            })}
           </nav>
           
           <div className="mt-auto">
             <Button 
               variant="outline" 
-              className="flex items-center w-full justify-start" 
+              className="flex items-center w-full justify-start hover:bg-red-50 hover:border-red-200 hover:text-red-600" 
               onClick={handleLogout}
             >
               <LogOut className="w-4 h-4 mr-2 flex-shrink-0" />
@@ -105,54 +118,24 @@ const AdminLayout: React.FC = () => {
           <div className="fixed inset-0 bg-black bg-opacity-50" onClick={() => setIsMobileMenuOpen(false)} />
           <div className="fixed top-16 left-0 right-0 bg-white border-b border-gray-200 shadow-lg">
             <nav className="p-4 space-y-2">
-              <Link 
-                to="/admin" 
-                className="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <LayoutDashboard className="w-5 h-5 mr-3" />
-                <span>Dashboard</span>
-              </Link>
-              <Link 
-                to="/admin/pages" 
-                className="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <FileText className="w-5 h-5 mr-3" />
-                <span>Strony</span>
-              </Link>
-              <Link 
-                to="/admin/blog" 
-                className="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <FileText className="w-5 h-5 mr-3" />
-                <span>Blog</span>
-              </Link>
-              <Link 
-                to="/admin/media" 
-                className="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <Image className="w-5 h-5 mr-3" />
-                <span>Media</span>
-              </Link>
-              <Link 
-                to="/admin/users" 
-                className="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <Users className="w-5 h-5 mr-3" />
-                <span>Użytkownicy</span>
-              </Link>
-              <Link 
-                to="/admin/settings" 
-                className="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <Settings className="w-5 h-5 mr-3" />
-                <span>Ustawienia</span>
-              </Link>
+              {navigationItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = isActivePath(item.path);
+                
+                return (
+                  <Link 
+                    key={item.path}
+                    to={item.path} 
+                    className={`flex items-center px-3 py-2 rounded-md ${
+                      isActive ? 'bg-orange-50 text-orange-700' : 'text-gray-700 hover:bg-gray-100'
+                    }`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <Icon className="w-5 h-5 mr-3" />
+                    <span>{item.label}</span>
+                  </Link>
+                );
+              })}
             </nav>
           </div>
         </div>
@@ -160,37 +143,28 @@ const AdminLayout: React.FC = () => {
 
       {/* Mobile Navigation - Bottom */}
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around py-1 md:hidden z-10">
-        <Link to="/admin" className="flex flex-col items-center p-2 min-w-0">
-          <LayoutDashboard className="w-4 h-4 flex-shrink-0" />
-          <span className="text-xs mt-1 truncate">Dashboard</span>
-        </Link>
-        <Link to="/admin/pages" className="flex flex-col items-center p-2 min-w-0">
-          <FileText className="w-4 h-4 flex-shrink-0" />
-          <span className="text-xs mt-1 truncate">Strony</span>
-        </Link>
-        <Link to="/admin/blog" className="flex flex-col items-center p-2 min-w-0">
-          <FileText className="w-4 h-4 flex-shrink-0" />
-          <span className="text-xs mt-1 truncate">Blog</span>
-        </Link>
-        <Link to="/admin/media" className="flex flex-col items-center p-2 min-w-0">
-          <Image className="w-4 h-4 flex-shrink-0" />
-          <span className="text-xs mt-1 truncate">Media</span>
-        </Link>
-        <Link to="/admin/users" className="flex flex-col items-center p-2 min-w-0">
-          <Users className="w-4 h-4 flex-shrink-0" />
-          <span className="text-xs mt-1 truncate">Użytkownicy</span>
-        </Link>
-        <Link to="/admin/settings" className="flex flex-col items-center p-2 min-w-0">
-          <Settings className="w-4 h-4 flex-shrink-0" />
-          <span className="text-xs mt-1 truncate">Ustawienia</span>
-        </Link>
+        {navigationItems.slice(0, 4).map((item) => {
+          const Icon = item.icon;
+          const isActive = isActivePath(item.path);
+          
+          return (
+            <Link 
+              key={item.path}
+              to={item.path} 
+              className={`flex flex-col items-center p-2 min-w-0 ${
+                isActive ? 'text-orange-600' : 'text-gray-600'
+              }`}
+            >
+              <Icon className="w-4 h-4 flex-shrink-0" />
+              <span className="text-xs mt-1 truncate">{item.label.split(' ')[0]}</span>
+            </Link>
+          );
+        })}
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col overflow-hidden pt-16 pb-16 md:py-0">
-        <main className="flex-1 overflow-y-auto p-4 md:p-6 bg-gray-100">
-          <Outlet />
-        </main>
+      <div className="flex-1 overflow-hidden md:pt-0 pt-16 pb-16 md:pb-0">
+        <Outlet />
       </div>
     </div>
   );
