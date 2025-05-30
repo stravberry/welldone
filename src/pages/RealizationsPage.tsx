@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Building, Users, Award, CheckCircle, Star, Calendar, MapPin } from 'lucide-react';
@@ -8,8 +7,8 @@ import Footer from '@/components/Footer';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const RealizationsPage = () => {
-  const { elementRef: statsRef, isVisible: statsVisible } = useScrollAnimation<HTMLDivElement>();
-  const { elementRef: realizationsRef, isVisible: realizationsVisible } = useScrollAnimation<HTMLDivElement>();
+  const { elementRef: statsRef, isInView: statsVisible } = useScrollAnimation<HTMLDivElement>();
+  const { elementRef: realizationsRef, isInView: realizationsVisible } = useScrollAnimation<HTMLDivElement>();
 
   const stats = [
     { value: "500+", label: "Przeszkolonych pracowników", icon: <Users className="h-8 w-8 text-orange-500" /> },

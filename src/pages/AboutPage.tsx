@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -10,8 +9,8 @@ import AnimatedTeamSection from '@/components/AnimatedTeamSection';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const AboutPage = () => {
-  const { elementRef: missionRef, isVisible: missionVisible } = useScrollAnimation<HTMLDivElement>();
-  const { elementRef: valuesRef, isVisible: valuesVisible } = useScrollAnimation<HTMLDivElement>();
+  const { elementRef: missionRef, isInView: missionVisible } = useScrollAnimation<HTMLDivElement>();
+  const { elementRef: valuesRef, isInView: valuesVisible } = useScrollAnimation<HTMLDivElement>();
 
   const values = [
     {

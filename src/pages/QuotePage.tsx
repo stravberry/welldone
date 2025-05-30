@@ -2,10 +2,10 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import EnhancedQuoteHero from './QuotePageComponents/EnhancedQuoteHero';
-import ProcessVisualization from './QuotePageComponents/ProcessVisualization';
-import TrustSection from './QuotePageComponents/TrustSection';
-import EnhancedQuoteForm from './QuotePageComponents/EnhancedQuoteForm';
+import EnhancedQuoteHero from '@/components/QuotePageComponents/EnhancedQuoteHero';
+import ProcessVisualization from '@/components/QuotePageComponents/ProcessVisualization';
+import TrustSection from '@/components/QuotePageComponents/TrustSection';
+import EnhancedQuoteForm from '@/components/QuotePageComponents/EnhancedQuoteForm';
 
 const QuotePage = () => {
   const scrollToForm = () => {

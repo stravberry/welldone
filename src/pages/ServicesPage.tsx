@@ -1,82 +1,81 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Award, Users, Briefcase, BarChart, BookOpen, ArrowRight, CheckCircle, Clock, ThumbsUp, Shield } from 'lucide-react';
+import { ArrowRight, Shield, Award, Users, Target, CheckCircle, Wrench, Building, Zap } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import ServiceCard from '@/components/ServiceCard';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const ServicesPage = () => {
-  const { elementRef: servicesRef, isVisible: servicesVisible } = useScrollAnimation<HTMLDivElement>();
-  const { elementRef: benefitsRef, isVisible: benefitsVisible } = useScrollAnimation<HTMLDivElement>();
+  const { elementRef: servicesRef, isInView: servicesVisible } = useScrollAnimation<HTMLDivElement>();
+  const { elementRef: featuresRef, isInView: featuresVisible } = useScrollAnimation<HTMLDivElement>();
 
   const services = [
     {
-      title: "Uprawnienia UDT dla operatorów",
-      description: "Szkolenia i certyfikacja dla operatorów urządzeń transportu bliskiego, takich jak wózki widłowe, suwnice i podesty ruchome.",
-      icon: <Award size={40} className="text-orange-500" />,
+      title: "Szkolenia UDT Operatorzy",
+      description: "Kompleksowe szkolenia dla operatorów urządzeń technicznych - wózki widłowe, platformy ruchome, żurawie.",
+      icon: <Wrench className="h-12 w-12 text-orange-500" />,
       link: "/uslugi/udt-operatorzy",
-      features: ["Wózki widłowe", "Suwnice", "Podesty ruchome", "Certyfikaty UDT"]
+      features: ["Kursy podstawowe i odświeżające", "Wszystkie kategorie UDT", "Egzaminy w UDT"]
     },
     {
-      title: "Uprawnienia UDT dla konserwatorów",
-      description: "Kursy dla konserwatorów urządzeń transportu bliskiego, takich jak suwnice i żurawie. Teoria online, praktyka stacjonarna.",
-      icon: <Briefcase size={40} className="text-orange-500" />,
+      title: "Szkolenia UDT Konserwatorzy", 
+      description: "Specjalistyczne szkolenia dla konserwatorów urządzeń technicznych i osób odpowiedzialnych za ich eksploatację.",
+      icon: <Shield className="h-12 w-12 text-orange-500" />,
       link: "/udt-konserwatorze",
-      features: ["Suwnice i żurawie", "Teoria online", "Praktyka stacjonarna", "Certyfikacja UDT"]
+      features: ["Uprawnienia konserwatorskie", "Dozór techniczny", "Certyfikacja UDT"]
     },
     {
-      title: "Uprawnienia SEP",
-      description: "Szkolenia i certyfikacja w zakresie uprawnień SEP: elektryczne, cieplne i gazowe dla pracowników obsługujących specjalistyczne urządzenia.",
-      icon: <BookOpen size={40} className="text-orange-500" />,
+      title: "Szkolenia SEP",
+      description: "Uprawnienia elektryczne SEP we wszystkich grupach - od 1kV do najwyższych napięć.",
+      icon: <Zap className="h-12 w-12 text-orange-500" />,
       link: "/sep",
-      features: ["Uprawnienia elektryczne", "Uprawnienia cieplne", "Uprawnienia gazowe", "Certyfikaty SEP"]
+      features: ["Wszystkie grupy SEP", "Kursy i egzaminy", "Dokumentacja"]
     },
     {
       title: "Szkolenia z lutowania",
-      description: "Profesjonalne kursy dla firm zajmujących się procesami lutowania. Podnosimy jakość produkcji i redukujemy liczbę błędów.",
-      icon: <BarChart size={40} className="text-orange-500" />,
-      link: "/lutowanie",
-      features: ["Techniki lutowania", "Kontrola jakości", "Redukcja błędów", "Certyfikacja"]
+      description: "Profesjonalne kursy lutowania dla przemysłu elektronicznego i nie tylko.",
+      icon: <Target className="h-12 w-12 text-orange-500" />,
+      link: "/lutowanie", 
+      features: ["Lutowanie ręczne", "Lutowanie maszynowe", "Certyfikaty"]
     },
     {
-      title: "Eventy edukacyjne",
-      description: "Organizacja wydarzeń edukacyjnych dla firm, które chcą zwiększyć świadomość pracowników w zakresie bezpieczeństwa technicznego.",
-      icon: <Users size={40} className="text-orange-500" />,
+      title: "Eventy szkoleniowe",
+      description: "Organizacja eventów szkoleniowych, konferencji i seminariów dla firm.",
+      icon: <Users className="h-12 w-12 text-orange-500" />,
       link: "/eventy",
-      features: ["Wydarzenia edukacyjne", "Bezpieczeństwo", "Świadomość pracowników", "Organizacja eventów"]
+      features: ["Konferencje", "Seminaria", "Warsztaty"]
     },
     {
-      title: "Szkolenia na wózki unoszące",
-      description: "Specjalistyczne szkolenia dla operatorów wózków unoszących. Bezpieczna obsługa i certyfikacja zgodna z przepisami.",
-      icon: <Shield size={40} className="text-orange-500" />,
+      title: "Wózki unoszące",
+      description: "Specjalistyczne szkolenia z obsługi wózków unoszących i platform roboczych.",
+      icon: <Building className="h-12 w-12 text-orange-500" />,
       link: "/szkolenie-wozki-unoszace",
-      features: ["Wózki unoszące", "Bezpieczna obsługa", "Praktyczne ćwiczenia", "Certyfikacja"]
+      features: ["Platformy ruchome", "Wózki unoszące", "Bezpieczeństwo pracy"]
     }
   ];
 
-  const benefits = [
+  const features = [
     {
-      icon: <Clock size={24} className="text-orange-500" />,
-      title: "Elastyczny harmonogram",
-      description: "Dostosowujemy terminy szkoleń do Twojego harmonogramu pracy i potrzeb firmy."
+      icon: <Award className="h-8 w-8 text-orange-500" />,
+      title: "Certyfikowane szkolenia",
+      description: "Wszystkie nasze kursy są akredytowane przez odpowiednie instytucje państwowe."
     },
     {
-      icon: <Award size={24} className="text-orange-500" />,
-      title: "Doświadczeni trenerzy",
-      description: "Nasi trenerzy to specjaliści z wieloletnim doświadczeniem w branży produkcyjnej."
+      icon: <Users className="h-8 w-8 text-orange-500" />,
+      title: "Doświadczeni instruktorzy", 
+      description: "Nasz zespół to praktycy z wieloletnim doświadczeniem w branży."
     },
     {
-      icon: <CheckCircle size={24} className="text-orange-500" />,
-      title: "Szkolenia szyte na miarę",
-      description: "Każde szkolenie jest dopasowane do specyficznych potrzeb Twojej firmy."
+      icon: <Target className="h-8 w-8 text-orange-500" />,
+      title: "Indywidualne podejście",
+      description: "Dostosowujemy program szkoleń do specyfiki Twojej firmy."
     },
     {
-      icon: <ThumbsUp size={24} className="text-orange-500" />,
-      title: "Najwyższa jakość",
-      description: "Gwarantujemy najwyższą jakość szkoleń i wsparcie na każdym etapie współpracy."
+      icon: <Shield className="h-8 w-8 text-orange-500" />,
+      title: "Pełna zgodność z przepisami",
+      description: "Gwarantujemy zgodność z najnowszymi przepisami i standardami."
     }
   ];
 
@@ -100,20 +99,20 @@ const ServicesPage = () => {
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
               Kompleksowe szkolenia
               <span className="block bg-gradient-to-r from-orange-200 to-white bg-clip-text text-transparent">
-                dla firm produkcyjnych
+                dla przemysłu
               </span>
             </h1>
             <p className="text-xl mb-8 text-orange-50 leading-relaxed max-w-3xl mx-auto">
-              Zapewniamy pełną zgodność uprawnień UDT i SEP dla pracowników. Nasze szkolenia są dopasowane 
-              do indywidualnych potrzeb każdej firmy i przeprowadzane przez doświadczonych ekspertów.
+              Oferujemy szeroki zakres szkoleń technicznych i uprawnień dla firm produkcyjnych. 
+              Nasze kursy spełniają najwyższe standardy jakości i są prowadzone przez certyfikowanych instruktorów.
             </p>
             <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
               <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-orange-50 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl text-lg px-8 py-4">
                 <Link to="/wycena">Uzyskaj wycenę</Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-orange-500/20 text-white hover:bg-orange-400/30 border-white/30 hover:border-white/50 backdrop-blur-sm transform hover:scale-105 transition-all duration-300 text-lg px-8 py-4">
-                <Link to="/bezplatny-audyt">
-                  Bezpłatny audyt
+                <Link to="/kontakt">
+                  Skontaktuj się z nami
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
@@ -122,20 +121,20 @@ const ServicesPage = () => {
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* Services Grid */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="inline-block mb-4">
               <span className="bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide">
-                Pełna oferta
+                Oferta
               </span>
             </div>
             <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-gray-900">
-              Nasze specjalizacje
+              Poznaj nasze usługi
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Oferujemy szeroki zakres szkoleń technicznych i certyfikacji dla sektora produkcyjnego.
+              Specjalizujemy się w dostarczaniu profesjonalnych szkoleń technicznych dla różnych branż przemysłowych.
             </p>
           </div>
 
@@ -146,21 +145,45 @@ const ServicesPage = () => {
             }`}
           >
             {services.map((service, index) => (
-              <div key={index} className="transform hover:scale-105 transition-all duration-300">
-                <ServiceCard
-                  title={service.title}
-                  description={service.description}
-                  icon={service.icon}
-                  link={service.link}
-                  index={index}
-                />
+              <div 
+                key={index}
+                className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-orange-200 group transform hover:scale-105 hover:-translate-y-2"
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                <div className="mb-6 group-hover:scale-110 transition-transform duration-300">
+                  {service.icon}
+                </div>
+                
+                <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-orange-700 transition-colors duration-300">
+                  {service.title}
+                </h3>
+                
+                <p className="text-gray-600 mb-6 leading-relaxed">
+                  {service.description}
+                </p>
+
+                <ul className="space-y-2 mb-6">
+                  {service.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="flex items-center text-sm text-gray-700">
+                      <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+
+                <Button asChild className="w-full bg-orange-500 hover:bg-orange-600 group-hover:shadow-lg transition-all duration-300">
+                  <Link to={service.link}>
+                    Dowiedz się więcej
+                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
+                  </Link>
+                </Button>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Benefits Section */}
+      {/* Features Section */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -170,28 +193,34 @@ const ServicesPage = () => {
               </span>
             </div>
             <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-gray-900">
-              Korzyści ze współpracy
+              Nasze przewagi
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Nasze doświadczenie i profesjonalne podejście gwarantują najwyższą jakość szkoleń.
+              To co wyróżnia nas na rynku szkoleń technicznych i sprawia, że klienci wracają do nas ponownie.
             </p>
           </div>
 
           <div 
-            ref={benefitsRef}
+            ref={featuresRef}
             className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 transition-all duration-1000 ${
-              benefitsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              featuresVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
           >
-            {benefits.map((benefit, index) => (
+            {features.map((feature, index) => (
               <div 
                 key={index}
-                className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-orange-200 transform hover:scale-105"
+                className="text-center bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-orange-200 group transform hover:scale-105"
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
-                <div className="mb-4">{benefit.icon}</div>
-                <h3 className="text-xl font-bold mb-2 text-gray-900">{benefit.title}</h3>
-                <p className="text-gray-600">{benefit.description}</p>
+                <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {feature.icon}
+                </div>
+                <h3 className="text-xl font-bold mb-2 text-gray-900 group-hover:text-orange-700 transition-colors duration-300">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {feature.description}
+                </p>
               </div>
             ))}
           </div>
@@ -202,18 +231,19 @@ const ServicesPage = () => {
       <section className="py-20 bg-gradient-to-br from-orange-500 to-orange-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl lg:text-4xl font-bold mb-6">
-            Rozpocznij współpracę już dziś
+            Gotowy na profesjonalne szkolenia?
           </h2>
           <p className="text-xl mb-8 text-orange-50 max-w-3xl mx-auto">
-            Skontaktuj się z nami, aby otrzymać spersonalizowaną ofertę szkoleń dla Twojej firmy.
+            Skontaktuj się z nami już dziś i dowiedz się, jak możemy pomóc Twojej firmie 
+            w rozwoju kompetencji pracowników i uzyskaniu wymaganych certyfikatów.
           </p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
             <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-orange-50 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl text-lg px-8 py-4">
               <Link to="/kontakt">Skontaktuj się z nami</Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="bg-orange-400/20 text-white hover:bg-orange-300/30 border-white/30 hover:border-white/50 backdrop-blur-sm transform hover:scale-105 transition-all duration-300 text-lg px-8 py-4">
-              <Link to="/wycena">
-                Uzyskaj wycenę
+              <Link to="/bezplatny-audyt">
+                Bezpłatny audyt
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
