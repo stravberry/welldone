@@ -11,7 +11,7 @@ import ContactCTA from './ContactPage/components/ContactCTA';
 
 const ContactPage = () => {
   return (
-    <div>
+    <div className="pt-16">
       <Navbar />
       <ContactHero />
       <ContactInfo />

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
@@ -83,10 +82,10 @@ const EventyPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pt-16">
       <Navbar />
       
-      {/* Hero Section - Remove mt-16 since padding-top is now handled globally */}
+      {/* Hero Section */}
       <div ref={heroRef}>
         <EventyHeroSection 
           heroInView={heroInView}
@@ -128,4 +127,3 @@ const EventyPage = () => {
 };
 
 export default EventyPage;
-
