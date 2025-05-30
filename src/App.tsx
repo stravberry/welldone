@@ -9,7 +9,6 @@ import HomePage from './pages/HomePage';
 import ContactPage from './pages/ContactPage';
 import AboutPage from './pages/AboutPage';
 import ServicesPage from './pages/ServicesPage';
-import PriceListPage from './pages/PriceListPage';
 import FreeAuditPage from './pages/FreeAuditPage';
 import QuotePage from './pages/QuotePage';
 import RealizationsPage from './pages/RealizationsPage';
@@ -41,7 +40,6 @@ function App() {
               <Route path="/kontakt" element={<ContactPage />} />
               <Route path="/o-nas" element={<AboutPage />} />
               <Route path="/uslugi" element={<ServicesPage />} />
-              <Route path="/cennik" element={<PriceListPage />} />
               <Route path="/bezplatny-audyt" element={<FreeAuditPage />} />
               <Route path="/wycena" element={<QuotePage />} />
               <Route path="/realizacje" element={<RealizationsPage />} />
