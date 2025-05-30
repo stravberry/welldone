@@ -20,6 +20,10 @@ const AboutPage = () => {
   const { elementRef: valuesRef, isInView: valuesVisible } = useScrollAnimation();
   const { elementRef: teamRef, isInView: teamVisible } = useScrollAnimation();
 
+  React.useEffect(() => {
+    document.title = "O nas - Profesjonalne szkolenia techniczne | Firma Szkoleniowa";
+  }, []);
+
   const values = [
     {
       icon: Clock,
@@ -112,94 +116,62 @@ const AboutPage = () => {
     <div>
       <Navbar />
       
-      {/* Revolutionary Animated Hero Section */}
-      <section className="relative min-h-screen bg-gradient-to-br from-orange-600 via-orange-500 to-orange-700 overflow-hidden">
-        {/* Animated background elements */}
-        <div className="absolute inset-0 bg-gradient-to-r from-orange-600/20 via-transparent to-orange-500/20" />
+      {/* Compact Elegant Hero Section */}
+      <section className="relative min-h-[70vh] bg-gradient-to-br from-orange-600 via-orange-500 to-orange-700 overflow-hidden">
+        {/* Subtle background elements */}
+        <div className="absolute inset-0 bg-gradient-to-r from-orange-600/10 via-transparent to-orange-500/10" />
         <FloatingParticles />
         
-        {/* Animated gradients */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-white/15 rounded-full blur-2xl animate-float" style={{ animationDelay: '2s' }} />
-        
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-screen flex items-center">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[70vh] flex items-center">
           <div 
             ref={heroRef}
-            className={`grid lg:grid-cols-2 gap-12 items-center w-full transition-all duration-1000 ${
+            className={`text-center w-full transition-all duration-1000 ${
               heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
           >
-            <div>
-              <div className="inline-block mb-6">
-                <span className="bg-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide backdrop-blur-sm">
-                  🏆 Lider szkoleń technicznych
-                </span>
-              </div>
-              
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-white">
-                Budujemy bezpieczeństwo
-                <span className="block bg-gradient-to-r from-yellow-200 to-white bg-clip-text text-transparent">
-                  poprzez wiedzę
-                </span>
-              </h1>
-              
-              <p className="text-xl mb-8 text-orange-50 leading-relaxed">
-                Jesteśmy więcej niż firmą szkoleniową - jesteśmy partnerem w budowaniu 
-                kultury bezpieczeństwa i profesjonalizmu w Twojej organizacji.
-              </p>
-
-              {/* Real-time stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                {achievements.map((stat, index) => (
-                  <div key={index} className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
-                    <div className="text-3xl font-bold text-white mb-1">
-                      <AnimatedCounter 
-                        endValue={stat.value} 
-                        suffix={stat.suffix}
-                        duration={2000}
-                      />
-                    </div>
-                    <div className="text-orange-100 text-sm">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
-              
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-orange-50 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl text-lg px-8 py-4">
-                  <Link to="/bezplatny-audyt">
-                    <Shield className="mr-2 h-5 w-5" />
-                    Bezpłatny audyt uprawnień
-                  </Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="bg-orange-500/20 text-white hover:bg-orange-400/30 border-white/30 hover:border-white/50 backdrop-blur-sm transform hover:scale-105 transition-all duration-300 text-lg px-8 py-4">
-                  <Link to="/uslugi">
-                    Poznaj nasze usługi
-                  </Link>
-                </Button>
-              </div>
+            {/* Main animated icon */}
+            <div className="flex justify-center mb-8">
+              <AnimatedIcon type="heart" size={100} className="transform hover:scale-110 transition-transform duration-300" />
             </div>
+            
+            {/* Main heading */}
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight text-white">
+              O nas
+            </h1>
+            
+            <p className="text-2xl md:text-3xl mb-6 text-orange-50 font-medium">
+              Budujemy bezpieczeństwo poprzez wiedzę
+            </p>
+            
+            <p className="text-lg mb-8 text-orange-100 max-w-2xl mx-auto leading-relaxed">
+              Jesteśmy liderem w dziedzinie szkoleń technicznych. 
+              Przez 15 lat pomagamy firmom rozwijać kompetencje swoich pracowników.
+            </p>
 
-            {/* Animated central icon */}
-            <div className="flex justify-center lg:justify-end">
-              <div className="relative">
-                <AnimatedIcon type="lightbulb" size={64} className="transform hover:scale-110 transition-transform duration-300" />
-                
-                {/* Orbiting elements */}
-                <div className="absolute inset-0 animate-spin" style={{ animationDuration: '20s' }}>
-                  <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-                    <Shield className="h-6 w-6 text-white/70" />
+            {/* Simple stats row */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 max-w-2xl mx-auto">
+              {achievements.map((stat, index) => (
+                <div key={index} className="bg-white/15 backdrop-blur-sm rounded-lg p-3 text-center">
+                  <div className="text-2xl font-bold text-white mb-1">
+                    <AnimatedCounter 
+                      endValue={stat.value} 
+                      suffix={stat.suffix}
+                      duration={2000}
+                    />
                   </div>
-                  <div className="absolute top-1/2 -right-8 transform -translate-y-1/2">
-                    <Award className="h-6 w-6 text-white/70" />
-                  </div>
-                  <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2">
-                    <Users className="h-6 w-6 text-white/70" />
-                  </div>
-                  <div className="absolute top-1/2 -left-8 transform -translate-y-1/2">
-                    <Target className="h-6 w-6 text-white/70" />
-                  </div>
+                  <div className="text-orange-100 text-xs">{stat.label}</div>
                 </div>
-              </div>
+              ))}
+            </div>
+            
+            {/* Single CTA button */}
+            <div className="flex justify-center">
+              <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-orange-50 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl text-lg px-8 py-4">
+                <Link to="/bezplatny-audyt">
+                  <Shield className="mr-2 h-5 w-5" />
+                  Bezpłatny audyt uprawnień
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
