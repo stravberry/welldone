@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -310,16 +309,14 @@ const HomePage = () => {
             </div>
             
             <div className="text-center mt-12">
-              <div className="relative inline-block group">
+              <div className="relative inline-block">
                 <Button 
                   size="lg" 
-                  className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 relative overflow-hidden text-lg px-8 py-4"
+                  className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 relative z-10 text-lg px-8 py-4"
                   onClick={handleQuoteClick}
                 >
-                  <span className="relative z-10">Uzyskaj Błyskawiczną Wycenę</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <span>Uzyskaj Błyskawiczną Wycenę</span>
                 </Button>
-                <div className="absolute inset-0 bg-orange-400 rounded-lg opacity-30 blur-lg scale-110 group-hover:scale-125 transition-transform duration-500" />
               </div>
             </div>
           </div>
