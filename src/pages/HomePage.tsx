@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -185,7 +186,7 @@ const HomePage = () => {
                   <Link to="/o-nas">Dlaczego My?</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="bg-orange-500/20 text-white hover:bg-orange-400/30 border-white/30 hover:border-white/50 backdrop-blur-sm transform hover:scale-105 transition-all duration-300 text-lg px-8 py-4">
-                  <Link to="#quote-form">
+                  <Link to="/wycena">
                     <span className="mr-2">🚀</span>
                     Błyskawiczna Wycena
                   </Link>
@@ -297,7 +298,7 @@ const HomePage = () => {
           <div className="text-center mt-12">
             <div className="relative inline-block group">
               <Button asChild size="lg" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 relative overflow-hidden text-lg px-8 py-4">
-                <Link to="#quote-form">
+                <Link to="/wycena">
                   <span className="relative z-10">Uzyskaj Błyskawiczną Wycenę</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </Link>
