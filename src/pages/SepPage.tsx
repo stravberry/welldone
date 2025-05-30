@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Phone, Mail, Zap, CheckCircle, Award, Users, Shield, Target, Clock } from 'lucide-react';
@@ -115,11 +114,12 @@ const SepPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pt-16">
       <Navbar />
       
       {/* Hero Section */}
-      <div ref={heroRef} className="relative bg-gradient-to-br from-yellow-600 via-yellow-500 to-orange-400 py-20 px-4 sm:px-6 lg:px-8 overflow-hidden mt-16">
+      <div ref={heroRef} className="relative bg-gradient-to-br from-yellow-600 via-yellow-500 to-orange-400 py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        {/* ... keep existing code (hero section content) */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-32 h-32 bg-white rounded-full animate-pulse"></div>
           <div className="absolute bottom-10 right-10 w-24 h-24 bg-white rounded-full animate-pulse delay-1000"></div>
