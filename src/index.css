@@ -81,6 +81,8 @@
 @layer base {
   * {
     @apply border-border;
+    margin: 0;
+    padding: 0;
   }
 
   html {
@@ -89,6 +91,8 @@
     overflow-x: hidden;
     width: 100%;
     scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
   }
 
   body {
@@ -98,6 +102,8 @@
     overflow-x: hidden;
     position: relative;
     font-family: 'Outfit', sans-serif;
+    margin: 0;
+    padding: 0;
   }
   
   h1, h2, h3, h4, h5, h6 {
