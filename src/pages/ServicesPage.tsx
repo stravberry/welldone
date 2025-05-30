@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Shield, Award, Users, Target, CheckCircle, Wrench, Building, Zap } from 'lucide-react';
+import { ArrowRight, Shield, Award, Users, Target, CheckCircle, Wrench, Building, Zap, Clock, Star, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -46,13 +46,6 @@ const ServicesPage = () => {
       icon: <Users className="h-12 w-12 text-orange-500" />,
       link: "/eventy",
       features: ["Konferencje", "Seminaria", "Warsztaty"]
-    },
-    {
-      title: "Wózki unoszące",
-      description: "Specjalistyczne szkolenia z obsługi wózków unoszących i platform roboczych.",
-      icon: <Building className="h-12 w-12 text-orange-500" />,
-      link: "/szkolenie-wozki-unoszace",
-      features: ["Platformy ruchome", "Wózki unoszące", "Bezpieczeństwo pracy"]
     }
   ];
 
@@ -83,39 +76,109 @@ const ServicesPage = () => {
     <div>
       <Navbar />
       
-      {/* Hero Section */}
+      {/* Enhanced Hero Section */}
       <section className="hero-gradient text-white py-20 md:py-32 relative overflow-hidden">
+        {/* Animated background elements */}
         <div className="absolute inset-0 bg-gradient-to-r from-orange-600/20 via-transparent to-orange-500/20" />
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-float" />
         <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-white/10 rounded-full blur-2xl animate-float" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/2 left-10 w-6 h-6 bg-orange-300/30 rounded-full animate-ping" />
+        <div className="absolute top-1/3 right-20 w-4 h-4 bg-white/40 rounded-full animate-pulse" />
+        <div className="absolute bottom-1/4 left-1/3 w-8 h-8 bg-orange-200/20 rounded-full animate-bounce" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-block mb-6">
-              <span className="bg-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide">
-                Nasze usługi
-              </span>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="inline-block mb-6">
+                <span className="bg-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide backdrop-blur-sm">
+                  🏆 Lider szkoleń technicznych
+                </span>
+              </div>
+              
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                Profesjonalne szkolenia,
+                <span className="block bg-gradient-to-r from-orange-200 to-white bg-clip-text text-transparent">
+                  które zwiększają bezpieczeństwo
+                </span>
+                <span className="block text-orange-100">
+                  Twojej firmy
+                </span>
+              </h1>
+              
+              <p className="text-xl mb-8 text-orange-50 leading-relaxed">
+                Zdobądź wszystkie wymagane uprawnienia w jednym miejscu. Nasze szkolenia to gwarancja 
+                compliance, bezpieczeństwa i profesjonalnego rozwoju Twoich pracowników.
+              </p>
+
+              {/* Key benefits */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
+                  <Star className="h-6 w-6 text-orange-200 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-white">96%</div>
+                  <div className="text-orange-100 text-sm">Zdawalność</div>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
+                  <Clock className="h-6 w-6 text-orange-200 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-white">3-5</div>
+                  <div className="text-orange-100 text-sm">Dni realizacji</div>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
+                  <TrendingUp className="h-6 w-6 text-orange-200 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-white">2500+</div>
+                  <div className="text-orange-100 text-sm">Certyfikatów</div>
+                </div>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-orange-50 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl text-lg px-8 py-4">
+                  <Link to="/bezplatny-audyt">
+                    <Shield className="mr-2 h-5 w-5" />
+                    Bezpłatny audyt uprawnień
+                  </Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="bg-orange-500/20 text-white hover:bg-orange-400/30 border-white/30 hover:border-white/50 backdrop-blur-sm transform hover:scale-105 transition-all duration-300 text-lg px-8 py-4">
+                  <Link to="/wycena">
+                    Błyskawiczna wycena
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Link>
+                </Button>
+              </div>
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              Kompleksowe szkolenia
-              <span className="block bg-gradient-to-r from-orange-200 to-white bg-clip-text text-transparent">
-                dla przemysłu
-              </span>
-            </h1>
-            <p className="text-xl mb-8 text-orange-50 leading-relaxed max-w-3xl mx-auto">
-              Oferujemy szeroki zakres szkoleń technicznych i uprawnień dla firm produkcyjnych. 
-              Nasze kursy spełniają najwyższe standardy jakości i są prowadzone przez certyfikowanych instruktorów.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-              <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-orange-50 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl text-lg px-8 py-4">
-                <Link to="/wycena">Uzyskaj wycenę</Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="bg-orange-500/20 text-white hover:bg-orange-400/30 border-white/30 hover:border-white/50 backdrop-blur-sm transform hover:scale-105 transition-all duration-300 text-lg px-8 py-4">
-                <Link to="/kontakt">
-                  Skontaktuj się z nami
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
+
+            {/* Enhanced stats section */}
+            <div className="relative">
+              <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20">
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold text-white mb-2">Nasze osiągnięcia</h3>
+                  <p className="text-orange-100">w liczbach</p>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="text-center">
+                    <div className="text-4xl font-bold text-white mb-2">15+</div>
+                    <div className="text-orange-100 text-sm">Lat doświadczenia</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-4xl font-bold text-white mb-2">5000+</div>
+                    <div className="text-orange-100 text-sm">Przeszkolonych</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-4xl font-bold text-white mb-2">24h</div>
+                    <div className="text-orange-100 text-sm">Czas odpowiedzi</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-4xl font-bold text-white mb-2">100%</div>
+                    <div className="text-orange-100 text-sm">Zgodność z prawem</div>
+                  </div>
+                </div>
+
+                <div className="mt-6 p-4 bg-orange-500/20 rounded-xl border border-orange-300/30">
+                  <div className="flex items-center justify-center space-x-2 text-orange-100">
+                    <Award className="h-5 w-5" />
+                    <span className="text-sm font-medium">Certyfikowany partner UDT i SEP</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -231,19 +294,22 @@ const ServicesPage = () => {
       <section className="py-20 bg-gradient-to-br from-orange-500 to-orange-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl lg:text-4xl font-bold mb-6">
-            Gotowy na profesjonalne szkolenia?
+            Zaoszczędź czas i pieniądze na szkoleniach
           </h2>
           <p className="text-xl mb-8 text-orange-50 max-w-3xl mx-auto">
-            Skontaktuj się z nami już dziś i dowiedz się, jak możemy pomóc Twojej firmie 
-            w rozwoju kompetencji pracowników i uzyskaniu wymaganych certyfikatów.
+            Skontaktuj się z nami już dziś i otrzymaj bezpłatny audyt aktualnych uprawnień 
+            w Twojej firmie. Pokażemy Ci, jak zoptymalizować koszty szkoleń i zapewnić pełną zgodność z przepisami.
           </p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
             <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-orange-50 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl text-lg px-8 py-4">
-              <Link to="/kontakt">Skontaktuj się z nami</Link>
+              <Link to="/bezplatny-audyt">
+                <Shield className="mr-2 h-5 w-5" />
+                Bezpłatny audyt uprawnień
+              </Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="bg-orange-400/20 text-white hover:bg-orange-300/30 border-white/30 hover:border-white/50 backdrop-blur-sm transform hover:scale-105 transition-all duration-300 text-lg px-8 py-4">
-              <Link to="/bezplatny-audyt">
-                Bezpłatny audyt
+              <Link to="/kontakt">
+                Skontaktuj się z ekspertem
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
