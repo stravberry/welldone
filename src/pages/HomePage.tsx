@@ -4,12 +4,12 @@ import { Helmet } from 'react-helmet-async';
 import Navbar from '@/components/Navbar';
 import PartnersSection from '@/components/PartnersSection';
 import Footer from '@/components/Footer';
-import WhyChooseUsSection from '@/components/WhyChooseUsSection';
-import FAQ from '@/components/FAQ';
 import EnhancedTestimonialsSection from '@/components/EnhancedTestimonialsSection';
 import AnimatedAdvantagesSection from '@/components/AnimatedAdvantagesSection';
 import AnimatedProcessSection from '@/components/AnimatedProcessSection';
 import AnimatedTeamSection from '@/components/AnimatedTeamSection';
+import HomePageWhyChooseUs from '@/components/HomePage/HomePageWhyChooseUs';
+import HomePageFAQ from '@/components/HomePage/HomePageFAQ';
 
 const HomePage = () => {
   return (
@@ -117,11 +117,11 @@ const HomePage = () => {
 
         <AnimatedAdvantagesSection />
         <AnimatedProcessSection />
-        <WhyChooseUsSection />
+        <HomePageWhyChooseUs />
         <EnhancedTestimonialsSection />
         <AnimatedTeamSection />
         <PartnersSection />
-        <FAQ />
+        <HomePageFAQ />
         <Footer />
       </div>
     </>
