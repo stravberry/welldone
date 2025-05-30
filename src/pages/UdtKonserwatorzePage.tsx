@@ -120,11 +120,11 @@ const UdtKonserwatorzePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pt-16">
       <Navbar />
       
       {/* Hero Section */}
-      <div ref={heroRef} className="relative bg-gradient-to-br from-blue-600 via-blue-500 to-blue-400 py-20 px-4 sm:px-6 lg:px-8 overflow-hidden mt-16">
+      <div ref={heroRef} className="relative bg-gradient-to-br from-blue-600 via-blue-500 to-blue-400 py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
         {/* Large Background Tools Icon */}
         <div className={`absolute -right-32 top-0 bottom-0 flex justify-end items-center transition-all duration-800 ${
           heroInView || showAllItems ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
