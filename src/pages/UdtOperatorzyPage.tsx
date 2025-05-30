@@ -1,11 +1,20 @@
+
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Award, Clock, Users, CheckCircle, ArrowRight, Truck, Settings, HardHat } from 'lucide-react';
+import { Award, Clock, Users, CheckCircle, ArrowRight, Truck, Settings, HardHat, Shield, Headphones, Zap } from 'lucide-react';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 import Navbar from '@/components/Navbar';
 import FAQ from '@/components/FAQ';
-import BottomQuoteForm from '@/components/BottomQuoteForm';
+import ContactForm from '@/components/ContactForm';
 
 const UdtOperatorzyPage = () => {
   const courses = [
@@ -13,51 +22,102 @@ const UdtOperatorzyPage = () => {
       title: "Wózki widłowe",
       description: "Szkolenie na uprawnienia do obsługi wózków widłowych wszystkich typów",
       duration: "16 godzin",
+      groupSize: "do 6 osób",
       price: "od 450 zł",
       icon: <Truck className="h-8 w-8 text-orange-500" />,
       image: "/lovable-uploads/a2c8c546-13e6-445b-9832-abf375420d6c.png",
-      alt: "Wózek widłowy w magazynie"
+      alt: "Wózek widłowy w magazynie",
+      features: [
+        "Teoria i praktyka",
+        "Egzamin UDT",
+        "Certyfikat uprawień",
+        "Materiały szkoleniowe",
+        "Wsparcie instruktora"
+      ]
     },
     {
       title: "Podesty ruchome",
       description: "Kurs operatora podestów ruchomych i platform roboczych",
       duration: "16 godzin", 
+      groupSize: "do 6 osób",
       price: "od 500 zł",
       icon: <Settings className="h-8 w-8 text-orange-500" />,
       image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
-      alt: "Podest ruchomy nożycowy na budowie"
+      alt: "Podest ruchomy nożycowy na budowie",
+      features: [
+        "Teoria i praktyka",
+        "Egzamin UDT",
+        "Certyfikat uprawień",
+        "Materiały szkoleniowe",
+        "Wsparcie instruktora"
+      ]
     },
     {
-      title: "Suwnice",
+      title: "Suwnice i żurawie",
       description: "Szkolenie operatorów suwnic i żurawi stacjonarnych",
       duration: "24 godziny",
+      groupSize: "do 8 osób",
       price: "od 650 zł", 
       icon: <HardHat className="h-8 w-8 text-orange-500" />,
       image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80",
-      alt: "Suwnica przemysłowa w hali produkcyjnej"
+      alt: "Suwnica przemysłowa w hali produkcyjnej",
+      features: [
+        "Teoria i praktyka",
+        "Egzamin UDT",
+        "Certyfikat uprawień",
+        "Materiały szkoleniowe",
+        "Wsparcie instruktora"
+      ]
+    },
+    {
+      title: "Układnice magazynowe",
+      description: "Uprawnienia do obsługi układnic teleskopowych i magazynowych",
+      duration: "16 godzin",
+      groupSize: "do 6 osób",
+      price: "od 480 zł",
+      icon: <Truck className="h-8 w-8 text-orange-500" />,
+      image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80",
+      alt: "Układnica magazynowa w akcji",
+      features: [
+        "Teoria i praktyka",
+        "Egzamin UDT",
+        "Certyfikat uprawień",
+        "Materiały szkoleniowe",
+        "Wsparcie instruktora"
+      ]
     }
   ];
 
   const benefits = [
     {
-      title: "96% zdawalność egzaminów",
-      description: "Nasi kursanci osiągają najwyższe wyniki zdawalności w regionie",
-      icon: <Award className="h-6 w-6 text-orange-500" />
-    },
-    {
-      title: "Elastyczne terminy",
-      description: "Dostosowujemy harmonogram szkoleń do potrzeb Twojej firmy",
-      icon: <Clock className="h-6 w-6 text-orange-500" />
+      title: "96% zdawalność",
+      description: "Nasi kursanci osiągają najwyższe wyniki zdawalności egzaminów w regionie",
+      icon: <Award className="h-6 w-6 text-white" />
     },
     {
       title: "Doświadczeni instruktorzy",
-      description: "Nasz zespół to praktycy z wieloletnim doświadczeniem",
-      icon: <Users className="h-6 w-6 text-orange-500" />
+      description: "Nasz zespół to praktycy z wieloletnim doświadczeniem w branży",
+      icon: <Users className="h-6 w-6 text-white" />
     },
     {
-      title: "Kompleksowa obsługa",
-      description: "Od szkolenia po załatwienie wszystkich formalności",
-      icon: <CheckCircle className="h-6 w-6 text-orange-500" />
+      title: "Nowoczesny sprzęt",
+      description: "Szkolimy na najnowszych maszynach dostępnych na rynku",
+      icon: <Settings className="h-6 w-6 text-white" />
+    },
+    {
+      title: "Małe grupy",
+      description: "Maksymalnie 6-8 osób w grupie zapewnia indywidualne podejście",
+      icon: <Shield className="h-6 w-6 text-white" />
+    },
+    {
+      title: "Wsparcie po kursie",
+      description: "Oferujemy pomoc i doradztwo nawet po zakończeniu szkolenia",
+      icon: <Headphones className="h-6 w-6 text-white" />
+    },
+    {
+      title: "Szybka realizacja",
+      description: "Elastyczne terminy dostosowane do potrzeb Twojej firmy",
+      icon: <Zap className="h-6 w-6 text-white" />
     }
   ];
 
@@ -67,20 +127,24 @@ const UdtOperatorzyPage = () => {
       answer: "Czas trwania zależy od rodzaju urządzenia. Szkolenia na wózki widłowe i podesty ruchome trwają 16 godzin, a na suwnice 24 godziny. Szkolenia można realizować w formie stacjonarnej lub weekendowej."
     },
     {
-      question: "Jakie dokumenty są potrzebne do zapisania się na kurs?",
-      answer: "Potrzebne są: dowód osobisty, zaświadczenie lekarskie o braku przeciwwskazań do pracy na stanowisku operatora oraz wykształcenie minimum podstawowe."
+      question: "Czy mogę uczestniczyć w szkoleniu bez doświadczenia?",
+      answer: "Tak, nasze szkolenia są skierowane zarówno do osób bez doświadczenia, jak i tych, które chcą podnieść swoje kwalifikacje. Zapewniamy kompleksowe przygotowanie od podstaw."
     },
     {
-      question: "Czy egzamin jest trudny?",
-      answer: "Nasi kursanci osiągają 96% zdawalność dzięki solidnemu przygotowaniu teoretycznemu i praktycznemu. Zapewniamy kompleksowe materiały i indywidualne podejście do każdego uczestnika."
+      question: "Jak wygląda egzamin UDT?",
+      answer: "Egzamin składa się z części teoretycznej (test) oraz praktycznej (obsługa maszyny). Nasi instruktorzy dokładnie przygotowują do obu części, dlatego osiągamy 96% zdawalność."
+    },
+    {
+      question: "Czy uprawnienia są ważne w całej Polsce?",
+      answer: "Tak, uprawnienia UDT wydane przez Urząd Dozoru Technicznego są ważne na terenie całego kraju i uznawane przez wszystkich pracodawców."
+    },
+    {
+      question: "Co się dzieje, jeśli nie zdam egzaminu za pierwszym razem?",
+      answer: "Oferujemy bezpłatny dodatkowy termin egzaminu oraz wsparcie instruktora w przygotowaniu. Zależy nam na sukcesie każdego kursanta."
     },
     {
       question: "Ile kosztuje szkolenie UDT?",
       answer: "Ceny zaczynają się od 450 zł za kurs na wózki widłowe. Oferujemy atrakcyjne rabaty dla grup oraz firm. Skontaktuj się z nami po szczegółową wycenę."
-    },
-    {
-      question: "Czy można płacić za szkolenie z funduszy szkoleniowych?",
-      answer: "Tak, jesteśmy zarejestrowanym ośrodkiem szkoleniowym i nasze kursy można finansować z różnych źródeł, w tym funduszy szkoleniowych firm czy środków unijnych."
     }
   ];
 
@@ -95,113 +159,39 @@ const UdtOperatorzyPage = () => {
       <Navbar />
       
       <div className="pt-16">
-        {/* Hero Section with Background Illustration */}
+        {/* Breadcrumbs */}
+        <section className="bg-gray-50 py-4">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link to="/">Strona główna</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link to="/uslugi">Usługi</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbPage>UDT Operatorzy</BreadcrumbPage>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+        </section>
+
+        {/* Hero Section */}
         <section className="hero-gradient text-white py-20 md:py-32 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-orange-600/20 via-transparent to-orange-500/20" />
-          
-          {/* Background Forklift and Warehouse Illustration */}
-          <div className="absolute -right-32 top-0 bottom-0 flex justify-end items-center transition-all duration-800 opacity-100 translate-x-0">
-            <svg
-              width="1600"
-              height="1600"
-              viewBox="0 0 400 400"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="opacity-10"
-            >
-              <g className="text-orange-200">
-                {/* Warehouse shelves in background */}
-                <rect x="50" y="80" width="8" height="120" fill="currentColor" opacity="0.3"/>
-                <rect x="50" y="80" width="40" height="8" fill="currentColor" opacity="0.3"/>
-                <rect x="50" y="120" width="40" height="8" fill="currentColor" opacity="0.3"/>
-                <rect x="50" y="160" width="40" height="8" fill="currentColor" opacity="0.3"/>
-                <rect x="50" y="200" width="40" height="8" fill="currentColor" opacity="0.3"/>
-                
-                <rect x="70" y="100" width="6" height="15" fill="currentColor" opacity="0.4"/>
-                <rect x="78" y="100" width="6" height="15" fill="currentColor" opacity="0.4"/>
-                <rect x="70" y="140" width="6" height="15" fill="currentColor" opacity="0.4"/>
-                <rect x="78" y="140" width="6" height="15" fill="currentColor" opacity="0.4"/>
-                <rect x="70" y="180" width="6" height="15" fill="currentColor" opacity="0.4"/>
-
-                {/* Main forklift body */}
-                <rect x="180" y="220" width="80" height="40" rx="4" fill="currentColor" opacity="0.8"/>
-                
-                {/* Forklift cabin */}
-                <rect x="200" y="200" width="40" height="20" rx="2" fill="currentColor" opacity="0.7"/>
-                <rect x="210" y="205" width="20" height="15" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.6"/>
-                
-                {/* Operator silhouette */}
-                <circle cx="220" cy="208" r="4" fill="currentColor" opacity="0.9"/>
-                <rect x="218" y="212" width="4" height="8" fill="currentColor" opacity="0.9"/>
-                
-                {/* Forklift mast */}
-                <rect x="175" y="120" width="6" height="100" fill="currentColor" opacity="0.8"/>
-                <rect x="183" y="120" width="6" height="100" fill="currentColor" opacity="0.8"/>
-                
-                {/* Forklift forks */}
-                <rect x="170" y="180" width="25" height="4" fill="currentColor" opacity="0.9"/>
-                <rect x="170" y="188" width="25" height="4" fill="currentColor" opacity="0.9"/>
-                
-                {/* Pallet on forks */}
-                <rect x="150" y="170" width="30" height="18" rx="2" fill="currentColor" opacity="0.6"/>
-                <rect x="152" y="175" width="4" height="8" fill="currentColor" opacity="0.4"/>
-                <rect x="158" y="175" width="4" height="8" fill="currentColor" opacity="0.4"/>
-                <rect x="164" y="175" width="4" height="8" fill="currentColor" opacity="0.4"/>
-                <rect x="170" y="175" width="4" height="8" fill="currentColor" opacity="0.4"/>
-                <rect x="176" y="175" width="4" height="8" fill="currentColor" opacity="0.4"/>
-                
-                {/* Boxes on pallet */}
-                <rect x="152" y="165" width="12" height="10" fill="currentColor" opacity="0.7"/>
-                <rect x="166" y="165" width="12" height="10" fill="currentColor" opacity="0.7"/>
-                
-                {/* Forklift wheels */}
-                <circle cx="190" cy="268" r="8" fill="currentColor" opacity="0.8"/>
-                <circle cx="230" cy="268" r="8" fill="currentColor" opacity="0.8"/>
-                <circle cx="250" cy="268" r="6" fill="currentColor" opacity="0.8"/>
-                
-                {/* Wheel details */}
-                <circle cx="190" cy="268" r="4" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.6"/>
-                <circle cx="230" cy="268" r="4" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.6"/>
-                <circle cx="250" cy="268" r="3" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.6"/>
-                
-                {/* Counterweight */}
-                <rect x="245" y="235" width="20" height="25" rx="2" fill="currentColor" opacity="0.7"/>
-                
-                {/* Safety elements */}
-                <circle cx="320" cy="120" r="15" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.4"/>
-                <path d="M320 110 L320 130 M310 120 L330 120" stroke="currentColor" strokeWidth="2" opacity="0.5"/>
-                
-                {/* Warning triangle */}
-                <path d="M300 300 L315 280 L330 300 Z" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.4"/>
-                <circle cx="315" cy="290" r="2" fill="currentColor" opacity="0.5"/>
-                <path d="M315 285 L315 295" stroke="currentColor" strokeWidth="1" opacity="0.5"/>
-                
-                {/* Movement arrows */}
-                <path d="M280 160 Q300 140 320 160" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.4"/>
-                <polygon points="315,158 325,160 315,162" fill="currentColor" opacity="0.4"/>
-                
-                {/* Additional warehouse elements */}
-                <rect x="350" y="200" width="6" height="80" fill="currentColor" opacity="0.3"/>
-                <rect x="350" y="200" width="30" height="6" fill="currentColor" opacity="0.3"/>
-                <rect x="350" y="230" width="30" height="6" fill="currentColor" opacity="0.3"/>
-                <rect x="350" y="260" width="30" height="6" fill="currentColor" opacity="0.3"/>
-                
-                {/* Ground/floor markings */}
-                <path d="M120 280 L380 280" stroke="currentColor" strokeWidth="2" opacity="0.3" strokeDasharray="10,5"/>
-                
-                {/* Hydraulic lines */}
-                <path d="M181 180 Q185 160 181 140" stroke="currentColor" strokeWidth="1" fill="none" opacity="0.5"/>
-                <path d="M187 180 Q191 160 187 140" stroke="currentColor" strokeWidth="1" fill="none" opacity="0.5"/>
-              </g>
-            </svg>
-          </div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
                 <div className="inline-block mb-6">
                   <span className="bg-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide">
-                    Uprawnienia UDT
+                    Certyfikowane szkolenia UDT
                   </span>
                 </div>
                 <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
@@ -250,7 +240,7 @@ const UdtOperatorzyPage = () => {
           </div>
         </section>
 
-        {/* Courses Section with Images */}
+        {/* Courses Section */}
         <section className="py-20 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
@@ -260,36 +250,58 @@ const UdtOperatorzyPage = () => {
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {courses.map((course, index) => (
-                <div key={index} className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                <div key={index} className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
                   <div className="relative h-48 overflow-hidden">
                     <img 
                       src={course.image} 
                       alt={course.alt} 
-                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                      className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                     <div className="absolute top-4 left-4 bg-orange-500 text-white p-2 rounded-lg">
                       {course.icon}
                     </div>
                   </div>
-                  <div className="p-8">
-                    <h3 className="text-2xl font-bold mb-4">{course.title}</h3>
-                    <p className="text-gray-600 mb-6">{course.description}</p>
-                    <div className="space-y-2 mb-6">
-                      <div className="flex justify-between">
-                        <span className="text-gray-500">Czas trwania:</span>
-                        <span className="font-semibold">{course.duration}</span>
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold mb-2">{course.title}</h3>
+                    <p className="text-gray-600 mb-4">{course.description}</p>
+                    
+                    <div className="grid grid-cols-3 gap-4 mb-4 text-sm">
+                      <div className="text-center">
+                        <Clock className="h-4 w-4 mx-auto mb-1 text-orange-500" />
+                        <span className="block font-semibold">{course.duration}</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-500">Cena:</span>
-                        <span className="font-semibold text-orange-600">{course.price}</span>
+                      <div className="text-center">
+                        <Users className="h-4 w-4 mx-auto mb-1 text-orange-500" />
+                        <span className="block font-semibold">{course.groupSize}</span>
+                      </div>
+                      <div className="text-center">
+                        <span className="block font-semibold text-orange-600">{course.price}</span>
                       </div>
                     </div>
-                    <Button asChild className="w-full bg-orange-500 hover:bg-orange-600 transition-all duration-200">
-                      <Link to="/wycena">Zapisz się na kurs</Link>
-                    </Button>
+
+                    <div className="mb-6">
+                      <h4 className="font-semibold mb-2">Co zawiera kurs:</h4>
+                      <ul className="space-y-1">
+                        {course.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-center text-sm text-gray-600">
+                            <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Button asChild className="w-full bg-orange-500 hover:bg-orange-600">
+                        <Link to="/wycena">Zapisz się na kurs</Link>
+                      </Button>
+                      <Button asChild variant="outline" className="w-full border-orange-500 text-orange-600 hover:bg-orange-50">
+                        <Link to="/kontakt">Szczegóły</Link>
+                      </Button>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -297,20 +309,20 @@ const UdtOperatorzyPage = () => {
           </div>
         </section>
 
-        {/* Benefits Section */}
+        {/* Why Choose Us Section */}
         <section className="py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold mb-6">Dlaczego Warto Wybrać Nas?</h2>
+              <h2 className="text-4xl font-bold mb-6">Dlaczego warto wybrać nasze szkolenia?</h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Jesteśmy liderem w szkoleniach UDT z wieloletnim doświadczeniem i najwyższą jakością
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {benefits.map((benefit, index) => (
                 <div key={index} className="text-center">
-                  <div className="bg-orange-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                  <div className="bg-orange-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                     {benefit.icon}
                   </div>
                   <h3 className="text-xl font-bold mb-2">{benefit.title}</h3>
@@ -346,8 +358,22 @@ const UdtOperatorzyPage = () => {
         {/* FAQ Section */}
         <FAQ items={faqItems} />
 
-        {/* Bottom Quote Form */}
-        <BottomQuoteForm />
+        {/* Contact Form Section */}
+        <section className="py-20 bg-gray-50">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-6">Zapisz się na szkolenie</h2>
+              <p className="text-xl text-gray-600">
+                Gotowy na nowe możliwości? Skontaktuj się z nami już dziś!
+              </p>
+            </div>
+            <ContactForm 
+              title="Wyślij zapytanie o szkolenie UDT"
+              subtitle="Wypełnij formularz, a nasz doradca skontaktuje się z Tobą w ciągu 24 godzin"
+              initialMessage="Jestem zainteresowany/a szkoleniem UDT dla operatorów. Proszę o kontakt w sprawie szczegółów."
+            />
+          </div>
+        </section>
       </div>
     </div>
   );
