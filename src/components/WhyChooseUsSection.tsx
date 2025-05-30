@@ -76,7 +76,7 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
         {/* CTA */}
         <div className="text-center">
           <Button asChild size="lg" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 text-lg px-8 py-4">
-            <Link to="#quote-form">
+            <Link to="/kontakt">
               Rozpocznij współpracę z nami
             </Link>
           </Button>
