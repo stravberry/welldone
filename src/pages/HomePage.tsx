@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -195,18 +194,15 @@ const HomePage = () => {
             </div>
             <div className="flex items-center justify-center animate-fade-in-right">
               <div className="w-full max-w-2xl transform hover:scale-105 transition-all duration-500">
-                <AspectRatio ratio={16/9}>
-                  <div className="relative rounded-xl overflow-hidden shadow-2xl">
-                    <iframe 
-                      src="https://www.youtube.com/embed/8QDIVIU9QZQ" 
-                      title="Well-Done.pl Company Presentation" 
-                      className="w-full h-full border-none" 
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                      allowFullScreen
-                    ></iframe>
-                    <div className="absolute inset-0 bg-gradient-to-t from-orange-600/20 to-transparent pointer-events-none" />
-                  </div>
+                <AspectRatio ratio={16/9} className="bg-black rounded-xl overflow-hidden shadow-2xl">
+                  <iframe 
+                    src="https://www.youtube.com/embed/8QDIVIU9QZQ" 
+                    title="Well-Done.pl Company Presentation" 
+                    className="w-full h-full border-none" 
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowFullScreen
+                  />
                 </AspectRatio>
               </div>
             </div>
