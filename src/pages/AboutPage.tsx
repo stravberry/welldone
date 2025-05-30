@@ -90,8 +90,8 @@ const AboutPage = () => {
             </div>
             <div className="relative">
               <img 
-                src="/lovable-uploads/2d3fe45c-4078-43ab-b479-ea144210537f.png" 
-                alt="Profesjonalne szkolenia" 
+                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" 
+                alt="Magazyn przemysłowy z wózkami widłowymi" 
                 className="w-full h-full object-cover rounded-lg shadow-lg"
               />
             </div>
