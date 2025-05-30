@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { Award, Users, Target, Building, CheckCircle, Clock } from 'lucide-react';
+import AnimatedProcessSection from '@/components/AnimatedProcessSection';
 
 const AboutPage = () => {
   const values = [
@@ -128,55 +129,15 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* How We Work Section */}
+      {/* Animated Process Section */}
+      <AnimatedProcessSection />
+
+      {/* CTA Section */}
       <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-gray-900">
-              Jak działamy
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Nasz proces jest prosty i przejrzysty
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white font-bold text-xl">1</span>
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900">Analiza potrzeb</h3>
-              <p className="text-gray-600">
-                Przeprowadzamy bezpłatny audyt uprawnień Twoich pracowników
-              </p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white font-bold text-xl">2</span>
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900">Planowanie szkoleń</h3>
-              <p className="text-gray-600">
-                Przygotowujemy plan szkoleń dostosowany do Twoich potrzeb
-              </p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white font-bold text-xl">3</span>
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900">Realizacja i certyfikacja</h3>
-              <p className="text-gray-600">
-                Prowadzimy szkolenia i pomagamy w uzyskaniu certyfikatów
-              </p>
-            </div>
-          </div>
-          
-          <div className="text-center mt-12">
-            <Button asChild size="lg" className="bg-orange-500 hover:bg-orange-600">
-              <Link to="/kontakt">Skontaktuj się z nami</Link>
-            </Button>
-          </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <Button asChild size="lg" className="bg-orange-500 hover:bg-orange-600">
+            <Link to="/kontakt">Skontaktuj się z nami</Link>
+          </Button>
         </div>
       </section>
 
