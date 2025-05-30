@@ -164,7 +164,7 @@ export const usePageBlocks = (pageId: string) => {
 
       // If blocks_data exists and is not empty, use it
       if (pageData.blocks_data && Array.isArray(pageData.blocks_data) && pageData.blocks_data.length > 0) {
-        return pageData.blocks_data as PageBlock[];
+        return pageData.blocks_data as unknown as PageBlock[];
       }
 
       // Otherwise, convert from page_sections
@@ -187,7 +187,7 @@ export const usePageBlocks = (pageId: string) => {
       // Save converted blocks to pages table for future use
       await supabase
         .from('pages')
-        .update({ blocks_data: blocks })
+        .update({ blocks_data: blocks as unknown as any })
         .eq('id', pageId);
 
       return blocks;
@@ -204,7 +204,7 @@ export const useSavePageBlocks = () => {
       // Save to pages table as blocks_data
       const { error: pageError } = await supabase
         .from('pages')
-        .update({ blocks_data: blocks })
+        .update({ blocks_data: blocks as unknown as any })
         .eq('id', pageId);
 
       if (pageError) throw pageError;

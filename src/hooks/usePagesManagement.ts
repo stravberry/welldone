@@ -36,6 +36,7 @@ export const usePagesManagement = () => {
         og_image: '',
         created_by: null,
         updated_by: null,
+        blocks_data: [],
       });
       
       toast({
