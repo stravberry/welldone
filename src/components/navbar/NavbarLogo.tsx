@@ -8,7 +8,7 @@ interface NavbarLogoProps {
 
 const NavbarLogo = ({ onLogoClick }: NavbarLogoProps) => {
   return (
-    <div className="flex-shrink-0 flex items-center py-2">
+    <div className="flex-shrink-0 flex items-center">
       <button 
         onClick={onLogoClick}
         className="flex items-center hover:opacity-80 transition-opacity duration-200"
@@ -16,7 +16,7 @@ const NavbarLogo = ({ onLogoClick }: NavbarLogoProps) => {
         <img 
           src="/lovable-uploads/a2c8c546-13e6-445b-9832-abf375420d6c.png" 
           alt="Well-done.pl Logo" 
-          className="h-10 sm:h-12 mr-2" 
+          className="h-8 sm:h-10 mr-2" 
         />
       </button>
     </div>

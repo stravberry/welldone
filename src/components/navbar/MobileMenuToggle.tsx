@@ -9,10 +9,10 @@ interface MobileMenuToggleProps {
 
 const MobileMenuToggle = ({ isOpen, onToggle }: MobileMenuToggleProps) => {
   return (
-    <div className="-mr-2 flex items-center lg:hidden py-4">
+    <div className="-mr-2 flex items-center lg:hidden">
       <button
         onClick={onToggle}
-        className="inline-flex items-center justify-center p-3 rounded-md text-gray-700 hover:text-orange-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-500 transition-colors duration-200"
+        className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-orange-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-500 transition-colors duration-200"
       >
         <span className="sr-only">Otwórz menu</span>
         <div className="relative w-6 h-6">
