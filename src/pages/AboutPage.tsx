@@ -1,9 +1,10 @@
+
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { Shield } from 'lucide-react';
+import { Shield, Award, Clock, Trophy } from 'lucide-react';
 import AnimatedProcessSection from '@/components/AnimatedProcessSection';
 import ContactForm from '@/components/ContactForm';
 import AnimatedCounter from '@/components/AnimatedCounter';
