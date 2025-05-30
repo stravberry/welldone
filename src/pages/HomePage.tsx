@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Award, Users, Briefcase, BarChart, CheckCircle, BookOpen, Clock, ThumbsUp } from 'lucide-react';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
@@ -17,6 +17,12 @@ import Navbar from '@/components/Navbar';
 
 const HomePage = () => {
   const { elementRef: statsRef, visibleItems, showAllFallback } = useStaggeredAnimation<HTMLDivElement>(4, 300);
+  const navigate = useNavigate();
+
+  const handleQuoteClick = () => {
+    navigate('/wycena');
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  };
 
   const services = [
     {
@@ -299,11 +305,13 @@ const HomePage = () => {
             
             <div className="text-center mt-12">
               <div className="relative inline-block group">
-                <Button asChild size="lg" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 relative overflow-hidden text-lg px-8 py-4">
-                  <Link to="/wycena">
-                    <span className="relative z-10">Uzyskaj Błyskawiczną Wycenę</span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </Link>
+                <Button 
+                  size="lg" 
+                  className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 relative overflow-hidden text-lg px-8 py-4"
+                  onClick={handleQuoteClick}
+                >
+                  <span className="relative z-10">Uzyskaj Błyskawiczną Wycenę</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </Button>
                 <div className="absolute inset-0 bg-orange-400 rounded-lg opacity-30 blur-lg scale-110 group-hover:scale-125 transition-transform duration-500" />
               </div>
