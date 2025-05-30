@@ -48,30 +48,46 @@ const PartnersSection = () => {
           </p>
         </div>
         
-        {/* Partners grid with animation */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8 items-center">
-          {partners.map((partner, index) => (
-            <div
-              key={partner.name}
-              className="transition-all duration-700 hover:scale-110"
-              style={{
-                opacity: isInView ? 1 : 0,
-                transform: isInView ? 'translateY(0)' : 'translateY(20px)',
-                transitionDelay: isInView ? `${index * 100}ms` : '0ms'
-              }}
-            >
-              <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-orange-200">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-700 mb-2">
-                    {partner.logo}
-                  </div>
-                  <div className="text-xs text-gray-500 uppercase tracking-wide">
-                    Partner
+        {/* Animated partners marquee */}
+        <div className="relative overflow-hidden">
+          <div className="flex animate-marquee whitespace-nowrap group-hover:animate-pause">
+            {/* First set of partners */}
+            {partners.map((partner, index) => (
+              <div
+                key={`first-${partner.name}`}
+                className="mx-8 flex-shrink-0"
+              >
+                <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-orange-200 min-w-[160px]">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-gray-700 mb-2">
+                      {partner.logo}
+                    </div>
+                    <div className="text-xs text-gray-500 uppercase tracking-wide">
+                      Partner
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+            {/* Duplicate set for seamless loop */}
+            {partners.map((partner, index) => (
+              <div
+                key={`second-${partner.name}`}
+                className="mx-8 flex-shrink-0"
+              >
+                <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-orange-200 min-w-[160px]">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-gray-700 mb-2">
+                      {partner.logo}
+                    </div>
+                    <div className="text-xs text-gray-500 uppercase tracking-wide">
+                      Partner
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
         
         {/* Animated background elements */}

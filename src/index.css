@@ -281,3 +281,14 @@ select:focus-visible {
 .btn-glow:hover::before {
   left: 100%;
 }
+
+/* Marquee animation pause on hover */
+.group:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Optimized marquee for performance */
+.animate-marquee {
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}

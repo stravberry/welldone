@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -393,6 +392,22 @@ export default {
 					'50%': {
 						transform: 'rotate(3deg)'
 					}
+				},
+				'marquee': {
+					'0%': {
+						transform: 'translateX(0%)'
+					},
+					'100%': {
+						transform: 'translateX(-100%)'
+					}
+				},
+				'marquee-reverse': {
+					'0%': {
+						transform: 'translateX(-100%)'
+					},
+					'100%': {
+						transform: 'translateX(0%)'
+					}
 				}
 			},
 			animation: {
@@ -422,7 +437,9 @@ export default {
 				'slide-down': 'slide-down 0.8s ease-out',
 				'zoom-in': 'zoom-in 0.6s ease-out',
 				'bounce-in': 'bounce-in 0.8s ease-out',
-				'wiggle': 'wiggle 1s ease-in-out infinite'
+				'wiggle': 'wiggle 1s ease-in-out infinite',
+				'marquee': 'marquee 30s linear infinite',
+				'marquee-reverse': 'marquee-reverse 30s linear infinite'
 			}
 		}
 	},
