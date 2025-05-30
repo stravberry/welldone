@@ -1,417 +1,130 @@
+
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { ArrowRight, Award, Users, Briefcase, BarChart, CheckCircle, BookOpen, Clock, ThumbsUp } from 'lucide-react';
-import { AspectRatio } from '@/components/ui/aspect-ratio';
-import ServiceCard from '@/components/ServiceCard';
-import FAQ from '@/components/FAQ';
-import ProcessStep from '@/components/ProcessStep';
-import { useScrollAnimation, useStaggeredAnimation, useCounterAnimation } from '@/hooks/useScrollAnimation';
-import AuditCard from '@/components/AuditCard';
-import AuditStatsCounter from '@/components/AuditStatsCounter';
-import PartnersSection from '@/components/PartnersSection';
-import EnhancedTestimonialsSection from '@/components/EnhancedTestimonialsSection';
-import BottomQuoteForm from '@/components/BottomQuoteForm';
-import WhyChooseUsSection from '@/components/WhyChooseUsSection';
+import { Helmet } from 'react-helmet-async';
 import Navbar from '@/components/Navbar';
+import PartnersSection from '@/components/PartnersSection';
 import Footer from '@/components/Footer';
+import WhyChooseUsSection from '@/components/WhyChooseUsSection';
+import FAQ from '@/components/FAQ';
+import EnhancedTestimonialsSection from '@/components/EnhancedTestimonialsSection';
+import AnimatedAdvantagesSection from '@/components/AnimatedAdvantagesSection';
+import AnimatedProcessSection from '@/components/AnimatedProcessSection';
+import AnimatedTeamSection from '@/components/AnimatedTeamSection';
 
 const HomePage = () => {
-  const { elementRef: statsRef, visibleItems, showAllFallback } = useStaggeredAnimation<HTMLDivElement>(4, 300);
-  const navigate = useNavigate();
-
-  const handleQuoteClick = () => {
-    navigate('/wycena');
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-  };
-
-  const handleAuditClick = () => {
-    navigate('/bezplatny-audyt');
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-  };
-
-  const services = [
-    {
-      title: "Uprawnienia UDT dla operatorów",
-      description: "Szkolenia i certyfikacja dla operatorów urządzeń transportu bliskiego, takich jak wózki widłowe, suwnice i podesty ruchome.",
-      icon: <Award size={40} className="text-orange-500" />,
-      link: "/uslugi/udt-operatorzy"
-    },
-    {
-      title: "Uprawnienia UDT dla konserwatorów",
-      description: "Kursy dla konserwatorów urządzeń transportu bliskiego, takich jak suwnice i żurawie. Teoria online, praktyka stacjonarna.",
-      icon: <Briefcase size={40} className="text-orange-500" />,
-      link: "/uslugi/udt-konserwatorzy"
-    },
-    {
-      title: "Uprawnienia SEP",
-      description: "Szkolenia i certyfikacja w zakresie uprawnień SEP: elektryczne, cieplne i gazowe dla pracowników obsługujących specjalistyczne urządzenia.",
-      icon: <BookOpen size={40} className="text-orange-500" />,
-      link: "/uslugi/sep"
-    },
-    {
-      title: "Szkolenia z lutowania",
-      description: "Profesjonalne kursy dla firm zajmujących się procesami lutowania. Podnosimy jakość produkcji i redukujemy liczbę błędów.",
-      icon: <BarChart size={40} className="text-orange-500" />,
-      link: "/uslugi/lutowanie"
-    },
-    {
-      title: "Eventy edukacyjne",
-      description: "Organizacja wydarzeń edukacyjnych dla firm, które chcą zwiększyć świadomość pracowników w zakresie bezpieczeństwa technicznego.",
-      icon: <Users size={40} className="text-orange-500" />,
-      link: "/uslugi/eventy"
-    }
-  ];
-  
-  const faqItems = [
-    {
-      question: "Czym zajmuje się Wasza firma?",
-      answer: "Specjalizujemy się w szkoleniach z zakresu BHP, uprawnień UDT (zarówno dla operatorów, jak i konserwatorów), SEP oraz w szkoleniach specjalistycznych, takich jak spawalnicze i na wózki unoszące. Nasze usługi są skierowane głównie do dużych firm produkcyjnych, które potrzebują regularnych szkoleń dla swoich pracowników."
-    },
-    {
-      question: "Do kogo skierowane są Wasze usługi?",
-      answer: "Nasze usługi są dedykowane głównie dla dużych firm produkcyjnych, które chcą podnosić kompetencje swoich pracowników oraz zapewnić im wymagane uprawnienia do obsługi specjalistycznego sprzętu."
-    },
-    {
-      question: "Co wyróżnia Waszą firmę na rynku?",
-      answer: "Wyróżnia nas elastyczność oraz głęboka znajomość specyfiki branży produkcyjnej. Oferujemy szkolenia dostosowane do harmonogramu firm oraz możliwość realizacji szkoleń w formie stacjonarnej, online i hybrydowej. Dodatkowo, zapewniamy bezpłatny audyt, który pozwala na optymalizację kosztów szkoleń w firmach."
-    },
-    {
-      question: "Jak wygląda proces współpracy?",
-      answer: "Proces współpracy jest uzależniony od sytuacji klienta. Jeśli klient wie jakiego typu rozwiązań potrzebuje, dostaraczmy błyskawiczną wycenę która pozwala mu zrozumieć pełny koszt współpracy. Natomiast dla firm które potrzebują kompleksowego wsparcia i identyfikacji możliwych sposobów optymalizacji kosztów szkoleń rekomendujemy rozpoczęcie od audytu, który pozwala nam na zrozumienie potrzeb szkoleniowych firmy."
-    },
-    {
-      question: "Jakie doświadczenie posiada Wasz zespół?",
-      answer: "Nasz zespół składa się z doświadczonych trenerów, którzy od lat specjalizują się w szkoleniach dla sektora produkcyjnego. Każdy z naszych specjalistów posiada odpowiednie certyfikaty oraz praktyczne doświadczenie, co gwarantuje najwyższą jakość szkoleń."
-    }
-  ];
-  
-  const processSteps = [
-    {
-      number: 1,
-      title: "Wycena",
-      description: "Przygotowujemy indywidualną wycenę dopasowaną do Twoich potrzeb."
-    },
-    {
-      number: 2,
-      title: "Weryfikacja założeń projektu",
-      description: "Analizujemy dokładnie Twoje potrzeby i oczekiwania."
-    },
-    {
-      number: 3,
-      title: "Harmonogram realizacji",
-      description: "Ustalamy dogodny dla Ciebie termin i formę szkoleń."
-    },
-    {
-      number: 4,
-      title: "Rozpoczęcie szkoleń",
-      description: "Realizujemy szkolenia zgodnie z ustalonym harmonogramem."
-    },
-    {
-      number: 5,
-      title: "Organizacja egzaminu",
-      description: "Koordynujemy cały proces egzaminacyjny."
-    },
-    {
-      number: 6,
-      title: "Przekazanie uprawnień",
-      description: "Dostarczamy wszystkie niezbędne certyfikaty i uprawnienia."
-    }
-  ];
-  
-  const benefits = [
-    {
-      title: "Elastyczny harmonogram",
-      description: "Dostosowujemy terminy szkoleń do Twojego harmonogramu pracy.",
-      icon: <Clock size={24} className="text-orange-500" />
-    },
-    {
-      title: "Doświadczeni trenerzy",
-      description: "Nasi trenerzy to specjaliści z wieloletnim doświadczeniem w branży.",
-      icon: <Award size={24} className="text-orange-500" />
-    },
-    {
-      title: "Szkolenia szyte na miarę",
-      description: "Każde szkolenie jest dopasowane do specyficznych potrzeb Twojej firmy.",
-      icon: <CheckCircle size={24} className="text-orange-500" />
-    },
-    {
-      title: "Najwyższa jakość",
-      description: "Gwarantujemy najwyższą jakość szkoleń i wsparcie na każdym etapie.",
-      icon: <ThumbsUp size={24} className="text-orange-500" />
-    }
-  ];
-
-  // Improved StatCard with proper fallback logic
-  const StatCard = ({ value, label, delay }: { value: number; label: string; delay: number }) => {
-    const { elementRef, count } = useCounterAnimation<HTMLDivElement>(value, 2000);
-    const index = Math.floor(delay / 300);
-    const isVisible = visibleItems.includes(index) || showAllFallback;
-    
-    return (
-      <div 
-        ref={elementRef}
-        className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-6 text-center transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-        style={{ 
-          opacity: 1,
-          transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-          transition: 'all 0.6s ease-out',
-          transitionDelay: isVisible ? `${delay}ms` : '0ms'
-        }}
-      >
-        <div className="text-4xl font-bold text-orange-600 mb-2 bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent">
-          {isVisible ? count : value}{value >= 1000 ? '+' : value === 80 || value === 96 ? '%' : '+'}
-        </div>
-        <div className="text-gray-700 font-medium">{label}</div>
-      </div>
-    );
-  };
-
   return (
-    <div>
-      <Navbar />
-      <div className="pt-16">
-        {/* Enhanced Hero Section */}
-        <section className="hero-gradient text-white py-20 md:py-32 relative overflow-hidden">
-          {/* Enhanced background effects */}
-          <div className="absolute inset-0 bg-gradient-to-r from-orange-600/20 via-transparent to-orange-500/20" />
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-float" />
-          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-white/10 rounded-full blur-2xl animate-float" style={{ animationDelay: '2s' }} />
-          
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div className="animate-fade-in-left">
-                <div className="inline-block mb-6">
-                  <span className="bg-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide animate-pulse-slow">
-                    Profesjonalne szkolenia
-                  </span>
-                </div>
-                <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                  Pomagamy firmom produkcyjnym 
-                  <span className="block bg-gradient-to-r from-orange-200 to-white bg-clip-text text-transparent animate-gradient-shift">
-                    działać bez ryzyka
+    <>
+      <Helmet>
+        <title>Well-done.pl - Profesjonalne szkolenia UDT, SEP i techniczne</title>
+        <meta name="description" content="Oferujemy kompleksowe szkolenia UDT dla operatorów i konserwatorów, uprawnienia SEP, kursy lutowania oraz eventy edukacyjne. Profesjonalna obsługa i najwyższa jakość szkoleń." />
+        <meta name="keywords" content="szkolenia UDT, uprawnienia SEP, kursy lutowania, szkolenia techniczne, uprawnienia operatorów, konserwatorzy UDT" />
+        <link rel="canonical" href="https://well-done.pl/" />
+      </Helmet>
+      
+      <div className="min-h-screen bg-gray-50">
+        <Navbar />
+        
+        {/* Hero Section with proper top padding */}
+        <section className="pt-16 hero-gradient text-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col lg:flex-row items-center justify-between py-12 lg:py-20">
+              <div className="flex-1 text-center lg:text-left mb-8 lg:mb-0">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                  Profesjonalne{" "}
+                  <span className="text-gradient-orange block sm:inline">
+                    Szkolenia Techniczne
                   </span>
                 </h1>
-                <p className="text-xl mb-8 text-orange-50 leading-relaxed">
-                  Zapewniamy pełną zgodność uprawnień UDT i SEP dla pracowników. Stosujemy procesowe podejście, które umożliwia precyzyjne dopasowanie szkoleń do indywidualnych potrzeb klienta.
+                <p className="text-lg sm:text-xl lg:text-2xl mb-8 text-white/90 max-w-2xl mx-auto lg:mx-0">
+                  Zdobądź uprawnienia UDT, SEP i inne certyfikaty techniczne. 
+                  Kompleksowe szkolenia z doświadczonymi instruktorami.
                 </p>
-                <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
-                  <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-orange-50 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl text-lg px-8 py-4">
-                    <Link to="/o-nas">Dlaczego My?</Link>
-                  </Button>
-                  <Button asChild size="lg" variant="outline" className="bg-orange-500/20 text-white hover:bg-orange-400/30 border-white/30 hover:border-white/50 backdrop-blur-sm transform hover:scale-105 transition-all duration-300 text-lg px-8 py-4">
-                    <Link to="/wycena">
-                      <span className="mr-2">🚀</span>
-                      Błyskawiczna Wycena
-                    </Link>
-                  </Button>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                  <a 
+                    href="/bezplatny-audyt" 
+                    className="bg-white text-orange-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                  >
+                    Bezpłatny Audyt
+                  </a>
+                  <a 
+                    href="/uslugi" 
+                    className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-orange-600 transition-all duration-300"
+                  >
+                    Nasze Usługi
+                  </a>
                 </div>
               </div>
-              <div className="flex items-center justify-center animate-fade-in-right">
-                <div className="w-full max-w-2xl transform hover:scale-105 transition-all duration-500">
-                  <AspectRatio ratio={16/9} className="bg-black rounded-xl overflow-hidden shadow-2xl">
-                    <iframe 
-                      src="https://www.youtube.com/embed/8QDIVIU9QZQ" 
-                      title="Well-Done.pl Company Presentation" 
-                      className="w-full h-full border-none" 
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                      allowFullScreen
-                    />
-                  </AspectRatio>
-                </div>
+              
+              <div className="flex-1 max-w-lg">
+                <img 
+                  src="/lovable-uploads/22043640-06d9-401c-b993-f9112b218762.png"
+                  alt="Profesjonalne szkolenia techniczne"
+                  className="w-full h-auto animate-enhanced-float"
+                />
               </div>
             </div>
           </div>
         </section>
 
-        {/* Partners Section */}
-        <PartnersSection />
-
-        {/* Enhanced Services Section */}
-        <section className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-orange-50/30 to-blue-50/20" />
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Services Preview */}
+        <section className="py-16 lg:py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <div className="inline-block mb-4">
-                <span className="bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide">
-                  Nasza oferta
-                </span>
-              </div>
-              <h2 className="text-4xl font-bold mb-6">
-                <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                  Nasze Usługi
-                </span>
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+                Nasze Główne Usługi
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Oferujemy kompleksowe szkolenia dla firm produkcyjnych, które chcą zapewnić swoim pracownikom niezbędne uprawnienia.
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                Oferujemy szeroki zakres szkoleń technicznych dostosowanych do potrzeb Twojej firmy
               </p>
             </div>
+            
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {services.map((service, index) => (
-                <div key={index} className="transform hover:scale-105 transition-all duration-300">
-                  <ServiceCard
-                    title={service.title}
-                    description={service.description}
-                    icon={service.icon}
-                    link={service.link}
-                    index={index}
-                  />
+              {[
+                {
+                  title: "Uprawnienia UDT",
+                  description: "Szkolenia dla operatorów i konserwatorów urządzeń technicznych",
+                  icon: "🏗️",
+                  href: "/uslugi/udt-operatorzy"
+                },
+                {
+                  title: "Uprawnienia SEP", 
+                  description: "Kwalifikacje w zakresie eksploatacji urządzeń elektrycznych",
+                  icon: "⚡",
+                  href: "/sep"
+                },
+                {
+                  title: "Szkolenia Lutowanie",
+                  description: "Profesjonalne kursy lutowania dla różnych branż",
+                  icon: "🔧",
+                  href: "/lutowanie"
+                }
+              ].map((service, index) => (
+                <div key={index} className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 card-hover">
+                  <div className="text-4xl mb-4">{service.icon}</div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">{service.title}</h3>
+                  <p className="text-gray-600 mb-6">{service.description}</p>
+                  <a 
+                    href={service.href}
+                    className="text-orange-600 font-semibold hover:text-orange-700 transition-colors"
+                  >
+                    Dowiedz się więcej →
+                  </a>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Why Choose Us Section */}
-        <WhyChooseUsSection 
-          benefits={benefits} 
-          statsRef={statsRef} 
-          visibleItems={visibleItems} 
-          StatCard={StatCard} 
-          showAllFallback={showAllFallback} 
-        />
-
-        {/* Enhanced Process Section */}
-        <section className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-orange-50/40 to-blue-50/30" />
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="text-center mb-16">
-              <div className="inline-block mb-4">
-                <span className="bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide animate-pulse-slow">
-                  Jak to działa?
-                </span>
-              </div>
-              <h2 className="text-4xl font-bold mb-6">
-                <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                  Jak wygląda proces współpracy?
-                </span>
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Nasze podejście jest oparte na jasno określonym procesie, który zapewnia skuteczne i efektywne szkolenia.
-              </p>
-            </div>
-            
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-50 via-white to-orange-50 rounded-3xl opacity-50" />
-              
-              <div className="relative grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-4 p-8">
-                {processSteps.map((step, index) => (
-                  <div key={step.number} className="transform hover:scale-105 transition-all duration-300">
-                    <ProcessStep
-                      number={step.number}
-                      title={step.title}
-                      description={step.description}
-                      index={index}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <div className="text-center mt-12">
-              <div className="relative inline-block">
-                <Button 
-                  size="lg" 
-                  className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 relative z-10 text-lg px-8 py-4"
-                  onClick={handleQuoteClick}
-                >
-                  <span>Uzyskaj Błyskawiczną Wycenę</span>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Enhanced Testimonials Section */}
+        <AnimatedAdvantagesSection />
+        <AnimatedProcessSection />
+        <WhyChooseUsSection />
         <EnhancedTestimonialsSection />
-
-        {/* Free Audit CTA */}
-        <section className="py-16 lg:py-20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-orange-600 via-orange-500 to-orange-700" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-float" />
-          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-white/10 rounded-full blur-2xl animate-float" style={{ animationDelay: '2s' }} />
-          
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="text-center mb-12">
-              <div className="inline-block mb-4">
-                <span className="bg-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide">
-                  Bezpłatna analiza
-                </span>
-              </div>
-              <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
-                Skorzystaj z bezpłatnego audytu
-              </h2>
-              <p className="text-xl text-orange-50 max-w-3xl mx-auto leading-relaxed">
-                Zastanawiasz się, czy Twoje szkolenia są odpowiednio dobrane i czy nie przepłacasz za uzyskiwanie uprawnień pracowników? Skorzystaj z bezpłatnego audytu i dowiedz się, jak możemy pomóc.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-12">
-              <AuditStatsCounter value={150} label="Przeprowadzonych audytów" suffix="+" index={0} />
-              <AuditStatsCounter value={95} label="Zadowolonych klientów" suffix="%" index={1} />
-              <AuditStatsCounter value={30} label="Średnia oszczędność" suffix="%" index={2} />
-              <AuditStatsCounter value={48} label="Godzin na audyt" suffix="h" index={3} />
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-              <div className="order-2 lg:order-1">
-                <div className="space-y-6">
-                  <h3 className="text-2xl font-bold text-white mb-4">
-                    Odkryj potencjał oszczędności w swojej firmie
-                  </h3>
-                  <p className="text-orange-50 text-lg leading-relaxed">
-                    Nasz bezpłatny audyt pomoże Ci zidentyfikować obszary, w których możesz zoptymalizować koszty szkoleń i poprawić efektywność procesu certyfikacji pracowników.
-                  </p>
-                  <div className="relative inline-block group">
-                    <div className="absolute inset-0 bg-white rounded-lg blur opacity-25 group-hover:opacity-50 transition-opacity duration-300" />
-                    <Button 
-                      size="lg" 
-                      className="relative bg-white text-orange-600 hover:bg-orange-50 font-bold text-lg px-8 py-4 shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 hover:-translate-y-1"
-                      onClick={handleAuditClick}
-                    >
-                      Zamów bezpłatny audyt
-                      <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-                    </Button>
-                  </div>
-                </div>
-              </div>
-
-              <div className="order-1 lg:order-2 space-y-6">
-                <AuditCard
-                  title="Ocena aktualnych szkoleń"
-                  description="Przeanalizujemy, czy obecne szkolenia spełniają wszystkie wymagania prawne oraz czy odpowiadają na realne potrzeby Twojej firmy."
-                  icon="check"
-                  index={0}
-                />
-                <AuditCard
-                  title="Weryfikacja uprawnień pracowników"
-                  description="Sprawdzimy, czy wszyscy pracownicy posiadają wymagane uprawnienia do obsługi sprzętu i urządzeń."
-                  icon="users"
-                  index={1}
-                />
-                <AuditCard
-                  title="Optymalizacja kosztów"
-                  description="Pomożemy zidentyfikować, czy nie przepłacasz za szkolenia i certyfikacje, oraz wskażemy obszary, w których możesz zredukować koszty."
-                  icon="dollar-sign"
-                  index={2}
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <FAQ items={faqItems} />
-
-        {/* Bottom Quote Form */}
-        <div id="quote-form">
-          <BottomQuoteForm />
-        </div>
+        <AnimatedTeamSection />
+        <PartnersSection />
+        <FAQ />
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   );
 };
 
