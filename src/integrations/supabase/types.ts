@@ -158,6 +158,7 @@ export type Database = {
       }
       pages: {
         Row: {
+          blocks_data: Json | null
           created_at: string
           created_by: string | null
           id: string
@@ -174,6 +175,7 @@ export type Database = {
           updated_by: string | null
         }
         Insert: {
+          blocks_data?: Json | null
           created_at?: string
           created_by?: string | null
           id?: string
@@ -190,6 +192,7 @@ export type Database = {
           updated_by?: string | null
         }
         Update: {
+          blocks_data?: Json | null
           created_at?: string
           created_by?: string | null
           id?: string

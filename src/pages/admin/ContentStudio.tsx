@@ -4,10 +4,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Plus, Eye, Edit, Settings, Smartphone, Tablet, Monitor, Palette } from 'lucide-react';
+import { Plus, Eye, Edit, Settings, Smartphone, Tablet, Monitor, Palette, ArrowLeft } from 'lucide-react';
 import PagesManagement from './PagesManagement';
+import PageEditor from '@/components/admin/PageEditor';
 import CreatePageDialog from '@/components/admin/CreatePageDialog';
 import { usePagesManagement } from '@/hooks/usePagesManagement';
+import { usePage } from '@/hooks/usePages';
 
 const ContentStudio: React.FC = () => {
   const [activeTab, setActiveTab] = useState('pages');
@@ -20,15 +22,25 @@ const ContentStudio: React.FC = () => {
     createPageLoading,
   } = usePagesManagement();
 
+  const { data: selectedPage } = usePage(selectedPageId || '');
+
   const quickStats = {
     totalPages: pages?.length || 0,
     publishedPages: pages?.filter(p => p.status === 'published').length || 0,
     draftPages: pages?.filter(p => p.status === 'draft').length || 0,
   };
 
-  if (selectedPageId) {
-    // This will be handled by the existing PagesManagement component
-    return <PagesManagement />;
+  // If a page is selected for editing, show the PageEditor
+  if (selectedPageId && selectedPage) {
+    return (
+      <PageEditor
+        page={selectedPage}
+        onBack={() => setSelectedPageId(null)}
+        onSave={async (content) => {
+          console.log('Saving page content:', content);
+        }}
+      />
+    );
   }
 
   return (
@@ -127,7 +139,7 @@ const ContentStudio: React.FC = () => {
           </TabsList>
 
           <TabsContent value="pages" className="space-y-4">
-            <PagesManagement />
+            <PagesManagement onSelectPage={setSelectedPageId} />
           </TabsContent>
 
           <TabsContent value="templates" className="space-y-4">

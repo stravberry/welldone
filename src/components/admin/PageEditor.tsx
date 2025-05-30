@@ -8,7 +8,9 @@ import PageSectionEditor from './PageSectionEditor';
 import HTMLCodeEditor from './HTMLCodeEditor';
 import LivePageBuilder from './LivePageBuilder';
 import { usePageSections } from '@/hooks/usePages';
+import { useSavePageBlocks } from '@/hooks/usePageBlocks';
 import type { Tables } from '@/integrations/supabase/types';
+import type { PageBlock } from './PageBuilder/types';
 
 type Page = Tables<'pages'> & {
   page_sections: Tables<'page_sections'>[];
@@ -31,6 +33,20 @@ const PageEditor: React.FC<PageEditorProps> = ({ page, onSave, onBack }) => {
   const [hasChanges, setHasChanges] = useState(false);
 
   const { data: pageSections, isLoading } = usePageSections(page.id);
+  const saveBlocks = useSavePageBlocks();
+
+  const handleLiveBuilderSave = async (blocks: PageBlock[]) => {
+    try {
+      await saveBlocks.mutateAsync({ pageId: page.id, blocks });
+      if (onSave) {
+        onSave({ blocks });
+      }
+      setHasChanges(false);
+    } catch (error) {
+      console.error('Failed to save blocks:', error);
+      throw error;
+    }
+  };
 
   const handleCodeSave = () => {
     if (onSave) {
@@ -64,12 +80,7 @@ const PageEditor: React.FC<PageEditorProps> = ({ page, onSave, onBack }) => {
         <div className="h-full">
           <LivePageBuilder
             pageId={page.id}
-            onSave={async (blocks) => {
-              const content = { blocks };
-              if (onSave) {
-                await onSave(content);
-              }
-            }}
+            onSave={handleLiveBuilderSave}
           />
         </div>
       );
@@ -198,15 +209,17 @@ const PageEditor: React.FC<PageEditorProps> = ({ page, onSave, onBack }) => {
             {hasChanges && (
               <span className="text-sm text-orange-600">Niezapisane zmiany</span>
             )}
-            <Button 
-              onClick={handleCodeSave}
-              disabled={!hasChanges}
-              className="bg-orange-600 hover:bg-orange-700"
-              size="sm"
-            >
-              <Save className="w-4 h-4 mr-2" />
-              Zapisz
-            </Button>
+            {activeEditor !== 'live-builder' && (
+              <Button 
+                onClick={handleCodeSave}
+                disabled={!hasChanges}
+                className="bg-orange-600 hover:bg-orange-700"
+                size="sm"
+              >
+                <Save className="w-4 h-4 mr-2" />
+                Zapisz
+              </Button>
+            )}
           </div>
         </div>
       </div>

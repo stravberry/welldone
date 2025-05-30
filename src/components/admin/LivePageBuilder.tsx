@@ -1,32 +1,44 @@
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { DndContext, DragEndEvent, DragOverlay, DragStartEvent } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy, arrayMove } from '@dnd-kit/sortable';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Monitor, Tablet, Smartphone, Save, Eye, Undo, Redo } from 'lucide-react';
+import { Monitor, Tablet, Smartphone, Save, Eye, Undo, Redo, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import BlockLibrary from './PageBuilder/BlockLibrary';
 import LivePageCanvas from './LivePageCanvas';
 import PropertiesPanel from './PageBuilder/PropertiesPanel';
+import { usePageBlocks, useSavePageBlocks } from '@/hooks/usePageBlocks';
 import type { PageBlock, ViewportMode } from './PageBuilder/types';
 
 interface LivePageBuilderProps {
   pageId: string;
-  initialBlocks?: PageBlock[];
-  onSave: (blocks: PageBlock[]) => Promise<void>;
+  onSave?: (blocks: PageBlock[]) => Promise<void>;
 }
 
-const LivePageBuilder: React.FC<LivePageBuilderProps> = ({ pageId, initialBlocks = [], onSave }) => {
-  const [blocks, setBlocks] = useState<PageBlock[]>(initialBlocks);
+const LivePageBuilder: React.FC<LivePageBuilderProps> = ({ pageId, onSave }) => {
+  const { data: loadedBlocks = [], isLoading } = usePageBlocks(pageId);
+  const saveBlocks = useSavePageBlocks();
+  
+  const [blocks, setBlocks] = useState<PageBlock[]>([]);
   const [selectedBlock, setSelectedBlock] = useState<PageBlock | null>(null);
   const [viewportMode, setViewportMode] = useState<ViewportMode>('desktop');
   const [isDragging, setIsDragging] = useState(false);
   const [activeId, setActiveId] = useState<string | null>(null);
-  const [history, setHistory] = useState<PageBlock[][]>([initialBlocks]);
+  const [history, setHistory] = useState<PageBlock[][]>([]);
   const [historyIndex, setHistoryIndex] = useState(0);
   const [isPreviewMode, setIsPreviewMode] = useState(false);
   const { toast } = useToast();
+
+  // Load blocks when data is fetched
+  useEffect(() => {
+    if (loadedBlocks.length > 0) {
+      setBlocks(loadedBlocks);
+      setHistory([loadedBlocks]);
+      setHistoryIndex(0);
+    }
+  }, [loadedBlocks]);
 
   const addToHistory = useCallback((newBlocks: PageBlock[]) => {
     const newHistory = history.slice(0, historyIndex + 1);
@@ -125,12 +137,17 @@ const LivePageBuilder: React.FC<LivePageBuilderProps> = ({ pageId, initialBlocks
 
   const handleSave = async () => {
     try {
-      await onSave(blocks);
+      if (onSave) {
+        await onSave(blocks);
+      } else {
+        await saveBlocks.mutateAsync({ pageId, blocks });
+      }
       toast({
         title: "Sukces",
         description: "Strona została zapisana",
       });
     } catch (error) {
+      console.error('Save error:', error);
       toast({
         title: "Błąd",
         description: "Nie udało się zapisać strony",
@@ -162,6 +179,17 @@ const LivePageBuilder: React.FC<LivePageBuilderProps> = ({ pageId, initialBlocks
       default: return 'max-w-full';
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="h-screen flex items-center justify-center bg-gray-50">
+        <div className="flex items-center space-x-2">
+          <Loader2 className="h-6 w-6 animate-spin" />
+          <span>Ładowanie strony...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="h-screen flex bg-gray-50">
@@ -240,8 +268,16 @@ const LivePageBuilder: React.FC<LivePageBuilderProps> = ({ pageId, initialBlocks
                 <Eye className="h-4 w-4 mr-2" />
                 {isPreviewMode ? 'Tryb edycji' : 'Podgląd'}
               </Button>
-              <Button onClick={handleSave} size="sm">
-                <Save className="h-4 w-4 mr-2" />
+              <Button 
+                onClick={handleSave} 
+                size="sm"
+                disabled={saveBlocks.isPending}
+              >
+                {saveBlocks.isPending ? (
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                ) : (
+                  <Save className="h-4 w-4 mr-2" />
+                )}
                 Zapisz
               </Button>
             </div>
