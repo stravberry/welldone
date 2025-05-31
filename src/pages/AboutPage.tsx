@@ -62,11 +62,11 @@ const AboutPage = () => {
       <Navbar />
       
       {/* Compact Elegant Hero Section */}
-      <section className="relative min-h-[60vh] bg-gradient-to-br from-orange-600 via-orange-500 to-orange-700 overflow-hidden pt-32">
+      <section className="relative min-h-[60vh] bg-gradient-to-br from-orange-600 via-orange-500 to-orange-700 overflow-hidden pt-42">
         <div className="absolute inset-0 bg-gradient-to-r from-orange-600/10 via-transparent to-orange-500/10" />
         <FloatingParticles />
         
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[calc(60vh-8rem)] flex items-center">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[calc(60vh-10.5rem)] flex items-center">
           <div 
             ref={heroRef}
             className={`text-center w-full transition-all duration-1000 ${
