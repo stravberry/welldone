@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -75,7 +74,10 @@ const AboutPage = () => {
             }`}
           >
             <div className="flex justify-center mb-6 sm:mb-8">
-              <AnimatedIcon type="heart" size={60} className="sm:w-20 sm:h-20 transform hover:scale-110 transition-transform duration-300" />
+              <AnimatedIcon 
+                type="heart" 
+                className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 aspect-square flex-shrink-0 transform hover:scale-110 transition-transform duration-300" 
+              />
             </div>
             
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 leading-tight text-white">
