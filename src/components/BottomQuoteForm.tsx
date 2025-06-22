@@ -104,7 +104,6 @@ const BottomQuoteForm = () => {
       
       // Test Supabase connection first
       console.log('Testing Supabase connection...');
-      console.log('Supabase URL:', supabase.supabaseUrl);
       console.log('Supabase client initialized:', !!supabase);
       
       // Map form data to the format expected by send-contact-email function
