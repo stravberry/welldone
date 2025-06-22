@@ -148,7 +148,22 @@ ${formData.additionalInfo || 'Brak dodatkowych informacji'}
       }
       console.log('=== SUCCESS ===');
       console.log('Email sent successfully, data:', data);
-      toast.success('Dziękujemy! Wycenę otrzymasz w ciągu 2 godzin roboczych.');
+      
+      // Enhanced success toast with icon, title and description
+      toast.success(
+        <div className="flex items-start space-x-3">
+          <CheckCircle className="w-6 h-6 text-green-500 mt-1 flex-shrink-0" />
+          <div>
+            <div className="font-bold text-lg text-gray-900">Dziękujemy za zgłoszenie!</div>
+            <div className="text-sm text-gray-600 mt-1">Wycenę otrzymasz w ciągu 2 godzin roboczych</div>
+            <div className="text-xs text-gray-500 mt-2">Sprawdź swoją skrzynkę email</div>
+          </div>
+        </div>,
+        {
+          duration: 7000,
+          className: 'p-6 min-h-[100px] shadow-lg border-l-4 border-l-green-500'
+        }
+      );
 
       // Reset form after successful submission
       setFormData({
