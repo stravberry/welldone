@@ -1,12 +1,12 @@
 
 import React, { useState, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { ArrowRight, Calculator, Clock, Phone, Mail, MapPin, CheckCircle, Star, Loader2 } from 'lucide-react';
+import { ArrowRight, Calculator, Clock, Phone, Mail, CheckCircle, Star, Loader2 } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { toast } from 'sonner';
+import { supabase } from '@/integrations/supabase/client';
 import FormStep1 from './BottomQuoteForm/FormStep1';
 import FormStep2 from './BottomQuoteForm/FormStep2';
 import FormStep3 from './BottomQuoteForm/FormStep3';
@@ -88,19 +88,47 @@ const BottomQuoteForm = () => {
     if (currentStep > 1) setCurrentStep(currentStep - 1);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+    console.log('Submit button clicked');
     
     if (!validateStep(2)) return; // Validate required fields
     
     setIsSubmitting(true);
     
     try {
-      console.log('Submitting quote form:', formData);
+      console.log('Submitting quote form with data:', formData);
       
-      // Simulate API call - replace with actual implementation
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
+      // Map form data to the format expected by send-contact-email function
+      const emailData = {
+        name: formData.contactPerson,
+        company: formData.companyName,
+        email: formData.email,
+        phone: formData.phone,
+        message: `
+Rodzaj szkolenia: ${formData.serviceType}
+Liczba uczestników: ${formData.participantCount}
+Miejsce szkolenia: ${formData.trainingLocation}
+Termin: ${formData.urgency || 'Nie określono'}
+
+Dodatkowe informacje:
+${formData.additionalInfo || 'Brak dodatkowych informacji'}
+        `.trim()
+      };
+
+      console.log('Calling send-contact-email function with:', emailData);
+
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: emailData
+      });
+
+      console.log('Supabase function response:', { data, error });
+
+      if (error) {
+        console.error('Error from send-contact-email function:', error);
+        throw new Error(error.message || 'Błąd podczas wysyłania wiadomości');
+      }
+
+      console.log('Email sent successfully:', data);
       toast.success('Dziękujemy! Wycenę otrzymasz w ciągu 2 godzin roboczych.');
       
       // Reset form after successful submission
@@ -117,9 +145,9 @@ const BottomQuoteForm = () => {
       });
       setCurrentStep(1);
       
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error submitting form:', error);
-      toast.error('Wystąpił błąd podczas wysyłania formularza. Spróbuj ponownie.');
+      toast.error(error.message || 'Wystąpił błąd podczas wysyłania formularza. Spróbuj ponownie.');
     } finally {
       setIsSubmitting(false);
     }
@@ -257,7 +285,7 @@ const BottomQuoteForm = () => {
               </CardHeader>
 
               <CardContent>
-                <form onSubmit={handleSubmit}>
+                <div>
                   {currentStep === 1 && (
                     <FormStep1
                       formData={formData}
@@ -303,7 +331,8 @@ const BottomQuoteForm = () => {
                       </Button>
                     ) : (
                       <Button
-                        type="submit"
+                        type="button"
+                        onClick={handleSubmit}
                         disabled={isSubmitting}
                         className="bg-green-600 hover:bg-green-700"
                       >
@@ -321,7 +350,7 @@ const BottomQuoteForm = () => {
                       </Button>
                     )}
                   </div>
-                </form>
+                </div>
               </CardContent>
             </Card>
           </div>
