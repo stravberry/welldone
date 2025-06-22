@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -30,6 +29,11 @@ const BottomQuoteForm = () => {
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleRegularInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const nextStep = () => {
@@ -116,8 +120,9 @@ const BottomQuoteForm = () => {
             Nazwa firmy *
           </label>
           <Input
+            name="companyName"
             value={formData.companyName}
-            onChange={(e) => handleInputChange('companyName', e.target.value)}
+            onChange={handleRegularInputChange}
             placeholder="Wprowadź nazwę firmy"
           />
         </div>
@@ -127,8 +132,9 @@ const BottomQuoteForm = () => {
             Osoba kontaktowa *
           </label>
           <Input
+            name="contactPerson"
             value={formData.contactPerson}
-            onChange={(e) => handleInputChange('contactPerson', e.target.value)}
+            onChange={handleRegularInputChange}
             placeholder="Imię i nazwisko"
           />
         </div>
@@ -141,8 +147,9 @@ const BottomQuoteForm = () => {
           </label>
           <Input
             type="email"
+            name="email"
             value={formData.email}
-            onChange={(e) => handleInputChange('email', e.target.value)}
+            onChange={handleRegularInputChange}
             placeholder="email@firma.pl"
           />
         </div>
@@ -153,8 +160,9 @@ const BottomQuoteForm = () => {
           </label>
           <Input
             type="tel"
+            name="phone"
             value={formData.phone}
-            onChange={(e) => handleInputChange('phone', e.target.value)}
+            onChange={handleRegularInputChange}
             placeholder="+48 123 456 789"
           />
         </div>
@@ -186,8 +194,9 @@ const BottomQuoteForm = () => {
           Dodatkowe informacje
         </label>
         <Textarea
+          name="additionalInfo"
           value={formData.additionalInfo}
-          onChange={(e) => handleInputChange('additionalInfo', e.target.value)}
+          onChange={handleRegularInputChange}
           placeholder="Opisz swoje potrzeby, specjalne wymagania lub zadaj pytania..."
           rows={4}
         />
