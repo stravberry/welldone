@@ -1,5 +1,5 @@
 
-import * as React from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 type AuthContextType = {
   isAuthenticated: boolean;
@@ -8,17 +8,17 @@ type AuthContextType = {
   logout: () => void;
 };
 
-const AuthContext = React.createContext<AuthContextType | undefined>(undefined);
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 interface AuthProviderProps {
   children: React.ReactNode;
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
-  const [username, setUsername] = React.useState<string | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [username, setUsername] = useState<string | null>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     // Check if user is authenticated on mount
     const auth = localStorage.getItem('cmsAuth');
     const storedUsername = localStorage.getItem('cmsUsername');
@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 };
 
 export const useAuth = () => {
-  const context = React.useContext(AuthContext);
+  const context = useContext(AuthContext);
   if (context === undefined) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
