@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -10,7 +9,6 @@ import { supabase } from '@/integrations/supabase/client';
 import FormStep1 from './BottomQuoteForm/FormStep1';
 import FormStep2 from './BottomQuoteForm/FormStep2';
 import FormStep3 from './BottomQuoteForm/FormStep3';
-
 interface FormData {
   serviceType: string;
   participantCount: string;
@@ -22,13 +20,14 @@ interface FormData {
   phone: string;
   additionalInfo: string;
 }
-
 const BottomQuoteForm = () => {
-  const { elementRef, isInView } = useScrollAnimation<HTMLDivElement>({
+  const {
+    elementRef,
+    isInView
+  } = useScrollAnimation<HTMLDivElement>({
     threshold: 0.1,
     triggerOnce: true
   });
-
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<FormData>({
@@ -42,18 +41,24 @@ const BottomQuoteForm = () => {
     phone: '',
     additionalInfo: ''
   });
-
   const handleInputChange = useCallback((field: string, value: string) => {
     console.log('Changing field:', field, 'to value:', value);
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
   }, []);
-
   const handleRegularInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
+    const {
+      name,
+      value
+    } = e.target;
     console.log('Regular input change:', name, 'to:', value);
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   }, []);
-
   const validateStep = (step: number): boolean => {
     switch (step) {
       case 1:
@@ -77,35 +82,29 @@ const BottomQuoteForm = () => {
     }
     return true;
   };
-
   const nextStep = () => {
     if (validateStep(currentStep)) {
       if (currentStep < 3) setCurrentStep(currentStep + 1);
     }
   };
-
   const prevStep = () => {
     if (currentStep > 1) setCurrentStep(currentStep - 1);
   };
-
   const handleSubmit = async () => {
     console.log('=== FORM SUBMISSION STARTED ===');
     console.log('Submit button clicked');
-    
     if (!validateStep(2)) {
       console.log('Validation failed, aborting submission');
       return;
     }
-    
     setIsSubmitting(true);
-    
     try {
       console.log('Form data before submission:', formData);
-      
+
       // Test Supabase connection first
       console.log('Testing Supabase connection...');
       console.log('Supabase client initialized:', !!supabase);
-      
+
       // Map form data to the format expected by send-contact-email function
       const emailData = {
         name: formData.contactPerson,
@@ -122,39 +121,35 @@ Dodatkowe informacje:
 ${formData.additionalInfo || 'Brak dodatkowych informacji'}
         `.trim()
       };
-
       console.log('=== CALLING EDGE FUNCTION ===');
       console.log('Function name: send-contact-email');
       console.log('Email data being sent:', emailData);
-      
+
       // Call the edge function with detailed logging
       const functionCall = supabase.functions.invoke('send-contact-email', {
         body: emailData
       });
-      
       console.log('Function invocation started...');
-      const { data, error } = await functionCall;
-      
+      const {
+        data,
+        error
+      } = await functionCall;
       console.log('=== EDGE FUNCTION RESPONSE ===');
       console.log('Function response data:', data);
       console.log('Function response error:', error);
       console.log('Response type - data:', typeof data);
       console.log('Response type - error:', typeof error);
-
       if (error) {
         console.error('=== ERROR FROM EDGE FUNCTION ===');
         console.error('Error object:', error);
         console.error('Error message:', error.message);
         console.error('Error details:', JSON.stringify(error, null, 2));
-        
         throw new Error(`Błąd funkcji Edge: ${error.message || 'Nieznany błąd'}`);
       }
-
       console.log('=== SUCCESS ===');
       console.log('Email sent successfully, data:', data);
-      
       toast.success('Dziękujemy! Wycenę otrzymasz w ciągu 2 godzin roboczych.');
-      
+
       // Reset form after successful submission
       setFormData({
         serviceType: '',
@@ -168,17 +163,15 @@ ${formData.additionalInfo || 'Brak dodatkowych informacji'}
         additionalInfo: ''
       });
       setCurrentStep(1);
-      
     } catch (error: any) {
       console.error('=== SUBMISSION ERROR ===');
       console.error('Caught error:', error);
       console.error('Error message:', error.message);
       console.error('Error stack:', error.stack);
       console.error('Full error object:', JSON.stringify(error, null, 2));
-      
+
       // More specific error messages
       let errorMessage = 'Wystąpił błąd podczas wysyłania formularza.';
-      
       if (error.message) {
         if (error.message.includes('fetch')) {
           errorMessage = 'Błąd połączenia z serwerem. Sprawdź połączenie internetowe.';
@@ -188,34 +181,27 @@ ${formData.additionalInfo || 'Brak dodatkowych informacji'}
           errorMessage = error.message;
         }
       }
-      
       toast.error(errorMessage);
     } finally {
       console.log('=== FORM SUBMISSION ENDED ===');
       setIsSubmitting(false);
     }
   };
-
-  return (
-    <section className="py-16 bg-gradient-to-br from-orange-600 via-orange-500 to-orange-700 relative overflow-hidden">
+  return <section className="py-16 bg-gradient-to-br from-orange-600 via-orange-500 to-orange-700 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent" />
       <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-white/10 rounded-full blur-2xl animate-float" style={{ animationDelay: '2s' }} />
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-white/10 rounded-full blur-2xl animate-float" style={{
+      animationDelay: '2s'
+    }} />
       
-      <div 
-        ref={elementRef}
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
-      >
+      <div ref={elementRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <div 
-          className="text-center mb-12"
-          style={{
-            opacity: isInView ? 1 : 0,
-            transform: isInView ? 'translateY(0)' : 'translateY(30px)',
-            transition: 'all 0.8s ease-out'
-          }}
-        >
+        <div className="text-center mb-12" style={{
+        opacity: isInView ? 1 : 0,
+        transform: isInView ? 'translateY(0)' : 'translateY(30px)',
+        transition: 'all 0.8s ease-out'
+      }}>
           <div className="inline-block mb-4">
             <span className="bg-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide">
               Błyskawiczna wycena
@@ -231,15 +217,12 @@ ${formData.additionalInfo || 'Brak dodatkowych informacji'}
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left side - Benefits */}
-          <div 
-            className="lg:col-span-1 space-y-6"
-            style={{
-              opacity: isInView ? 1 : 0,
-              transform: isInView ? 'translateX(0)' : 'translateX(-30px)',
-              transition: 'all 0.8s ease-out',
-              transitionDelay: '200ms'
-            }}
-          >
+          <div className="lg:col-span-1 space-y-6" style={{
+          opacity: isInView ? 1 : 0,
+          transform: isInView ? 'translateX(0)' : 'translateX(-30px)',
+          transition: 'all 0.8s ease-out',
+          transitionDelay: '200ms'
+        }}>
             <Card className="bg-white/95 backdrop-blur-sm border-0 shadow-xl">
               <CardHeader>
                 <CardTitle className="flex items-center text-gray-800">
@@ -279,7 +262,7 @@ ${formData.additionalInfo || 'Brak dodatkowych informacji'}
                   <div className="space-y-3">
                     <div className="flex items-center justify-center text-gray-600">
                       <Phone className="w-4 h-4 mr-2" />
-                      <span className="text-sm">+48 123 456 789</span>
+                      <span className="text-sm">+48 504 305 437</span>
                     </div>
                     <div className="flex items-center justify-center text-gray-600">
                       <Mail className="w-4 h-4 mr-2" />
@@ -292,15 +275,12 @@ ${formData.additionalInfo || 'Brak dodatkowych informacji'}
           </div>
 
           {/* Right side - Form */}
-          <div 
-            className="lg:col-span-2"
-            style={{
-              opacity: isInView ? 1 : 0,
-              transform: isInView ? 'translateX(0)' : 'translateX(30px)',
-              transition: 'all 0.8s ease-out',
-              transitionDelay: '400ms'
-            }}
-          >
+          <div className="lg:col-span-2" style={{
+          opacity: isInView ? 1 : 0,
+          transform: isInView ? 'translateX(0)' : 'translateX(30px)',
+          transition: 'all 0.8s ease-out',
+          transitionDelay: '400ms'
+        }}>
             <Card className="bg-white/95 backdrop-blur-sm border-0 shadow-2xl">
               <CardHeader>
                 <div className="flex items-center justify-between">
@@ -314,84 +294,44 @@ ${formData.additionalInfo || 'Brak dodatkowych informacji'}
                     </CardDescription>
                   </div>
                   <div className="text-sm text-gray-500">
-                    {Math.round((currentStep / 3) * 100)}% ukończone
+                    {Math.round(currentStep / 3 * 100)}% ukończone
                   </div>
                 </div>
                 
                 {/* Progress bar */}
                 <div className="w-full bg-gray-200 rounded-full h-2 mt-4">
-                  <div 
-                    className="bg-orange-500 h-2 rounded-full transition-all duration-500" 
-                    style={{ width: `${(currentStep / 3) * 100}%` }}
-                  />
+                  <div className="bg-orange-500 h-2 rounded-full transition-all duration-500" style={{
+                  width: `${currentStep / 3 * 100}%`
+                }} />
                 </div>
               </CardHeader>
 
               <CardContent>
                 <div>
-                  {currentStep === 1 && (
-                    <FormStep1
-                      formData={formData}
-                      onInputChange={handleInputChange}
-                    />
-                  )}
-                  {currentStep === 2 && (
-                    <FormStep2
-                      formData={formData}
-                      onInputChange={handleInputChange}
-                      onRegularInputChange={handleRegularInputChange}
-                    />
-                  )}
-                  {currentStep === 3 && (
-                    <FormStep3
-                      formData={formData}
-                      onRegularInputChange={handleRegularInputChange}
-                    />
-                  )}
+                  {currentStep === 1 && <FormStep1 formData={formData} onInputChange={handleInputChange} />}
+                  {currentStep === 2 && <FormStep2 formData={formData} onInputChange={handleInputChange} onRegularInputChange={handleRegularInputChange} />}
+                  {currentStep === 3 && <FormStep3 formData={formData} onRegularInputChange={handleRegularInputChange} />}
 
                   <Separator className="my-6" />
 
                   {/* Navigation buttons */}
                   <div className="flex justify-between">
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={prevStep}
-                      disabled={currentStep === 1 || isSubmitting}
-                    >
+                    <Button type="button" variant="outline" onClick={prevStep} disabled={currentStep === 1 || isSubmitting}>
                       Wstecz
                     </Button>
 
-                    {currentStep < 3 ? (
-                      <Button
-                        type="button"
-                        onClick={nextStep}
-                        disabled={isSubmitting}
-                        className="bg-orange-500 hover:bg-orange-600"
-                      >
+                    {currentStep < 3 ? <Button type="button" onClick={nextStep} disabled={isSubmitting} className="bg-orange-500 hover:bg-orange-600">
                         Dalej
                         <ArrowRight className="w-4 h-4 ml-2" />
-                      </Button>
-                    ) : (
-                      <Button
-                        type="button"
-                        onClick={handleSubmit}
-                        disabled={isSubmitting}
-                        className="bg-green-600 hover:bg-green-700"
-                      >
-                        {isSubmitting ? (
-                          <>
+                      </Button> : <Button type="button" onClick={handleSubmit} disabled={isSubmitting} className="bg-green-600 hover:bg-green-700">
+                        {isSubmitting ? <>
                             <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                             Wysyłanie...
-                          </>
-                        ) : (
-                          <>
+                          </> : <>
                             Wyślij zapytanie
                             <ArrowRight className="w-4 h-4 ml-2" />
-                          </>
-                        )}
-                      </Button>
-                    )}
+                          </>}
+                      </Button>}
                   </div>
                 </div>
               </CardContent>
@@ -399,8 +339,6 @@ ${formData.additionalInfo || 'Brak dodatkowych informacji'}
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default BottomQuoteForm;
