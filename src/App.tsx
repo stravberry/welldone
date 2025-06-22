@@ -31,6 +31,7 @@ import AdminLayout from './pages/admin/AdminLayout';
 import ProtectedRoute from './components/ProtectedRoute';
 import ContentStudio from './pages/admin/ContentStudio';
 import Dashboard from './pages/admin/Dashboard';
+import EmailTemplatesManagement from './pages/admin/EmailTemplatesManagement';
 
 // Create a client
 const queryClient = new QueryClient();

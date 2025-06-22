@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { Outlet, useNavigate, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { Button } from '@/components/ui/button';
-import { LayoutDashboard, Palette, FileText, Settings, Image, LogOut, Users, Menu } from 'lucide-react';
+import { LayoutDashboard, Palette, FileText, Settings, Image, LogOut, Users, Menu, Mail } from 'lucide-react';
 
 const AdminLayout: React.FC = () => {
   const { logout, username } = useAuth();
@@ -19,6 +18,7 @@ const AdminLayout: React.FC = () => {
   const navigationItems = [
     { path: '/admin', label: 'Dashboard', icon: LayoutDashboard },
     { path: '/admin/content-studio', label: 'Content Studio', icon: Palette },
+    { path: '/admin/email-templates', label: 'Szablony E-mail', icon: Mail },
     { path: '/admin/blog', label: 'Blog', icon: FileText },
     { path: '/admin/media', label: 'Media Library', icon: Image },
     { path: '/admin/users', label: 'Użytkownicy', icon: Users },

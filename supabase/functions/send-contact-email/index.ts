@@ -3,7 +3,8 @@ import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "npm:resend@2.0.0";
 import React from 'npm:react@18.3.1';
 import { renderAsync } from 'npm:@react-email/components@0.0.11';
-import { ContactEmail } from "./_templates/contact-email.tsx";
+import { AdminNotificationEmail } from "./_templates/admin-notification-email.tsx";
+import { ClientConfirmationEmail } from "./_templates/client-confirmation-email.tsx";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -79,29 +80,48 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    console.log('Renderowanie szablonu email...');
-    // Render the email template
-    const html = await renderAsync(
-      React.createElement(ContactEmail, formData)
+    console.log('Renderowanie szablonów email...');
+    
+    // Render email templates
+    const adminEmailHtml = await renderAsync(
+      React.createElement(AdminNotificationEmail, formData)
     );
-    console.log('Szablon email wyrenderowany, długość HTML:', html.length);
+    console.log('Szablon email dla administratora wyrenderowany, długość HTML:', adminEmailHtml.length);
 
-    console.log('Wysyłanie emaila przez Resend...');
-    // Send the email
-    const emailResponse = await resend.emails.send({
+    const clientEmailHtml = await renderAsync(
+      React.createElement(ClientConfirmationEmail, {
+        name: formData.name,
+        company: formData.company
+      })
+    );
+    console.log('Szablon email dla klienta wyrenderowany, długość HTML:', clientEmailHtml.length);
+
+    console.log('Wysyłanie emaili przez Resend...');
+    
+    // Send email to admin (notification)
+    const adminEmailResponse = await resend.emails.send({
       from: "Well-done.pl <noreply@well-done.pl>",
       to: ["wskopek.all@gmail.com"],
-      subject: `Nowe zapytanie UDT od ${formData.name} - ${formData.company}`,
-      html: html,
+      subject: `🔔 Nowe zapytanie UDT od ${formData.name}${formData.company ? ` - ${formData.company}` : ''}`,
+      html: adminEmailHtml,
       reply_to: formData.email,
     });
+    console.log("Email do administratora wysłany pomyślnie:", adminEmailResponse);
 
-    console.log("Email wysłany pomyślnie:", emailResponse);
+    // Send confirmation email to client
+    const clientEmailResponse = await resend.emails.send({
+      from: "Well-done.pl <noreply@well-done.pl>",
+      to: [formData.email],
+      subject: "✅ Potwierdzenie otrzymania zapytania - Well-done.pl",
+      html: clientEmailHtml,
+    });
+    console.log("Email potwierdzający do klienta wysłany pomyślnie:", clientEmailResponse);
 
     return new Response(JSON.stringify({ 
       success: true, 
-      emailId: emailResponse.data?.id,
-      message: "Email wysłany pomyślnie" 
+      adminEmailId: adminEmailResponse.data?.id,
+      clientEmailId: clientEmailResponse.data?.id,
+      message: "Oba emaile wysłane pomyślnie" 
     }), {
       status: 200,
       headers: {
