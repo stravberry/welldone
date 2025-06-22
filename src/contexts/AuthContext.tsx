@@ -1,5 +1,5 @@
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React from 'react';
 
 type AuthContextType = {
   isAuthenticated: boolean;
@@ -8,17 +8,17 @@ type AuthContextType = {
   logout: () => void;
 };
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const AuthContext = React.createContext<AuthContextType | undefined>(undefined);
 
 interface AuthProviderProps {
   children: React.ReactNode;
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [username, setUsername] = useState<string | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+  const [username, setUsername] = React.useState<string | null>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     // Check if user is authenticated on mount
     const auth = localStorage.getItem('cmsAuth');
     const storedUsername = localStorage.getItem('cmsUsername');
@@ -32,6 +32,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const login = (username: string) => {
     setIsAuthenticated(true);
     setUsername(username);
+    localStorage.setItem('cmsAuth', 'true');
+    localStorage.setItem('cmsUsername', username);
   };
 
   const logout = () => {
@@ -49,7 +51,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 };
 
 export const useAuth = () => {
-  const context = useContext(AuthContext);
+  const context = React.useContext(AuthContext);
   if (context === undefined) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
