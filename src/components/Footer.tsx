@@ -1,26 +1,10 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Linkedin, Youtube, Phone, Mail, MapPin } from 'lucide-react';
-import { toast } from 'sonner';
+import { Facebook, Instagram, Linkedin, Youtube, Mail, MapPin } from 'lucide-react';
+import ClickablePhone from './ClickablePhone';
 
 const Footer = () => {
-  const handlePhoneClick = async () => {
-    const phoneNumber = '504-305-437';
-    try {
-      await navigator.clipboard.writeText(phoneNumber);
-      toast.success('Numer telefonu został skopiowany do schowka!');
-    } catch (err) {
-      // Fallback for older browsers
-      const textArea = document.createElement('textarea');
-      textArea.value = phoneNumber;
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textArea);
-      toast.success('Numer telefonu został skopiowany do schowka!');
-    }
-  };
-
   return (
     <footer className="bg-gray-900 text-white">
       <div className="pt-12 pb-8">
@@ -101,15 +85,8 @@ const Footer = () => {
             <div className="mt-8 md:mt-0">
               <h3 className="text-lg font-semibold mb-4">Kontakt</h3>
               <ul className="space-y-4 text-sm sm:text-base">
-                <li className="flex items-start">
-                  <Phone size={20} className="mr-2 mt-1 text-orange-400 flex-shrink-0" />
-                  <button
-                    onClick={handlePhoneClick}
-                    className="hover:text-orange-400 transition-colors cursor-pointer text-left"
-                    title="Kliknij aby skopiować numer telefonu"
-                  >
-                    504-305-437
-                  </button>
+                <li>
+                  <ClickablePhone showIcon={true} />
                 </li>
                 <li className="flex items-start">
                   <Mail size={20} className="mr-2 mt-1 text-orange-400 flex-shrink-0" />
