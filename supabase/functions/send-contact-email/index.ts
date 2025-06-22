@@ -98,17 +98,24 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log('Wysyłanie emaili przez Resend...');
     
-    // Send email to admin (notification)
+    // Send email to admin (notification) - POPRAWIONY ADRES!
+    console.log('Wysyłanie emaila do administratora na kontakt@well-done.pl...');
     const adminEmailResponse = await resend.emails.send({
       from: "Well-done.pl <noreply@well-done.pl>",
-      to: ["wskopek.all@gmail.com"],
+      to: ["kontakt@well-done.pl"], // ZMIENIONE Z wskopek.all@gmail.com
       subject: `🔔 Nowe zapytanie UDT od ${formData.name}${formData.company ? ` - ${formData.company}` : ''}`,
       html: adminEmailHtml,
       reply_to: formData.email,
     });
     console.log("Email do administratora wysłany pomyślnie:", adminEmailResponse);
+    console.log("Admin email ID:", adminEmailResponse.data?.id);
+    
+    if (adminEmailResponse.error) {
+      console.error("Błąd wysyłania emaila do administratora:", adminEmailResponse.error);
+    }
 
     // Send confirmation email to client
+    console.log('Wysyłanie emaila potwierdzającego do klienta:', formData.email);
     const clientEmailResponse = await resend.emails.send({
       from: "Well-done.pl <noreply@well-done.pl>",
       to: [formData.email],
@@ -116,12 +123,32 @@ const handler = async (req: Request): Promise<Response> => {
       html: clientEmailHtml,
     });
     console.log("Email potwierdzający do klienta wysłany pomyślnie:", clientEmailResponse);
+    console.log("Client email ID:", clientEmailResponse.data?.id);
+    
+    if (clientEmailResponse.error) {
+      console.error("Błąd wysyłania emaila do klienta:", clientEmailResponse.error);
+    }
+
+    // Sprawdzenie czy oba emaile zostały wysłane pomyślnie
+    const adminSuccess = adminEmailResponse.data?.id && !adminEmailResponse.error;
+    const clientSuccess = clientEmailResponse.data?.id && !clientEmailResponse.error;
+    
+    console.log('Status wysyłania emaili:', {
+      adminSuccess,
+      clientSuccess,
+      adminEmailId: adminEmailResponse.data?.id,
+      clientEmailId: clientEmailResponse.data?.id
+    });
 
     return new Response(JSON.stringify({ 
       success: true, 
       adminEmailId: adminEmailResponse.data?.id,
       clientEmailId: clientEmailResponse.data?.id,
-      message: "Oba emaile wysłane pomyślnie" 
+      adminSuccess,
+      clientSuccess,
+      message: adminSuccess && clientSuccess 
+        ? "Oba emaile wysłane pomyślnie" 
+        : "Wysłano częściowo - sprawdź logi"
     }), {
       status: 200,
       headers: {
