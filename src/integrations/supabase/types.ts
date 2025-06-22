@@ -78,29 +78,77 @@ export type Database = {
         Row: {
           blocks_data: Json | null
           created_at: string
+          created_by: string | null
           id: string
+          meta_description: string | null
+          meta_keywords: string | null
+          meta_title: string | null
+          og_description: string | null
+          og_image: string | null
+          og_title: string | null
           slug: string
           status: string
           title: string
           updated_at: string
+          updated_by: string | null
         }
         Insert: {
           blocks_data?: Json | null
           created_at?: string
+          created_by?: string | null
           id?: string
+          meta_description?: string | null
+          meta_keywords?: string | null
+          meta_title?: string | null
+          og_description?: string | null
+          og_image?: string | null
+          og_title?: string | null
           slug: string
           status?: string
           title: string
           updated_at?: string
+          updated_by?: string | null
         }
         Update: {
           blocks_data?: Json | null
           created_at?: string
+          created_by?: string | null
           id?: string
+          meta_description?: string | null
+          meta_keywords?: string | null
+          meta_title?: string | null
+          og_description?: string | null
+          og_image?: string | null
+          og_title?: string | null
           slug?: string
           status?: string
           title?: string
           updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: string
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }

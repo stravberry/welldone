@@ -1,8 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Linkedin, Youtube, Phone, Mail, MapPin } from 'lucide-react';
+import { toast } from 'sonner';
 
 const Footer = () => {
+  const handlePhoneClick = async () => {
+    const phoneNumber = '504-305-437';
+    try {
+      await navigator.clipboard.writeText(phoneNumber);
+      toast.success('Numer telefonu został skopiowany do schowka!');
+    } catch (err) {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = phoneNumber;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      toast.success('Numer telefonu został skopiowany do schowka!');
+    }
+  };
+
   return (
     <footer className="bg-gray-900 text-white">
       <div className="pt-12 pb-8">
@@ -85,7 +103,13 @@ const Footer = () => {
               <ul className="space-y-4 text-sm sm:text-base">
                 <li className="flex items-start">
                   <Phone size={20} className="mr-2 mt-1 text-orange-400 flex-shrink-0" />
-                  <span>504-305-437</span>
+                  <button
+                    onClick={handlePhoneClick}
+                    className="hover:text-orange-400 transition-colors cursor-pointer text-left"
+                    title="Kliknij aby skopiować numer telefonu"
+                  >
+                    504-305-437
+                  </button>
                 </li>
                 <li className="flex items-start">
                   <Mail size={20} className="mr-2 mt-1 text-orange-400 flex-shrink-0" />
