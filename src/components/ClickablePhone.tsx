@@ -21,7 +21,14 @@ const ClickablePhone: React.FC<ClickablePhoneProps> = ({
   const handlePhoneClick = async () => {
     try {
       await navigator.clipboard.writeText(phoneNumber);
-      toast.success('Numer telefonu został skopiowany do schowka!');
+      toast.success('Numer telefonu został skopiowany do schowka!', {
+        style: {
+          fontSize: '16px',
+          padding: '16px 20px',
+          minHeight: '60px',
+          borderRadius: '12px'
+        }
+      });
     } catch (err) {
       // Fallback for older browsers
       const textArea = document.createElement('textarea');
@@ -30,7 +37,14 @@ const ClickablePhone: React.FC<ClickablePhoneProps> = ({
       textArea.select();
       document.execCommand('copy');
       document.body.removeChild(textArea);
-      toast.success('Numer telefonu został skopiowany do schowka!');
+      toast.success('Numer telefonu został skopiowany do schowka!', {
+        style: {
+          fontSize: '16px',
+          padding: '16px 20px',
+          minHeight: '60px',
+          borderRadius: '12px'
+        }
+      });
     }
   };
 
