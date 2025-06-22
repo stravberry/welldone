@@ -95,7 +95,18 @@ const handler = async (req: Request): Promise<Response> => {
     
     // Render email templates
     const adminEmailHtml = await renderAsync(
-      React.createElement(AdminNotificationEmail, formData)
+      React.createElement(AdminNotificationEmail, {
+        name: formData.name,
+        company: formData.company,
+        email: formData.email,
+        phone: formData.phone,
+        message: formData.message,
+        trainingType: formData.trainingType,
+        participants: formData.participants,
+        location: formData.location,
+        timeline: formData.timeline,
+        urgency: formData.urgency
+      })
     );
     console.log('Szablon email dla administratora wyrenderowany, długość HTML:', adminEmailHtml.length);
 
@@ -114,11 +125,11 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log('Wysyłanie emaili przez Resend...');
     
-    // Send email to admin (notification) - POPRAWIONY ADRES!
+    // Send email to admin (notification)
     console.log('Wysyłanie emaila do administratora na kontakt@well-done.pl...');
     const adminEmailResponse = await resend.emails.send({
       from: "Well-done.pl <noreply@well-done.pl>",
-      to: ["kontakt@well-done.pl"], // ZMIENIONE Z wskopek.all@gmail.com
+      to: ["kontakt@well-done.pl"],
       subject: `🔔 Nowe zapytanie UDT od ${formData.name}${formData.company ? ` - ${formData.company}` : ''}`,
       html: adminEmailHtml,
       reply_to: formData.email,

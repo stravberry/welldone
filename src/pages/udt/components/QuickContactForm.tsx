@@ -146,6 +146,40 @@ const QuickContactForm: React.FC<QuickContactFormProps> = ({
         </div>
 
         <div className="space-y-2">
+          <Label htmlFor="quick-location" className="text-sm sm:text-base text-gray-700 font-medium">
+            Miejsce szkolenia
+          </Label>
+          <Select value={formData.location || ''} onValueChange={(value) => handleSelectChange('location', value)}>
+            <SelectTrigger className="h-10 sm:h-12">
+              <SelectValue placeholder="Wybierz miejsce szkolenia" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="our-site">Nasza siedziba</SelectItem>
+              <SelectItem value="client-site">U klienta</SelectItem>
+              <SelectItem value="online">Online</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="quick-timeline" className="text-sm sm:text-base text-gray-700 font-medium">
+            Preferowany termin
+          </Label>
+          <Select value={formData.timeline || ''} onValueChange={(value) => handleSelectChange('timeline', value)}>
+            <SelectTrigger className="h-10 sm:h-12">
+              <SelectValue placeholder="Wybierz preferowany termin" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="asap">Jak najszybciej</SelectItem>
+              <SelectItem value="1-week">W ciągu tygodnia</SelectItem>
+              <SelectItem value="1-month">W ciągu 1 miesiąca</SelectItem>
+              <SelectItem value="3-months">W ciągu 3 miesięcy</SelectItem>
+              <SelectItem value="flexible">Elastyczny termin</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="space-y-2">
           <Label htmlFor="quick-message" className="text-sm sm:text-base text-gray-700 font-medium">
             Dodatkowe informacje
           </Label>

@@ -26,6 +26,50 @@ interface AdminNotificationEmailProps {
   urgency?: string;
 }
 
+// Mapping functions for Polish names
+const getPolishTrainingName = (value: string) => {
+  const mapping: { [key: string]: string } = {
+    'udt-operatorzy': 'UDT Operatorzy wózków widłowych',
+    'udt-konserwatorze': 'UDT Konserwatorzy',
+    'wozki-unoszace': 'Wózki unoszące',
+    'sep': 'SEP',
+    'lutowanie': 'Lutowanie',
+    'inne': 'Inne'
+  };
+  return mapping[value] || value;
+};
+
+const getPolishParticipantsName = (value: string) => {
+  const mapping: { [key: string]: string } = {
+    '1-3': '1-3 osób',
+    '4-6': '4-6 osób',
+    '7-10': '7-10 osób',
+    '11-15': '11-15 osób',
+    '16+': 'Ponad 15 osób'
+  };
+  return mapping[value] || value;
+};
+
+const getPolishLocationName = (value: string) => {
+  const mapping: { [key: string]: string } = {
+    'our-site': 'Nasza siedziba',
+    'client-site': 'U klienta',
+    'online': 'Online'
+  };
+  return mapping[value] || value;
+};
+
+const getPolishTimelineName = (value: string) => {
+  const mapping: { [key: string]: string } = {
+    'asap': 'Jak najszybciej',
+    '1-week': 'W ciągu tygodnia',
+    '1-month': 'W ciągu 1 miesiąca',
+    '3-months': 'W ciągu 3 miesięcy',
+    'flexible': 'Elastyczny termin'
+  };
+  return mapping[value] || value;
+};
+
 export const AdminNotificationEmail = ({
   name,
   company,
@@ -80,7 +124,7 @@ export const AdminNotificationEmail = ({
           </div>
         </Section>
 
-        {/* Training Details - only show if we have training data */}
+        {/* Training Details */}
         {(trainingType || participants || location || timeline || urgency) && (
           <Section style={section}>
             <Heading as="h2" style={sectionTitle}>📋 Szczegóły szkolenia</Heading>
@@ -88,25 +132,25 @@ export const AdminNotificationEmail = ({
               {trainingType && (
                 <div style={contactItem}>
                   <Text style={contactLabel}>Rodzaj szkolenia:</Text>
-                  <Text style={contactValue}>{trainingType}</Text>
+                  <Text style={contactValue}>{getPolishTrainingName(trainingType)}</Text>
                 </div>
               )}
               {participants && (
                 <div style={contactItem}>
                   <Text style={contactLabel}>Liczba uczestników:</Text>
-                  <Text style={contactValue}>{participants}</Text>
+                  <Text style={contactValue}>{getPolishParticipantsName(participants)}</Text>
                 </div>
               )}
               {location && (
                 <div style={contactItem}>
                   <Text style={contactLabel}>Miejsce szkolenia:</Text>
-                  <Text style={contactValue}>{location}</Text>
+                  <Text style={contactValue}>{getPolishLocationName(location)}</Text>
                 </div>
               )}
               {timeline && (
                 <div style={contactItem}>
-                  <Text style={contactLabel}>Termin:</Text>
-                  <Text style={contactValue}>{timeline}</Text>
+                  <Text style={contactLabel}>Preferowany termin:</Text>
+                  <Text style={contactValue}>{getPolishTimelineName(timeline)}</Text>
                 </div>
               )}
               {urgency && (
