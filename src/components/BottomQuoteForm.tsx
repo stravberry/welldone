@@ -1,12 +1,27 @@
-import React, { useState } from 'react';
+
+import React, { useState, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { ArrowRight, Calculator, Clock, Phone, Mail, MapPin, CheckCircle, Star } from 'lucide-react';
+import { ArrowRight, Calculator, Clock, Phone, Mail, MapPin, CheckCircle, Star, Loader2 } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { toast } from 'sonner';
+import FormStep1 from './BottomQuoteForm/FormStep1';
+import FormStep2 from './BottomQuoteForm/FormStep2';
+import FormStep3 from './BottomQuoteForm/FormStep3';
+
+interface FormData {
+  serviceType: string;
+  participantCount: string;
+  trainingLocation: string;
+  urgency: string;
+  companyName: string;
+  contactPerson: string;
+  email: string;
+  phone: string;
+  additionalInfo: string;
+}
 
 const BottomQuoteForm = () => {
   const { elementRef, isInView } = useScrollAnimation<HTMLDivElement>({
@@ -15,7 +30,8 @@ const BottomQuoteForm = () => {
   });
 
   const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState({
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState<FormData>({
     serviceType: '',
     participantCount: '',
     trainingLocation: '',
@@ -27,200 +43,87 @@ const BottomQuoteForm = () => {
     additionalInfo: ''
   });
 
-  const handleInputChange = (field: string, value: string) => {
+  const handleInputChange = useCallback((field: string, value: string) => {
+    console.log('Changing field:', field, 'to value:', value);
     setFormData(prev => ({ ...prev, [field]: value }));
-  };
+  }, []);
 
-  const handleRegularInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleRegularInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+    console.log('Regular input change:', name, 'to:', value);
     setFormData(prev => ({ ...prev, [name]: value }));
+  }, []);
+
+  const validateStep = (step: number): boolean => {
+    switch (step) {
+      case 1:
+        if (!formData.serviceType || !formData.participantCount || !formData.trainingLocation) {
+          toast.error('Proszę wypełnić wszystkie wymagane pola');
+          return false;
+        }
+        break;
+      case 2:
+        if (!formData.companyName || !formData.contactPerson || !formData.email || !formData.phone) {
+          toast.error('Proszę wypełnić wszystkie wymagane pola');
+          return false;
+        }
+        // Basic email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.email)) {
+          toast.error('Proszę podać prawidłowy adres email');
+          return false;
+        }
+        break;
+    }
+    return true;
   };
 
   const nextStep = () => {
-    if (currentStep < 3) setCurrentStep(currentStep + 1);
+    if (validateStep(currentStep)) {
+      if (currentStep < 3) setCurrentStep(currentStep + 1);
+    }
   };
 
   const prevStep = () => {
     if (currentStep > 1) setCurrentStep(currentStep - 1);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Quote form submitted:', formData);
-    // Here would be the actual form submission logic
+    
+    if (!validateStep(2)) return; // Validate required fields
+    
+    setIsSubmitting(true);
+    
+    try {
+      console.log('Submitting quote form:', formData);
+      
+      // Simulate API call - replace with actual implementation
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      toast.success('Dziękujemy! Wycenę otrzymasz w ciągu 2 godzin roboczych.');
+      
+      // Reset form after successful submission
+      setFormData({
+        serviceType: '',
+        participantCount: '',
+        trainingLocation: '',
+        urgency: '',
+        companyName: '',
+        contactPerson: '',
+        email: '',
+        phone: '',
+        additionalInfo: ''
+      });
+      setCurrentStep(1);
+      
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast.error('Wystąpił błąd podczas wysyłania formularza. Spróbuj ponownie.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
-
-  const Step1Content = () => (
-    <div className="space-y-6">
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Rodzaj szkolenia *
-        </label>
-        <Select value={formData.serviceType} onValueChange={(value) => handleInputChange('serviceType', value)}>
-          <SelectTrigger>
-            <SelectValue placeholder="Wybierz rodzaj szkolenia" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="udt-operators">Uprawnienia UDT dla operatorów</SelectItem>
-            <SelectItem value="udt-maintenance">Uprawnienia UDT dla konserwatorów</SelectItem>
-            <SelectItem value="sep">Uprawnienia SEP</SelectItem>
-            <SelectItem value="forklift">Wózki widłowe</SelectItem>
-            <SelectItem value="crane">Suwnice</SelectItem>
-            <SelectItem value="lifting">Wózki unoszące</SelectItem>
-            <SelectItem value="welding">Szkolenia spawalnicze</SelectItem>
-            <SelectItem value="other">Inne</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Liczba uczestników *
-          </label>
-          <Select value={formData.participantCount} onValueChange={(value) => handleInputChange('participantCount', value)}>
-            <SelectTrigger>
-              <SelectValue placeholder="Wybierz liczbę" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="1-5">1-5 osób</SelectItem>
-              <SelectItem value="6-10">6-10 osób</SelectItem>
-              <SelectItem value="11-20">11-20 osób</SelectItem>
-              <SelectItem value="21-50">21-50 osób</SelectItem>
-              <SelectItem value="50+">Powyżej 50 osób</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Miejsce szkolenia *
-          </label>
-          <Select value={formData.trainingLocation} onValueChange={(value) => handleInputChange('trainingLocation', value)}>
-            <SelectTrigger>
-              <SelectValue placeholder="Wybierz miejsce" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="client-site">U klienta</SelectItem>
-              <SelectItem value="our-site">W naszej siedzibie</SelectItem>
-              <SelectItem value="online">Online</SelectItem>
-              <SelectItem value="hybrid">Hybrydowo</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-      </div>
-    </div>
-  );
-
-  const Step2Content = () => (
-    <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Nazwa firmy *
-          </label>
-          <Input
-            name="companyName"
-            value={formData.companyName}
-            onChange={handleRegularInputChange}
-            placeholder="Wprowadź nazwę firmy"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Osoba kontaktowa *
-          </label>
-          <Input
-            name="contactPerson"
-            value={formData.contactPerson}
-            onChange={handleRegularInputChange}
-            placeholder="Imię i nazwisko"
-          />
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Email *
-          </label>
-          <Input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleRegularInputChange}
-            placeholder="email@firma.pl"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Telefon *
-          </label>
-          <Input
-            type="tel"
-            name="phone"
-            value={formData.phone}
-            onChange={handleRegularInputChange}
-            placeholder="+48 123 456 789"
-          />
-        </div>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Kiedy potrzebujesz szkolenia?
-        </label>
-        <Select value={formData.urgency} onValueChange={(value) => handleInputChange('urgency', value)}>
-          <SelectTrigger>
-            <SelectValue placeholder="Wybierz termin" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="asap">Jak najszybciej</SelectItem>
-            <SelectItem value="1-month">W ciągu miesiąca</SelectItem>
-            <SelectItem value="2-3-months">2-3 miesiące</SelectItem>
-            <SelectItem value="flexible">Elastycznie</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-    </div>
-  );
-
-  const Step3Content = () => (
-    <div className="space-y-6">
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Dodatkowe informacje
-        </label>
-        <Textarea
-          name="additionalInfo"
-          value={formData.additionalInfo}
-          onChange={handleRegularInputChange}
-          placeholder="Opisz swoje potrzeby, specjalne wymagania lub zadaj pytania..."
-          rows={4}
-        />
-      </div>
-
-      <div className="bg-orange-50 p-6 rounded-lg border border-orange-200">
-        <h4 className="font-semibold text-orange-800 mb-3">Podsumowanie zapytania:</h4>
-        <div className="space-y-2 text-sm">
-          <p><span className="font-medium">Rodzaj szkolenia:</span> {formData.serviceType || 'Nie wybrano'}</p>
-          <p><span className="font-medium">Liczba uczestników:</span> {formData.participantCount || 'Nie wybrano'}</p>
-          <p><span className="font-medium">Miejsce:</span> {formData.trainingLocation || 'Nie wybrano'}</p>
-          <p><span className="font-medium">Termin:</span> {formData.urgency || 'Nie wybrano'}</p>
-          <p><span className="font-medium">Firma:</span> {formData.companyName || 'Nie podano'}</p>
-        </div>
-      </div>
-
-      <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-        <div className="flex items-center text-blue-800">
-          <Clock className="w-5 h-5 mr-2" />
-          <span className="text-sm font-medium">Otrzymasz wycenę w ciągu 2 godzin roboczych</span>
-        </div>
-      </div>
-    </div>
-  );
 
   return (
     <section className="py-16 bg-gradient-to-br from-orange-600 via-orange-500 to-orange-700 relative overflow-hidden">
@@ -355,9 +258,25 @@ const BottomQuoteForm = () => {
 
               <CardContent>
                 <form onSubmit={handleSubmit}>
-                  {currentStep === 1 && <Step1Content />}
-                  {currentStep === 2 && <Step2Content />}
-                  {currentStep === 3 && <Step3Content />}
+                  {currentStep === 1 && (
+                    <FormStep1
+                      formData={formData}
+                      onInputChange={handleInputChange}
+                    />
+                  )}
+                  {currentStep === 2 && (
+                    <FormStep2
+                      formData={formData}
+                      onInputChange={handleInputChange}
+                      onRegularInputChange={handleRegularInputChange}
+                    />
+                  )}
+                  {currentStep === 3 && (
+                    <FormStep3
+                      formData={formData}
+                      onRegularInputChange={handleRegularInputChange}
+                    />
+                  )}
 
                   <Separator className="my-6" />
 
@@ -367,7 +286,7 @@ const BottomQuoteForm = () => {
                       type="button"
                       variant="outline"
                       onClick={prevStep}
-                      disabled={currentStep === 1}
+                      disabled={currentStep === 1 || isSubmitting}
                     >
                       Wstecz
                     </Button>
@@ -376,6 +295,7 @@ const BottomQuoteForm = () => {
                       <Button
                         type="button"
                         onClick={nextStep}
+                        disabled={isSubmitting}
                         className="bg-orange-500 hover:bg-orange-600"
                       >
                         Dalej
@@ -384,10 +304,20 @@ const BottomQuoteForm = () => {
                     ) : (
                       <Button
                         type="submit"
+                        disabled={isSubmitting}
                         className="bg-green-600 hover:bg-green-700"
                       >
-                        Wyślij zapytanie
-                        <ArrowRight className="w-4 h-4 ml-2" />
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                            Wysyłanie...
+                          </>
+                        ) : (
+                          <>
+                            Wyślij zapytanie
+                            <ArrowRight className="w-4 h-4 ml-2" />
+                          </>
+                        )}
                       </Button>
                     )}
                   </div>
