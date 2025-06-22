@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider } from './contexts/AuthContext';
+import { Toaster } from 'sonner';
 import PageTransition from './components/PageTransition';
 import RouteChangeTracker from './components/RouteChangeTracker';
 import CMSLoginPage from './pages/CMSLoginPage';
@@ -88,6 +89,7 @@ function App() {
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </PageTransition>
+            <Toaster position="top-center" richColors />
           </Router>
         </AuthProvider>
       </QueryClientProvider>

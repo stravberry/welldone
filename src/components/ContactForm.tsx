@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
@@ -70,7 +69,10 @@ const ContactForm: React.FC<ContactFormProps> = ({
       }
 
       console.log('Formularz wysłany pomyślnie');
-      toast.success("Formularz został wysłany! Skontaktujemy się wkrótce.");
+      toast.success("Twoja wiadomość została wysłana, skontaktujemy się z Tobą wkrótce", {
+        position: "top-center",
+        duration: 5000,
+      });
       reset();
 
     } catch (error: any) {
@@ -89,7 +91,10 @@ const ContactForm: React.FC<ContactFormProps> = ({
         errorMessage = error.message;
       }
 
-      toast.error(errorMessage);
+      toast.error(errorMessage, {
+        position: "top-center",
+        duration: 5000,
+      });
     }
   };
 

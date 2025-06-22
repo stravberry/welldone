@@ -1,7 +1,7 @@
-
 import React, { useState } from 'react';
 import { Send, CheckCircle, Building2, User, Mail, Phone, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const InteractiveContactForm: React.FC = () => {
@@ -42,6 +42,10 @@ const InteractiveContactForm: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    toast.success("Twoja wiadomość została wysłana, skontaktujemy się z Tobą wkrótce", {
+      position: "top-center",
+      duration: 5000,
+    });
     setIsSubmitted(true);
   };
 
