@@ -38,7 +38,7 @@ export const useUserManagement = () => {
       const formattedUsers = rolesData.map((roleEntry) => ({
         id: roleEntry.user_id,
         email: roleEntry.user_id, // We'll use ID as email initially
-        role: roleEntry.role,
+        role: roleEntry.role as 'admin' | 'moderator' | 'user', // Type assertion to fix the error
         created_at: roleEntry.created_at,
         last_sign_in_at: null,
       }));
