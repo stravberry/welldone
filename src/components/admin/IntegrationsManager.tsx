@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -7,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Switch } from '@/components/ui/switch';
 import { toast } from '@/components/ui/use-toast';
-import { Globe, Mail, MessageCircle, CreditCard, Share2, Key } from 'lucide-react';
+import { Globe, Mail, MessageCircle, CreditCard, Share2, Key, Send } from 'lucide-react';
 
 interface Integration {
   id: string;
@@ -21,6 +20,13 @@ interface Integration {
 
 const IntegrationsManager: React.FC = () => {
   const [integrations, setIntegrations] = useState<Integration[]>([
+    {
+      id: 'resend',
+      name: 'Resend',
+      description: 'Profesjonalne wysyłanie emaili',
+      icon: <Send className="h-5 w-5" />,
+      isActive: false
+    },
     {
       id: 'google-analytics',
       name: 'Google Analytics',
@@ -60,6 +66,7 @@ const IntegrationsManager: React.FC = () => {
   ]);
 
   const [apiKeys, setApiKeys] = useState<Record<string, string>>({
+    'resend': '',
     'google-analytics': 'GTM-MFXDSXB7',
     'mailchimp': '',
     'facebook-pixel': '',
@@ -67,7 +74,18 @@ const IntegrationsManager: React.FC = () => {
     'intercom': ''
   });
 
+  const [resendFromEmail, setResendFromEmail] = useState('noreply@well-done.pl');
+
   const toggleIntegration = (id: string) => {
+    if (id === 'resend' && !apiKeys.resend) {
+      toast({
+        title: "Brak klucza API",
+        description: "Najpierw wprowadź i zapisz klucz API Resend",
+        variant: "destructive"
+      });
+      return;
+    }
+
     setIntegrations(prev => 
       prev.map(integration => 
         integration.id === id 
@@ -87,7 +105,7 @@ const IntegrationsManager: React.FC = () => {
     setApiKeys(prev => ({ ...prev, [id]: value }));
   };
 
-  const saveIntegration = (id: string) => {
+  const saveIntegration = async (id: string) => {
     const apiKey = apiKeys[id];
     if (!apiKey.trim()) {
       toast({
@@ -96,6 +114,38 @@ const IntegrationsManager: React.FC = () => {
         variant: "destructive"
       });
       return;
+    }
+
+    // For Resend, save the API key to Supabase secrets
+    if (id === 'resend') {
+      try {
+        const response = await fetch('/api/save-resend-key', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ 
+            apiKey,
+            fromEmail: resendFromEmail 
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to save API key');
+        }
+
+        toast({
+          title: "Klucz Resend zapisany",
+          description: "Klucz API został bezpiecznie zapisany i jest gotowy do użycia"
+        });
+      } catch (error) {
+        toast({
+          title: "Błąd zapisywania",
+          description: "Nie udało się zapisać klucza API. Spróbuj ponownie.",
+          variant: "destructive"
+        });
+        return;
+      }
     }
 
     setIntegrations(prev => 
@@ -118,7 +168,38 @@ const IntegrationsManager: React.FC = () => {
       description: "Sprawdzanie połączenia..."
     });
 
-    // Simulate API test
+    if (id === 'resend') {
+      try {
+        const response = await fetch('/api/test-resend', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (response.ok) {
+          toast({
+            title: "Test Resend zakończony pomyślnie",
+            description: "Integracja z Resend działa poprawnie"
+          });
+        } else {
+          toast({
+            title: "Test nie powiódł się",
+            description: "Sprawdź klucz API i spróbuj ponownie",
+            variant: "destructive"
+          });
+        }
+      } catch (error) {
+        toast({
+          title: "Błąd testowania",
+          description: "Nie udało się przetestować integracji",
+          variant: "destructive"
+        });
+      }
+      return;
+    }
+
+    // Simulate API test for other integrations
     setTimeout(() => {
       toast({
         title: "Test zakończony pomyślnie",
@@ -161,6 +242,20 @@ const IntegrationsManager: React.FC = () => {
                         {integration.description}
                       </p>
                       
+                      {integration.id === 'resend' && (
+                        <div className="mb-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                          <p className="text-sm text-blue-800 mb-2">
+                            <strong>Instrukcje konfiguracji Resend:</strong>
+                          </p>
+                          <ol className="text-sm text-blue-700 space-y-1 ml-4 list-decimal">
+                            <li>Zarejestruj się na <a href="https://resend.com" target="_blank" rel="noopener noreferrer" className="underline">resend.com</a></li>
+                            <li>Zweryfikuj swoją domenę na <a href="https://resend.com/domains" target="_blank" rel="noopener noreferrer" className="underline">resend.com/domains</a></li>
+                            <li>Utwórz klucz API na <a href="https://resend.com/api-keys" target="_blank" rel="noopener noreferrer" className="underline">resend.com/api-keys</a></li>
+                            <li>Wklej klucz API poniżej i zapisz</li>
+                          </ol>
+                        </div>
+                      )}
+                      
                       <div className="space-y-3">
                         <div className="flex items-center gap-3">
                           <Label>Włącz integrację</Label>
@@ -200,6 +295,24 @@ const IntegrationsManager: React.FC = () => {
                             </Button>
                           </div>
                         </div>
+
+                        {integration.id === 'resend' && (
+                          <div className="space-y-2">
+                            <Label htmlFor="resend-from-email">
+                              Adres nadawcy (From)
+                            </Label>
+                            <Input
+                              id="resend-from-email"
+                              type="email"
+                              value={resendFromEmail}
+                              onChange={(e) => setResendFromEmail(e.target.value)}
+                              placeholder="noreply@twojadomena.pl"
+                            />
+                            <p className="text-xs text-muted-foreground">
+                              Musi być z zweryfikowanej domeny w Resend
+                            </p>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
