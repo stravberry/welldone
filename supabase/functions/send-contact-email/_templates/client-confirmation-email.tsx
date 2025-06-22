@@ -91,9 +91,13 @@ export const ClientConfirmationEmail = ({
 
         {/* Main Content */}
         <Section style={section}>
-          <div style={iconContainer}>
-            <div style={successIcon}>📧</div>
-          </div>
+          <table style={iconTable}>
+            <tr>
+              <td style={iconCell}>
+                <div style={successIcon}>📧</div>
+              </td>
+            </tr>
+          </table>
           
           <Heading as="h2" style={greetingTitle}>
             Dzień dobry {name}!
@@ -104,84 +108,118 @@ export const ClientConfirmationEmail = ({
             i bardzo dziękujemy za zainteresowanie naszą ofertą.
           </Text>
 
-          <div style={highlightBox}>
-            <Text style={highlightText}>
-              <strong>Skontaktujemy się z Tobą w ciągu 24 godzin!</strong>
-            </Text>
-          </div>
+          <table style={highlightTable}>
+            <tr>
+              <td style={highlightCell}>
+                <Text style={highlightText}>
+                  <strong>Skontaktujemy się z Tobą w ciągu 24 godzin!</strong>
+                </Text>
+              </td>
+            </tr>
+          </table>
         </Section>
 
         {/* Training Summary */}
         {(trainingType || participants || location || timeline || urgency) && (
           <Section style={section}>
-            <Heading as="h2" style={sectionTitle}>📋 Podsumowanie Twojego zapytania</Heading>
-            <div style={summaryBox}>
-              {trainingType && (
-                <div style={summaryItem}>
-                  <Text style={summaryLabel}>Rodzaj szkolenia:</Text>
-                  <Text style={summaryValue}>{getPolishTrainingName(trainingType)}</Text>
-                </div>
-              )}
-              {participants && (
-                <div style={summaryItem}>
-                  <Text style={summaryLabel}>Liczba uczestników:</Text>
-                  <Text style={summaryValue}>{getPolishParticipantsName(participants)}</Text>
-                </div>
-              )}
-              {location && (
-                <div style={summaryItem}>
-                  <Text style={summaryLabel}>Miejsce szkolenia:</Text>
-                  <Text style={summaryValue}>{getPolishLocationName(location)}</Text>
-                </div>
-              )}
-              {timeline && (
-                <div style={summaryItem}>
-                  <Text style={summaryLabel}>Wybrany termin:</Text>
-                  <Text style={summaryValue}>{getPolishTimelineName(timeline)}</Text>
-                </div>
-              )}
-              {urgency && (
-                <div style={summaryItem}>
-                  <Text style={summaryLabel}>Pilność:</Text>
-                  <Text style={summaryValue}>{urgency}</Text>
-                </div>
-              )}
-            </div>
+            <Heading as="h2" style={sectionTitle}>📋 Szczegóły Twojego zapytania</Heading>
+            <table style={summaryTable}>
+              <tbody>
+                {trainingType && (
+                  <tr>
+                    <td style={summaryLabelCell}>
+                      <Text style={summaryLabel}>Rodzaj szkolenia:</Text>
+                    </td>
+                    <td style={summaryValueCell}>
+                      <Text style={summaryValue}>{getPolishTrainingName(trainingType)}</Text>
+                    </td>
+                  </tr>
+                )}
+                {participants && (
+                  <tr>
+                    <td style={summaryLabelCell}>
+                      <Text style={summaryLabel}>Liczba uczestników:</Text>
+                    </td>
+                    <td style={summaryValueCell}>
+                      <Text style={summaryValue}>{getPolishParticipantsName(participants)}</Text>
+                    </td>
+                  </tr>
+                )}
+                {location && (
+                  <tr>
+                    <td style={summaryLabelCell}>
+                      <Text style={summaryLabel}>Miejsce szkolenia:</Text>
+                    </td>
+                    <td style={summaryValueCell}>
+                      <Text style={summaryValue}>{getPolishLocationName(location)}</Text>
+                    </td>
+                  </tr>
+                )}
+                {timeline && (
+                  <tr>
+                    <td style={summaryLabelCell}>
+                      <Text style={summaryLabel}>Preferowany termin:</Text>
+                    </td>
+                    <td style={summaryValueCell}>
+                      <Text style={summaryValue}>{getPolishTimelineName(timeline)}</Text>
+                    </td>
+                  </tr>
+                )}
+                {urgency && (
+                  <tr>
+                    <td style={summaryLabelCell}>
+                      <Text style={summaryLabel}>Pilność:</Text>
+                    </td>
+                    <td style={summaryValueCell}>
+                      <Text style={summaryValue}>{urgency}</Text>
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </Section>
         )}
 
         {/* What's Next */}
         <Section style={section}>
           <Heading as="h2" style={sectionTitle}>🚀 Co dalej?</Heading>
-          <div style={stepsList}>
-            <div style={stepItem}>
-              <div style={stepNumber}>1</div>
-              <div style={stepContent}>
-                <Text style={stepTitle}>Analiza zapytania</Text>
-                <Text style={stepDescription}>
-                  Nasz ekspert przeanalizuje Twoje potrzeby szkoleniowe
-                </Text>
-              </div>
-            </div>
-            <div style={stepItem}>
-              <div style={stepNumber}>2</div>
-              <div style={stepContent}>
-                <Text style={stepTitle}>Kontakt z ekspertem</Text>
-                <Text style={stepDescription}>
-                  Skontaktujemy się z Tobą telefonicznie lub e-mailem
-                </Text>
-              </div>
-            </div>
-            <div style={stepItem}>
-              <div style={stepNumber}>3</div>
-              <div style={stepContent}>
-                <Text style={stepTitle}>Indywidualna oferta</Text>
-                <Text style={stepDescription}>
-                  Przedstawimy spersonalizowaną propozycję szkoleń
-                </Text>
-              </div>
-            </div>
-          </div>
+          <table style={stepsTable}>
+            <tbody>
+              <tr>
+                <td style={stepNumberCell}>
+                  <div style={stepNumber}>1</div>
+                </td>
+                <td style={stepContentCell}>
+                  <Text style={stepTitle}>Analiza zapytania</Text>
+                  <Text style={stepDescription}>
+                    Nasz ekspert przeanalizuje Twoje potrzeby szkoleniowe
+                  </Text>
+                </td>
+              </tr>
+              <tr>
+                <td style={stepNumberCell}>
+                  <div style={stepNumber}>2</div>
+                </td>
+                <td style={stepContentCell}>
+                  <Text style={stepTitle}>Kontakt z ekspertem</Text>
+                  <Text style={stepDescription}>
+                    Skontaktujemy się z Tobą telefonicznie lub e-mailem
+                  </Text>
+                </td>
+              </tr>
+              <tr>
+                <td style={stepNumberCell}>
+                  <div style={stepNumber}>3</div>
+                </td>
+                <td style={stepContentCell}>
+                  <Text style={stepTitle}>Indywidualna oferta</Text>
+                  <Text style={stepDescription}>
+                    Przedstawimy spersonalizowaną propozycję szkoleń
+                  </Text>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </Section>
 
         {/* Quick Contact */}
@@ -190,63 +228,95 @@ export const ClientConfirmationEmail = ({
           <Text style={contactText}>
             Nie czekaj - skontaktuj się z nami już teraz!
           </Text>
-          <div style={buttonGrid}>
-            <Button 
-              href="tel:+48123456789"
-              style={primaryButton}
-            >
-              📞 Zadzwoń: +48 123 456 789
-            </Button>
-            <Button 
-              href="mailto:kontakt@well-done.pl"
-              style={secondaryButton}
-            >
-              ✉️ Napisz e-mail
-            </Button>
-          </div>
+          <table style={buttonTable}>
+            <tbody>
+              <tr>
+                <td style={buttonCell}>
+                  <Button 
+                    href="tel:+48504305437"
+                    style={primaryButton}
+                  >
+                    📞 Zadzwoń: +48 504 305 437
+                  </Button>
+                </td>
+              </tr>
+              <tr>
+                <td style={buttonCell}>
+                  <Button 
+                    href="mailto:kontakt@well-done.pl"
+                    style={secondaryButton}
+                  >
+                    ✉️ Napisz e-mail
+                  </Button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </Section>
 
         {/* Why Choose Us */}
         <Section style={section}>
           <Heading as="h2" style={sectionTitle}>⭐ Dlaczego Well-done.pl?</Heading>
-          <div style={benefitsList}>
-            <div style={benefitItem}>
-              <Text style={benefitText}>🏆 <strong>Doświadczenie:</strong> Ponad 10 lat na rynku szkoleń</Text>
-            </div>
-            <div style={benefitItem}>
-              <Text style={benefitText}>✅ <strong>Certyfikaty:</strong> Uznawane przez UDT dokumenty</Text>
-            </div>
-            <div style={benefitItem}>
-              <Text style={benefitText}>👥 <strong>Eksperci:</strong> Wykwalifikowani instruktorzy</Text>
-            </div>
-            <div style={benefitItem}>
-              <Text style={benefitText}>🎯 <strong>Elastyczność:</strong> Szkolenia dostosowane do Twoich potrzeb</Text>
-            </div>
-          </div>
+          <table style={benefitsTable}>
+            <tbody>
+              <tr>
+                <td style={benefitCell}>
+                  <Text style={benefitText}>🏆 <strong>Doświadczenie:</strong> Ponad 10 lat na rynku szkoleń</Text>
+                </td>
+              </tr>
+              <tr>
+                <td style={benefitCell}>
+                  <Text style={benefitText}>✅ <strong>Certyfikaty:</strong> Uznawane przez UDT dokumenty</Text>
+                </td>
+              </tr>
+              <tr>
+                <td style={benefitCell}>
+                  <Text style={benefitText}>👥 <strong>Eksperci:</strong> Wykwalifikowani instruktorzy</Text>
+                </td>
+              </tr>
+              <tr>
+                <td style={benefitCell}>
+                  <Text style={benefitText}>🎯 <strong>Elastyczność:</strong> Szkolenia dostosowane do Twoich potrzeb</Text>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </Section>
 
         {/* Footer */}
         <Section style={footer}>
-          <div style={footerContent}>
-            <Text style={footerTitle}>Well-done.pl</Text>
-            <Text style={footerSubtitle}>Kompleksowe szkolenia UDT</Text>
-          </div>
-          <div style={footerLinks}>
-            <Link href="https://well-done.pl" style={footerLink}>
-              🌐 Strona główna
-            </Link>
-            <span style={footerSeparator}>|</span>
-            <Link href="https://well-done.pl/uslugi" style={footerLink}>
-              📋 Nasze usługi
-            </Link>
-            <span style={footerSeparator}>|</span>
-            <Link href="https://well-done.pl/kontakt" style={footerLink}>
-              📧 Kontakt
-            </Link>
-          </div>
-          <Text style={footerCopyright}>
-            © 2024 Well-done.pl. Wszystkie prawa zastrzeżone.
-          </Text>
+          <table style={footerTable}>
+            <tbody>
+              <tr>
+                <td style={footerContentCell}>
+                  <Text style={footerTitle}>Well-done.pl</Text>
+                  <Text style={footerSubtitle}>Kompleksowe szkolenia UDT</Text>
+                </td>
+              </tr>
+              <tr>
+                <td style={footerLinksCell}>
+                  <Link href="https://well-done.pl" style={footerLink}>
+                    🌐 Strona główna
+                  </Link>
+                  <span style={footerSeparator}>|</span>
+                  <Link href="https://well-done.pl/uslugi" style={footerLink}>
+                    📋 Nasze usługi
+                  </Link>
+                  <span style={footerSeparator}>|</span>
+                  <Link href="https://well-done.pl/kontakt" style={footerLink}>
+                    📧 Kontakt
+                  </Link>
+                </td>
+              </tr>
+              <tr>
+                <td style={footerCopyrightCell}>
+                  <Text style={footerCopyright}>
+                    © 2024 Well-done.pl. Wszystkie prawa zastrzeżone.
+                  </Text>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </Section>
       </Container>
     </Body>
@@ -297,9 +367,13 @@ const section = {
   padding: '32px 24px',
 }
 
-const iconContainer = {
-  textAlign: 'center' as const,
+const iconTable = {
+  width: '100%',
   marginBottom: '24px',
+}
+
+const iconCell = {
+  textAlign: 'center' as const,
 }
 
 const successIcon = {
@@ -336,10 +410,14 @@ const mainText = {
   textAlign: 'center' as const,
 }
 
-const highlightBox = {
+const highlightTable = {
+  width: '100%',
   backgroundColor: '#fef7ed',
   border: '2px solid #f97316',
   borderRadius: '8px',
+}
+
+const highlightCell = {
   padding: '20px',
   textAlign: 'center' as const,
 }
@@ -350,19 +428,26 @@ const highlightText = {
   margin: '0',
 }
 
-const summaryBox = {
+const summaryTable = {
+  width: '100%',
   backgroundColor: '#f0f9ff',
   border: '1px solid #bae6fd',
   borderRadius: '8px',
-  padding: '20px',
+  borderCollapse: 'collapse' as const,
 }
 
-const summaryItem = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  padding: '8px 0',
+const summaryLabelCell = {
+  padding: '12px 16px',
   borderBottom: '1px solid #e0f2fe',
+  width: '40%',
+  verticalAlign: 'top' as const,
+}
+
+const summaryValueCell = {
+  padding: '12px 16px',
+  borderBottom: '1px solid #e0f2fe',
+  width: '60%',
+  verticalAlign: 'top' as const,
 }
 
 const summaryLabel = {
@@ -379,16 +464,21 @@ const summaryValue = {
   fontWeight: '500',
 }
 
-const stepsList = {
-  display: 'flex',
-  flexDirection: 'column' as const,
-  gap: '20px',
+const stepsTable = {
+  width: '100%',
 }
 
-const stepItem = {
-  display: 'flex',
-  alignItems: 'flex-start',
-  gap: '16px',
+const stepNumberCell = {
+  width: '48px',
+  verticalAlign: 'top' as const,
+  paddingTop: '4px',
+  paddingRight: '16px',
+  paddingBottom: '20px',
+}
+
+const stepContentCell = {
+  verticalAlign: 'top' as const,
+  paddingBottom: '20px',
 }
 
 const stepNumber = {
@@ -397,16 +487,10 @@ const stepNumber = {
   width: '32px',
   height: '32px',
   borderRadius: '50%',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  textAlign: 'center' as const,
+  lineHeight: '32px',
   fontSize: '16px',
   fontWeight: '600',
-  flexShrink: 0,
-}
-
-const stepContent = {
-  flex: 1,
 }
 
 const stepTitle = {
@@ -436,11 +520,13 @@ const contactText = {
   margin: '0 0 24px 0',
 }
 
-const buttonGrid = {
-  display: 'flex',
-  gap: '12px',
-  flexWrap: 'wrap' as const,
-  justifyContent: 'center',
+const buttonTable = {
+  width: '100%',
+}
+
+const buttonCell = {
+  textAlign: 'center' as const,
+  paddingBottom: '12px',
 }
 
 const primaryButton = {
@@ -471,17 +557,16 @@ const secondaryButton = {
   cursor: 'pointer',
 }
 
-const benefitsList = {
-  display: 'flex',
-  flexDirection: 'column' as const,
-  gap: '12px',
+const benefitsTable = {
+  width: '100%',
 }
 
-const benefitItem = {
+const benefitCell = {
   backgroundColor: '#f8fafc',
   border: '1px solid #e2e8f0',
   borderRadius: '6px',
   padding: '16px',
+  marginBottom: '12px',
 }
 
 const benefitText = {
@@ -499,8 +584,22 @@ const footer = {
   marginTop: '0',
 }
 
-const footerContent = {
-  marginBottom: '20px',
+const footerTable = {
+  width: '100%',
+}
+
+const footerContentCell = {
+  textAlign: 'center' as const,
+  paddingBottom: '20px',
+}
+
+const footerLinksCell = {
+  textAlign: 'center' as const,
+  paddingBottom: '20px',
+}
+
+const footerCopyrightCell = {
+  textAlign: 'center' as const,
 }
 
 const footerTitle = {
@@ -514,10 +613,6 @@ const footerSubtitle = {
   color: '#94a3b8',
   fontSize: '14px',
   margin: '0',
-}
-
-const footerLinks = {
-  marginBottom: '20px',
 }
 
 const footerLink = {
