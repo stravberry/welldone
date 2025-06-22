@@ -89,14 +89,23 @@ const BottomQuoteForm = () => {
   };
 
   const handleSubmit = async () => {
+    console.log('=== FORM SUBMISSION STARTED ===');
     console.log('Submit button clicked');
     
-    if (!validateStep(2)) return; // Validate required fields
+    if (!validateStep(2)) {
+      console.log('Validation failed, aborting submission');
+      return;
+    }
     
     setIsSubmitting(true);
     
     try {
-      console.log('Submitting quote form with data:', formData);
+      console.log('Form data before submission:', formData);
+      
+      // Test Supabase connection first
+      console.log('Testing Supabase connection...');
+      console.log('Supabase URL:', supabase.supabaseUrl);
+      console.log('Supabase client initialized:', !!supabase);
       
       // Map form data to the format expected by send-contact-email function
       const emailData = {
@@ -115,20 +124,36 @@ ${formData.additionalInfo || 'Brak dodatkowych informacji'}
         `.trim()
       };
 
-      console.log('Calling send-contact-email function with:', emailData);
-
-      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+      console.log('=== CALLING EDGE FUNCTION ===');
+      console.log('Function name: send-contact-email');
+      console.log('Email data being sent:', emailData);
+      
+      // Call the edge function with detailed logging
+      const functionCall = supabase.functions.invoke('send-contact-email', {
         body: emailData
       });
-
-      console.log('Supabase function response:', { data, error });
+      
+      console.log('Function invocation started...');
+      const { data, error } = await functionCall;
+      
+      console.log('=== EDGE FUNCTION RESPONSE ===');
+      console.log('Function response data:', data);
+      console.log('Function response error:', error);
+      console.log('Response type - data:', typeof data);
+      console.log('Response type - error:', typeof error);
 
       if (error) {
-        console.error('Error from send-contact-email function:', error);
-        throw new Error(error.message || 'Błąd podczas wysyłania wiadomości');
+        console.error('=== ERROR FROM EDGE FUNCTION ===');
+        console.error('Error object:', error);
+        console.error('Error message:', error.message);
+        console.error('Error details:', JSON.stringify(error, null, 2));
+        
+        throw new Error(`Błąd funkcji Edge: ${error.message || 'Nieznany błąd'}`);
       }
 
-      console.log('Email sent successfully:', data);
+      console.log('=== SUCCESS ===');
+      console.log('Email sent successfully, data:', data);
+      
       toast.success('Dziękujemy! Wycenę otrzymasz w ciągu 2 godzin roboczych.');
       
       // Reset form after successful submission
@@ -146,9 +171,28 @@ ${formData.additionalInfo || 'Brak dodatkowych informacji'}
       setCurrentStep(1);
       
     } catch (error: any) {
-      console.error('Error submitting form:', error);
-      toast.error(error.message || 'Wystąpił błąd podczas wysyłania formularza. Spróbuj ponownie.');
+      console.error('=== SUBMISSION ERROR ===');
+      console.error('Caught error:', error);
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
+      console.error('Full error object:', JSON.stringify(error, null, 2));
+      
+      // More specific error messages
+      let errorMessage = 'Wystąpił błąd podczas wysyłania formularza.';
+      
+      if (error.message) {
+        if (error.message.includes('fetch')) {
+          errorMessage = 'Błąd połączenia z serwerem. Sprawdź połączenie internetowe.';
+        } else if (error.message.includes('Function not found')) {
+          errorMessage = 'Funkcja wysyłania maili nie została znaleziona.';
+        } else {
+          errorMessage = error.message;
+        }
+      }
+      
+      toast.error(errorMessage);
     } finally {
+      console.log('=== FORM SUBMISSION ENDED ===');
       setIsSubmitting(false);
     }
   };
