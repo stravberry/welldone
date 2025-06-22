@@ -1,4 +1,3 @@
-
 import {
   Body,
   Container,
@@ -16,11 +15,21 @@ import * as React from 'npm:react@18.3.1'
 interface ClientConfirmationEmailProps {
   name: string;
   company?: string;
+  trainingType?: string;
+  participants?: string;
+  location?: string;
+  timeline?: string;
+  urgency?: string;
 }
 
 export const ClientConfirmationEmail = ({
   name,
   company,
+  trainingType,
+  participants,
+  location,
+  timeline,
+  urgency,
 }: ClientConfirmationEmailProps) => (
   <Html>
     <Head />
@@ -56,6 +65,45 @@ export const ClientConfirmationEmail = ({
             </Text>
           </div>
         </Section>
+
+        {/* Training Summary - only show if we have training data */}
+        {(trainingType || participants || location || timeline || urgency) && (
+          <Section style={section}>
+            <Heading as="h2" style={sectionTitle}>📋 Podsumowanie Twojego zapytania</Heading>
+            <div style={summaryBox}>
+              {trainingType && (
+                <div style={summaryItem}>
+                  <Text style={summaryLabel}>Rodzaj szkolenia:</Text>
+                  <Text style={summaryValue}>{trainingType}</Text>
+                </div>
+              )}
+              {participants && (
+                <div style={summaryItem}>
+                  <Text style={summaryLabel}>Liczba uczestników:</Text>
+                  <Text style={summaryValue}>{participants}</Text>
+                </div>
+              )}
+              {location && (
+                <div style={summaryItem}>
+                  <Text style={summaryLabel}>Miejsce szkolenia:</Text>
+                  <Text style={summaryValue}>{location}</Text>
+                </div>
+              )}
+              {timeline && (
+                <div style={summaryItem}>
+                  <Text style={summaryLabel}>Preferowany termin:</Text>
+                  <Text style={summaryValue}>{timeline}</Text>
+                </div>
+              )}
+              {urgency && (
+                <div style={summaryItem}>
+                  <Text style={summaryLabel}>Pilność:</Text>
+                  <Text style={summaryValue}>{urgency}</Text>
+                </div>
+              )}
+            </div>
+          </Section>
+        )}
 
         {/* What's Next */}
         <Section style={section}>
@@ -255,6 +303,36 @@ const highlightText = {
   color: '#ea580c',
   fontSize: '18px',
   margin: '0',
+}
+
+// New styles for training summary
+const summaryBox = {
+  backgroundColor: '#f0f9ff',
+  border: '1px solid #bae6fd',
+  borderRadius: '8px',
+  padding: '20px',
+}
+
+const summaryItem = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  padding: '8px 0',
+  borderBottom: '1px solid #e0f2fe',
+}
+
+const summaryLabel = {
+  fontSize: '14px',
+  fontWeight: '600',
+  color: '#0c4a6e',
+  margin: '0',
+}
+
+const summaryValue = {
+  fontSize: '14px',
+  color: '#1e293b',
+  margin: '0',
+  fontWeight: '500',
 }
 
 const stepsList = {

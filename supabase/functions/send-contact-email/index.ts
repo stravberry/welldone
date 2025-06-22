@@ -18,6 +18,12 @@ interface ContactFormData {
   email: string;
   phone: string;
   message: string;
+  // Dodatkowe pola dla szczegółów szkolenia
+  trainingType?: string;
+  participants?: string;
+  location?: string;
+  timeline?: string;
+  urgency?: string;
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -61,7 +67,12 @@ const handler = async (req: Request): Promise<Response> => {
       company: formData.company,
       email: formData.email,
       phone: formData.phone,
-      messageLength: formData.message?.length || 0
+      messageLength: formData.message?.length || 0,
+      trainingType: formData.trainingType,
+      participants: formData.participants,
+      location: formData.location,
+      timeline: formData.timeline,
+      urgency: formData.urgency
     });
 
     // Walidacja danych
@@ -91,7 +102,12 @@ const handler = async (req: Request): Promise<Response> => {
     const clientEmailHtml = await renderAsync(
       React.createElement(ClientConfirmationEmail, {
         name: formData.name,
-        company: formData.company
+        company: formData.company,
+        trainingType: formData.trainingType,
+        participants: formData.participants,
+        location: formData.location,
+        timeline: formData.timeline,
+        urgency: formData.urgency
       })
     );
     console.log('Szablon email dla klienta wyrenderowany, długość HTML:', clientEmailHtml.length);

@@ -19,6 +19,11 @@ interface AdminNotificationEmailProps {
   email: string;
   phone: string;
   message: string;
+  trainingType?: string;
+  participants?: string;
+  location?: string;
+  timeline?: string;
+  urgency?: string;
 }
 
 export const AdminNotificationEmail = ({
@@ -27,6 +32,11 @@ export const AdminNotificationEmail = ({
   email,
   phone,
   message,
+  trainingType,
+  participants,
+  location,
+  timeline,
+  urgency,
 }: AdminNotificationEmailProps) => (
   <Html>
     <Head />
@@ -70,6 +80,45 @@ export const AdminNotificationEmail = ({
           </div>
         </Section>
 
+        {/* Training Details - only show if we have training data */}
+        {(trainingType || participants || location || timeline || urgency) && (
+          <Section style={section}>
+            <Heading as="h2" style={sectionTitle}>📋 Szczegóły szkolenia</Heading>
+            <div style={contactGrid}>
+              {trainingType && (
+                <div style={contactItem}>
+                  <Text style={contactLabel}>Rodzaj szkolenia:</Text>
+                  <Text style={contactValue}>{trainingType}</Text>
+                </div>
+              )}
+              {participants && (
+                <div style={contactItem}>
+                  <Text style={contactLabel}>Liczba uczestników:</Text>
+                  <Text style={contactValue}>{participants}</Text>
+                </div>
+              )}
+              {location && (
+                <div style={contactItem}>
+                  <Text style={contactLabel}>Miejsce szkolenia:</Text>
+                  <Text style={contactValue}>{location}</Text>
+                </div>
+              )}
+              {timeline && (
+                <div style={contactItem}>
+                  <Text style={contactLabel}>Termin:</Text>
+                  <Text style={contactValue}>{timeline}</Text>
+                </div>
+              )}
+              {urgency && (
+                <div style={contactItem}>
+                  <Text style={contactLabel}>Pilność:</Text>
+                  <Text style={contactValue}>{urgency}</Text>
+                </div>
+              )}
+            </div>
+          </Section>
+        )}
+
         {/* Message */}
         <Section style={section}>
           <Heading as="h2" style={sectionTitle}>💬 Treść zapytania</Heading>
@@ -88,12 +137,14 @@ export const AdminNotificationEmail = ({
             >
               📧 Odpowiedz e-mailem
             </Button>
-            <Button 
-              href={`tel:${phone}`}
-              style={secondaryButton}
-            >
-              📞 Zadzwoń
-            </Button>
+            {phone && (
+              <Button 
+                href={`tel:${phone}`}
+                style={secondaryButton}
+              >
+                📞 Zadzwoń
+              </Button>
+            )}
           </div>
         </Section>
 
