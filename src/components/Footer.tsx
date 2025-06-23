@@ -6,6 +6,19 @@ import ClickablePhone from './ClickablePhone';
 import ClickableEmail from './ClickableEmail';
 import ClickableText from './ClickableText';
 
+// Custom TikTok icon component
+const TikTokIcon = ({ size = 20 }: { size?: number }) => (
+  <svg 
+    width={size} 
+    height={size} 
+    viewBox="0 0 24 24" 
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M19.321 5.562a5.124 5.124 0 0 1-.443-.258 6.228 6.228 0 0 1-1.137-.966c-.849-.948-1.263-2.101-1.263-3.52V0h-3.016v16.06c0 1.177-.954 2.133-2.127 2.133s-2.127-.956-2.127-2.133.954-2.133 2.127-2.133c.234 0 .459.038.671.109V10.96a5.147 5.147 0 0 0-.671-.044c-2.832 0-5.135 2.304-5.135 5.144S8.503 21.204 11.335 21.204s5.135-2.304 5.135-5.144V8.572a9.239 9.239 0 0 0 5.321 1.664V7.227a6.226 6.226 0 0 1-2.47-1.665z"/>
+  </svg>
+);
+
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white">
@@ -29,6 +42,9 @@ const Footer = () => {
                 </a>
                 <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
                   <Instagram size={20} />
+                </a>
+                <a href="https://www.tiktok.com/@pawelodudt" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+                  <TikTokIcon size={20} />
                 </a>
                 <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
                   <Linkedin size={20} />
