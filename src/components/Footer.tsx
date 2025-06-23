@@ -24,7 +24,7 @@ const Footer = () => {
                 Pomagamy firmom produkcyjnym działać bez ryzyka – zapewniamy pełną zgodność uprawnień UDT i SEP dla pracowników.
               </p>
               <div className="flex space-x-4">
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+                <a href="https://www.facebook.com/people/Pawe%C5%82-Gerus-Uprawnienia-UDT-SEP/61572194412744/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
                   <Facebook size={20} />
                 </a>
                 <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
