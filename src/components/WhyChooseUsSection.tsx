@@ -31,10 +31,12 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
 
   const cooperatingCompanies = [
     { name: 'UDT', logo: '/lovable-uploads/fc113f21-4e0a-4b9a-aaf9-f22ad0623f9b.png' },
-    { name: 'GKZ Wrocław', logo: '/lovable-uploads/de7b3dbd-ac70-479e-b736-982d3926f022.png' },
+    { name: 'TDT', logo: '/lovable-uploads/dff32973-25de-4c17-ac6c-7dee76c2c74c.png' },
+    { name: 'WDT', logo: '/lovable-uploads/placeholder-wdt.png' },
+    { name: 'CPKZ Wrocław', logo: '/lovable-uploads/placeholder-cpkz.png' },
     { name: 'PUP Wrocław', logo: '/lovable-uploads/def966ea-cd05-4d1d-98e5-bfb8ae149ca4.png' },
     { name: 'SEP', logo: '/lovable-uploads/94311598-c54a-4825-8c5a-7ab251653eef.png' },
-    { name: 'TDT', logo: '/lovable-uploads/dff32973-25de-4c17-ac6c-7dee76c2c74c.png' }
+    { name: 'SPE', logo: '/lovable-uploads/placeholder-spe.png' }
   ];
 
   const registeredCompanies = [
