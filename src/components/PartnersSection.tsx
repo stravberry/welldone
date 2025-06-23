@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
@@ -57,16 +58,22 @@ const PartnersSection = () => {
           </p>
         </div>
         
-        {/* Animated partners marquee */}
-        <div className="relative overflow-hidden">
-          <div className="flex animate-marquee whitespace-nowrap group-hover:animate-pause">
+        {/* Smooth continuous marquee */}
+        <div className="relative overflow-hidden group">
+          <div 
+            className="flex whitespace-nowrap"
+            style={{
+              animation: 'marquee 60s linear infinite',
+              width: 'fit-content'
+            }}
+          >
             {/* First set of partners */}
             {partners.map((partner, index) => (
               <div
                 key={`first-${partner.name}`}
-                className="mx-8 flex-shrink-0"
+                className="mx-6 flex-shrink-0"
               >
-                <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-orange-200 min-w-[180px] h-[120px] flex items-center justify-center">
+                <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-orange-200 min-w-[160px] h-[100px] flex items-center justify-center">
                   <img 
                     src={partner.logo} 
                     alt={`${partner.name} logo`}
@@ -75,13 +82,28 @@ const PartnersSection = () => {
                 </div>
               </div>
             ))}
-            {/* Duplicate set for seamless loop */}
+            {/* Second set for seamless loop */}
             {partners.map((partner, index) => (
               <div
                 key={`second-${partner.name}`}
-                className="mx-8 flex-shrink-0"
+                className="mx-6 flex-shrink-0"
               >
-                <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-orange-200 min-w-[180px] h-[120px] flex items-center justify-center">
+                <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-orange-200 min-w-[160px] h-[100px] flex items-center justify-center">
+                  <img 
+                    src={partner.logo} 
+                    alt={`${partner.name} logo`}
+                    className="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                  />
+                </div>
+              </div>
+            ))}
+            {/* Third set for extra smoothness */}
+            {partners.map((partner, index) => (
+              <div
+                key={`third-${partner.name}`}
+                className="mx-6 flex-shrink-0"
+              >
+                <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-orange-200 min-w-[160px] h-[100px] flex items-center justify-center">
                   <img 
                     src={partner.logo} 
                     alt={`${partner.name} logo`}
@@ -91,6 +113,13 @@ const PartnersSection = () => {
               </div>
             ))}
           </div>
+          
+          {/* Pause animation on hover */}
+          <style jsx>{`
+            .group:hover [style*="animation"] {
+              animation-play-state: paused;
+            }
+          `}</style>
         </div>
         
         {/* Animated background elements */}
