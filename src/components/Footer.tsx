@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Linkedin, Youtube, Mail, MapPin } from 'lucide-react';
 import ClickablePhone from './ClickablePhone';
+import ClickableEmail from './ClickableEmail';
 
 const Footer = () => {
   return (
@@ -90,7 +91,10 @@ const Footer = () => {
                 </li>
                 <li className="flex items-start">
                   <Mail size={20} className="mr-2 mt-1 text-orange-400 flex-shrink-0" />
-                  <span className="break-all">pgerus@well-done.pl</span>
+                  <ClickableEmail 
+                    email="pgerus@well-done.pl" 
+                    className="break-all text-white hover:text-orange-400"
+                  />
                 </li>
                 <li className="flex items-start">
                   <MapPin size={20} className="mr-2 mt-1 text-orange-400 flex-shrink-0" />
