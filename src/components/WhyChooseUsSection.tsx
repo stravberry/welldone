@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Link, useNavigate } from 'react-router-dom';
@@ -27,6 +28,14 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
     navigate('/kontakt');
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   };
+
+  const cooperatingCompanies = [
+    { name: 'UDT', logo: '/lovable-uploads/fc113f21-4e0a-4b9a-aaf9-f22ad0623f9b.png' },
+    { name: 'GKZ Wrocław', logo: '/lovable-uploads/de7b3dbd-ac70-479e-b736-982d3926f022.png' },
+    { name: 'PUP Wrocław', logo: '/lovable-uploads/def966ea-cd05-4d1d-98e5-bfb8ae149ca4.png' },
+    { name: 'SEP', logo: '/lovable-uploads/94311598-c54a-4825-8c5a-7ab251653eef.png' },
+    { name: 'TDT', logo: '/lovable-uploads/dff32973-25de-4c17-ac6c-7dee76c2c74c.png' }
+  ];
 
   return (
     <section className="py-20 bg-gradient-to-br from-orange-50 to-white relative overflow-hidden">
@@ -69,6 +78,34 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
               </div>
             );
           })}
+        </div>
+
+        {/* Cooperating Companies Section */}
+        <div className="mb-16">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">Współpracujemy z:</h3>
+            <p className="text-gray-600">Jesteśmy akredytowani przez wiodące instytucje w branży</p>
+          </div>
+          <div className="flex flex-wrap justify-center items-center gap-8">
+            {cooperatingCompanies.map((company, index) => (
+              <div 
+                key={company.name}
+                className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-orange-200 flex items-center justify-center min-w-[120px] h-[80px]"
+                style={{
+                  opacity: showAllFallback ? 1 : 0,
+                  transform: showAllFallback ? 'translateY(0)' : 'translateY(20px)',
+                  transition: 'all 0.6s ease-out',
+                  transitionDelay: showAllFallback ? `${index * 100}ms` : '0ms'
+                }}
+              >
+                <img 
+                  src={company.logo} 
+                  alt={`${company.name} logo`}
+                  className="max-w-full max-h-full object-contain"
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Stats Section */}
