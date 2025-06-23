@@ -16,7 +16,7 @@ const EnhancedTestimonialsSection = () => {
     {
       quote: "Firma Well-Done.pl sumiennie wywiązała się ze wszystkich obowiązków, dbając o wysoką jakość usług i wzajemnych relacji. Wysoko oceniamy profesjonalizm i zaangażowanie jej pracowników. Polecamy usługi Well-Done.pl wszystkim, którzy podobnie jak my cenią sobie solidne partnerstwo w biznesie.",
       company: "WAGO",
-      logo: "WAGO",
+      logo: "/lovable-uploads/3963c686-fb1a-4f20-bc6b-201507b49c8f.png",
       rating: 5
     },
     {
