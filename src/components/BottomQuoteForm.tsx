@@ -342,22 +342,41 @@ ${formData.additionalInfo || 'Brak dodatkowych informacji'}
                       Wstecz
                     </Button>
 
-                    {currentStep < 3 ? <Button type="button" onClick={nextStep} disabled={isSubmitting} className="bg-orange-500 hover:bg-orange-600">
+                    {currentStep < 3 ? (
+                      <Button type="button" onClick={nextStep} disabled={isSubmitting} className="bg-orange-500 hover:bg-orange-600">
                         Dalej
                         <ArrowRight className="w-4 h-4 ml-2" />
-                      </Button> : <Button type="button" onClick={handleSubmit} disabled={isSubmitting} className="bg-green-600 hover:bg-green-700">
-                        {isSubmitting ? <>
+                      </Button>
+                    ) : (
+                      <Button type="button" onClick={handleSubmit} disabled={isSubmitting} className="bg-green-600 hover:bg-green-700">
+                        {isSubmitting ? (
+                          <>
                             <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                             Wysyłanie...
-                          </> : <>
+                          </>
+                        ) : (
+                          <>
                             Wyślij zapytanie
                             <ArrowRight className="w-4 h-4 ml-2" />
-                          </>}
-                      </Button>}
+                          </>
+                        )}
+                      </Button>
+                    )}
                   </div>
                 </div>
               </CardContent>
             </Card>
+          </div>
+        </div>
+
+        {/* EU Funding Banner */}
+        <div className="mt-12 flex justify-center">
+          <div className="bg-white/95 backdrop-blur-sm rounded-xl px-8 py-4 shadow-lg border border-orange-200">
+            <img 
+              src="/lovable-uploads/e4434cbe-bb98-47cf-a1c1-96bf2ed377a0.png" 
+              alt="Finansowanie europejskie - Fundusze Europejskie, Rzeczpospolita Polska, Dolny Śląsk, Unia Europejska"
+              className="h-12 object-contain"
+            />
           </div>
         </div>
       </div>
