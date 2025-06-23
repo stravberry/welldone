@@ -36,7 +36,7 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
     { name: 'CPKZ Wrocław', logo: '/lovable-uploads/cpkz-logo.png' },
     { name: 'PUP Wrocław', logo: '/lovable-uploads/def966ea-cd05-4d1d-98e5-bfb8ae149ca4.png' },
     { name: 'SEP', logo: '/lovable-uploads/94311598-c54a-4825-8c5a-7ab251653eef.png' },
-    { name: 'SPE', logo: '/lovable-uploads/placeholder-spe.png' }
+    { name: 'SPE', logo: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=200&h=100&fit=crop&crop=center' }
   ];
 
   const registeredCompanies = [
@@ -109,6 +109,13 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
                   src={company.logo} 
                   alt={`${company.name} logo`}
                   className="max-w-full max-h-full object-contain"
+                  onError={(e) => {
+                    console.log(`Failed to load logo for ${company.name}:`, company.logo);
+                    e.currentTarget.style.display = 'none';
+                  }}
+                  onLoad={() => {
+                    console.log(`Successfully loaded logo for ${company.name}`);
+                  }}
                 />
               </div>
             ))}
@@ -137,6 +144,13 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
                   src={company.logo} 
                   alt={`${company.name} logo`}
                   className="max-w-full max-h-full object-contain"
+                  onError={(e) => {
+                    console.log(`Failed to load logo for ${company.name}:`, company.logo);
+                    e.currentTarget.style.display = 'none';
+                  }}
+                  onLoad={() => {
+                    console.log(`Successfully loaded logo for ${company.name}`);
+                  }}
                 />
               </div>
             ))}
