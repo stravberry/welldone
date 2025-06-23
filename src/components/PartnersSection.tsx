@@ -61,7 +61,7 @@ const PartnersSection = () => {
         {/* Smooth continuous marquee */}
         <div className="relative overflow-hidden group">
           <div 
-            className="flex whitespace-nowrap"
+            className="flex whitespace-nowrap group-hover:[animation-play-state:paused]"
             style={{
               animation: 'marquee 60s linear infinite',
               width: 'fit-content'
@@ -113,19 +113,23 @@ const PartnersSection = () => {
               </div>
             ))}
           </div>
-          
-          {/* Pause animation on hover */}
-          <style jsx>{`
-            .group:hover [style*="animation"] {
-              animation-play-state: paused;
-            }
-          `}</style>
         </div>
         
         {/* Animated background elements */}
         <div className="absolute top-10 right-10 w-20 h-20 bg-orange-200 rounded-full opacity-20 animate-float" />
         <div className="absolute bottom-10 left-10 w-16 h-16 bg-blue-200 rounded-full opacity-20 animate-float" style={{ animationDelay: '2s' }} />
       </div>
+      
+      <style>{`
+        @keyframes marquee {
+          0% {
+            transform: translateX(0%);
+          }
+          100% {
+            transform: translateX(-33.333%);
+          }
+        }
+      `}</style>
     </section>
   );
 };
