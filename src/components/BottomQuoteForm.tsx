@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -371,11 +372,11 @@ ${formData.additionalInfo || 'Brak dodatkowych informacji'}
 
         {/* EU Funding Banner */}
         <div className="mt-12 flex justify-center">
-          <div className="bg-white/95 backdrop-blur-sm rounded-xl px-8 py-4 shadow-lg border border-orange-200">
+          <div className="bg-white/95 backdrop-blur-sm rounded-xl px-12 py-6 shadow-lg border border-orange-200">
             <img 
               src="/lovable-uploads/e4434cbe-bb98-47cf-a1c1-96bf2ed377a0.png" 
               alt="Finansowanie europejskie - Fundusze Europejskie, Rzeczpospolita Polska, Dolny Śląsk, Unia Europejska"
-              className="h-12 object-contain"
+              className="h-16 object-contain"
             />
           </div>
         </div>
