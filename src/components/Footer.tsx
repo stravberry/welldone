@@ -40,7 +40,7 @@ const Footer = () => {
                 <a href="https://www.facebook.com/people/Pawe%C5%82-Gerus-Uprawnienia-UDT-SEP/61572194412744/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
                   <Facebook size={20} />
                 </a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+                <a href="https://www.instagram.com/Pawel.od.udt" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
                   <Instagram size={20} />
                 </a>
                 <a href="https://www.tiktok.com/@pawelodudt" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
