@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Linkedin, Youtube, Mail, MapPin } from 'lucide-react';
 import ClickablePhone from './ClickablePhone';
 import ClickableEmail from './ClickableEmail';
+import ClickableText from './ClickableText';
 
 const Footer = () => {
   return (
@@ -99,20 +100,40 @@ const Footer = () => {
                 <li className="flex items-start">
                   <MapPin size={20} className="mr-2 mt-1 text-orange-400 flex-shrink-0" />
                   <div>
-                    <span>ul. Drzewieckiego 19/11</span>
+                    <ClickableText
+                      text="ul. Drzewieckiego 19/11, 54-129 Wrocław"
+                      className="text-white hover:text-orange-400"
+                      successMessage="Adres został skopiowany do schowka!"
+                      title="Kliknij aby skopiować adres"
+                    >
+                      <span>ul. Drzewieckiego 19/11</span>
+                      <br />
+                      <span>54-129 Wrocław</span>
+                    </ClickableText>
                     <br />
-                    <span>54-129 Wrocław</span>
+                    <ClickableText
+                      text="Centrum Kompetencji Zawodowych Well-Done.pl Paweł Gerus"
+                      className="text-xs sm:text-sm text-gray-500 mt-2 hover:text-orange-400"
+                      successMessage="Nazwa firmy została skopiowana do schowka!"
+                      title="Kliknij aby skopiować nazwę firmy"
+                    />
                     <br />
-                    <span className="text-xs sm:text-sm text-gray-500 mt-2">
-                      Centrum Kompetencji Zawodowych Well-Done.pl Paweł Gerus
+                    <span className="text-xs sm:text-sm text-gray-500">
+                      NIP: <ClickableText
+                        text="884-248-74-55"
+                        className="hover:text-orange-400 inline"
+                        successMessage="NIP został skopiowany do schowka!"
+                        title="Kliknij aby skopiować NIP"
+                      />
                     </span>
                     <br />
                     <span className="text-xs sm:text-sm text-gray-500">
-                      NIP: 884-248-74-55
-                    </span>
-                    <br />
-                    <span className="text-xs sm:text-sm text-gray-500">
-                      REGON: 022303775
+                      REGON: <ClickableText
+                        text="022303775"
+                        className="hover:text-orange-400 inline"
+                        successMessage="REGON został skopiowany do schowka!"
+                        title="Kliknij aby skopiować REGON"
+                      />
                     </span>
                   </div>
                 </li>
