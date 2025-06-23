@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Quote, Star } from 'lucide-react';
 import { useStaggeredAnimation } from '@/hooks/useScrollAnimation';
@@ -63,7 +62,7 @@ const EnhancedTestimonialsSection = () => {
         {/* Company info */}
         <div className="flex items-center justify-between relative z-10">
           <div className="flex items-center">
-            <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-4 border border-gray-200">
+            <div className="w-12 h-12 flex items-center justify-center mr-4">
               {testimonial.logo.startsWith('/') ? (
                 <img 
                   src={testimonial.logo} 
