@@ -49,7 +49,7 @@ const Footer = () => {
                 <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
                   <Linkedin size={20} />
                 </a>
-                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+                <a href="https://www.youtube.com/@Well-Done.Szkolenia" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
                   <Youtube size={20} />
                 </a>
               </div>
