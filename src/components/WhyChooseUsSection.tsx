@@ -37,6 +37,11 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
     { name: 'TDT', logo: '/lovable-uploads/dff32973-25de-4c17-ac6c-7dee76c2c74c.png' }
   ];
 
+  const registeredCompanies = [
+    { name: 'Baza Usług Rozwojowych', logo: '/lovable-uploads/2a844adb-5302-4517-bd5f-905e3c293b9d.png' },
+    { name: 'Rejestr Instytucji Szkoleniowych (RIS)', logo: '/lovable-uploads/96cdbf5e-6c4a-4fed-8050-f2cf9a644c49.png' }
+  ];
+
   return (
     <section className="py-20 bg-gradient-to-br from-orange-50 to-white relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-orange-100/30 to-blue-100/20" />
@@ -96,6 +101,34 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
                   transform: showAllFallback ? 'translateY(0)' : 'translateY(20px)',
                   transition: 'all 0.6s ease-out',
                   transitionDelay: showAllFallback ? `${index * 100}ms` : '0ms'
+                }}
+              >
+                <img 
+                  src={company.logo} 
+                  alt={`${company.name} logo`}
+                  className="max-w-full max-h-full object-contain"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Registered Companies Section */}
+        <div className="mb-16">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">Jesteśmy wpisani do:</h3>
+            <p className="text-gray-600">Oficjalne rejestry i bazy instytucji szkoleniowych</p>
+          </div>
+          <div className="flex flex-wrap justify-center items-center gap-8">
+            {registeredCompanies.map((company, index) => (
+              <div 
+                key={company.name}
+                className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-orange-200 flex items-center justify-center min-w-[180px] h-[100px]"
+                style={{
+                  opacity: showAllFallback ? 1 : 0,
+                  transform: showAllFallback ? 'translateY(0)' : 'translateY(20px)',
+                  transition: 'all 0.6s ease-out',
+                  transitionDelay: showAllFallback ? `${(cooperatingCompanies.length + index) * 100}ms` : '0ms'
                 }}
               >
                 <img 
