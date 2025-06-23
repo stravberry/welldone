@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Link, useNavigate } from 'react-router-dom';
@@ -32,7 +33,6 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
     { name: 'UDT', logo: '/lovable-uploads/fc113f21-4e0a-4b9a-aaf9-f22ad0623f9b.png' },
     { name: 'TDT', logo: '/lovable-uploads/dff32973-25de-4c17-ac6c-7dee76c2c74c.png' },
     { name: 'WDI', logo: '/lovable-uploads/9e854999-7cb9-4120-bd0a-f2eb8911834c.png' },
-    { name: 'CPKZ Wrocław', logo: '/lovable-uploads/cpkz-logo.png' },
     { name: 'PUP Wrocław', logo: '/lovable-uploads/def966ea-cd05-4d1d-98e5-bfb8ae149ca4.png' },
     { name: 'SEP', logo: '/lovable-uploads/94311598-c54a-4825-8c5a-7ab251653eef.png' },
     { name: 'SPE', logo: '/lovable-uploads/e412dee8-39ee-449c-b2f3-d78314cfe175.png' }
@@ -108,9 +108,19 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
                   src={company.logo} 
                   alt={`${company.name} logo`}
                   className="max-w-full max-h-full object-contain"
+                  style={{ maxWidth: '100px', maxHeight: '60px' }}
                   onError={(e) => {
-                    console.log(`Failed to load logo for ${company.name}:`, company.logo);
-                    e.currentTarget.style.display = 'none';
+                    console.error(`Failed to load logo for ${company.name}:`, company.logo);
+                    const target = e.currentTarget as HTMLImageElement;
+                    target.style.display = 'none';
+                    // Show company name as fallback
+                    const parent = target.parentElement;
+                    if (parent && !parent.querySelector('.fallback-text')) {
+                      const fallback = document.createElement('div');
+                      fallback.className = 'fallback-text text-sm font-semibold text-gray-600';
+                      fallback.textContent = company.name;
+                      parent.appendChild(fallback);
+                    }
                   }}
                   onLoad={() => {
                     console.log(`Successfully loaded logo for ${company.name}`);
@@ -143,9 +153,19 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
                   src={company.logo} 
                   alt={`${company.name} logo`}
                   className="max-w-full max-h-full object-contain"
+                  style={{ maxWidth: '160px', maxHeight: '80px' }}
                   onError={(e) => {
-                    console.log(`Failed to load logo for ${company.name}:`, company.logo);
-                    e.currentTarget.style.display = 'none';
+                    console.error(`Failed to load logo for ${company.name}:`, company.logo);
+                    const target = e.currentTarget as HTMLImageElement;
+                    target.style.display = 'none';
+                    // Show company name as fallback
+                    const parent = target.parentElement;
+                    if (parent && !parent.querySelector('.fallback-text')) {
+                      const fallback = document.createElement('div');
+                      fallback.className = 'fallback-text text-sm font-semibold text-gray-600 text-center';
+                      fallback.textContent = company.name;
+                      parent.appendChild(fallback);
+                    }
                   }}
                   onLoad={() => {
                     console.log(`Successfully loaded logo for ${company.name}`);
