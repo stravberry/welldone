@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
@@ -17,7 +16,16 @@ const PartnersSection = () => {
     { name: 'Sörling', logo: '/lovable-uploads/2acf80ce-5ce2-4675-9ea3-acfaea907e2d.png' },
     { name: 'Bartek Candles', logo: '/lovable-uploads/87573245-503b-47bb-b4c4-cc146b6aaae9.png' },
     { name: 'DS Smith', logo: '/lovable-uploads/390f276a-c28b-4673-90e8-9597a05710ef.png' },
-    { name: 'GTHR', logo: '/lovable-uploads/0dac7fe8-118a-4237-8a94-cf942035abc1.png' }
+    { name: 'GTHR', logo: '/lovable-uploads/0dac7fe8-118a-4237-8a94-cf942035abc1.png' },
+    { name: '3M', logo: '/lovable-uploads/1d6ea078-fd2c-4f0d-a181-5d05da5aa2e4.png' },
+    { name: 'Walgo', logo: '/lovable-uploads/f94101ae-b323-4fd6-8617-ad3cb1638fd7.png' },
+    { name: 'Oleofarm', logo: '/lovable-uploads/e7addfaa-d3a7-4fb7-8577-d1be9b3cbc4a.png' },
+    { name: 'ZF', logo: '/lovable-uploads/8af76837-91e5-4d32-acb8-7b9677852535.png' },
+    { name: 'Mask Authority', logo: '/lovable-uploads/8158ab6b-33a7-49c2-a634-0eba61e5df4a.png' },
+    { name: 'Colgate-Palmolive', logo: '/lovable-uploads/414a8841-5ff7-4841-a874-743f6752295e.png' },
+    { name: 'Collins Aerospace', logo: '/lovable-uploads/02055021-d4ef-4d85-8eff-95ead97d9b26.png' },
+    { name: 'Nutricia', logo: '/lovable-uploads/7ea5d964-6154-49e1-af19-b0f9b4b5e9e4.png' },
+    { name: 'Cargill', logo: '/lovable-uploads/7d1e6908-562e-40c8-b4c0-ca5c23507339.png' }
   ];
 
   return (
