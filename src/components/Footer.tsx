@@ -46,7 +46,7 @@ const Footer = () => {
                 <a href="https://www.tiktok.com/@pawelodudt" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
                   <TikTokIcon size={20} />
                 </a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+                <a href="https://www.linkedin.com/in/pawel-gerus-well-donepl/?originalSubdomain=pl" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
                   <Linkedin size={20} />
                 </a>
                 <a href="https://www.youtube.com/@Well-Done.Szkolenia" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
