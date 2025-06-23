@@ -2,13 +2,16 @@ import React, { useState, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { ArrowRight, Calculator, Clock, Phone, Mail, CheckCircle, Star, Loader2 } from 'lucide-react';
+import { ArrowRight, Calculator, Clock, CheckCircle, Star, Loader2 } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
+import ClickablePhone from '@/components/ClickablePhone';
+import ClickableEmail from '@/components/ClickableEmail';
 import FormStep1 from './BottomQuoteForm/FormStep1';
 import FormStep2 from './BottomQuoteForm/FormStep2';
 import FormStep3 from './BottomQuoteForm/FormStep3';
+
 interface FormData {
   serviceType: string;
   participantCount: string;
@@ -275,14 +278,18 @@ ${formData.additionalInfo || 'Brak dodatkowych informacji'}
                 <div className="text-center">
                   <h4 className="font-semibold text-gray-800 mb-4">Potrzebujesz pomocy?</h4>
                   <div className="space-y-3">
-                    <div className="flex items-center justify-center text-gray-600">
-                      <Phone className="w-4 h-4 mr-2" />
-                      <span className="text-sm">+48 504 305 437</span>
-                    </div>
-                    <div className="flex items-center justify-center text-gray-600">
-                      <Mail className="w-4 h-4 mr-2" />
-                      <span className="text-sm">kontakt@well-done.pl</span>
-                    </div>
+                    <ClickablePhone 
+                      phoneNumber="+48 504 305 437"
+                      className="text-gray-600 text-sm justify-center"
+                      showIcon={true}
+                      iconClassName="w-4 h-4 mr-2 text-orange-400"
+                    />
+                    <ClickableEmail 
+                      email="kontakt@well-done.pl"
+                      className="text-gray-600 text-sm justify-center"
+                      showIcon={true}
+                      iconClassName="w-4 h-4 mr-2 text-orange-400"
+                    />
                   </div>
                 </div>
               </CardContent>
