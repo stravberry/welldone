@@ -22,7 +22,7 @@ const EnhancedTestimonialsSection = () => {
     {
       quote: "Wysoko oceniamy materiały przygotowane przez firmę Well Done na nasz kurs. Zostały one przygotowane w sposób profesjonalny pod względem dydaktycznym. Reasumując, jesteśmy zadowoleni z metodyki przeprowadzonego kursu, z wiedzy i przygotowania do zajęć Wykładowcy oraz przygotowanych materiałów.",
       company: "LG",
-      logo: "LG",
+      logo: "/lovable-uploads/775e72b5-a5ab-4c3d-bdb8-7e4862889cba.png",
       rating: 5
     }
   ];
