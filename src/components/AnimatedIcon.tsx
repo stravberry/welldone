@@ -26,17 +26,15 @@ const AnimatedIcon: React.FC<AnimatedIconProps> = ({ type, size = 120, className
       <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full blur-2xl opacity-60 animate-pulse scale-150" />
       <div className="absolute inset-0 bg-orange-500 rounded-full blur-xl opacity-40 animate-ping" />
       
-      {/* Main icon container */}
-      <div className="relative bg-gradient-to-br from-orange-500 via-orange-600 to-orange-700 p-8 rounded-full shadow-2xl">
-        <Icon 
-          size={size} 
-          className="text-white animate-bounce drop-shadow-lg" 
-          style={{ 
-            animationDuration: '2s',
-            filter: 'drop-shadow(0 0 10px rgba(255,255,255,0.5))'
-          }}
-        />
-      </div>
+      {/* Just the icon without background container */}
+      <Icon 
+        size={size} 
+        className="text-white animate-bounce drop-shadow-lg relative z-10" 
+        style={{ 
+          animationDuration: '2s',
+          filter: 'drop-shadow(0 0 10px rgba(255,255,255,0.5))'
+        }}
+      />
       
       {/* Orbiting particles */}
       <div className="absolute inset-0 animate-spin" style={{ animationDuration: '20s' }}>
