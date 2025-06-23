@@ -75,7 +75,7 @@ const AboutPage = () => {
           >
             <div className="flex justify-center mb-6 sm:mb-8">
               <AnimatedIcon 
-                type="heart" 
+                type="users" 
                 className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 aspect-square flex-shrink-0 transform hover:scale-110 transition-transform duration-300" 
               />
             </div>

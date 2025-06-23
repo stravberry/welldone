@@ -1,9 +1,9 @@
 
 import React from 'react';
-import { Award, Lightbulb, Heart, Shield } from 'lucide-react';
+import { Award, Lightbulb, Heart, Shield, Users, Handshake } from 'lucide-react';
 
 interface AnimatedIconProps {
-  type: 'award' | 'lightbulb' | 'heart' | 'shield';
+  type: 'award' | 'lightbulb' | 'heart' | 'shield' | 'users' | 'handshake';
   size?: number;
   className?: string;
 }
@@ -13,7 +13,9 @@ const AnimatedIcon: React.FC<AnimatedIconProps> = ({ type, size = 120, className
     award: Award,
     lightbulb: Lightbulb,
     heart: Heart,
-    shield: Shield
+    shield: Shield,
+    users: Users,
+    handshake: Handshake
   };
 
   const Icon = iconMap[type];
