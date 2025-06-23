@@ -10,7 +10,7 @@ const EnhancedTestimonialsSection = () => {
     {
       quote: "W trakcie współpracy zrealizowano kursy dla 31 grup szkoleniowych. Pracownicy i trenerzy firmy Well-Done.pl wykazywali się profesjonalizmem i rzetelnością. Na szczególną uwagę zasługuje wysoki poziom zaangażowania oraz elastyczne podejście do wyzwań jakie pojawiły się w trakcie współpracy.",
       company: "3M",
-      logo: "3M",
+      logo: "/lovable-uploads/fb097357-e01e-4e8d-a791-8d1bc80cb34c.png",
       rating: 5
     },
     {
@@ -63,8 +63,16 @@ const EnhancedTestimonialsSection = () => {
         {/* Company info */}
         <div className="flex items-center justify-between relative z-10">
           <div className="flex items-center">
-            <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center mr-4">
-              <span className="text-white font-bold text-sm">{testimonial.logo}</span>
+            <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-4 border border-gray-200">
+              {testimonial.logo.startsWith('/') ? (
+                <img 
+                  src={testimonial.logo} 
+                  alt={`${testimonial.company} logo`}
+                  className="max-w-full max-h-full object-contain"
+                />
+              ) : (
+                <span className="text-gray-800 font-bold text-sm">{testimonial.logo}</span>
+              )}
             </div>
             <div>
               <div className="font-semibold text-gray-900">{testimonial.company}</div>
