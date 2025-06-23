@@ -9,14 +9,15 @@ const PartnersSection = () => {
   });
 
   const partners = [
-    { name: '3M', logo: '3M' },
-    { name: 'WAGO', logo: 'WAGO' },
-    { name: 'LG', logo: 'LG' },
-    { name: 'Siemens', logo: 'SIEMENS' },
-    { name: 'Samsung', logo: 'SAMSUNG' },
-    { name: 'Bosch', logo: 'BOSCH' },
-    { name: 'Philips', logo: 'PHILIPS' },
-    { name: 'ABB', logo: 'ABB' }
+    { name: 'Integer.pl', logo: '/lovable-uploads/0a2ae962-c06c-418a-b66b-907402b760a4.png' },
+    { name: 'Parker', logo: '/lovable-uploads/55a487c4-fa08-4983-94f4-38a9d215ce0d.png' },
+    { name: 'SteriPack', logo: '/lovable-uploads/88b74fff-f073-4ff7-a9b8-5fa5c4db6116.png' },
+    { name: 'Boart Longyear', logo: '/lovable-uploads/a19e13b7-2a90-4931-a065-45e2f54f7d31.png' },
+    { name: 'Elica', logo: '/lovable-uploads/2e5d717c-013b-4811-8603-c44aa25d8b41.png' },
+    { name: 'Sörling', logo: '/lovable-uploads/2acf80ce-5ce2-4675-9ea3-acfaea907e2d.png' },
+    { name: 'Bartek Candles', logo: '/lovable-uploads/87573245-503b-47bb-b4c4-cc146b6aaae9.png' },
+    { name: 'DS Smith', logo: '/lovable-uploads/390f276a-c28b-4673-90e8-9597a05710ef.png' },
+    { name: 'GTHR', logo: '/lovable-uploads/0dac7fe8-118a-4237-8a94-cf942035abc1.png' }
   ];
 
   return (
@@ -57,15 +58,12 @@ const PartnersSection = () => {
                 key={`first-${partner.name}`}
                 className="mx-8 flex-shrink-0"
               >
-                <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-orange-200 min-w-[160px]">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-gray-700 mb-2">
-                      {partner.logo}
-                    </div>
-                    <div className="text-xs text-gray-500 uppercase tracking-wide">
-                      Partner
-                    </div>
-                  </div>
+                <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-orange-200 min-w-[180px] h-[120px] flex items-center justify-center">
+                  <img 
+                    src={partner.logo} 
+                    alt={`${partner.name} logo`}
+                    className="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                  />
                 </div>
               </div>
             ))}
@@ -75,15 +73,12 @@ const PartnersSection = () => {
                 key={`second-${partner.name}`}
                 className="mx-8 flex-shrink-0"
               >
-                <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-orange-200 min-w-[160px]">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-gray-700 mb-2">
-                      {partner.logo}
-                    </div>
-                    <div className="text-xs text-gray-500 uppercase tracking-wide">
-                      Partner
-                    </div>
-                  </div>
+                <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-orange-200 min-w-[180px] h-[120px] flex items-center justify-center">
+                  <img 
+                    src={partner.logo} 
+                    alt={`${partner.name} logo`}
+                    className="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                  />
                 </div>
               </div>
             ))}
