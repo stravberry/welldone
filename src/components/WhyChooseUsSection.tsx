@@ -31,11 +31,11 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
   const cooperatingCompanies = [
     { name: 'UDT', logo: '/lovable-uploads/fc113f21-4e0a-4b9a-aaf9-f22ad0623f9b.png' },
     { name: 'TDT', logo: '/lovable-uploads/dff32973-25de-4c17-ac6c-7dee76c2c74c.png' },
-    { name: 'WDI', logo: '/lovable-uploads/wdi-logo.png' },
+    { name: 'WDI', logo: '/lovable-uploads/9e854999-7cb9-4120-bd0a-f2eb8911834c.png' },
     { name: 'CPKZ Wrocław', logo: '/lovable-uploads/cpkz-logo.png' },
     { name: 'PUP Wrocław', logo: '/lovable-uploads/def966ea-cd05-4d1d-98e5-bfb8ae149ca4.png' },
     { name: 'SEP', logo: '/lovable-uploads/94311598-c54a-4825-8c5a-7ab251653eef.png' },
-    { name: 'SPE', logo: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=200&h=100&fit=crop&crop=center' }
+    { name: 'SPE', logo: '/lovable-uploads/e412dee8-39ee-449c-b2f3-d78314cfe175.png' }
   ];
 
   const registeredCompanies = [
