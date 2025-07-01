@@ -90,9 +90,6 @@ const Footer = () => {
                 <li>
                   <Link to="/uslugi/lutowanie" className="text-gray-400 hover:text-white">Szkolenia z lutowania</Link>
                 </li>
-                <li>
-                  <Link to="/uslugi/eventy" className="text-gray-400 hover:text-white">Eventy edukacyjne</Link>
-                </li>
               </ul>
             </div>
             
