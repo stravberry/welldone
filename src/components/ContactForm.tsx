@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
@@ -198,7 +199,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
               page: window.location.pathname
             }
           })} 
-          className="w-full transition-all duration-300 hover:scale-105 hover:shadow-lg bg-blue-500 hover:bg-blue-400 disabled:opacity-50"
+          className="w-full transition-all duration-300 hover:scale-105 hover:shadow-lg bg-orange-500 hover:bg-orange-400 disabled:opacity-50"
         >
           {isSubmitting ? 'Wysyłanie...' : 'Wyślij wiadomość'}
         </Button>
