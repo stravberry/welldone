@@ -1,5 +1,4 @@
 
-
 import React, { useState, useRef, useCallback, useMemo } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
@@ -657,4 +656,3 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
 EnhancedQuoteForm.displayName = 'EnhancedQuoteForm';
 
 export default EnhancedQuoteForm;
-
