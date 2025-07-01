@@ -1,5 +1,4 @@
-
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback, useMemo } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -24,9 +23,9 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
   const serviceType = watch('serviceType');
   const participantsCount = watch('participantsCount');
   
-  const getProgress = () => (step / 3) * 100;
+  const getProgress = useCallback(() => (step / 3) * 100, [step]);
 
-  const getServiceTypeLabel = (type: string) => {
+  const getServiceTypeLabel = useCallback((type: string) => {
     const labels = {
       'udt-operator': 'Uprawnienia UDT dla operatorów',
       'udt-conservator': 'Uprawnienia UDT dla konserwatorów',
@@ -34,9 +33,9 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
       'forklifts': 'Wózki unoszące'
     };
     return labels[type] || type;
-  };
+  }, []);
 
-  const getParticipantsLabel = (count: string) => {
+  const getParticipantsLabel = useCallback((count: string) => {
     const labels = {
       '1': '1 osoba',
       '2-5': '2-5 osób',
@@ -45,9 +44,9 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
       '15+': 'Powyżej 15 pracowników'
     };
     return labels[count] || count;
-  };
+  }, []);
 
-  const formatQuoteMessage = (data: any) => {
+  const formatQuoteMessage = useCallback((data: any) => {
     let message = `=== ZAPYTANIE O WYCENĘ SZKOLENIA ===\n\n`;
     
     message += `Rodzaj usługi: ${getServiceTypeLabel(data.serviceType)}\n`;
@@ -72,9 +71,9 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
     message += `\n=== KONIEC ZAPYTANIA ===`;
     
     return message;
-  };
+  }, [getServiceTypeLabel, getParticipantsLabel]);
   
-  const onSubmit = async (data: any) => {
+  const onSubmit = useCallback(async (data: any) => {
     if (step < 3) {
       setFormData({ ...formData, ...data });
       setStep(step + 1);
@@ -167,9 +166,9 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
         setIsSubmitting(false);
       }
     }
-  };
+  }, [step, formData, ref, trackEvent, formatQuoteMessage, getServiceTypeLabel, getParticipantsLabel, reset]);
   
-  const goBack = () => {
+  const goBack = useCallback(() => {
     if (step === 2) {
       // Wyczyść wybór usługi, żeby użytkownik mógł wybrać ponownie
       setValue('serviceType', '');
@@ -177,13 +176,70 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
     setStep(step - 1);
     const formElement = ref as React.RefObject<HTMLDivElement>;
     formElement.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  }, [step, setValue, ref]);
 
-  const stepTitles = [
+  const stepTitles = useMemo(() => [
     'Wybierz usługę',
     'Szczegóły szkolenia',
     'Dane kontaktowe'
-  ];
+  ], []);
+
+  const serviceOptions = useMemo(() => [
+    { 
+      value: 'udt-operator', 
+      label: 'Uprawnienia UDT dla operatorów', 
+      desc: 'Szkolenia i egzaminy dla operatorów maszyn i urządzeń',
+      icon: '🏭'
+    },
+    { 
+      value: 'udt-conservator', 
+      label: 'Uprawnienia UDT dla konserwatorów', 
+      desc: 'Szkolenia dla konserwatorów urządzeń technicznych',
+      icon: '🔧'
+    },
+    { 
+      value: 'sep', 
+      label: 'Uprawnienia SEP', 
+      desc: 'Szkolenia elektryczne, cieplne i gazowe',
+      icon: '⚡'
+    },
+    { 
+      value: 'forklifts', 
+      label: 'Wózki unoszące', 
+      desc: 'Szkolenia na wózki widłowe i platformy',
+      icon: '🚛'
+    }
+  ], []);
+
+  const udtOperatorOptions = useMemo(() => [
+    { value: 'forklifts', label: 'Wózki widłowe', desc: 'Wszystkie kategorie', icon: '🚛' },
+    { value: 'cranes', label: 'Suwnice', desc: 'Wszystkie kategorie', icon: '🏭' },
+    { value: 'winches', label: 'Wciągniki i wciągarki', desc: 'Wszystkie kategorie', icon: '⚙️' },
+    { value: 'platforms', label: 'Podesty ruchome', desc: '', icon: '🏗️' },
+    { value: 'storage-stacker', label: 'Układnice magazynowe', desc: '', icon: '📦' },
+    { value: 'stationary-cranes', label: 'Żurawie stacjonarne', desc: '', icon: '🚧' }
+  ], []);
+
+  const udtConservatorOptions = useMemo(() => [
+    { value: 'cranes', label: 'Suwnice', desc: 'Wszystkie kategorie', icon: '🏭' },
+    { value: 'winches', label: 'Wciągniki i wciągarki', desc: 'Wszystkie kategorie', icon: '⚙️' },
+    { value: 'stationary-cranes', label: 'Żurawie stacjonarne', desc: '', icon: '🚧' },
+    { value: 'storage-stacker', label: 'Układnice magazynowe', desc: '', icon: '📦' }
+  ], []);
+
+  const sepOptions = useMemo(() => [
+    { value: 'electrical', label: 'Elektryczne [E1, D1]', icon: '⚡' },
+    { value: 'thermal', label: 'Cieplne [E2, D2]', icon: '🔥' },
+    { value: 'gas', label: 'Gazowe [E3, D3]', icon: '🔥' }
+  ], []);
+
+  const participantOptions = useMemo(() => [
+    { value: '1', label: '1 osoba', icon: '👤' },
+    { value: '2-5', label: '2-5 osób', icon: '👥' },
+    { value: '6-10', label: '6-10 osób', icon: '👫' },
+    { value: '11-15', label: '11-15 osób', icon: '👨‍👩‍👧‍👦' },
+    { value: '15+', label: 'Powyżej 15 pracowników', icon: '🏢' }
+  ], []);
 
   return (
     <div ref={ref} className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 max-w-4xl mx-auto">
@@ -242,32 +298,7 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                     value={field.value || ''}
                     className="grid grid-cols-2 gap-4"
                   >
-                    {[
-                      { 
-                        value: 'udt-operator', 
-                        label: 'Uprawnienia UDT dla operatorów', 
-                        desc: 'Szkolenia i egzaminy dla operatorów maszyn i urządzeń',
-                        icon: '🏭'
-                      },
-                      { 
-                        value: 'udt-conservator', 
-                        label: 'Uprawnienia UDT dla konserwatorów', 
-                        desc: 'Szkolenia dla konserwatorów urządzeń technicznych',
-                        icon: '🔧'
-                      },
-                      { 
-                        value: 'sep', 
-                        label: 'Uprawnienia SEP', 
-                        desc: 'Szkolenia elektryczne, cieplne i gazowe',
-                        icon: '⚡'
-                      },
-                      { 
-                        value: 'forklifts', 
-                        label: 'Wózki unoszące', 
-                        desc: 'Szkolenia na wózki widłowe i platformy',
-                        icon: '🚛'
-                      }
-                    ].map((option) => (
+                    {serviceOptions.map((option) => (
                       <div key={option.value} className="relative">
                         <RadioGroupItem 
                           value={option.value} 
@@ -323,14 +354,7 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                       value={field.value || ''}
                       className="grid grid-cols-2 gap-3"
                     >
-                      {[
-                        { value: 'forklifts', label: 'Wózki widłowe', desc: 'Wszystkie kategorie', icon: '🚛' },
-                        { value: 'winches', label: 'Wciągniki i wciągarki', desc: 'Wszystkie kategorie', icon: '⚙️' },
-                        { value: 'platforms', label: 'Podesty ruchome', desc: '', icon: '🏗️' },
-                        { value: 'cranes', label: 'Suwnice', desc: 'Wszystkie kategorie', icon: '🏭' },
-                        { value: 'storage-stacker', label: 'Układnice magazynowe', desc: '', icon: '📦' },
-                        { value: 'stationary-cranes', label: 'Żurawie stacjonarne', desc: '', icon: '🚧' }
-                      ].map((option) => (
+                      {udtOperatorOptions.map((option) => (
                         <div key={option.value} className="relative">
                           <RadioGroupItem 
                             value={option.value} 
@@ -371,12 +395,7 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                       value={field.value || ''}
                       className="grid grid-cols-2 gap-3"
                     >
-                      {[
-                        { value: 'cranes', label: 'Suwnice', desc: 'Wszystkie kategorie', icon: '🏭' },
-                        { value: 'winches', label: 'Wciągniki i wciągarki', desc: 'Wszystkie kategorie', icon: '⚙️' },
-                        { value: 'stationary-cranes', label: 'Żurawie stacjonarne', desc: '', icon: '🚧' },
-                        { value: 'storage-stacker', label: 'Układnice magazynowe', desc: '', icon: '📦' }
-                      ].map((option) => (
+                      {udtConservatorOptions.map((option) => (
                         <div key={option.value} className="relative">
                           <RadioGroupItem 
                             value={option.value} 
@@ -417,11 +436,7 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                       value={field.value || ''}
                       className="grid grid-cols-1 gap-3"
                     >
-                      {[
-                        { value: 'electrical', label: 'Elektryczne [E1, D1]', icon: '⚡' },
-                        { value: 'thermal', label: 'Cieplne [E2, D2]', icon: '🔥' },
-                        { value: 'gas', label: 'Gazowe [E3, D3]', icon: '🔥' }
-                      ].map((option) => (
+                      {sepOptions.map((option) => (
                         <div key={option.value} className="relative">
                           <RadioGroupItem 
                             value={option.value} 
@@ -458,13 +473,7 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                     value={field.value || ''}
                     className="grid grid-cols-2 gap-3"
                   >
-                    {[
-                      { value: '1', label: '1 osoba', icon: '👤' },
-                      { value: '2-5', label: '2-5 osób', icon: '👥' },
-                      { value: '6-10', label: '6-10 osób', icon: '👫' },
-                      { value: '11-15', label: '11-15 osób', icon: '👨‍👩‍👧‍👦' },
-                      { value: '15+', label: 'Powyżej 15 pracowników', icon: '🏢' }
-                    ].map((option) => (
+                    {participantOptions.map((option) => (
                       <div key={option.value} className="relative">
                         <RadioGroupItem 
                           value={option.value} 
