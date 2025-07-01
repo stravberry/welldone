@@ -220,7 +220,7 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
       value: 'forklifts', 
       label: 'Wózki unoszące', 
       desc: 'Szkolenia na wózki widłowe i platformy',
-      icon: <Forklift className="h-8 w-8" />
+      icon: <img src="/lovable-uploads/a6019978-6a0d-47ee-9dc4-ab2633c22ea9.png" alt="Pallet jack icon" className="h-8 w-8" />
     }
   ], []);
 
