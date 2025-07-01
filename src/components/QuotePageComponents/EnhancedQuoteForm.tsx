@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+
+import React, { useState, useRef, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -23,6 +24,18 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
   const serviceType = watch('serviceType');
   const participantsCount = watch('participantsCount');
   
+  // Automatyczne przejście do następnego kroku po wyborze usługi
+  useEffect(() => {
+    if (serviceType && step === 1) {
+      const timer = setTimeout(() => {
+        setStep(2);
+        const formElement = ref as React.RefObject<HTMLDivElement>;
+        formElement.current?.scrollIntoView({ behavior: 'smooth' });
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [serviceType, step, ref]);
+  
   const getProgress = () => (step / 3) * 100;
   
   const getEstimatedPrice = () => {
@@ -32,9 +45,7 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
       'udt-operator': 500,
       'udt-conservator': 600,
       'sep': 450,
-      'soldering': 350,
-      'forklifts': 400,
-      'refresher': 250
+      'forklifts': 400
     };
     
     const multipliers = {
@@ -60,9 +71,7 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
       'udt-operator': 'Uprawnienia UDT dla operatorów',
       'udt-conservator': 'Uprawnienia UDT dla konserwatorów',
       'sep': 'Uprawnienia SEP',
-      'soldering': 'Szkolenie lutownicze',
-      'forklifts': 'Wózki unoszące',
-      'refresher': 'Szkolenia przypominające'
+      'forklifts': 'Wózki unoszące'
     };
     return labels[type] || type;
   };
@@ -262,8 +271,8 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
       <div className="p-4 sm:p-6 lg:p-8">
         {step === 1 && (
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-900">Wybierz rodzaj usługi szkoleniowej</h3>
+            <div className="space-y-6">
+              <h3 className="text-lg font-semibold text-gray-900 text-center">Wybierz rodzaj usługi szkoleniowej</h3>
               <Controller
                 name="serviceType"
                 control={control}
@@ -272,39 +281,56 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                   <RadioGroup
                     onValueChange={field.onChange}
                     defaultValue={field.value}
-                    className="space-y-3"
+                    className="grid grid-cols-1 sm:grid-cols-2 gap-4"
                   >
                     {[
-                      { value: 'udt-operator', label: 'Uprawnienia UDT dla operatorów', desc: 'Szkolenia i egzaminy dla operatorów maszyn i urządzeń' },
-                      { value: 'udt-conservator', label: 'Uprawnienia UDT dla konserwatorów', desc: 'Szkolenia dla konserwatorów urządzeń technicznych' },
-                      { value: 'sep', label: 'Uprawnienia SEP', desc: 'Szkolenia elektryczne, cieplne i gazowe' },
-                      { value: 'soldering', label: 'Szkolenie lutownicze', desc: 'Kursy lutowania dla różnych branż' },
-                      { value: 'forklifts', label: 'Wózki unoszące', desc: 'Szkolenia na wózki widłowe i platformy' },
-                      { value: 'refresher', label: 'Szkolenia przypominające', desc: 'Odświeżenie wiedzy i uprawnień' }
+                      { 
+                        value: 'udt-operator', 
+                        label: 'Uprawnienia UDT dla operatorów', 
+                        desc: 'Szkolenia i egzaminy dla operatorów maszyn i urządzeń',
+                        icon: '🏭'
+                      },
+                      { 
+                        value: 'udt-conservator', 
+                        label: 'Uprawnienia UDT dla konserwatorów', 
+                        desc: 'Szkolenia dla konserwatorów urządzeń technicznych',
+                        icon: '🔧'
+                      },
+                      { 
+                        value: 'sep', 
+                        label: 'Uprawnienia SEP', 
+                        desc: 'Szkolenia elektryczne, cieplne i gazowe',
+                        icon: '⚡'
+                      },
+                      { 
+                        value: 'forklifts', 
+                        label: 'Wózki unoszące', 
+                        desc: 'Szkolenia na wózki widłowe i platformy',
+                        icon: '🚛'
+                      }
                     ].map((option) => (
-                      <div key={option.value} className="flex items-start space-x-3 p-3 rounded-lg border border-gray-200 hover:border-amber-300 hover:bg-amber-50 transition-all duration-200 cursor-pointer">
-                        <RadioGroupItem value={option.value} id={option.value} className="mt-1" />
-                        <div className="flex-1">
-                          <Label htmlFor={option.value} className="font-medium text-gray-900 cursor-pointer block">
-                            {option.label}
-                          </Label>
-                          <p className="text-sm text-gray-600 mt-1">{option.desc}</p>
-                        </div>
+                      <div key={option.value} className="relative">
+                        <RadioGroupItem 
+                          value={option.value} 
+                          id={option.value} 
+                          className="sr-only peer"
+                        />
+                        <Label 
+                          htmlFor={option.value} 
+                          className="flex flex-col items-center justify-center p-6 bg-white border-2 border-gray-200 rounded-xl cursor-pointer hover:border-amber-300 hover:bg-amber-50 transition-all duration-200 peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:shadow-md min-h-[160px]"
+                        >
+                          <div className="text-3xl mb-3">{option.icon}</div>
+                          <div className="font-semibold text-gray-900 mb-2 text-center text-sm">{option.label}</div>
+                          <p className="text-xs text-gray-600 text-center leading-relaxed">{option.desc}</p>
+                        </Label>
                       </div>
                     ))}
                   </RadioGroup>
                 )}
               />
               {errors.serviceType && (
-                <p className="text-red-500 text-sm">{errors.serviceType.message as string}</p>
+                <p className="text-red-500 text-sm text-center">{errors.serviceType.message as string}</p>
               )}
-            </div>
-            
-            <div className="flex justify-end pt-4">
-              <Button type="submit" size="lg" className="bg-amber-500 hover:bg-amber-600 text-white px-8 py-3 font-semibold">
-                Dalej
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
             </div>
           </form>
         )}
