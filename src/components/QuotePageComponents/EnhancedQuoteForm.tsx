@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useCallback, useMemo } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
@@ -303,7 +304,7 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                         <RadioGroupItem 
                           value={option.value} 
                           id={option.value} 
-                          className="sr-only peer"
+                          className="peer sr-only"
                         />
                         <Label 
                           htmlFor={option.value} 
@@ -358,11 +359,11 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                         <div key={option.value} className="relative">
                           <RadioGroupItem 
                             value={option.value} 
-                            id={option.value} 
-                            className="sr-only peer"
+                            id={`udt-op-${option.value}`} 
+                            className="peer sr-only"
                           />
                           <Label 
-                            htmlFor={option.value} 
+                            htmlFor={`udt-op-${option.value}`} 
                             className="flex flex-col items-center justify-center p-4 bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:border-amber-300 hover:bg-amber-50 transition-all duration-200 peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:shadow-md min-h-[100px]"
                           >
                             <div className="text-2xl mb-2">{option.icon}</div>
@@ -399,11 +400,11 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                         <div key={option.value} className="relative">
                           <RadioGroupItem 
                             value={option.value} 
-                            id={option.value} 
-                            className="sr-only peer"
+                            id={`udt-con-${option.value}`} 
+                            className="peer sr-only"
                           />
                           <Label 
-                            htmlFor={option.value} 
+                            htmlFor={`udt-con-${option.value}`} 
                             className="flex flex-col items-center justify-center p-4 bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:border-amber-300 hover:bg-amber-50 transition-all duration-200 peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:shadow-md min-h-[100px]"
                           >
                             <div className="text-2xl mb-2">{option.icon}</div>
@@ -440,11 +441,11 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                         <div key={option.value} className="relative">
                           <RadioGroupItem 
                             value={option.value} 
-                            id={option.value} 
-                            className="sr-only peer"
+                            id={`sep-${option.value}`} 
+                            className="peer sr-only"
                           />
                           <Label 
-                            htmlFor={option.value} 
+                            htmlFor={`sep-${option.value}`} 
                             className="flex items-center p-4 bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:border-amber-300 hover:bg-amber-50 transition-all duration-200 peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:shadow-md"
                           >
                             <div className="text-2xl mr-4">{option.icon}</div>
@@ -478,7 +479,7 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                         <RadioGroupItem 
                           value={option.value} 
                           id={`participants-${option.value}`} 
-                          className="sr-only peer"
+                          className="peer sr-only"
                         />
                         <Label 
                           htmlFor={`participants-${option.value}`} 
