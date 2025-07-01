@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
@@ -281,7 +280,7 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                   <RadioGroup
                     onValueChange={field.onChange}
                     defaultValue={field.value}
-                    className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+                    className="grid grid-cols-2 gap-4"
                   >
                     {[
                       { 
@@ -341,15 +340,15 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
             
             {serviceType === 'udt-operator' && (
               <div className="space-y-2">
-                <Label htmlFor="udtOperatorType" className="text-base font-medium">Wybierz maszynę lub pojazd</Label>
+                <Label htmlFor="udtOperatorType" className="text-base font-medium">Wybierz urządzenie lub kategorię uprawnień</Label>
                 <Controller
                   name="udtOperatorType"
                   control={control}
-                  rules={{ required: "Wybierz maszynę lub pojazd" }}
+                  rules={{ required: "Wybierz urządzenie lub kategorię uprawnień" }}
                   render={({ field }) => (
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <SelectTrigger className="h-12">
-                        <SelectValue placeholder="Wybierz maszynę lub pojazd" />
+                        <SelectValue placeholder="Wybierz urządzenie lub kategorię uprawnień" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="forklifts-standard">Wózki bez specjalizowanych</SelectItem>
@@ -371,15 +370,15 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
             
             {serviceType === 'udt-conservator' && (
               <div className="space-y-2">
-                <Label htmlFor="udtConservatorType" className="text-base font-medium">Wybierz maszynę lub pojazd</Label>
+                <Label htmlFor="udtConservatorType" className="text-base font-medium">Wybierz urządzenie lub kategorię uprawnień</Label>
                 <Controller
                   name="udtConservatorType"
                   control={control}
-                  rules={{ required: "Wybierz maszynę lub pojazd" }}
+                  rules={{ required: "Wybierz urządzenie lub kategorię uprawnień" }}
                   render={({ field }) => (
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <SelectTrigger className="h-12">
-                        <SelectValue placeholder="Wybierz maszynę lub pojazd" />
+                        <SelectValue placeholder="Wybierz urządzenie lub kategorię uprawnień" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="cranes">Suwnice</SelectItem>
