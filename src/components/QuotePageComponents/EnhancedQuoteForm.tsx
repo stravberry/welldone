@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
@@ -344,111 +343,175 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
             <h3 className="text-lg font-semibold text-gray-900">Szczegóły szkolenia</h3>
             
             {serviceType === 'udt-operator' && (
-              <div className="space-y-2">
-                <Label htmlFor="udtOperatorType" className="text-base font-medium">Wybierz urządzenie lub kategorię uprawnień</Label>
+              <div className="space-y-4">
+                <h4 className="text-base font-medium text-gray-800 text-center">Wybierz urządzenie lub kategorię uprawnień</h4>
                 <Controller
                   name="udtOperatorType"
                   control={control}
                   rules={{ required: "Wybierz urządzenie lub kategorię uprawnień" }}
                   render={({ field }) => (
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <SelectTrigger className="h-12">
-                        <SelectValue placeholder="Wybierz urządzenie lub kategorię uprawnień" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="forklifts-standard">Wózki bez specjalizowanych</SelectItem>
-                        <SelectItem value="winches">Wciągniki i wciągarki</SelectItem>
-                        <SelectItem value="platforms">Podesty ruchome</SelectItem>
-                        <SelectItem value="cranes">Suwnice</SelectItem>
-                        <SelectItem value="storage-stacker">Układnice magazynowe</SelectItem>
-                        <SelectItem value="forklifts-specialized">Wózki specjalizowane</SelectItem>
-                        <SelectItem value="stationary-cranes">Żurawie stacjonarne</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      value={field.value || ''}
+                      className="grid grid-cols-2 gap-3"
+                    >
+                      {[
+                        { value: 'forklifts-standard', label: 'Wózki bez specjalizowanych', icon: '🚛' },
+                        { value: 'winches', label: 'Wciągniki i wciągarki', icon: '⚙️' },
+                        { value: 'platforms', label: 'Podesty ruchome', icon: '🏗️' },
+                        { value: 'cranes', label: 'Suwnice', icon: '🏭' },
+                        { value: 'storage-stacker', label: 'Układnice magazynowe', icon: '📦' },
+                        { value: 'forklifts-specialized', label: 'Wózki specjalizowane', icon: '🚜' },
+                        { value: 'stationary-cranes', label: 'Żurawie stacjonarne', icon: '🚧' }
+                      ].map((option) => (
+                        <div key={option.value} className="relative">
+                          <RadioGroupItem 
+                            value={option.value} 
+                            id={option.value} 
+                            className="sr-only peer"
+                          />
+                          <Label 
+                            htmlFor={option.value} 
+                            className="flex flex-col items-center justify-center p-4 bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:border-amber-300 hover:bg-amber-50 transition-all duration-200 peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:shadow-md min-h-[100px]"
+                          >
+                            <div className="text-2xl mb-2">{option.icon}</div>
+                            <div className="font-medium text-gray-900 text-center text-sm">{option.label}</div>
+                          </Label>
+                        </div>
+                      ))}
+                    </RadioGroup>
                   )}
                 />
                 {errors.udtOperatorType && (
-                  <p className="text-red-500 text-sm">{errors.udtOperatorType.message as string}</p>
+                  <p className="text-red-500 text-sm text-center">{errors.udtOperatorType.message as string}</p>
                 )}
               </div>
             )}
             
             {serviceType === 'udt-conservator' && (
-              <div className="space-y-2">
-                <Label htmlFor="udtConservatorType" className="text-base font-medium">Wybierz urządzenie lub kategorię uprawnień</Label>
+              <div className="space-y-4">
+                <h4 className="text-base font-medium text-gray-800 text-center">Wybierz urządzenie lub kategorię uprawnień</h4>
                 <Controller
                   name="udtConservatorType"
                   control={control}
                   rules={{ required: "Wybierz urządzenie lub kategorię uprawnień" }}
                   render={({ field }) => (
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <SelectTrigger className="h-12">
-                        <SelectValue placeholder="Wybierz urządzenie lub kategorię uprawnień" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="cranes">Suwnice</SelectItem>
-                        <SelectItem value="winches">Wciągniki i wciągarki</SelectItem>
-                        <SelectItem value="stationary-cranes">Żurawie stacjonarne</SelectItem>
-                        <SelectItem value="storage-stacker">Układnice magazynowe</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      value={field.value || ''}
+                      className="grid grid-cols-2 gap-3"
+                    >
+                      {[
+                        { value: 'cranes', label: 'Suwnice', icon: '🏭' },
+                        { value: 'winches', label: 'Wciągniki i wciągarki', icon: '⚙️' },
+                        { value: 'stationary-cranes', label: 'Żurawie stacjonarne', icon: '🚧' },
+                        { value: 'storage-stacker', label: 'Układnice magazynowe', icon: '📦' }
+                      ].map((option) => (
+                        <div key={option.value} className="relative">
+                          <RadioGroupItem 
+                            value={option.value} 
+                            id={option.value} 
+                            className="sr-only peer"
+                          />
+                          <Label 
+                            htmlFor={option.value} 
+                            className="flex flex-col items-center justify-center p-4 bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:border-amber-300 hover:bg-amber-50 transition-all duration-200 peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:shadow-md min-h-[100px]"
+                          >
+                            <div className="text-2xl mb-2">{option.icon}</div>
+                            <div className="font-medium text-gray-900 text-center text-sm">{option.label}</div>
+                          </Label>
+                        </div>
+                      ))}
+                    </RadioGroup>
                   )}
                 />
                 {errors.udtConservatorType && (
-                  <p className="text-red-500 text-sm">{errors.udtConservatorType.message as string}</p>
+                  <p className="text-red-500 text-sm text-center">{errors.udtConservatorType.message as string}</p>
                 )}
               </div>
             )}
             
             {serviceType === 'sep' && (
-              <div className="space-y-2">
-                <Label htmlFor="sepType" className="text-base font-medium">Wybierz rodzaj uprawnień SEP</Label>
+              <div className="space-y-4">
+                <h4 className="text-base font-medium text-gray-800 text-center">Wybierz rodzaj uprawnień SEP</h4>
                 <Controller
                   name="sepType"
                   control={control}
                   rules={{ required: "Wybierz rodzaj uprawnień SEP" }}
                   render={({ field }) => (
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <SelectTrigger className="h-12">
-                        <SelectValue placeholder="Wybierz rodzaj uprawnień SEP" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="electrical">Elektryczne [E1, D1]</SelectItem>
-                        <SelectItem value="thermal">Cieplne [E2, D2]</SelectItem>
-                        <SelectItem value="gas">Gazowe [E3, D3]</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      value={field.value || ''}
+                      className="grid grid-cols-1 gap-3"
+                    >
+                      {[
+                        { value: 'electrical', label: 'Elektryczne [E1, D1]', icon: '⚡' },
+                        { value: 'thermal', label: 'Cieplne [E2, D2]', icon: '🔥' },
+                        { value: 'gas', label: 'Gazowe [E3, D3]', icon: '🔥' }
+                      ].map((option) => (
+                        <div key={option.value} className="relative">
+                          <RadioGroupItem 
+                            value={option.value} 
+                            id={option.value} 
+                            className="sr-only peer"
+                          />
+                          <Label 
+                            htmlFor={option.value} 
+                            className="flex items-center p-4 bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:border-amber-300 hover:bg-amber-50 transition-all duration-200 peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:shadow-md"
+                          >
+                            <div className="text-2xl mr-4">{option.icon}</div>
+                            <div className="font-medium text-gray-900">{option.label}</div>
+                          </Label>
+                        </div>
+                      ))}
+                    </RadioGroup>
                   )}
                 />
                 {errors.sepType && (
-                  <p className="text-red-500 text-sm">{errors.sepType.message as string}</p>
+                  <p className="text-red-500 text-sm text-center">{errors.sepType.message as string}</p>
                 )}
               </div>
             )}
             
-            <div className="space-y-2">
-              <Label htmlFor="participantsCount" className="text-base font-medium">Liczba uczestników</Label>
+            <div className="space-y-4">
+              <h4 className="text-base font-medium text-gray-800 text-center">Liczba uczestników</h4>
               <Controller
                 name="participantsCount"
                 control={control}
                 rules={{ required: "Podaj liczbę uczestników" }}
                 render={({ field }) => (
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <SelectTrigger className="h-12">
-                      <SelectValue placeholder="Wybierz liczbę uczestników" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="1">1 osoba</SelectItem>
-                      <SelectItem value="2-5">2-5 osób</SelectItem>
-                      <SelectItem value="6-10">6-10 osób</SelectItem>
-                      <SelectItem value="11-15">11-15 osób</SelectItem>
-                      <SelectItem value="15+">Powyżej 15 pracowników</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    value={field.value || ''}
+                    className="grid grid-cols-2 gap-3"
+                  >
+                    {[
+                      { value: '1', label: '1 osoba', icon: '👤' },
+                      { value: '2-5', label: '2-5 osób', icon: '👥' },
+                      { value: '6-10', label: '6-10 osób', icon: '👫' },
+                      { value: '11-15', label: '11-15 osób', icon: '👨‍👩‍👧‍👦' },
+                      { value: '15+', label: 'Powyżej 15 pracowników', icon: '🏢' }
+                    ].map((option) => (
+                      <div key={option.value} className="relative">
+                        <RadioGroupItem 
+                          value={option.value} 
+                          id={`participants-${option.value}`} 
+                          className="sr-only peer"
+                        />
+                        <Label 
+                          htmlFor={`participants-${option.value}`} 
+                          className="flex flex-col items-center justify-center p-4 bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:border-amber-300 hover:bg-amber-50 transition-all duration-200 peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:shadow-md min-h-[100px]"
+                        >
+                          <div className="text-2xl mb-2">{option.icon}</div>
+                          <div className="font-medium text-gray-900 text-center text-sm">{option.label}</div>
+                        </Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
                 )}
               />
               {errors.participantsCount && (
-                <p className="text-red-500 text-sm">{errors.participantsCount.message as string}</p>
+                <p className="text-red-500 text-sm text-center">{errors.participantsCount.message as string}</p>
               )}
             </div>
             
