@@ -11,12 +11,15 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
 import { toast } from 'sonner';
 import { CheckCircle, ArrowRight, ArrowLeft, Mail, Euro } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import useEventTracking from '@/hooks/useEventTracking';
 
 const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
   const { register, handleSubmit, control, watch, reset, formState: { errors } } = useForm();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { trackEvent } = useEventTracking();
   
   const serviceType = watch('serviceType');
   const participantsCount = watch('participantsCount');
@@ -53,6 +56,62 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
     
     return `${basePrice * multiplier} - ${basePrice * multiplier * 1.3} PLN`;
   };
+
+  const getServiceTypeLabel = (type: string) => {
+    const labels = {
+      'udt-operator': 'Uprawnienia UDT dla operatorów',
+      'udt-conservator': 'Uprawnienia UDT dla konserwatorów',
+      'sep': 'Uprawnienia SEP',
+      'soldering': 'Szkolenie lutownicze',
+      'forklifts': 'Wózki unoszące',
+      'refresher': 'Szkolenia przypominające',
+      'events': 'Wydarzenia edukacyjne'
+    };
+    return labels[type] || type;
+  };
+
+  const getParticipantsLabel = (count: string) => {
+    const labels = {
+      '1': '1 osoba',
+      '2-5': '2-5 osób',
+      '6-10': '6-10 osób',
+      '11-15': '11-15 osób',
+      '15+': 'Powyżej 15 pracowników'
+    };
+    return labels[count] || count;
+  };
+
+  const formatQuoteMessage = (data: any) => {
+    let message = `=== ZAPYTANIE O WYCENĘ SZKOLENIA ===\n\n`;
+    
+    message += `Rodzaj usługi: ${getServiceTypeLabel(data.serviceType)}\n`;
+    
+    // Dodaj szczegóły w zależności od typu usługi
+    if (data.udtOperatorType) {
+      message += `Typ maszyny/pojazdu (UDT Operator): ${data.udtOperatorType}\n`;
+    }
+    if (data.udtConservatorType) {
+      message += `Typ maszyny/pojazdu (UDT Konserwator): ${data.udtConservatorType}\n`;
+    }
+    if (data.sepType) {
+      message += `Rodzaj uprawnień SEP: ${data.sepType}\n`;
+    }
+    
+    message += `Liczba uczestników: ${getParticipantsLabel(data.participantsCount)}\n`;
+    
+    const estimatedPrice = getEstimatedPrice();
+    if (estimatedPrice) {
+      message += `Orientacyjna cena: ${estimatedPrice}\n`;
+    }
+    
+    if (data.additionalInfo) {
+      message += `\nDodatkowe informacje:\n${data.additionalInfo}\n`;
+    }
+    
+    message += `\n=== KONIEC ZAPYTANIA ===`;
+    
+    return message;
+  };
   
   const onSubmit = async (data: any) => {
     if (step < 3) {
@@ -64,15 +123,88 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
       setIsSubmitting(true);
       const finalData = { ...formData, ...data };
       
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      console.log('Final form data:', finalData);
-      toast.success("Formularz został wysłany! Wycena zostanie przesłana na Twój email w ciągu 15 minut.");
-      reset();
-      setStep(1);
-      setFormData({});
-      setIsSubmitting(false);
+      // Tracking wyceny
+      trackEvent({
+        category: 'form',
+        action: 'submit',
+        label: 'quote-form-submission',
+        value: 1,
+        additionalData: {
+          serviceType: finalData.serviceType,
+          participantsCount: finalData.participantsCount,
+          formName: 'quote-form',
+          formLocation: window.location.pathname
+        }
+      });
+
+      try {
+        console.log('Wysyłanie formularza wyceny...');
+        
+        // Przygotuj dane do wysłania
+        const emailData = {
+          name: finalData.name,
+          company: finalData.company,
+          email: finalData.email,
+          phone: finalData.phone,
+          message: formatQuoteMessage(finalData),
+          // Dodatkowe pola dla szczegółów szkolenia
+          trainingType: getServiceTypeLabel(finalData.serviceType),
+          participants: getParticipantsLabel(finalData.participantsCount),
+          urgency: 'Wycena szkolenia'
+        };
+
+        const { data: response, error } = await supabase.functions.invoke('send-contact-email', {
+          body: emailData
+        });
+
+        console.log('Odpowiedź z funkcji Edge:', { response, error });
+
+        if (error) {
+          console.error('Błąd z funkcji Edge:', error);
+          throw new Error(error.message || 'Błąd podczas wysyłania wiadomości');
+        }
+
+        console.log('Formularz wyceny wysłany pomyślnie');
+        
+        // GTM tracking dla sukcesu
+        if (window.dataLayer) {
+          window.dataLayer.push({
+            'event': 'success_sent_form',
+            'form_type': 'quote_request',
+            'service_type': finalData.serviceType
+          });
+        }
+        
+        toast.success("Formularz został wysłany! Wycena zostanie przesłana na Twój email w ciągu 15 minut.", {
+          position: "top-center",
+          duration: 5000,
+        });
+        
+        reset();
+        setStep(1);
+        setFormData({});
+        
+      } catch (error: any) {
+        console.error('=== BŁĄD WYSYŁANIA FORMULARZA WYCENY ===');
+        console.error('Błąd:', error);
+        
+        let errorMessage = "Wystąpił błąd podczas wysyłania formularza.";
+        
+        if (error.message?.includes('fetch')) {
+          errorMessage = "Błąd połączenia. Sprawdź internetowe połączenie i spróbuj ponownie.";
+        } else if (error.message?.includes('Function not found')) {
+          errorMessage = "Funkcja wysyłania nie została znaleziona. Skontaktuj się z administratorem.";
+        } else if (error.message) {
+          errorMessage = error.message;
+        }
+
+        toast.error(errorMessage, {
+          position: "top-center",
+          duration: 5000,
+        });
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
   
@@ -107,7 +239,6 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
           <Progress value={getProgress()} className="h-2 bg-gray-200" />
         </div>
         
-        {/* Simple step indicators */}
         <div className="flex items-center justify-between">
           {stepTitles.map((title, index) => (
             <div key={index} className="flex flex-col items-center flex-1">
