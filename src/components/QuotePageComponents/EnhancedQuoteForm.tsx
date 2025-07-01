@@ -202,7 +202,7 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
       value: 'udt-operator', 
       label: 'Uprawnienia UDT dla operatorów', 
       desc: 'Szkolenia i egzaminy dla operatorów maszyn i urządzeń',
-      icon: <HardHat className="h-8 w-8" />
+      icon: <img src="/lovable-uploads/886d72de-54ab-4cd8-b675-5cabc84d69a1.png" alt="Hard hat icon" className="h-8 w-8" />
     },
     { 
       value: 'udt-conservator', 
