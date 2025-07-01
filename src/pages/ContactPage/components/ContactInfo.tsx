@@ -3,6 +3,9 @@ import React from 'react';
 import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Linkedin, Youtube } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import ContactForm from '@/components/ContactForm';
+import ClickablePhone from '@/components/ClickablePhone';
+import ClickableEmail from '@/components/ClickableEmail';
+import ClickableText from '@/components/ClickableText';
 
 const ContactInfo = () => {
   const { elementRef: formRef, isInView: formInView } = useScrollAnimation<HTMLDivElement>();
@@ -33,7 +36,10 @@ const ContactInfo = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg">Telefon</h3>
-                  <p className="text-gray-700 text-lg font-medium">504-305-437</p>
+                  <ClickablePhone 
+                    phoneNumber="504-305-437"
+                    className="text-gray-700 text-lg font-medium"
+                  />
                   <p className="text-sm text-gray-500">Pon-Pt: 8:00-16:00</p>
                 </div>
               </div>
@@ -44,7 +50,10 @@ const ContactInfo = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg">Email</h3>
-                  <p className="text-gray-700 text-lg font-medium">pgerus@well-done.pl</p>
+                  <ClickableEmail 
+                    email="pgerus@well-done.pl"
+                    className="text-gray-700 text-lg font-medium"
+                  />
                   <p className="text-sm text-gray-500">Odpowiadamy w ciągu 24h</p>
                 </div>
               </div>
@@ -55,8 +64,17 @@ const ContactInfo = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg">Adres</h3>
-                  <p className="text-gray-700">ul. Drzewieckiego 19/11</p>
-                  <p className="text-gray-700">54-129 Wrocław</p>
+                  <ClickableText 
+                    text="ul. Drzewieckiego 19/11, 54-129 Wrocław"
+                    className="text-gray-700"
+                    successMessage="Adres został skopiowany do schowka!"
+                    title="Kliknij aby skopiować adres"
+                  >
+                    <div>
+                      <p className="text-gray-700">ul. Drzewieckiego 19/11</p>
+                      <p className="text-gray-700">54-129 Wrocław</p>
+                    </div>
+                  </ClickableText>
                 </div>
               </div>
               
