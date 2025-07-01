@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+
+import React, { useState, useRef } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -23,47 +24,7 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
   const serviceType = watch('serviceType');
   const participantsCount = watch('participantsCount');
   
-  // Automatyczne przejście do następnego kroku po wyborze usługi
-  useEffect(() => {
-    if (serviceType && step === 1) {
-      const timer = setTimeout(() => {
-        setStep(2);
-        const formElement = ref as React.RefObject<HTMLDivElement>;
-        formElement.current?.scrollIntoView({ behavior: 'smooth' });
-      }, 500);
-      return () => clearTimeout(timer);
-    }
-  }, [serviceType, step, ref]);
-  
   const getProgress = () => (step / 3) * 100;
-  
-  const getEstimatedPrice = () => {
-    if (!serviceType || !participantsCount) return null;
-    
-    const basePrices = {
-      'udt-operator': 500,
-      'udt-conservator': 600,
-      'sep': 450,
-      'forklifts': 400
-    };
-    
-    const multipliers = {
-      '1': 1,
-      '2-5': 3,
-      '6-10': 6,
-      '11-15': 10,
-      '15+': 'Wycena indywidualna'
-    };
-    
-    const basePrice = basePrices[serviceType] || 0;
-    const multiplier = multipliers[participantsCount];
-    
-    if (multiplier === 'Wycena indywidualna') {
-      return 'Wycena indywidualna';
-    }
-    
-    return `${basePrice * multiplier} - ${basePrice * multiplier * 1.3} PLN`;
-  };
 
   const getServiceTypeLabel = (type: string) => {
     const labels = {
@@ -103,11 +64,6 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
     }
     
     message += `Liczba uczestników: ${getParticipantsLabel(data.participantsCount)}\n`;
-    
-    const estimatedPrice = getEstimatedPrice();
-    if (estimatedPrice) {
-      message += `Orientacyjna cena: ${estimatedPrice}\n`;
-    }
     
     if (data.additionalInfo) {
       message += `\nDodatkowe informacje:\n${data.additionalInfo}\n`;
@@ -335,6 +291,18 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                 <p className="text-red-500 text-sm text-center">{errors.serviceType.message as string}</p>
               )}
             </div>
+            
+            <div className="flex justify-center pt-4">
+              <Button 
+                type="submit" 
+                size="lg" 
+                className="bg-amber-500 hover:bg-amber-600 text-white px-8 py-3 font-semibold"
+                disabled={!serviceType}
+              >
+                Dalej
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
           </form>
         )}
         
@@ -356,13 +324,12 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                       className="grid grid-cols-2 gap-3"
                     >
                       {[
-                        { value: 'forklifts-standard', label: 'Wózki bez specjalizowanych', icon: '🚛' },
-                        { value: 'winches', label: 'Wciągniki i wciągarki', icon: '⚙️' },
-                        { value: 'platforms', label: 'Podesty ruchome', icon: '🏗️' },
-                        { value: 'cranes', label: 'Suwnice', icon: '🏭' },
-                        { value: 'storage-stacker', label: 'Układnice magazynowe', icon: '📦' },
-                        { value: 'forklifts-specialized', label: 'Wózki specjalizowane', icon: '🚜' },
-                        { value: 'stationary-cranes', label: 'Żurawie stacjonarne', icon: '🚧' }
+                        { value: 'forklifts', label: 'Wózki widłowe', desc: 'Wszystkie kategorie', icon: '🚛' },
+                        { value: 'winches', label: 'Wciągniki i wciągarki', desc: 'Wszystkie kategorie', icon: '⚙️' },
+                        { value: 'platforms', label: 'Podesty ruchome', desc: '', icon: '🏗️' },
+                        { value: 'cranes', label: 'Suwnice', desc: 'Wszystkie kategorie', icon: '🏭' },
+                        { value: 'storage-stacker', label: 'Układnice magazynowe', desc: '', icon: '📦' },
+                        { value: 'stationary-cranes', label: 'Żurawie stacjonarne', desc: '', icon: '🚧' }
                       ].map((option) => (
                         <div key={option.value} className="relative">
                           <RadioGroupItem 
@@ -376,6 +343,9 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                           >
                             <div className="text-2xl mb-2">{option.icon}</div>
                             <div className="font-medium text-gray-900 text-center text-sm">{option.label}</div>
+                            {option.desc && (
+                              <div className="text-xs text-gray-500 text-center mt-1">{option.desc}</div>
+                            )}
                           </Label>
                         </div>
                       ))}
@@ -402,10 +372,10 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                       className="grid grid-cols-2 gap-3"
                     >
                       {[
-                        { value: 'cranes', label: 'Suwnice', icon: '🏭' },
-                        { value: 'winches', label: 'Wciągniki i wciągarki', icon: '⚙️' },
-                        { value: 'stationary-cranes', label: 'Żurawie stacjonarne', icon: '🚧' },
-                        { value: 'storage-stacker', label: 'Układnice magazynowe', icon: '📦' }
+                        { value: 'cranes', label: 'Suwnice', desc: 'Wszystkie kategorie', icon: '🏭' },
+                        { value: 'winches', label: 'Wciągniki i wciągarki', desc: 'Wszystkie kategorie', icon: '⚙️' },
+                        { value: 'stationary-cranes', label: 'Żurawie stacjonarne', desc: '', icon: '🚧' },
+                        { value: 'storage-stacker', label: 'Układnice magazynowe', desc: '', icon: '📦' }
                       ].map((option) => (
                         <div key={option.value} className="relative">
                           <RadioGroupItem 
@@ -419,6 +389,9 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                           >
                             <div className="text-2xl mb-2">{option.icon}</div>
                             <div className="font-medium text-gray-900 text-center text-sm">{option.label}</div>
+                            {option.desc && (
+                              <div className="text-xs text-gray-500 text-center mt-1">{option.desc}</div>
+                            )}
                           </Label>
                         </div>
                       ))}
