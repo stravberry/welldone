@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
 import { toast } from 'sonner';
-import { CheckCircle, ArrowRight, ArrowLeft, Mail, HardHat, Forklift } from 'lucide-react';
+import { CheckCircle, ArrowRight, ArrowLeft, Mail, HardHat, Forklift, Wrench } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import useEventTracking from '@/hooks/useEventTracking';
 
@@ -227,7 +227,7 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
   const udtOperatorOptions = useMemo(() => [
     { value: 'forklifts', label: 'Wózki widłowe', desc: 'Wszystkie kategorie', icon: <Forklift className="h-6 w-6" /> },
     { value: 'cranes', label: 'Suwnice', desc: 'Wszystkie kategorie', icon: '🏭' },
-    { value: 'winches', label: 'Wciągniki i wciągarki', desc: 'Wszystkie kategorie', icon: '⚙️' },
+    { value: 'winches', label: 'Wciągniki i wciągarki', desc: 'Wszystkie kategorie', icon: <Wrench className="h-6 w-6" /> },
     { value: 'platforms', label: 'Podesty ruchome', desc: '', icon: '🏗️' },
     { value: 'storage-stacker', label: 'Układnice magazynowe', desc: '', icon: '📦' },
     { value: 'stationary-cranes', label: 'Żurawie stacjonarne', desc: '', icon: '🚧' }
@@ -235,7 +235,7 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
 
   const udtConservatorOptions = useMemo(() => [
     { value: 'cranes', label: 'Suwnice', desc: 'Wszystkie kategorie', icon: '🏭' },
-    { value: 'winches', label: 'Wciągniki i wciągarki', desc: 'Wszystkie kategorie', icon: '⚙️' },
+    { value: 'winches', label: 'Wciągniki i wciągarki', desc: 'Wszystkie kategorie', icon: <Wrench className="h-6 w-6" /> },
     { value: 'stationary-cranes', label: 'Żurawie stacjonarne', desc: '', icon: '🚧' },
     { value: 'storage-stacker', label: 'Układnice magazynowe', desc: '', icon: '📦' }
   ], []);
