@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
@@ -35,8 +34,7 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
       'sep': 450,
       'soldering': 350,
       'forklifts': 400,
-      'refresher': 250,
-      'events': 800
+      'refresher': 250
     };
     
     const multipliers = {
@@ -64,8 +62,7 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
       'sep': 'Uprawnienia SEP',
       'soldering': 'Szkolenie lutownicze',
       'forklifts': 'Wózki unoszące',
-      'refresher': 'Szkolenia przypominające',
-      'events': 'Wydarzenia edukacyjne'
+      'refresher': 'Szkolenia przypominające'
     };
     return labels[type] || type;
   };
@@ -283,8 +280,7 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                       { value: 'sep', label: 'Uprawnienia SEP', desc: 'Szkolenia elektryczne, cieplne i gazowe' },
                       { value: 'soldering', label: 'Szkolenie lutownicze', desc: 'Kursy lutowania dla różnych branż' },
                       { value: 'forklifts', label: 'Wózki unoszące', desc: 'Szkolenia na wózki widłowe i platformy' },
-                      { value: 'refresher', label: 'Szkolenia przypominające', desc: 'Odświeżenie wiedzy i uprawnień' },
-                      { value: 'events', label: 'Wydarzenia edukacyjne', desc: 'Dedykowane wydarzenia dla firm' }
+                      { value: 'refresher', label: 'Szkolenia przypominające', desc: 'Odświeżenie wiedzy i uprawnień' }
                     ].map((option) => (
                       <div key={option.value} className="flex items-start space-x-3 p-3 rounded-lg border border-gray-200 hover:border-amber-300 hover:bg-amber-50 transition-all duration-200 cursor-pointer">
                         <RadioGroupItem value={option.value} id={option.value} className="mt-1" />
