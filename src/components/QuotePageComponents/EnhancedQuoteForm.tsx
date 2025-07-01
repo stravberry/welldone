@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
 import { toast } from 'sonner';
-import { CheckCircle, ArrowRight, ArrowLeft, Mail, HardHat } from 'lucide-react';
+import { CheckCircle, ArrowRight, ArrowLeft, Mail, HardHat, Forklift } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import useEventTracking from '@/hooks/useEventTracking';
 
@@ -220,12 +220,12 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
       value: 'forklifts', 
       label: 'Wózki unoszące', 
       desc: 'Szkolenia na wózki widłowe i platformy',
-      icon: '🚛'
+      icon: <Forklift className="h-8 w-8" />
     }
   ], []);
 
   const udtOperatorOptions = useMemo(() => [
-    { value: 'forklifts', label: 'Wózki widłowe', desc: 'Wszystkie kategorie', icon: '🚛' },
+    { value: 'forklifts', label: 'Wózki widłowe', desc: 'Wszystkie kategorie', icon: <Forklift className="h-6 w-6" /> },
     { value: 'cranes', label: 'Suwnice', desc: 'Wszystkie kategorie', icon: '🏭' },
     { value: 'winches', label: 'Wciągniki i wciągarki', desc: 'Wszystkie kategorie', icon: '⚙️' },
     { value: 'platforms', label: 'Podesty ruchome', desc: '', icon: '🏗️' },
