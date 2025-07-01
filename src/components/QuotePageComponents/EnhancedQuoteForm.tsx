@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
 import { toast } from 'sonner';
-import { CheckCircle, ArrowRight, ArrowLeft, Mail, Euro } from 'lucide-react';
+import { CheckCircle, ArrowRight, ArrowLeft, Mail } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import useEventTracking from '@/hooks/useEventTracking';
 
@@ -451,17 +451,6 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                 <p className="text-red-500 text-sm">{errors.participantsCount.message as string}</p>
               )}
             </div>
-            
-            {serviceType && participantsCount && (
-              <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-4">
-                <div className="flex items-center space-x-2 mb-2">
-                  <Euro className="h-5 w-5 text-green-600" />
-                  <h4 className="text-base font-semibold text-green-800">Orientacyjna cena</h4>
-                </div>
-                <p className="text-lg font-bold text-green-700">{getEstimatedPrice()}</p>
-                <p className="text-sm text-green-600 mt-1">Ostateczna cena może ulec zmianie</p>
-              </div>
-            )}
             
             <div className="space-y-2">
               <Label htmlFor="additionalInfo" className="text-base font-medium">Dodatkowe informacje (opcjonalnie)</Label>
