@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -12,6 +11,7 @@ import HomePage from './pages/HomePage';
 import ContactPage from './pages/ContactPage';
 import AboutPage from './pages/AboutPage';
 import ServicesPage from './pages/ServicesPage';
+import ServiceDetailPage from './pages/ServiceDetailPage';
 import FreeAuditPage from './pages/FreeAuditPage';
 import QuotePage from './pages/QuotePage';
 import RealizationsPage from './pages/RealizationsPage';
@@ -55,8 +55,13 @@ function App() {
                 <Route path="/realizacje" element={<RealizationsPage />} />
                 <Route path="/wiedza" element={<KnowledgePage />} />
                 
-                {/* Service Subpages */}
+                {/* Service Subpages - Updated structure */}
                 <Route path="/uslugi/udt-operatorzy" element={<UdtOperatorzyPage />} />
+                <Route path="/uslugi/udt-konserwatorzy" element={<UdtKonserwatorzePage />} />
+                <Route path="/uslugi/sep" element={<SepPage />} />
+                <Route path="/uslugi/lutowanie" element={<LutowaniePage />} />
+                
+                {/* Keep old routes for backward compatibility */}
                 <Route path="/udt-szkolenia" element={<UdtSzkoleniaPage />} />
                 <Route path="/udt-konserwatorze" element={<UdtKonserwatorzePage />} />
                 <Route path="/sep" element={<SepPage />} />
