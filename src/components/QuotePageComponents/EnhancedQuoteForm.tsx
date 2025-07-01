@@ -311,21 +311,24 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                   className="grid grid-cols-2 gap-4"
                 >
                   {serviceOptions.map((option) => (
-                    <div key={option.value} className="relative">
+                    <Label 
+                      key={option.value}
+                      htmlFor={option.value} 
+                      className={`flex flex-col items-center justify-center p-6 bg-white border-2 rounded-xl cursor-pointer hover:border-amber-300 hover:bg-amber-50 transition-all duration-200 min-h-[140px] ${
+                        field.value === option.value 
+                          ? 'border-amber-500 bg-amber-50 shadow-md ring-2 ring-amber-200' 
+                          : 'border-gray-200'
+                      }`}
+                    >
                       <RadioGroupItem 
                         value={option.value} 
                         id={option.value} 
-                        className="peer sr-only"
+                        className="sr-only"
                       />
-                      <Label 
-                        htmlFor={option.value} 
-                        className="flex flex-col items-center justify-center p-6 bg-white border-2 border-gray-200 rounded-xl cursor-pointer hover:border-amber-300 hover:bg-amber-50 transition-all duration-200 peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:shadow-md min-h-[160px]"
-                      >
-                        <div className="text-3xl mb-3">{option.icon}</div>
-                        <div className="font-semibold text-gray-900 mb-2 text-center text-sm">{option.label}</div>
-                        <p className="text-xs text-gray-600 text-center leading-relaxed">{option.desc}</p>
-                      </Label>
-                    </div>
+                      <div className="text-3xl mb-3">{option.icon}</div>
+                      <div className="font-semibold text-gray-900 mb-2 text-center text-sm">{option.label}</div>
+                      <p className="text-xs text-gray-600 text-center leading-relaxed">{option.desc}</p>
+                    </Label>
                   ))}
                 </RadioGroup>
               )}
@@ -354,23 +357,26 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                       className="grid grid-cols-2 gap-3"
                     >
                       {udtOperatorOptions.map((option) => (
-                        <div key={option.value} className="relative">
+                        <Label 
+                          key={option.value}
+                          htmlFor={`udt-op-${option.value}`} 
+                          className={`flex flex-col items-center justify-center p-4 bg-white border-2 rounded-lg cursor-pointer hover:border-amber-300 hover:bg-amber-50 transition-all duration-200 min-h-[140px] ${
+                            field.value === option.value 
+                              ? 'border-amber-500 bg-amber-50 shadow-md ring-2 ring-amber-200' 
+                              : 'border-gray-200'
+                          }`}
+                        >
                           <RadioGroupItem 
                             value={option.value} 
                             id={`udt-op-${option.value}`} 
-                            className="peer sr-only"
+                            className="sr-only"
                           />
-                          <Label 
-                            htmlFor={`udt-op-${option.value}`} 
-                            className="flex flex-col items-center justify-center p-4 bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:border-amber-300 hover:bg-amber-50 transition-all duration-200 peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:shadow-md min-h-[100px]"
-                          >
-                            <div className="text-2xl mb-2">{option.icon}</div>
-                            <div className="font-medium text-gray-900 text-center text-sm">{option.label}</div>
-                            {option.desc && (
-                              <div className="text-xs text-gray-500 text-center mt-1">{option.desc}</div>
-                            )}
-                          </Label>
-                        </div>
+                          <div className="text-2xl mb-2">{option.icon}</div>
+                          <div className="font-medium text-gray-900 text-center text-sm">{option.label}</div>
+                          {option.desc && (
+                            <div className="text-xs text-gray-500 text-center mt-1">{option.desc}</div>
+                          )}
+                        </Label>
                       ))}
                     </RadioGroup>
                   )}
@@ -395,23 +401,26 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                       className="grid grid-cols-2 gap-3"
                     >
                       {udtConservatorOptions.map((option) => (
-                        <div key={option.value} className="relative">
+                        <Label 
+                          key={option.value}
+                          htmlFor={`udt-con-${option.value}`} 
+                          className={`flex flex-col items-center justify-center p-4 bg-white border-2 rounded-lg cursor-pointer hover:border-amber-300 hover:bg-amber-50 transition-all duration-200 min-h-[140px] ${
+                            field.value === option.value 
+                              ? 'border-amber-500 bg-amber-50 shadow-md ring-2 ring-amber-200' 
+                              : 'border-gray-200'
+                          }`}
+                        >
                           <RadioGroupItem 
                             value={option.value} 
                             id={`udt-con-${option.value}`} 
-                            className="peer sr-only"
+                            className="sr-only"
                           />
-                          <Label 
-                            htmlFor={`udt-con-${option.value}`} 
-                            className="flex flex-col items-center justify-center p-4 bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:border-amber-300 hover:bg-amber-50 transition-all duration-200 peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:shadow-md min-h-[100px]"
-                          >
-                            <div className="text-2xl mb-2">{option.icon}</div>
-                            <div className="font-medium text-gray-900 text-center text-sm">{option.label}</div>
-                            {option.desc && (
-                              <div className="text-xs text-gray-500 text-center mt-1">{option.desc}</div>
-                            )}
-                          </Label>
-                        </div>
+                          <div className="text-2xl mb-2">{option.icon}</div>
+                          <div className="font-medium text-gray-900 text-center text-sm">{option.label}</div>
+                          {option.desc && (
+                            <div className="text-xs text-gray-500 text-center mt-1">{option.desc}</div>
+                          )}
+                        </Label>
                       ))}
                     </RadioGroup>
                   )}
@@ -436,20 +445,23 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                       className="grid grid-cols-1 gap-3"
                     >
                       {sepOptions.map((option) => (
-                        <div key={option.value} className="relative">
+                        <Label 
+                          key={option.value}
+                          htmlFor={`sep-${option.value}`} 
+                          className={`flex items-center p-4 bg-white border-2 rounded-lg cursor-pointer hover:border-amber-300 hover:bg-amber-50 transition-all duration-200 min-h-[80px] ${
+                            field.value === option.value 
+                              ? 'border-amber-500 bg-amber-50 shadow-md ring-2 ring-amber-200' 
+                              : 'border-gray-200'
+                          }`}
+                        >
                           <RadioGroupItem 
                             value={option.value} 
                             id={`sep-${option.value}`} 
-                            className="peer sr-only"
+                            className="sr-only"
                           />
-                          <Label 
-                            htmlFor={`sep-${option.value}`} 
-                            className="flex items-center p-4 bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:border-amber-300 hover:bg-amber-50 transition-all duration-200 peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:shadow-md"
-                          >
-                            <div className="text-2xl mr-4">{option.icon}</div>
-                            <div className="font-medium text-gray-900">{option.label}</div>
-                          </Label>
-                        </div>
+                          <div className="text-2xl mr-4">{option.icon}</div>
+                          <div className="font-medium text-gray-900">{option.label}</div>
+                        </Label>
                       ))}
                     </RadioGroup>
                   )}
@@ -473,20 +485,23 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                     className="grid grid-cols-2 gap-3"
                   >
                     {participantOptions.map((option) => (
-                      <div key={option.value} className="relative">
+                      <Label 
+                        key={option.value}
+                        htmlFor={`participants-${option.value}`} 
+                        className={`flex flex-col items-center justify-center p-4 bg-white border-2 rounded-lg cursor-pointer hover:border-amber-300 hover:bg-amber-50 transition-all duration-200 min-h-[140px] ${
+                          field.value === option.value 
+                            ? 'border-amber-500 bg-amber-50 shadow-md ring-2 ring-amber-200' 
+                            : 'border-gray-200'
+                        }`}
+                      >
                         <RadioGroupItem 
                           value={option.value} 
                           id={`participants-${option.value}`} 
-                          className="peer sr-only"
+                          className="sr-only"
                         />
-                        <Label 
-                          htmlFor={`participants-${option.value}`} 
-                          className="flex flex-col items-center justify-center p-4 bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:border-amber-300 hover:bg-amber-50 transition-all duration-200 peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:shadow-md min-h-[100px]"
-                        >
-                          <div className="text-2xl mb-2">{option.icon}</div>
-                          <div className="font-medium text-gray-900 text-center text-sm">{option.label}</div>
-                        </Label>
-                      </div>
+                        <div className="text-2xl mb-2">{option.icon}</div>
+                        <div className="font-medium text-gray-900 text-center text-sm">{option.label}</div>
+                      </Label>
                     ))}
                   </RadioGroup>
                 )}
