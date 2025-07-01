@@ -1,4 +1,5 @@
 
+
 import React, { useState, useRef, useCallback, useMemo } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
@@ -73,6 +74,18 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
     
     return message;
   }, [getServiceTypeLabel, getParticipantsLabel]);
+
+  // Automatyczne przechodzenie do następnego kroku po wyborze usługi
+  const handleServiceTypeChange = useCallback((value: string) => {
+    setValue('serviceType', value);
+    // Automatycznie przejdź do następnego kroku po wyborze usługi
+    setTimeout(() => {
+      setFormData({ serviceType: value });
+      setStep(2);
+      const formElement = ref as React.RefObject<HTMLDivElement>;
+      formElement.current?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  }, [setValue, ref]);
   
   const onSubmit = useCallback(async (data: any) => {
     if (step < 3) {
@@ -244,7 +257,7 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
 
   return (
     <div ref={ref} className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 max-w-4xl mx-auto">
-      {/* Simplified header */}
+      {/* Header */}
       <div className="bg-gradient-to-r from-amber-50 to-orange-50 px-4 sm:px-6 py-4 sm:py-6 border-b border-gray-100">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Formularz wyceny</h2>
@@ -286,56 +299,42 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
       {/* Form content */}
       <div className="p-4 sm:p-6 lg:p-8">
         {step === 1 && (
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            <div className="space-y-6">
-              <h3 className="text-lg font-semibold text-gray-900 text-center">Wybierz rodzaj usługi szkoleniowej</h3>
-              <Controller
-                name="serviceType"
-                control={control}
-                rules={{ required: "Wybierz rodzaj usługi" }}
-                render={({ field }) => (
-                  <RadioGroup
-                    onValueChange={field.onChange}
-                    value={field.value || ''}
-                    className="grid grid-cols-2 gap-4"
-                  >
-                    {serviceOptions.map((option) => (
-                      <div key={option.value} className="relative">
-                        <RadioGroupItem 
-                          value={option.value} 
-                          id={option.value} 
-                          className="peer sr-only"
-                        />
-                        <Label 
-                          htmlFor={option.value} 
-                          className="flex flex-col items-center justify-center p-6 bg-white border-2 border-gray-200 rounded-xl cursor-pointer hover:border-amber-300 hover:bg-amber-50 transition-all duration-200 peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:shadow-md min-h-[160px]"
-                        >
-                          <div className="text-3xl mb-3">{option.icon}</div>
-                          <div className="font-semibold text-gray-900 mb-2 text-center text-sm">{option.label}</div>
-                          <p className="text-xs text-gray-600 text-center leading-relaxed">{option.desc}</p>
-                        </Label>
-                      </div>
-                    ))}
-                  </RadioGroup>
-                )}
-              />
-              {errors.serviceType && (
-                <p className="text-red-500 text-sm text-center">{errors.serviceType.message as string}</p>
+          <div className="space-y-6">
+            <h3 className="text-lg font-semibold text-gray-900 text-center">Wybierz rodzaj usługi szkoleniowej</h3>
+            <Controller
+              name="serviceType"
+              control={control}
+              rules={{ required: "Wybierz rodzaj usługi" }}
+              render={({ field }) => (
+                <RadioGroup
+                  onValueChange={handleServiceTypeChange}
+                  value={field.value || ''}
+                  className="grid grid-cols-2 gap-4"
+                >
+                  {serviceOptions.map((option) => (
+                    <div key={option.value} className="relative">
+                      <RadioGroupItem 
+                        value={option.value} 
+                        id={option.value} 
+                        className="peer sr-only"
+                      />
+                      <Label 
+                        htmlFor={option.value} 
+                        className="flex flex-col items-center justify-center p-6 bg-white border-2 border-gray-200 rounded-xl cursor-pointer hover:border-amber-300 hover:bg-amber-50 transition-all duration-200 peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:shadow-md min-h-[160px]"
+                      >
+                        <div className="text-3xl mb-3">{option.icon}</div>
+                        <div className="font-semibold text-gray-900 mb-2 text-center text-sm">{option.label}</div>
+                        <p className="text-xs text-gray-600 text-center leading-relaxed">{option.desc}</p>
+                      </Label>
+                    </div>
+                  ))}
+                </RadioGroup>
               )}
-            </div>
-            
-            <div className="flex justify-center pt-4">
-              <Button 
-                type="submit" 
-                size="lg" 
-                className="bg-amber-500 hover:bg-amber-600 text-white px-8 py-3 font-semibold"
-                disabled={!serviceType}
-              >
-                Dalej
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </div>
-          </form>
+            />
+            {errors.serviceType && (
+              <p className="text-red-500 text-sm text-center">{errors.serviceType.message as string}</p>
+            )}
+          </div>
         )}
         
         {step === 2 && (
@@ -658,3 +657,4 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
 EnhancedQuoteForm.displayName = 'EnhancedQuoteForm';
 
 export default EnhancedQuoteForm;
+
