@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Shield, Award, Users, Clock, Star, CheckCircle } from 'lucide-react';
 import { useStaggeredAnimation } from '@/hooks/useScrollAnimation';
@@ -27,7 +26,7 @@ const TrustSection: React.FC = () => {
     },
     {
       icon: <Clock className="h-8 w-8" />,
-      title: "8 lat doświadczenia",
+      title: "Działamy od 2013 roku",
       description: "Konsekwentnie dostarczamy najwyższej jakości szkolenia",
       color: "from-purple-500 to-violet-500"
     },
