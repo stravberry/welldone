@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
 import { toast } from 'sonner';
-import { CheckCircle, ArrowRight, ArrowLeft, Mail } from 'lucide-react';
+import { CheckCircle, ArrowRight, ArrowLeft, Mail, HardHat } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import useEventTracking from '@/hooks/useEventTracking';
 
@@ -202,7 +202,7 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
       value: 'udt-operator', 
       label: 'Uprawnienia UDT dla operatorów', 
       desc: 'Szkolenia i egzaminy dla operatorów maszyn i urządzeń',
-      icon: '🏭'
+      icon: <HardHat className="h-8 w-8" />
     },
     { 
       value: 'udt-conservator', 
@@ -325,7 +325,13 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                             : 'border-gray-200'
                         }`}
                       >
-                        <div className="text-3xl mb-3">{option.icon}</div>
+                        <div className="mb-3">
+                          {typeof option.icon === 'string' ? (
+                            <div className="text-3xl">{option.icon}</div>
+                          ) : (
+                            option.icon
+                          )}
+                        </div>
                         <div className="font-semibold text-gray-900 mb-2 text-center text-sm">{option.label}</div>
                         <p className="text-xs text-gray-600 text-center leading-relaxed">{option.desc}</p>
                       </Label>
