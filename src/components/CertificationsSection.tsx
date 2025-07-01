@@ -30,14 +30,6 @@ const CertificationsSection = () => {
       description: "Międzynarodowe standardy lutowania elektroniki",
       icon: CheckCircle,
       color: "bg-green-500"
-    },
-    {
-      name: "ISO 9001",
-      fullName: "System Zarządzania Jakością",
-      year: "2018",
-      description: "Certyfikat jakości procesów szkoleniowych",
-      icon: Award,
-      color: "bg-purple-500"
     }
   ];
 
@@ -60,7 +52,7 @@ const CertificationsSection = () => {
 
         <div 
           ref={elementRef}
-          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 transition-all duration-1000 ${
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-1000 ${
             isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
@@ -96,7 +88,7 @@ const CertificationsSection = () => {
               <div className="text-green-700 font-medium">Zgodność z przepisami</div>
             </div>
             <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-6">
-              <div className="text-2xl font-bold text-blue-600 mb-2">4</div>
+              <div className="text-2xl font-bold text-blue-600 mb-2">3</div>
               <div className="text-blue-700 font-medium">Główne certyfikaty</div>
             </div>
             <div className="bg-gradient-to-r from-orange-50 to-orange-100 rounded-xl p-6">
