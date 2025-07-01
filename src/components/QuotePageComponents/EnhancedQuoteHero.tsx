@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Calculator, TrendingUp, Clock, CheckCircle, Zap, Users } from 'lucide-react';
@@ -58,15 +59,6 @@ const EnhancedQuoteHero: React.FC<EnhancedQuoteHeroProps> = ({
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={elementRef}>
-        {/* Trust badge */}
-        <div className="text-center mb-12">
-          <div className={`inline-block bg-white bg-opacity-20 backdrop-blur-sm px-6 py-3 rounded-full text-white font-semibold transition-all duration-800 shadow-lg ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`} style={{
-          transitionDelay: '200ms'
-        }}>
-            ⚡ 80% klientów wybiera pierwszą otrzymaną ofertę
-          </div>
-        </div>
-
         {/* Main content grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
           {/* Left column - Text content */}
