@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
@@ -14,7 +15,7 @@ import { supabase } from '@/integrations/supabase/client';
 import useEventTracking from '@/hooks/useEventTracking';
 
 const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
-  const { register, handleSubmit, control, watch, reset, formState: { errors } } = useForm();
+  const { register, handleSubmit, control, watch, reset, formState: { errors }, setValue } = useForm();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -214,6 +215,10 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
   };
   
   const goBack = () => {
+    if (step === 2) {
+      // Wyczyść wybór usługi, żeby użytkownik mógł wybrać ponownie
+      setValue('serviceType', '');
+    }
     setStep(step - 1);
     const formElement = ref as React.RefObject<HTMLDivElement>;
     formElement.current?.scrollIntoView({ behavior: 'smooth' });
@@ -279,7 +284,7 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
                 render={({ field }) => (
                   <RadioGroup
                     onValueChange={field.onChange}
-                    defaultValue={field.value}
+                    value={field.value || ''}
                     className="grid grid-cols-2 gap-4"
                   >
                     {[
