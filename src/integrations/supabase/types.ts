@@ -128,6 +128,134 @@ export type Database = {
         }
         Relationships: []
       }
+      quote_requests: {
+        Row: {
+          additional_info: string | null
+          company: string | null
+          created_at: string
+          email: string
+          estimated_price: number | null
+          id: string
+          name: string
+          notes: string | null
+          participants_count: string
+          phone: string | null
+          service_type: string
+          service_variant: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          additional_info?: string | null
+          company?: string | null
+          created_at?: string
+          email: string
+          estimated_price?: number | null
+          id?: string
+          name: string
+          notes?: string | null
+          participants_count: string
+          phone?: string | null
+          service_type: string
+          service_variant?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          additional_info?: string | null
+          company?: string | null
+          created_at?: string
+          email?: string
+          estimated_price?: number | null
+          id?: string
+          name?: string
+          notes?: string | null
+          participants_count?: string
+          phone?: string | null
+          service_type?: string
+          service_variant?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      service_variants: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean
+          name: string
+          price_modifier: number | null
+          service_id: string
+          updated_at: string
+          variant_key: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          name: string
+          price_modifier?: number | null
+          service_id: string
+          updated_at?: string
+          variant_key: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          name?: string
+          price_modifier?: number | null
+          service_id?: string
+          updated_at?: string
+          variant_key?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "service_variants_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      services: {
+        Row: {
+          base_price: number | null
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean
+          name: string
+          service_type: string
+          updated_at: string
+        }
+        Insert: {
+          base_price?: number | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          name: string
+          service_type: string
+          updated_at?: string
+        }
+        Update: {
+          base_price?: number | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          name?: string
+          service_type?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string

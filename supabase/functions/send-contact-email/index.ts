@@ -2,9 +2,11 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "npm:resend@2.0.0";
 import React from 'npm:react@18.3.1';
-import { renderAsync } from 'npm:@react-email/components@0.0.11';
+import { renderAsync } from 'npm:@react-email/components@0.0.22';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.50.0';
 import { AdminNotificationEmail } from "./_templates/admin-notification-email.tsx";
 import { ClientConfirmationEmail } from "./_templates/client-confirmation-email.tsx";
+import { QuoteEmail } from "./_templates/quote-email.tsx";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -14,9 +16,9 @@ const corsHeaders = {
 
 interface ContactFormData {
   name: string;
-  company: string;
+  company?: string;
   email: string;
-  phone: string;
+  phone?: string;
   message: string;
   // Dodatkowe pola dla szczegółów szkolenia
   trainingType?: string;
@@ -24,6 +26,10 @@ interface ContactFormData {
   location?: string;
   timeline?: string;
   urgency?: string;
+  // Nowe pola dla systemu wycen
+  serviceType?: string;
+  serviceVariant?: string;
+  estimatedPrice?: number;
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -60,6 +66,11 @@ const handler = async (req: Request): Promise<Response> => {
     const resend = new Resend(resendApiKey);
     console.log('Resend zainicjalizowany');
 
+    // Inicjalizacja Supabase dla pobierania cen
+    const supabaseUrl = Deno.env.get("SUPABASE_URL");
+    const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+    const supabase = createClient(supabaseUrl!, supabaseServiceKey!);
+
     // Parsowanie danych formularza
     const formData: ContactFormData = await req.json();
     console.log("Otrzymane dane formularza:", {
@@ -72,8 +83,46 @@ const handler = async (req: Request): Promise<Response> => {
       participants: formData.participants,
       location: formData.location,
       timeline: formData.timeline,
-      urgency: formData.urgency
+      urgency: formData.urgency,
+      serviceType: formData.serviceType,
+      serviceVariant: formData.serviceVariant
     });
+
+    // Pobierz ceny z bazy danych jeśli to zapytanie o wycenę
+    let estimatedPrice = formData.estimatedPrice;
+    
+    if (formData.serviceType && !estimatedPrice) {
+      try {
+        console.log('Pobieranie cen z bazy dla:', formData.serviceType, formData.serviceVariant);
+        
+        // Pobierz usługę bazową
+        const { data: service } = await supabase
+          .from('services')
+          .select('base_price')
+          .eq('service_type', formData.serviceType)
+          .single();
+
+        let totalPrice = service?.base_price || 0;
+
+        // Pobierz wariant jeśli istnieje
+        if (formData.serviceVariant && service) {
+          const { data: variant } = await supabase
+            .from('service_variants')
+            .select('price_modifier')
+            .eq('variant_key', formData.serviceVariant)
+            .single();
+
+          if (variant) {
+            totalPrice += variant.price_modifier || 0;
+          }
+        }
+
+        estimatedPrice = totalPrice;
+        console.log('Obliczona cena:', estimatedPrice);
+      } catch (error) {
+        console.error('Błąd pobierania cen:', error);
+      }
+    }
 
     // Walidacja danych
     if (!formData.name || !formData.email || !formData.message) {
@@ -93,21 +142,44 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log('Renderowanie szablonów email...');
     
-    // Render email templates
-    const adminEmailHtml = await renderAsync(
-      React.createElement(AdminNotificationEmail, {
-        name: formData.name,
-        company: formData.company,
-        email: formData.email,
-        phone: formData.phone,
-        message: formData.message,
-        trainingType: formData.trainingType,
-        participants: formData.participants,
-        location: formData.location,
-        timeline: formData.timeline,
-        urgency: formData.urgency
-      })
-    );
+    // Sprawdź czy to zapytanie o wycenę
+    const isQuoteRequest = formData.serviceType || formData.trainingType;
+    
+    let adminEmailHtml;
+    
+    if (isQuoteRequest) {
+      // Użyj nowego szablonu dla zapytań o wycenę
+      adminEmailHtml = await renderAsync(
+        React.createElement(QuoteEmail, {
+          name: formData.name,
+          company: formData.company,
+          email: formData.email,
+          phone: formData.phone,
+          trainingType: formData.trainingType || formData.serviceType || '',
+          participants: formData.participants || '',
+          serviceVariant: formData.serviceVariant,
+          message: formData.message,
+          estimatedPrice: estimatedPrice,
+          additionalInfo: formData.message
+        })
+      );
+    } else {
+      // Użyj standardowego szablonu
+      adminEmailHtml = await renderAsync(
+        React.createElement(AdminNotificationEmail, {
+          name: formData.name,
+          company: formData.company,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+          trainingType: formData.trainingType,
+          participants: formData.participants,
+          location: formData.location,
+          timeline: formData.timeline,
+          urgency: formData.urgency
+        })
+      );
+    }
     console.log('Szablon email dla administratora wyrenderowany, długość HTML:', adminEmailHtml.length);
 
     const clientEmailHtml = await renderAsync(
@@ -127,10 +199,14 @@ const handler = async (req: Request): Promise<Response> => {
     
     // Send email to admin (notification)
     console.log('Wysyłanie emaila do administratora na kontakt@well-done.pl...');
+    const subject = isQuoteRequest 
+      ? `💰 Zapytanie o wycenę od ${formData.name}${formData.company ? ` - ${formData.company}` : ''}`
+      : `🔔 Nowe zapytanie UDT od ${formData.name}${formData.company ? ` - ${formData.company}` : ''}`;
+      
     const adminEmailResponse = await resend.emails.send({
       from: "Well-done.pl <noreply@well-done.pl>",
       to: ["kontakt@well-done.pl"],
-      subject: `🔔 Nowe zapytanie UDT od ${formData.name}${formData.company ? ` - ${formData.company}` : ''}`,
+      subject: subject,
       html: adminEmailHtml,
       reply_to: formData.email,
     });

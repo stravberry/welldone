@@ -13,6 +13,7 @@ import { toast } from 'sonner';
 import { CheckCircle, ArrowRight, ArrowLeft, Mail, HardHat, Forklift, Wrench } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import useEventTracking from '@/hooks/useEventTracking';
+import { useQuotesManagement } from '@/hooks/useQuotesManagement';
 
 const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
   const { register, handleSubmit, control, watch, reset, formState: { errors }, setValue } = useForm();
@@ -20,6 +21,7 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
   const [formData, setFormData] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { trackEvent } = useEventTracking();
+  const { services, serviceVariants, createQuoteRequest } = useQuotesManagement();
   
   const serviceType = watch('serviceType');
   const participantsCount = watch('participantsCount');
@@ -95,6 +97,23 @@ const EnhancedQuoteForm = React.forwardRef<HTMLDivElement>((props, ref) => {
     } else {
       setIsSubmitting(true);
       const finalData = { ...formData, ...data };
+      
+      // Zapisz zapytanie do CRM
+      try {
+        await createQuoteRequest({
+          name: finalData.name,
+          email: finalData.email,
+          phone: finalData.phone,
+          company: finalData.company,
+          service_type: finalData.serviceType,
+          service_variant: finalData.udtOperatorType || finalData.udtConservatorType || finalData.sepType,
+          participants_count: finalData.participantsCount,
+          additional_info: finalData.additionalInfo,
+          status: 'new'
+        });
+      } catch (error) {
+        console.error('Error saving to CRM:', error);
+      }
       
       // Tracking wyceny
       trackEvent({

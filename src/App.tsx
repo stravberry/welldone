@@ -29,8 +29,9 @@ import TermsPage from './pages/TermsPage';
 import NotFound from './pages/NotFound';
 import AdminLayout from './pages/admin/AdminLayout';
 import ProtectedRoute from './components/ProtectedRoute';
-import ContentStudio from './pages/admin/ContentStudio';
 import Dashboard from './pages/admin/Dashboard';
+import QuotesManagement from './pages/admin/QuotesManagement';
+import CRMManagement from './pages/admin/CRMManagement';
 import EmailTemplatesManagement from './pages/admin/EmailTemplatesManagement';
 
 // Create a client
@@ -84,10 +85,11 @@ function App() {
                   </ProtectedRoute>
                 }>
                   <Route index element={<Dashboard />} />
-                  <Route path="content-studio" element={<ContentStudio />} />
+                  <Route path="quotes" element={<QuotesManagement />} />
+                  <Route path="crm" element={<CRMManagement />} />
+                  <Route path="email-templates" element={<EmailTemplatesManagement />} />
                   <Route path="blog" element={<div className="p-6">Blog management coming soon...</div>} />
                   <Route path="media" element={<div className="p-6">Media library coming soon...</div>} />
-                  <Route path="users" element={<div className="p-6">User management coming soon...</div>} />
                   <Route path="settings" element={<div className="p-6">Settings coming soon...</div>} />
                 </Route>
                 
