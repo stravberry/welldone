@@ -25,6 +25,16 @@ export interface ServiceVariant {
   updated_at: string;
 }
 
+export interface PricingTier {
+  id: string;
+  service_id: string;
+  participant_range: string;
+  price_multiplier: number;
+  fixed_price?: number;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface QuoteRequest {
   id: string;
   name: string;
@@ -45,6 +55,7 @@ export interface QuoteRequest {
 export const useQuotesManagement = () => {
   const [services, setServices] = useState<Service[]>([]);
   const [serviceVariants, setServiceVariants] = useState<ServiceVariant[]>([]);
+  const [pricingTiers, setPricingTiers] = useState<PricingTier[]>([]);
   const [quoteRequests, setQuoteRequests] = useState<QuoteRequest[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -75,6 +86,21 @@ export const useQuotesManagement = () => {
     } catch (error: any) {
       console.error('Error fetching service variants:', error);
       toast.error('Błąd podczas pobierania wariantów usług');
+    }
+  };
+
+  const fetchPricingTiers = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('pricing_tiers')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setPricingTiers(data || []);
+    } catch (error: any) {
+      console.error('Error fetching pricing tiers:', error);
+      toast.error('Błąd podczas pobierania cennika');
     }
   };
 
@@ -127,6 +153,23 @@ export const useQuotesManagement = () => {
     }
   };
 
+  const updatePricingTier = async (id: string, updates: Partial<PricingTier>) => {
+    try {
+      const { error } = await supabase
+        .from('pricing_tiers')
+        .update(updates)
+        .eq('id', id);
+
+      if (error) throw error;
+      
+      toast.success('Cennik został zaktualizowany');
+      fetchPricingTiers();
+    } catch (error: any) {
+      console.error('Error updating pricing tier:', error);
+      toast.error('Błąd podczas aktualizacji cennika');
+    }
+  };
+
   const updateQuoteRequest = async (id: string, updates: Partial<QuoteRequest>) => {
     try {
       const { error } = await supabase
@@ -169,6 +212,7 @@ export const useQuotesManagement = () => {
       await Promise.all([
         fetchServices(),
         fetchServiceVariants(),
+        fetchPricingTiers(),
         fetchQuoteRequests()
       ]);
       setLoading(false);
@@ -180,15 +224,18 @@ export const useQuotesManagement = () => {
   return {
     services,
     serviceVariants,
+    pricingTiers,
     quoteRequests,
     loading,
     updateService,
     updateServiceVariant,
+    updatePricingTier,
     updateQuoteRequest,
     createQuoteRequest,
     refetch: () => {
       fetchServices();
       fetchServiceVariants();
+      fetchPricingTiers();
       fetchQuoteRequests();
     }
   };

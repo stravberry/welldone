@@ -128,6 +128,44 @@ export type Database = {
         }
         Relationships: []
       }
+      pricing_tiers: {
+        Row: {
+          created_at: string
+          fixed_price: number | null
+          id: string
+          participant_range: string
+          price_multiplier: number
+          service_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          fixed_price?: number | null
+          id?: string
+          participant_range: string
+          price_multiplier?: number
+          service_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          fixed_price?: number | null
+          id?: string
+          participant_range?: string
+          price_multiplier?: number
+          service_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pricing_tiers_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       quote_requests: {
         Row: {
           additional_info: string | null
