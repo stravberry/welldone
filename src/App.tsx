@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider } from './contexts/AuthContext';
@@ -78,8 +78,11 @@ function App() {
                 {/* CMS Login */}
                 <Route path="/cms-login" element={<CMSLoginPage />} />
                 
+                {/* Admin Redirect */}
+                <Route path="/admin" element={<Navigate to="/cms-login" replace />} />
+                
                 {/* Admin Routes */}
-                <Route path="/admin" element={
+                <Route path="/admin/*" element={
                   <ProtectedRoute>
                     <AdminLayout />
                   </ProtectedRoute>
