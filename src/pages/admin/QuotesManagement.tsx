@@ -8,7 +8,7 @@ import { Switch } from '@/components/ui/switch';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { Edit, Euro, Settings, Eye } from 'lucide-react';
-import { useQuotesManagement, Service, ServiceVariant, PricingTier } from '@/hooks/useQuotesManagement';
+import { useQuotesManagement, type Service, type ServiceVariant, type PricingTier } from '@/hooks/useQuotesManagement';
 
 const QuotesManagement: React.FC = () => {
   const { services, serviceVariants, pricingTiers, loading, updateService, updateServiceVariant, updatePricingTier } = useQuotesManagement();

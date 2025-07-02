@@ -122,7 +122,10 @@ export const useQuoteForm = (ref: React.RefObject<HTMLDivElement>) => {
           message: formatQuoteMessage(finalData),
           trainingType: getServiceTypeLabel(finalData.serviceType!),
           participants: getParticipantsLabel(finalData.participantsCount!),
-          urgency: 'Wycena szkolenia'
+          urgency: 'Wycena szkolenia',
+          // Dodatkowe pola dla nowego systemu wycen
+          serviceType: finalData.serviceType,
+          serviceVariant: finalData.udtOperatorType || finalData.udtConservatorType || finalData.sepType
         };
 
         const { data: response, error } = await supabase.functions.invoke('send-contact-email', {
@@ -141,7 +144,7 @@ export const useQuoteForm = (ref: React.RefObject<HTMLDivElement>) => {
           });
         }
         
-        toast.success("Formularz został wysłany! Wycena zostanie przesłana na Twój email w ciągu 15 minut.", {
+        toast.success("Formularz został wysłany! Wycena zostanie przesłana na Twój email w ciągu kilku minut.", {
           position: "top-center",
           duration: 5000,
         });

@@ -7,6 +7,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.50.0';
 import { AdminNotificationEmail } from "./_templates/admin-notification-email.tsx";
 import { ClientConfirmationEmail } from "./_templates/client-confirmation-email.tsx";
 import { QuoteEmail } from "./_templates/quote-email.tsx";
+import { ClientQuoteEmail } from "./_templates/client-quote-email.tsx";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -89,36 +90,67 @@ const handler = async (req: Request): Promise<Response> => {
     });
 
     // Pobierz ceny z bazy danych jeśli to zapytanie o wycenę
-    let estimatedPrice = formData.estimatedPrice;
+    let priceData = null;
     
-    if (formData.serviceType && !estimatedPrice) {
+    if (formData.serviceType) {
       try {
-        console.log('Pobieranie cen z bazy dla:', formData.serviceType, formData.serviceVariant);
+        console.log('Pobieranie pełnych danych cenowych dla:', formData.serviceType, formData.serviceVariant, formData.participants);
         
         // Pobierz usługę bazową
         const { data: service } = await supabase
           .from('services')
-          .select('base_price')
+          .select('id, base_price, name')
           .eq('service_type', formData.serviceType)
           .single();
 
-        let totalPrice = service?.base_price || 0;
+        let basePrice = service?.base_price || 0;
+        let variantModifier = 0;
+        let participantsMultiplier = 1;
 
         // Pobierz wariant jeśli istnieje
         if (formData.serviceVariant && service) {
           const { data: variant } = await supabase
             .from('service_variants')
-            .select('price_modifier')
+            .select('price_modifier, name')
             .eq('variant_key', formData.serviceVariant)
             .single();
 
           if (variant) {
-            totalPrice += variant.price_modifier || 0;
+            variantModifier = variant.price_modifier || 0;
           }
         }
 
-        estimatedPrice = totalPrice;
-        console.log('Obliczona cena:', estimatedPrice);
+        // Pobierz mnożnik dla liczby uczestników
+        if (formData.participants && service) {
+          const { data: pricingTier } = await supabase
+            .from('pricing_tiers')
+            .select('price_multiplier, fixed_price')
+            .eq('service_id', service.id)
+            .eq('participant_range', formData.participants)
+            .single();
+
+          if (pricingTier) {
+            if (pricingTier.fixed_price) {
+              // Jeśli jest stała cena, użyj jej
+              basePrice = pricingTier.fixed_price;
+              variantModifier = 0; // Resetuj modyfikator wariantu dla stałej ceny
+            } else {
+              participantsMultiplier = pricingTier.price_multiplier || 1;
+            }
+          }
+        }
+
+        const finalPrice = (basePrice + variantModifier) * participantsMultiplier;
+
+        priceData = {
+          basePrice,
+          variantModifier,
+          participantsMultiplier,
+          finalPrice,
+          serviceName: service?.name || ''
+        };
+
+        console.log('Obliczone dane cenowe:', priceData);
       } catch (error) {
         console.error('Błąd pobierania cen:', error);
       }
@@ -159,7 +191,7 @@ const handler = async (req: Request): Promise<Response> => {
           participants: formData.participants || '',
           serviceVariant: formData.serviceVariant,
           message: formData.message,
-          estimatedPrice: estimatedPrice,
+          estimatedPrice: priceData?.finalPrice,
           additionalInfo: formData.message
         })
       );
@@ -217,7 +249,7 @@ const handler = async (req: Request): Promise<Response> => {
       console.error("Błąd wysyłania emaila do administratora:", adminEmailResponse.error);
     }
 
-    // Send confirmation email to client
+    // Send confirmation email to client immediately
     console.log('Wysyłanie emaila potwierdzającego do klienta:', formData.email);
     const clientEmailResponse = await resend.emails.send({
       from: "Well-done.pl <noreply@well-done.pl>",
@@ -232,7 +264,52 @@ const handler = async (req: Request): Promise<Response> => {
       console.error("Błąd wysyłania emaila do klienta:", clientEmailResponse.error);
     }
 
-    // Sprawdzenie czy oba emaile zostały wysłane pomyślnie
+    // Jeśli to zapytanie o wycenę i mamy dane cenowe, wyślij email z wyceną po opóźnieniu
+    let quoteEmailSuccess = true;
+    if (isQuoteRequest && priceData) {
+      console.log('Planowanie wysyłki emaila z wyceną za 60 sekund...');
+      
+      // Opóźnienie 60 sekund dla wrażenia ręcznego przygotowania wyceny
+      setTimeout(async () => {
+        try {
+          console.log('Wysyłanie emaila z wyceną do klienta...');
+          
+          const quoteEmailHtml = await renderAsync(
+            React.createElement(ClientQuoteEmail, {
+              name: formData.name,
+              company: formData.company,
+              serviceType: formData.serviceType!,
+              serviceVariant: formData.serviceVariant,
+              participantsCount: formData.participants || '1',
+              basePrice: priceData.basePrice,
+              finalPrice: priceData.finalPrice,
+              priceBreakdown: {
+                basePrice: priceData.basePrice,
+                variantModifier: priceData.variantModifier,
+                participantsMultiplier: priceData.participantsMultiplier
+              }
+            })
+          );
+
+          const quoteEmailResponse = await resend.emails.send({
+            from: "Well-done.pl <noreply@well-done.pl>",
+            to: [formData.email],
+            subject: `💰 Wycena szkolenia - ${priceData.serviceName}`,
+            html: quoteEmailHtml,
+          });
+
+          console.log("Email z wyceną wysłany pomyślnie:", quoteEmailResponse);
+          
+          if (quoteEmailResponse.error) {
+            console.error("Błąd wysyłania emaila z wyceną:", quoteEmailResponse.error);
+          }
+        } catch (error) {
+          console.error("Błąd podczas opóźnionej wysyłki emaila z wyceną:", error);
+        }
+      }, 60000); // 60 sekund opóźnienia
+    }
+
+    // Sprawdzenie czy podstawowe emaile zostały wysłane pomyślnie
     const adminSuccess = adminEmailResponse.data?.id && !adminEmailResponse.error;
     const clientSuccess = clientEmailResponse.data?.id && !clientEmailResponse.error;
     
