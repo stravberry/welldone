@@ -24,21 +24,21 @@ const QuotesManagement: React.FC = () => {
     return pricingTiers.filter(tier => tier.service_id === serviceId);
   };
 
-  const handleUpdateService = async (updates: Partial<Service>) => {
+  const handleUpdateService = async () => {
     if (!editingService) return;
-    await updateService(editingService.id, updates);
+    await updateService(editingService.id, editingService);
     setEditingService(null);
   };
 
-  const handleUpdateVariant = async (updates: Partial<ServiceVariant>) => {
+  const handleUpdateVariant = async () => {
     if (!editingVariant) return;
-    await updateServiceVariant(editingVariant.id, updates);
+    await updateServiceVariant(editingVariant.id, editingVariant);
     setEditingVariant(null);
   };
 
-  const handleUpdatePricing = async (updates: Partial<PricingTier>) => {
+  const handleUpdatePricing = async () => {
     if (!editingPricing) return;
-    await updatePricingTier(editingPricing.id, updates);
+    await updatePricingTier(editingPricing.id, editingPricing);
     setEditingPricing(null);
   };
 
@@ -137,7 +137,7 @@ const QuotesManagement: React.FC = () => {
                               <Button variant="outline" onClick={() => setEditingService(null)}>
                                 Anuluj
                               </Button>
-                              <Button onClick={() => handleUpdateService(editingService!)}>
+                              <Button onClick={handleUpdateService}>
                                 Zapisz
                               </Button>
                             </div>
@@ -222,7 +222,7 @@ const QuotesManagement: React.FC = () => {
                                         <Button variant="outline" onClick={() => setEditingPricing(null)}>
                                           Anuluj
                                         </Button>
-                                        <Button onClick={() => handleUpdatePricing(editingPricing!)}>
+                                        <Button onClick={handleUpdatePricing}>
                                           Zapisz
                                         </Button>
                                       </div>
@@ -305,7 +305,7 @@ const QuotesManagement: React.FC = () => {
                                         <Button variant="outline" onClick={() => setEditingVariant(null)}>
                                           Anuluj
                                         </Button>
-                                        <Button onClick={() => handleUpdateVariant(editingVariant!)}>
+                                        <Button onClick={handleUpdateVariant}>
                                           Zapisz
                                         </Button>
                                       </div>
