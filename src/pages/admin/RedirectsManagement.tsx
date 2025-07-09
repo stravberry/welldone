@@ -123,254 +123,300 @@ ${pages.map(page => `  <url>
   };
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
-          <h1 className="text-2xl font-bold flex items-center gap-2">
-            <ArrowRightLeft className="h-6 w-6" />
-            Przekierowania
-          </h1>
-          <p className="text-muted-foreground mt-1">
-            Zarządzanie przekierowaniami URL, importowanie sitemap i monitoring SEO
-          </p>
-        </div>
-        <div className="flex gap-2">
-          <Button onClick={generateSitemap} variant="outline">
-            <Download className="h-4 w-4 mr-2" />
-            Pobierz sitemap
-          </Button>
-          <Button onClick={handleAdd}>
-            <Plus className="h-4 w-4 mr-2" />
-            Dodaj przekierowanie
-          </Button>
-        </div>
-      </div>
-
-      {/* Statystyki */}
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
-        <Card>
-          <CardContent className="p-4">
-            <div className="text-2xl font-bold">{stats.total}</div>
-            <p className="text-xs text-muted-foreground">Łącznie</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4">
-            <div className="text-2xl font-bold text-green-600">{stats.active}</div>
-            <p className="text-xs text-muted-foreground">Aktywne</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4">
-            <div className="text-2xl font-bold text-gray-500">{stats.inactive}</div>
-            <p className="text-xs text-muted-foreground">Nieaktywne</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4">
-            <div className="text-2xl font-bold text-blue-600">{stats.permanent}</div>
-            <p className="text-xs text-muted-foreground">301</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4">
-            <div className="text-2xl font-bold text-orange-600">{stats.temporary}</div>
-            <p className="text-xs text-muted-foreground">302</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4">
-            <div className="text-2xl font-bold">{stats.totalHits}</div>
-            <p className="text-xs text-muted-foreground">Użycia</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4">
-            <div className="text-2xl font-bold text-red-600">{stats.unresolved404s}</div>
-            <p className="text-xs text-muted-foreground">404 błędy</p>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Główny panel z tabami */}
-      <Tabs defaultValue="redirects" className="space-y-4">
-        <TabsList>
-          <TabsTrigger value="redirects">Przekierowania</TabsTrigger>
-          <TabsTrigger value="import">Import sitemap</TabsTrigger>
-          <TabsTrigger value="404errors">Błędy 404</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="redirects" className="space-y-4">
-          {/* Wyszukiwanie */}
-          <div className="flex gap-4">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Szukaj przekierowań..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
-              />
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="max-w-7xl mx-auto p-4 md:p-6 lg:p-8 space-y-6">
+        {/* Header */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg border p-6">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+            <div className="flex-1">
+              <h1 className="text-2xl lg:text-3xl font-bold flex items-center gap-3 text-gray-900 dark:text-white">
+                <ArrowRightLeft className="h-7 w-7 text-primary" />
+                Przekierowania
+              </h1>
+              <p className="text-muted-foreground mt-2 text-sm lg:text-base">
+                Zarządzanie przekierowaniami URL, importowanie sitemap i monitoring SEO
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+              <Button onClick={generateSitemap} variant="outline" className="w-full sm:w-auto">
+                <Download className="h-4 w-4 mr-2" />
+                Pobierz sitemap
+              </Button>
+              <Button onClick={handleAdd} className="w-full sm:w-auto">
+                <Plus className="h-4 w-4 mr-2" />
+                Dodaj przekierowanie
+              </Button>
             </div>
           </div>
+        </div>
 
-          {/* Tabela przekierowań */}
-          <Card>
-            <CardContent className="p-0">
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>URL źródłowy</TableHead>
-                      <TableHead>URL docelowy</TableHead>
-                      <TableHead>Typ</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead>Użycia</TableHead>
-                      <TableHead>Ostatnie użycie</TableHead>
-                      <TableHead>Akcje</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {filteredRedirects.map((redirect) => (
-                      <TableRow key={redirect.id}>
-                        <TableCell className="font-mono text-sm max-w-xs truncate">
-                          {redirect.source_url}
-                        </TableCell>
-                        <TableCell className="font-mono text-sm max-w-xs truncate">
-                          {redirect.target_url}
-                        </TableCell>
-                        <TableCell>
-                          <Badge variant={redirect.redirect_type === 301 ? "default" : "secondary"}>
-                            {redirect.redirect_type}
-                          </Badge>
-                        </TableCell>
-                        <TableCell>
-                          <Badge variant={redirect.is_active ? "default" : "secondary"}>
-                            {redirect.is_active ? 'Aktywne' : 'Nieaktywne'}
-                          </Badge>
-                        </TableCell>
-                        <TableCell>{redirect.hit_count}</TableCell>
-                        <TableCell className="text-xs text-muted-foreground">
-                          {redirect.last_accessed 
-                            ? new Date(redirect.last_accessed).toLocaleString() 
-                            : 'Nigdy'
-                          }
-                        </TableCell>
-                        <TableCell>
-                          <div className="flex gap-2">
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              onClick={() => handleEdit(redirect)}
-                            >
-                              <Edit className="h-4 w-4" />
-                            </Button>
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              onClick={() => handleDelete(redirect.id)}
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
+        {/* Statystyki */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 lg:gap-4">
+          <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+            <CardContent className="p-4 lg:p-6">
+              <div className="text-xl lg:text-2xl font-bold text-gray-900 dark:text-white">{stats.total}</div>
+              <p className="text-xs lg:text-sm text-muted-foreground">Łącznie</p>
             </CardContent>
           </Card>
-        </TabsContent>
-
-        <TabsContent value="import">
-          <SitemapImporter />
-        </TabsContent>
-
-        <TabsContent value="404errors" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <AlertCircle className="h-5 w-5" />
-                Błędy 404
-              </CardTitle>
-              <CardDescription>
-                Monitorowanie błędów 404 i ich rozwiązywanie
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>URL</TableHead>
-                      <TableHead>Referrer</TableHead>
-                      <TableHead>Data wystąpienia</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead>Akcje</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {notFoundErrors.slice(0, 20).map((error) => (
-                      <TableRow key={error.id}>
-                        <TableCell className="font-mono text-sm max-w-xs truncate">
-                          {error.url}
-                        </TableCell>
-                        <TableCell className="text-sm max-w-xs truncate">
-                          {error.referrer || 'Brak'}
-                        </TableCell>
-                        <TableCell className="text-xs">
-                          {new Date(error.occurred_at).toLocaleString()}
-                        </TableCell>
-                        <TableCell>
-                          <Badge variant={error.resolved ? "default" : "destructive"}>
-                            {error.resolved ? 'Rozwiązane' : 'Nierozwiązane'}
-                          </Badge>
-                        </TableCell>
-                        <TableCell>
-                          {!error.resolved && (
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              onClick={() => resolveNotFoundError(error.id)}
-                            >
-                              Oznacz jako rozwiązane
-                            </Button>
-                          )}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
+          <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+            <CardContent className="p-4 lg:p-6">
+              <div className="text-xl lg:text-2xl font-bold text-green-600 dark:text-green-400">{stats.active}</div>
+              <p className="text-xs lg:text-sm text-muted-foreground">Aktywne</p>
             </CardContent>
           </Card>
-        </TabsContent>
-      </Tabs>
+          <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+            <CardContent className="p-4 lg:p-6">
+              <div className="text-xl lg:text-2xl font-bold text-gray-500 dark:text-gray-400">{stats.inactive}</div>
+              <p className="text-xs lg:text-sm text-muted-foreground">Nieaktywne</p>
+            </CardContent>
+          </Card>
+          <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+            <CardContent className="p-4 lg:p-6">
+              <div className="text-xl lg:text-2xl font-bold text-blue-600 dark:text-blue-400">{stats.permanent}</div>
+              <p className="text-xs lg:text-sm text-muted-foreground">301</p>
+            </CardContent>
+          </Card>
+          <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+            <CardContent className="p-4 lg:p-6">
+              <div className="text-xl lg:text-2xl font-bold text-orange-600 dark:text-orange-400">{stats.temporary}</div>
+              <p className="text-xs lg:text-sm text-muted-foreground">302</p>
+            </CardContent>
+          </Card>
+          <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+            <CardContent className="p-4 lg:p-6">
+              <div className="text-xl lg:text-2xl font-bold text-gray-900 dark:text-white">{stats.totalHits}</div>
+              <p className="text-xs lg:text-sm text-muted-foreground">Użycia</p>
+            </CardContent>
+          </Card>
+          <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+            <CardContent className="p-4 lg:p-6">
+              <div className="text-xl lg:text-2xl font-bold text-red-600 dark:text-red-400">{stats.unresolved404s}</div>
+              <p className="text-xs lg:text-sm text-muted-foreground">404 błędy</p>
+            </CardContent>
+          </Card>
+        </div>
 
-      {/* Formularze i dialogi */}
-      <RedirectForm
-        open={showForm}
-        onOpenChange={setShowForm}
-        redirect={selectedRedirect}
-        onSubmit={handleFormSubmit}
-      />
+        {/* Główny panel z tabami */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+          <Tabs defaultValue="redirects" className="space-y-6">
+            <div className="border-b border-gray-200 dark:border-gray-700 px-6 pt-6">
+              <TabsList className="grid w-full grid-cols-3 max-w-md">
+                <TabsTrigger value="redirects" className="text-xs sm:text-sm">Przekierowania</TabsTrigger>
+                <TabsTrigger value="import" className="text-xs sm:text-sm">Import sitemap</TabsTrigger>
+                <TabsTrigger value="404errors" className="text-xs sm:text-sm">Błędy 404</TabsTrigger>
+              </TabsList>
+            </div>
 
-      <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Czy na pewno chcesz usunąć to przekierowanie?</AlertDialogTitle>
-            <AlertDialogDescription>
-              Ta akcja nie może być cofnięta. Przekierowanie zostanie trwale usunięte.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Anuluj</AlertDialogCancel>
-            <AlertDialogAction onClick={confirmDelete}>Usuń</AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+            <TabsContent value="redirects" className="space-y-6 px-6 pb-6">
+              {/* Wyszukiwanie */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <div className="relative flex-1">
+                  <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    placeholder="Szukaj przekierowań..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="pl-10"
+                  />
+                </div>
+              </div>
+
+              {/* Tabela przekierowań */}
+              <div className="border rounded-lg overflow-hidden bg-white dark:bg-gray-800">
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow className="border-gray-200 dark:border-gray-700">
+                        <TableHead className="font-semibold text-gray-900 dark:text-white">URL źródłowy</TableHead>
+                        <TableHead className="font-semibold text-gray-900 dark:text-white">URL docelowy</TableHead>
+                        <TableHead className="font-semibold text-gray-900 dark:text-white">Typ</TableHead>
+                        <TableHead className="font-semibold text-gray-900 dark:text-white">Status</TableHead>
+                        <TableHead className="font-semibold text-gray-900 dark:text-white hidden md:table-cell">Użycia</TableHead>
+                        <TableHead className="font-semibold text-gray-900 dark:text-white hidden lg:table-cell">Ostatnie użycie</TableHead>
+                        <TableHead className="font-semibold text-gray-900 dark:text-white">Akcje</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {filteredRedirects.length === 0 ? (
+                        <TableRow>
+                          <TableCell colSpan={7} className="text-center py-8">
+                            <div className="flex flex-col items-center gap-2 text-muted-foreground">
+                              <ArrowRightLeft className="h-8 w-8" />
+                              <p>Brak przekierowań do wyświetlenia</p>
+                              {searchTerm && (
+                                <p className="text-sm">Spróbuj zmienić kryteria wyszukiwania</p>
+                              )}
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ) : (
+                        filteredRedirects.map((redirect) => (
+                          <TableRow key={redirect.id} className="border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                            <TableCell className="font-mono text-xs sm:text-sm max-w-xs truncate">
+                              <div className="flex items-center gap-2">
+                                <span className="truncate">{redirect.source_url}</span>
+                              </div>
+                            </TableCell>
+                            <TableCell className="font-mono text-xs sm:text-sm max-w-xs truncate">
+                              <div className="flex items-center gap-2">
+                                <span className="truncate">{redirect.target_url}</span>
+                              </div>
+                            </TableCell>
+                            <TableCell>
+                              <Badge 
+                                variant={redirect.redirect_type === 301 ? "default" : "secondary"}
+                                className="text-xs"
+                              >
+                                {redirect.redirect_type}
+                              </Badge>
+                            </TableCell>
+                            <TableCell>
+                              <Badge 
+                                variant={redirect.is_active ? "default" : "secondary"}
+                                className="text-xs"
+                              >
+                                {redirect.is_active ? 'Aktywne' : 'Nieaktywne'}
+                              </Badge>
+                            </TableCell>
+                            <TableCell className="hidden md:table-cell text-sm">{redirect.hit_count}</TableCell>
+                            <TableCell className="hidden lg:table-cell text-xs text-muted-foreground">
+                              {redirect.last_accessed 
+                                ? new Date(redirect.last_accessed).toLocaleDateString() 
+                                : 'Nigdy'
+                              }
+                            </TableCell>
+                            <TableCell>
+                              <div className="flex gap-1 sm:gap-2">
+                                <Button
+                                  size="sm"
+                                  variant="outline"
+                                  onClick={() => handleEdit(redirect)}
+                                  className="h-8 w-8 p-0"
+                                >
+                                  <Edit className="h-3 w-3" />
+                                </Button>
+                                <Button
+                                  size="sm"
+                                  variant="outline"
+                                  onClick={() => handleDelete(redirect.id)}
+                                  className="h-8 w-8 p-0 hover:bg-red-50 hover:border-red-200 hover:text-red-600"
+                                >
+                                  <Trash2 className="h-3 w-3" />
+                                </Button>
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                        ))
+                      )}
+                    </TableBody>
+                  </Table>
+                </div>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="import" className="px-6 pb-6">
+              <SitemapImporter />
+            </TabsContent>
+
+            <TabsContent value="404errors" className="space-y-6 px-6 pb-6">
+              <div>
+                <h3 className="text-lg font-semibold flex items-center gap-2 text-gray-900 dark:text-white">
+                  <AlertCircle className="h-5 w-5 text-red-500" />
+                  Błędy 404
+                </h3>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Monitorowanie błędów 404 i ich rozwiązywanie
+                </p>
+              </div>
+              
+              <div className="border rounded-lg overflow-hidden bg-white dark:bg-gray-800">
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow className="border-gray-200 dark:border-gray-700">
+                        <TableHead className="font-semibold text-gray-900 dark:text-white">URL</TableHead>
+                        <TableHead className="font-semibold text-gray-900 dark:text-white hidden sm:table-cell">Referrer</TableHead>
+                        <TableHead className="font-semibold text-gray-900 dark:text-white">Data wystąpienia</TableHead>
+                        <TableHead className="font-semibold text-gray-900 dark:text-white">Status</TableHead>
+                        <TableHead className="font-semibold text-gray-900 dark:text-white">Akcje</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {notFoundErrors.length === 0 ? (
+                        <TableRow>
+                          <TableCell colSpan={5} className="text-center py-8">
+                            <div className="flex flex-col items-center gap-2 text-muted-foreground">
+                              <AlertCircle className="h-8 w-8" />
+                              <p>Brak błędów 404 do wyświetlenia</p>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ) : (
+                        notFoundErrors.slice(0, 20).map((error) => (
+                          <TableRow key={error.id} className="border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                            <TableCell className="font-mono text-xs sm:text-sm max-w-xs truncate">
+                              {error.url}
+                            </TableCell>
+                            <TableCell className="text-xs sm:text-sm max-w-xs truncate hidden sm:table-cell">
+                              {error.referrer || 'Brak'}
+                            </TableCell>
+                            <TableCell className="text-xs">
+                              {new Date(error.occurred_at).toLocaleDateString()}
+                            </TableCell>
+                            <TableCell>
+                              <Badge 
+                                variant={error.resolved ? "default" : "destructive"}
+                                className="text-xs"
+                              >
+                                {error.resolved ? 'Rozwiązane' : 'Nierozwiązane'}
+                              </Badge>
+                            </TableCell>
+                            <TableCell>
+                              {!error.resolved && (
+                                <Button
+                                  size="sm"
+                                  variant="outline"
+                                  onClick={() => resolveNotFoundError(error.id)}
+                                  className="text-xs h-8"
+                                >
+                                  Oznacz jako rozwiązane
+                                </Button>
+                              )}
+                            </TableCell>
+                          </TableRow>
+                        ))
+                      )}
+                    </TableBody>
+                  </Table>
+                </div>
+              </div>
+            </TabsContent>
+          </Tabs>
+        </div>
+
+        {/* Formularze i dialogi */}
+        <RedirectForm
+          open={showForm}
+          onOpenChange={setShowForm}
+          redirect={selectedRedirect}
+          onSubmit={handleFormSubmit}
+        />
+
+        <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Czy na pewno chcesz usunąć to przekierowanie?</AlertDialogTitle>
+              <AlertDialogDescription>
+                Ta akcja nie może być cofnięta. Przekierowanie zostanie trwale usunięte.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Anuluj</AlertDialogCancel>
+              <AlertDialogAction onClick={confirmDelete}>Usuń</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </div>
     </div>
   );
 };
