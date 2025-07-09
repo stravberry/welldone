@@ -47,8 +47,8 @@ import { Redirect } from '@/hooks/useRedirectsManagement';
 import { useSitePages } from '@/hooks/useSitePages';
 
 const redirectSchema = z.object({
-  source_url: z.string().min(1, 'URL źródłowy jest wymagany').url('Nieprawidłowy format URL'),
-  target_url: z.string().min(1, 'URL docelowy jest wymagany').url('Nieprawidłowy format URL'),
+  source_url: z.string().min(1, 'URL źródłowy jest wymagany'),
+  target_url: z.string().min(1, 'URL docelowy jest wymagany'),
   redirect_type: z.union([z.literal(301), z.literal(302)]),
   is_active: z.boolean(),
   description: z.string().optional(),
@@ -128,7 +128,11 @@ export const RedirectForm: React.FC<RedirectFormProps> = ({
     const page = sitePages.find(p => p.id === pageId);
     if (page) {
       setSelectedPage(pageId);
-      form.setValue('target_url', page.path);
+      // Ensure we set a full URL, not just a path
+      const fullUrl = page.path.startsWith('http') 
+        ? page.path 
+        : `${window.location.origin}${page.path}`;
+      form.setValue('target_url', fullUrl);
       setPageSearchOpen(false);
     }
   };
