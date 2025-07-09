@@ -33,6 +33,7 @@ import Dashboard from './pages/admin/Dashboard';
 import QuotesManagement from './pages/admin/QuotesManagement';
 import CRMManagement from './pages/admin/CRMManagement';
 import EmailTemplatesManagement from './pages/admin/EmailTemplatesManagement';
+import RedirectsManagement from './pages/admin/RedirectsManagement';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -91,6 +92,7 @@ function App() {
                   <Route path="quotes" element={<QuotesManagement />} />
                   <Route path="crm" element={<CRMManagement />} />
                   <Route path="email-templates" element={<EmailTemplatesManagement />} />
+                  <Route path="redirects" element={<RedirectsManagement />} />
                   <Route path="blog" element={<div className="p-6">Blog management coming soon...</div>} />
                   <Route path="media" element={<div className="p-6">Media library coming soon...</div>} />
                   <Route path="settings" element={<div className="p-6">Settings coming soon...</div>} />

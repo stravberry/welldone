@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      not_found_errors: {
+        Row: {
+          id: string
+          ip_address: unknown | null
+          occurred_at: string
+          referrer: string | null
+          resolved: boolean
+          url: string
+          user_agent: string | null
+        }
+        Insert: {
+          id?: string
+          ip_address?: unknown | null
+          occurred_at?: string
+          referrer?: string | null
+          resolved?: boolean
+          url: string
+          user_agent?: string | null
+        }
+        Update: {
+          id?: string
+          ip_address?: unknown | null
+          occurred_at?: string
+          referrer?: string | null
+          resolved?: boolean
+          url?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       page_sections: {
         Row: {
           button_text: string | null
@@ -222,6 +252,48 @@ export type Database = {
         }
         Relationships: []
       }
+      redirects: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          description: string | null
+          hit_count: number
+          id: string
+          is_active: boolean
+          last_accessed: string | null
+          redirect_type: number
+          source_url: string
+          target_url: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          hit_count?: number
+          id?: string
+          is_active?: boolean
+          last_accessed?: string | null
+          redirect_type?: number
+          source_url: string
+          target_url: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          hit_count?: number
+          id?: string
+          is_active?: boolean
+          last_accessed?: string | null
+          redirect_type?: number
+          source_url?: string
+          target_url?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       service_variants: {
         Row: {
           created_at: string
@@ -296,6 +368,39 @@ export type Database = {
           name?: string
           service_type?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      sitemap_entries: {
+        Row: {
+          changefreq: string | null
+          created_at: string
+          id: string
+          is_active: boolean
+          lastmod: string | null
+          priority: number | null
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          changefreq?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          lastmod?: string | null
+          priority?: number | null
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          changefreq?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          lastmod?: string | null
+          priority?: number | null
+          updated_at?: string
+          url?: string
         }
         Relationships: []
       }

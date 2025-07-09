@@ -2,7 +2,7 @@ import React from 'react';
 import { Outlet, useNavigate, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { Button } from '@/components/ui/button';
-import { LayoutDashboard, Calculator, FileText, Settings, Image, LogOut, Users, Menu, Mail } from 'lucide-react';
+import { LayoutDashboard, Calculator, FileText, Settings, Image, LogOut, Users, Menu, Mail, ArrowRightLeft } from 'lucide-react';
 
 const AdminLayout: React.FC = () => {
   const { logout, username } = useAuth();
@@ -20,6 +20,7 @@ const AdminLayout: React.FC = () => {
     { path: '/admin/quotes', label: 'Wyceny', icon: Calculator },
     { path: '/admin/crm', label: 'CRM', icon: Users },
     { path: '/admin/email-templates', label: 'Szablony E-mail', icon: Mail },
+    { path: '/admin/redirects', label: 'Przekierowania', icon: ArrowRightLeft },
     { path: '/admin/blog', label: 'Blog', icon: FileText },
     { path: '/admin/media', label: 'Media Library', icon: Image },
     { path: '/admin/settings', label: 'Ustawienia', icon: Settings },
