@@ -233,10 +233,10 @@ export const RedirectForm: React.FC<RedirectFormProps> = ({
                               </Button>
                             </FormControl>
                           </PopoverTrigger>
-                          <PopoverContent className="w-full p-0">
-                            <Command>
-                              <CommandInput placeholder="Szukaj strony..." />
-                              <CommandList>
+                          <PopoverContent className="w-full p-0 max-w-md">
+                            <Command className="max-h-64">
+                              <CommandInput placeholder="Szukaj strony..." className="h-9" />
+                              <CommandList className="max-h-48 overflow-y-auto">
                                 <CommandEmpty>Nie znaleziono stron.</CommandEmpty>
                                 <CommandGroup>
                                   {sitePages.map((page) => (
@@ -244,18 +244,24 @@ export const RedirectForm: React.FC<RedirectFormProps> = ({
                                       key={page.id}
                                       value={page.title}
                                       onSelect={() => handlePageSelect(page.id)}
+                                      className="flex items-start gap-2 p-2"
                                     >
                                       <Check
                                         className={cn(
-                                          "mr-2 h-4 w-4",
+                                          "mt-1 h-4 w-4 shrink-0",
                                           selectedPage === page.id ? "opacity-100" : "opacity-0"
                                         )}
                                       />
-                                      <div className="flex flex-col">
-                                        <span className="font-medium">{page.title}</span>
-                                        <span className="text-xs text-muted-foreground font-mono">
+                                      <div className="flex flex-col min-w-0 flex-1">
+                                        <span className="font-medium truncate">{page.title}</span>
+                                        <span className="text-xs text-muted-foreground font-mono truncate">
                                           {page.path}
                                         </span>
+                                        {page.description && (
+                                          <span className="text-xs text-muted-foreground truncate mt-1">
+                                            {page.description}
+                                          </span>
+                                        )}
                                       </div>
                                     </CommandItem>
                                   ))}
