@@ -371,6 +371,39 @@ export type Database = {
         }
         Relationships: []
       }
+      site_pages: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean
+          last_indexed: string
+          path: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          last_indexed?: string
+          path: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          last_indexed?: string
+          path?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       sitemap_entries: {
         Row: {
           changefreq: string | null
