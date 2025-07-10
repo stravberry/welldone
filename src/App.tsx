@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { HelmetProvider } from 'react-helmet-async';
+import { Analytics } from "@vercel/analytics/react";
 import { AuthProvider } from './contexts/AuthContext';
 import { Toaster } from 'sonner';
 import PageTransition from './components/PageTransition';
@@ -109,6 +110,7 @@ function App() {
               </Routes>
             </PageTransition>
             <Toaster position="top-center" richColors />
+            <Analytics />
           </Router>
         </AuthProvider>
       </QueryClientProvider>
