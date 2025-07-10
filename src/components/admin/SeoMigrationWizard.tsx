@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -12,13 +13,16 @@ import { Loader2, ExternalLink, CheckCircle, AlertTriangle, XCircle } from 'luci
 
 export const SeoMigrationWizard: React.FC = () => {
   const [sitemapUrl, setSitemapUrl] = useState('https://well-done.pl/wp-sitemap.xml');
+  const [sitemapXml, setSitemapXml] = useState('');
   const [currentStep, setCurrentStep] = useState(1);
+  const [importMethod, setImportMethod] = useState<'url' | 'xml'>('url');
   
   const {
     sitemapUrls,
     loading,
     stats,
     parseSitemap,
+    parseXmlContent,
     analyzeUrls,
     generateSmartMappings,
     updateUrlAction,
@@ -130,27 +134,64 @@ export const SeoMigrationWizard: React.FC = () => {
             <CardHeader>
               <CardTitle>Import sitemapy WordPress</CardTitle>
               <CardDescription>
-                Wklej URL do sitemapy XML swojej starej strony WordPress
+                Wybierz metodę importu sitemapy XML
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="sitemap-url">URL sitemapy</Label>
-                <Input
-                  id="sitemap-url"
-                  value={sitemapUrl}
-                  onChange={(e) => setSitemapUrl(e.target.value)}
-                  placeholder="https://example.com/wp-sitemap.xml"
-                />
-              </div>
-              <Button 
-                onClick={() => parseSitemap(sitemapUrl)}
-                disabled={loading || !sitemapUrl}
-                className="w-full"
-              >
-                {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                Załaduj sitemapę
-              </Button>
+              <Tabs value={importMethod} onValueChange={(value: 'url' | 'xml') => setImportMethod(value)}>
+                <TabsList className="grid w-full grid-cols-2">
+                  <TabsTrigger value="url">Z URL</TabsTrigger>
+                  <TabsTrigger value="xml">Wklej XML</TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="url" className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="sitemap-url">URL sitemapy</Label>
+                    <Input
+                      id="sitemap-url"
+                      value={sitemapUrl}
+                      onChange={(e) => setSitemapUrl(e.target.value)}
+                      placeholder="https://example.com/wp-sitemap.xml"
+                    />
+                  </div>
+                  <Button 
+                    onClick={() => parseSitemap(sitemapUrl)}
+                    disabled={loading || !sitemapUrl}
+                    className="w-full"
+                  >
+                    {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                    Załaduj sitemapę z URL
+                  </Button>
+                  <p className="text-sm text-muted-foreground">
+                    Uwaga: Może nie działać z powodu ograniczeń CORS. W takim przypadku użyj opcji "Wklej XML".
+                  </p>
+                </TabsContent>
+
+                <TabsContent value="xml" className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="sitemap-xml">Zawartość XML sitemapy</Label>
+                    <Textarea
+                      id="sitemap-xml"
+                      value={sitemapXml}
+                      onChange={(e) => setSitemapXml(e.target.value)}
+                      placeholder="Wklej tutaj zawartość pliku sitemap.xml..."
+                      rows={8}
+                      className="font-mono text-sm"
+                    />
+                  </div>
+                  <Button 
+                    onClick={() => parseXmlContent(sitemapXml)}
+                    disabled={loading || !sitemapXml.trim()}
+                    className="w-full"
+                  >
+                    {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                    Przetwórz XML sitemapy
+                  </Button>
+                  <p className="text-sm text-muted-foreground">
+                    Skopiuj zawartość pliku sitemap.xml i wklej tutaj, jeśli pobieranie z URL nie działa.
+                  </p>
+                </TabsContent>
+              </Tabs>
             </CardContent>
           </Card>
         </TabsContent>

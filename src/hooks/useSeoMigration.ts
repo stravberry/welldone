@@ -39,7 +39,19 @@ export const useSeoMigration = () => {
   const parseSitemap = useCallback(async (sitemapUrl: string) => {
     setLoading(true);
     try {
-      const response = await fetch(sitemapUrl);
+      // Add CORS handling and better error detection
+      const response = await fetch(sitemapUrl, {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+          'Accept': 'text/xml, application/xml, text/plain'
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
       const xmlText = await response.text();
       
       const parser = new DOMParser();
@@ -71,9 +83,24 @@ export const useSeoMigration = () => {
         description: `Znaleziono ${urls.length} URL-i do analizy`,
       });
     } catch (error) {
+      console.error('Sitemap parsing error:', error);
+      let errorMessage = "Nie udało się załadować sitemapy";
+      
+      if (error instanceof Error) {
+        if (error.message.includes('CORS')) {
+          errorMessage = "Problem z CORS - sitemap nie może być załadowana bezpośrednio";
+        } else if (error.message.includes('HTTP')) {
+          errorMessage = `Błąd serwera: ${error.message}`;
+        } else if (error.message.includes('NetworkError')) {
+          errorMessage = "Błąd sieci - sprawdź URL sitemapy";
+        } else {
+          errorMessage = `Błąd: ${error.message}`;
+        }
+      }
+      
       toast({
-        title: "Błąd",
-        description: "Nie udało się załadować sitemapy",
+        title: "Błąd ładowania sitemapy",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
@@ -268,12 +295,72 @@ export const useSeoMigration = () => {
     });
   };
 
+  const parseXmlContent = useCallback(async (xmlContent: string) => {
+    setLoading(true);
+    try {
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(xmlContent, 'text/xml');
+      
+      // Check for parsing errors
+      const parseError = xmlDoc.querySelector('parsererror');
+      if (parseError) {
+        throw new Error('Nieprawidłowy format XML');
+      }
+      
+      const urlElements = xmlDoc.querySelectorAll('url');
+      const urls: SitemapUrl[] = Array.from(urlElements).map(urlEl => {
+        const loc = urlEl.querySelector('loc')?.textContent || '';
+        const lastmod = urlEl.querySelector('lastmod')?.textContent || '';
+        const priority = parseFloat(urlEl.querySelector('priority')?.textContent || '0.5');
+        const changefreq = urlEl.querySelector('changefreq')?.textContent || '';
+        
+        return {
+          url: loc,
+          lastmod,
+          priority,
+          changefreq,
+          status: 'pending',
+          category: categorizeUrl(loc),
+          action: 'redirect'
+        };
+      });
+      
+      if (urls.length === 0) {
+        throw new Error('Nie znaleziono URL-i w sitemap');
+      }
+      
+      setSitemapUrls(urls);
+      updateStats(urls);
+      
+      toast({
+        title: "Sitemap załadowana",
+        description: `Znaleziono ${urls.length} URL-i do analizy`,
+      });
+    } catch (error) {
+      console.error('XML parsing error:', error);
+      let errorMessage = "Nie udało się przetworzyć sitemapy";
+      
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+      
+      toast({
+        title: "Błąd przetwarzania XML",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  }, [toast]);
+
   return {
     sitemapUrls,
     analysis,
     loading,
     stats,
     parseSitemap,
+    parseXmlContent,
     analyzeUrls,
     generateSmartMappings,
     updateUrlAction,
