@@ -31,27 +31,31 @@ const NotFound = () => {
             })
             .eq('id', redirect.id);
 
-          // Wykonaj przekierowanie
+          // Wykonaj przekierowanie - dla Vercel używamy replace zawsze
           if (redirect.target_url.startsWith('http')) {
-            // Zewnętrzny URL
-            window.location.href = redirect.target_url;
+            // Zewnętrzny URL - wymusza przekierowanie przez browser
+            window.location.replace(redirect.target_url);
           } else {
-            // Wewnętrzny URL
-            navigate(redirect.target_url, { replace: redirect.redirect_type === 301 });
+            // Wewnętrzny URL - używamy React Router
+            navigate(redirect.target_url, { replace: true });
           }
           return;
         }
       } catch (error) {
         console.error('Error checking redirect:', error);
-        // Zapisz błąd 404 do monitorowania
-        await supabase
-          .from('not_found_errors')
-          .insert([{
-            url: `${window.location.origin}${currentPath}`,
-            referrer: document.referrer || null,
-            user_agent: navigator.userAgent,
-            occurred_at: new Date().toISOString()
-          }]);
+        // Zapisz błąd 404 do monitorowania tylko gdy nie ma przekierowania
+        try {
+          await supabase
+            .from('not_found_errors')
+            .insert([{
+              url: `${window.location.origin}${currentPath}`,
+              referrer: document.referrer || null,
+              user_agent: navigator.userAgent,
+              occurred_at: new Date().toISOString()
+            }]);
+        } catch (insertError) {
+          console.error('Failed to log 404 error:', insertError);
+        }
       }
       
       setIsChecking(false);
