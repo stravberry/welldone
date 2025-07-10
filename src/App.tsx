@@ -82,8 +82,6 @@ function App() {
                 <Route path="/regulamin" element={<TermsPage />} />
                 
                 {/* Redirect Routes - Physical routes for SEO redirects */}
-                <Route path="/admin" element={<RedirectPage to="/cms-login" />} />
-                <Route path="/admin/" element={<RedirectPage to="/cms-login" />} />
                 <Route path="/cms" element={<RedirectPage to="/cms-login" />} />
                 <Route path="/panel" element={<RedirectPage to="/cms-login" />} />
                 <Route path="/login" element={<RedirectPage to="/cms-login" />} />
@@ -93,7 +91,7 @@ function App() {
                 <Route path="/cms-login" element={<CMSLoginPage />} />
                 
                 {/* Admin Routes */}
-                <Route path="/admin/*" element={
+                <Route path="/admin" element={
                   <ProtectedRoute>
                     <AdminLayout />
                   </ProtectedRoute>
