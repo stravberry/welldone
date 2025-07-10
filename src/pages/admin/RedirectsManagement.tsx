@@ -27,6 +27,7 @@ import { useRedirectsManagement, Redirect } from '@/hooks/useRedirectsManagement
 import { RedirectForm } from '@/components/admin/RedirectForm';
 import { SitemapImporter } from '@/components/admin/SitemapImporter';
 import { SeoMigrationWizard } from '@/components/admin/SeoMigrationWizard';
+import { RedirectTester } from '@/components/admin/RedirectTester';
 
 const RedirectsManagement: React.FC = () => {
   const {
@@ -210,6 +211,9 @@ ${pages.map(page => `  <url>
             </div>
 
             <TabsContent value="redirects" className="space-y-6 px-6 pb-6">
+              {/* Tester przekierowań */}
+              <RedirectTester />
+              
               {/* Wyszukiwanie */}
               <div className="flex flex-col sm:flex-row gap-4">
                 <div className="relative flex-1">

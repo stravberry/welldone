@@ -34,7 +34,7 @@ serve(async (req) => {
       )
     }
 
-    console.log(`Checking redirect for path: ${path}`)
+    console.log(`[REDIRECT] Checking redirect for path: ${path}`)
 
     // Initialize Supabase client
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!
@@ -60,7 +60,7 @@ serve(async (req) => {
 
       if (data && !error) {
         redirect = data
-        console.log(`Found redirect for ${checkPath} -> ${data.target_url}`)
+        console.log(`[REDIRECT] Found redirect for ${checkPath} -> ${data.target_url}`)
         break
       }
     }
@@ -74,8 +74,8 @@ serve(async (req) => {
           last_accessed: new Date().toISOString() 
         })
         .eq('id', redirect.id)
-        .then(() => console.log(`Updated hit count for redirect ${redirect.id}`))
-        .catch(err => console.error('Failed to update hit count:', err))
+        .then(() => console.log(`[REDIRECT] Updated hit count for redirect ${redirect.id}`))
+        .catch(err => console.error('[REDIRECT] Failed to update hit count:', err))
 
       // Return redirect response based on type
       const status = redirect.redirect_type === 301 ? 301 : 302
@@ -91,7 +91,7 @@ serve(async (req) => {
     }
 
     // No redirect found
-    console.log(`No redirect found for path: ${path}`)
+    console.log(`[REDIRECT] No redirect found for path: ${path}`)
     return new Response(
       JSON.stringify({ redirect: false }),
       { 
