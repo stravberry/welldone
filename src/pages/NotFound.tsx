@@ -1,80 +1,32 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import { supabase } from '@/integrations/supabase/client';
 
 const NotFound = () => {
   const location = useLocation();
-  const navigate = useNavigate();
-  const [isChecking, setIsChecking] = useState(true);
 
   useEffect(() => {
-    const checkForRedirect = async () => {
+    // Log 404 errors for monitoring since server-side redirects handle most cases
+    const logNotFoundError = async () => {
       const currentPath = `${location.pathname}${location.search}`;
-      console.log('NotFound component checking path:', currentPath);
+      console.log('404 page reached for path:', currentPath);
       
       try {
-        // Sprawdź czy istnieje aktywne przekierowanie dla tej ścieżki
-        const { data: redirect, error } = await supabase
-          .from('redirects')
-          .select('target_url, redirect_type, id, hit_count')
-          .eq('source_url', currentPath)
-          .eq('is_active', true)
-          .single();
-
-        if (redirect && !error) {
-          // Zwiększ licznik użyć i zaktualizuj ostatni dostęp
-          await supabase
-            .from('redirects')
-            .update({ 
-              hit_count: (redirect.hit_count || 0) + 1,
-              last_accessed: new Date().toISOString() 
-            })
-            .eq('id', redirect.id);
-
-          // Wykonaj przekierowanie - dla Vercel używamy replace zawsze
-          if (redirect.target_url.startsWith('http')) {
-            // Zewnętrzny URL - wymusza przekierowanie przez browser
-            window.location.replace(redirect.target_url);
-          } else {
-            // Wewnętrzny URL - używamy React Router
-            navigate(redirect.target_url, { replace: true });
-          }
-          return;
-        }
+        await supabase
+          .from('not_found_errors')
+          .insert([{
+            url: `${window.location.origin}${currentPath}`,
+            referrer: document.referrer || null,
+            user_agent: navigator.userAgent,
+            occurred_at: new Date().toISOString()
+          }]);
       } catch (error) {
-        console.error('Error checking redirect:', error);
-        // Zapisz błąd 404 do monitorowania tylko gdy nie ma przekierowania
-        try {
-          await supabase
-            .from('not_found_errors')
-            .insert([{
-              url: `${window.location.origin}${currentPath}`,
-              referrer: document.referrer || null,
-              user_agent: navigator.userAgent,
-              occurred_at: new Date().toISOString()
-            }]);
-        } catch (insertError) {
-          console.error('Failed to log 404 error:', insertError);
-        }
+        console.error('Failed to log 404 error:', error);
       }
-      
-      setIsChecking(false);
     };
 
-    checkForRedirect();
-  }, [location, navigate]);
-
-  // Pokaż loading podczas sprawdzania przekierowań
-  if (isChecking) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-4"></div>
-          <p className="text-gray-600">Sprawdzanie przekierowań...</p>
-        </div>
-      </div>
-    );
-  }
+    logNotFoundError();
+  }, [location]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">

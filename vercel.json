@@ -1,5 +1,15 @@
 {
+  "functions": [
+    {
+      "source": "api/redirect-handler.js",
+      "function": "api/redirect-handler.js"
+    }
+  ],
   "rewrites": [
+    {
+      "source": "/((?!api|_next|_static|favicon.ico|robots.txt|sitemap.xml|public|assets|admin).*)",
+      "destination": "/api/redirect-handler?path=$1"
+    },
     {
       "source": "/((?!api|_next|_static|favicon.ico|robots.txt|sitemap.xml|public|assets).*)",
       "destination": "/index.html"
@@ -12,11 +22,6 @@
       "permanent": true
     }
   ],
-  "functions": {
-    "src/pages/**": {
-      "maxDuration": 10
-    }
-  },
   "headers": [
     {
       "source": "/(.*)",
