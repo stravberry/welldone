@@ -9,10 +9,6 @@
     {
       "source": "/((?!api|_next|_static|favicon.ico|robots.txt|sitemap.xml|public|assets|admin).*)",
       "destination": "/api/redirect-handler?path=$1"
-    },
-    {
-      "source": "/((?!api|_next|_static|favicon.ico|robots.txt|sitemap.xml|public|assets).*)",
-      "destination": "/index.html"
     }
   ],
   "redirects": [

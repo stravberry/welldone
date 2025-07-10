@@ -29,7 +29,8 @@ export default async function handler(req, res) {
       return res.rewrite('/index.html');
     }
 
-    return res.status(404).json({ error: 'Page not found' });
+    // Should not reach here in normal case
+    return res.rewrite('/index.html');
     
   } catch (error) {
     console.error('Redirect handler error:', error);
