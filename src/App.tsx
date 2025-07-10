@@ -29,6 +29,7 @@ import TermsPage from './pages/TermsPage';
 import NotFound from './pages/NotFound';
 import AdminLayout from './pages/admin/AdminLayout';
 import ProtectedRoute from './components/ProtectedRoute';
+import RedirectPage from './components/RedirectPage';
 import Dashboard from './pages/admin/Dashboard';
 import QuotesManagement from './pages/admin/QuotesManagement';
 import CRMManagement from './pages/admin/CRMManagement';
@@ -76,11 +77,16 @@ function App() {
                 <Route path="/polityka-prywatnosci" element={<PrivacyPolicyPage />} />
                 <Route path="/regulamin" element={<TermsPage />} />
                 
+                {/* Redirect Routes - Physical routes for SEO redirects */}
+                <Route path="/admin" element={<RedirectPage to="/cms-login" />} />
+                <Route path="/admin/" element={<RedirectPage to="/cms-login" />} />
+                <Route path="/cms" element={<RedirectPage to="/cms-login" />} />
+                <Route path="/panel" element={<RedirectPage to="/cms-login" />} />
+                <Route path="/login" element={<RedirectPage to="/cms-login" />} />
+                <Route path="/szkolenia-na-wozki-widlowe-na-dolnym-slasku/szkolenia-wozki-widlowe-wroclaw/" element={<RedirectPage to="/uslugi/udt-operatorzy" />} />
+                
                 {/* CMS Login */}
                 <Route path="/cms-login" element={<CMSLoginPage />} />
-                
-                {/* Admin Redirect */}
-                <Route path="/admin" element={<Navigate to="/cms-login" replace />} />
                 
                 {/* Admin Routes */}
                 <Route path="/admin/*" element={
