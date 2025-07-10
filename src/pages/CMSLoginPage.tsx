@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { toast } from '@/components/ui/use-toast';
+import { toast } from 'sonner';
 
 const CMSLoginPage = () => {
   const [username, setUsername] = useState('');
@@ -19,11 +19,7 @@ const CMSLoginPage = () => {
 
     // Simple validation
     if (!username || !password) {
-      toast({
-        title: "Błąd logowania",
-        description: "Podaj nazwę użytkownika i hasło",
-        variant: "destructive"
-      });
+      toast.error("Podaj nazwę użytkownika i hasło");
       setIsLoggingIn(false);
       return;
     }
@@ -34,18 +30,11 @@ const CMSLoginPage = () => {
       localStorage.setItem('cmsUsername', username);
       login(username);
       
-      toast({
-        title: "Zalogowano pomyślnie",
-        description: "Przekierowuję do panelu administratora"
-      });
+      toast.success("Zalogowano pomyślnie - przekierowuję do panelu administratora");
       
       navigate('/admin');
     } else {
-      toast({
-        title: "Błąd logowania",
-        description: "Nieprawidłowa nazwa użytkownika lub hasło",
-        variant: "destructive"
-      });
+      toast.error("Nieprawidłowa nazwa użytkownika lub hasło");
     }
     
     setIsLoggingIn(false);
