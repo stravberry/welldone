@@ -6,6 +6,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import { Toaster } from 'sonner';
 import PageTransition from './components/PageTransition';
 import RouteChangeTracker from './components/RouteChangeTracker';
+import { RedirectHandler } from './components/RedirectHandler';
 import CMSLoginPage from './pages/CMSLoginPage';
 import HomePage from './pages/HomePage';
 import ContactPage from './pages/ContactPage';
@@ -45,6 +46,7 @@ function App() {
         <AuthProvider>
           <Router>
             <RouteChangeTracker />
+            <RedirectHandler />
             <PageTransition>
               <Routes>
                 {/* Public Routes */}
