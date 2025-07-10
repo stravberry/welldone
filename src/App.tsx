@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { HelmetProvider } from 'react-helmet-async';
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import { AuthProvider } from './contexts/AuthContext';
 import { Toaster } from 'sonner';
 import PageTransition from './components/PageTransition';
@@ -111,6 +112,7 @@ function App() {
             </PageTransition>
             <Toaster position="top-center" richColors />
             <Analytics />
+            <SpeedInsights />
           </Router>
         </AuthProvider>
       </QueryClientProvider>
