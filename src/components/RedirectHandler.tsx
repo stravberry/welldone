@@ -8,14 +8,15 @@ export const RedirectHandler: React.FC = () => {
 
   useEffect(() => {
     const checkForRedirect = async () => {
-      const currentUrl = `${window.location.origin}${location.pathname}${location.search}`;
+      // Użyj tylko ścieżki + query string, bez domeny
+      const currentPath = `${location.pathname}${location.search}`;
       
       try {
-        // Sprawdź czy istnieje aktywne przekierowanie dla tego URL
+        // Sprawdź czy istnieje aktywne przekierowanie dla tej ścieżki
         const { data: redirect, error } = await supabase
           .from('redirects')
           .select('target_url, redirect_type, id, hit_count')
-          .eq('source_url', currentUrl)
+          .eq('source_url', currentPath)
           .eq('is_active', true)
           .single();
 
@@ -44,7 +45,7 @@ export const RedirectHandler: React.FC = () => {
           await supabase
             .from('not_found_errors')
             .insert([{
-              url: currentUrl,
+              url: `${window.location.origin}${currentPath}`,
               referrer: document.referrer || null,
               user_agent: navigator.userAgent,
               occurred_at: new Date().toISOString()
