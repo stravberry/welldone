@@ -26,6 +26,7 @@ import {
 import { useRedirectsManagement, Redirect } from '@/hooks/useRedirectsManagement';
 import { RedirectForm } from '@/components/admin/RedirectForm';
 import { SitemapImporter } from '@/components/admin/SitemapImporter';
+import { SeoMigrationWizard } from '@/components/admin/SeoMigrationWizard';
 
 const RedirectsManagement: React.FC = () => {
   const {
@@ -200,8 +201,9 @@ ${pages.map(page => `  <url>
         <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
           <Tabs defaultValue="redirects" className="space-y-6">
             <div className="border-b border-gray-200 dark:border-gray-700 px-6 pt-6">
-              <TabsList className="grid w-full grid-cols-3 max-w-md">
+              <TabsList className="grid w-full grid-cols-4 max-w-2xl">
                 <TabsTrigger value="redirects" className="text-xs sm:text-sm">Przekierowania</TabsTrigger>
+                <TabsTrigger value="migration" className="text-xs sm:text-sm">Migracja SEO</TabsTrigger>
                 <TabsTrigger value="import" className="text-xs sm:text-sm">Import sitemap</TabsTrigger>
                 <TabsTrigger value="404errors" className="text-xs sm:text-sm">Błędy 404</TabsTrigger>
               </TabsList>
@@ -312,6 +314,10 @@ ${pages.map(page => `  <url>
                   </Table>
                 </div>
               </div>
+            </TabsContent>
+
+            <TabsContent value="migration" className="px-6 pb-6">
+              <SeoMigrationWizard />
             </TabsContent>
 
             <TabsContent value="import" className="px-6 pb-6">
