@@ -10,6 +10,7 @@ const NotFound = () => {
   useEffect(() => {
     const checkForRedirect = async () => {
       const currentPath = `${location.pathname}${location.search}`;
+      console.log('NotFound component checking path:', currentPath);
       
       try {
         // Sprawdź czy istnieje aktywne przekierowanie dla tej ścieżki
