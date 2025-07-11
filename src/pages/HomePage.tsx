@@ -155,7 +155,7 @@ const HomePage = () => {
       <Navbar />
       <div className="pt-16">
         {/* Enhanced Hero Section */}
-        <section className="hero-gradient text-white py-20 md:py-32 relative overflow-hidden">
+        <section className="hero-gradient text-white pt-12 pb-20 md:pt-16 md:pb-32 relative overflow-hidden">
           {/* Enhanced background effects */}
           <div className="absolute inset-0 bg-gradient-to-r from-orange-600/20 via-transparent to-orange-500/20" />
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-float" />
