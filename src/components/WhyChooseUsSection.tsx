@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Link, useNavigate } from 'react-router-dom';
-
 interface WhyChooseUsSectionProps {
   benefits: Array<{
     title: string;
@@ -10,41 +9,59 @@ interface WhyChooseUsSectionProps {
   }>;
   statsRef: React.RefObject<HTMLDivElement>;
   visibleItems: number[];
-  StatCard: React.ComponentType<{ value: number; label: string; delay: number }>;
+  StatCard: React.ComponentType<{
+    value: number;
+    label: string;
+    delay: number;
+  }>;
   showAllFallback: boolean;
 }
-
-const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({ 
-  benefits, 
-  statsRef, 
-  visibleItems, 
-  StatCard, 
-  showAllFallback 
+const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
+  benefits,
+  statsRef,
+  visibleItems,
+  StatCard,
+  showAllFallback
 }) => {
   const navigate = useNavigate();
-
   const handleContactClick = () => {
     navigate('/kontakt');
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   };
-
-  const cooperatingCompanies = [
-    { name: 'UDT', logo: '/lovable-uploads/fc113f21-4e0a-4b9a-aaf9-f22ad0623f9b.png' },
-    { name: 'TDT', logo: '/lovable-uploads/dff32973-25de-4c17-ac6c-7dee76c2c74c.png' },
-    { name: 'WDT', logo: '/lovable-uploads/wdi-new-logo.png' },
-    { name: 'CPKZ Wrocław', logo: '/lovable-uploads/cpkz-wroclaw-logo.png' },
-    { name: 'PUP Wrocław', logo: '/lovable-uploads/def966ea-cd05-4d1d-98e5-bfb8ae149ca4.png' },
-    { name: 'SEP', logo: '/lovable-uploads/94311598-c54a-4825-8c5a-7ab251653eef.png' },
-    { name: 'SPE International', logo: '/lovable-uploads/spe-international-logo.png' }
-  ];
-
-  const registeredCompanies = [
-    { name: 'Baza Usług Rozwojowych', logo: '/lovable-uploads/2a844adb-5302-4517-bd5f-905e3c293b9d.png' },
-    { name: 'Rejestr Instytucji Szkoleniowych (RIS)', logo: '/lovable-uploads/96cdbf5e-6c4a-4fed-8050-f2cf9a644c49.png' }
-  ];
-
-  return (
-    <section className="py-20 bg-gradient-to-br from-orange-50 to-white relative overflow-hidden">
+  const cooperatingCompanies = [{
+    name: 'UDT',
+    logo: '/lovable-uploads/fc113f21-4e0a-4b9a-aaf9-f22ad0623f9b.png'
+  }, {
+    name: 'TDT',
+    logo: '/lovable-uploads/dff32973-25de-4c17-ac6c-7dee76c2c74c.png'
+  }, {
+    name: 'WDT',
+    logo: '/lovable-uploads/wdi-new-logo.png'
+  }, {
+    name: 'CPKZ Wrocław',
+    logo: '/lovable-uploads/cpkz-wroclaw-logo.png'
+  }, {
+    name: 'PUP Wrocław',
+    logo: '/lovable-uploads/def966ea-cd05-4d1d-98e5-bfb8ae149ca4.png'
+  }, {
+    name: 'SEP',
+    logo: '/lovable-uploads/94311598-c54a-4825-8c5a-7ab251653eef.png'
+  }, {
+    name: 'SPE International',
+    logo: '/lovable-uploads/spe-international-logo.png'
+  }];
+  const registeredCompanies = [{
+    name: 'Baza Usług Rozwojowych',
+    logo: '/lovable-uploads/2a844adb-5302-4517-bd5f-905e3c293b9d.png'
+  }, {
+    name: 'Rejestr Instytucji Szkoleniowych (RIS)',
+    logo: '/lovable-uploads/96cdbf5e-6c4a-4fed-8050-f2cf9a644c49.png'
+  }];
+  return <section className="py-20 bg-gradient-to-br from-orange-50 to-white relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-orange-100/30 to-blue-100/20" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
@@ -66,68 +83,52 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
         {/* Benefits Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {benefits.map((benefit, index) => {
-            const isVisible = visibleItems.includes(index) || showAllFallback;
-            return (
-              <div 
-                key={index}
-                className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-orange-200 transform hover:scale-105"
-                style={{
-                  opacity: isVisible ? 1 : 0,
-                  transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-                  transition: 'all 0.6s ease-out',
-                  transitionDelay: isVisible ? `${index * 100}ms` : '0ms'
-                }}
-              >
+          const isVisible = visibleItems.includes(index) || showAllFallback;
+          return <div key={index} className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-orange-200 transform hover:scale-105" style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+            transition: 'all 0.6s ease-out',
+            transitionDelay: isVisible ? `${index * 100}ms` : '0ms'
+          }}>
                 <div className="mb-4">{benefit.icon}</div>
                 <h3 className="text-xl font-bold mb-2 text-gray-900">{benefit.title}</h3>
                 <p className="text-gray-600">{benefit.description}</p>
-              </div>
-            );
-          })}
+              </div>;
+        })}
         </div>
 
         {/* Cooperating Companies Section */}
         <div className="mb-16">
           <div className="text-center mb-8">
             <h3 className="text-2xl font-bold text-gray-900 mb-2">Współpracujemy z:</h3>
-            <p className="text-gray-600">Jesteśmy akredytowani przez wiodące instytucje w branży</p>
+            
           </div>
           <div className="flex flex-wrap justify-center items-center gap-8">
-            {cooperatingCompanies.map((company, index) => (
-              <div 
-                key={company.name}
-                className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-orange-200 flex items-center justify-center min-w-[120px] h-[80px]"
-                style={{
-                  opacity: showAllFallback ? 1 : 0,
-                  transform: showAllFallback ? 'translateY(0)' : 'translateY(20px)',
-                  transition: 'all 0.6s ease-out',
-                  transitionDelay: showAllFallback ? `${index * 100}ms` : '0ms'
-                }}
-              >
-                <img 
-                  src={company.logo} 
-                  alt={`${company.name} logo`}
-                  className="max-w-full max-h-full object-contain"
-                  style={{ maxWidth: '100px', maxHeight: '60px' }}
-                  onError={(e) => {
-                    console.error(`Failed to load logo for ${company.name}:`, company.logo);
-                    const target = e.currentTarget as HTMLImageElement;
-                    target.style.display = 'none';
-                    // Show company name as fallback
-                    const parent = target.parentElement;
-                    if (parent && !parent.querySelector('.fallback-text')) {
-                      const fallback = document.createElement('div');
-                      fallback.className = 'fallback-text text-sm font-semibold text-gray-600';
-                      fallback.textContent = company.name;
-                      parent.appendChild(fallback);
-                    }
-                  }}
-                  onLoad={() => {
-                    console.log(`Successfully loaded logo for ${company.name}`);
-                  }}
-                />
-              </div>
-            ))}
+            {cooperatingCompanies.map((company, index) => <div key={company.name} className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-orange-200 flex items-center justify-center min-w-[120px] h-[80px]" style={{
+            opacity: showAllFallback ? 1 : 0,
+            transform: showAllFallback ? 'translateY(0)' : 'translateY(20px)',
+            transition: 'all 0.6s ease-out',
+            transitionDelay: showAllFallback ? `${index * 100}ms` : '0ms'
+          }}>
+                <img src={company.logo} alt={`${company.name} logo`} className="max-w-full max-h-full object-contain" style={{
+              maxWidth: '100px',
+              maxHeight: '60px'
+            }} onError={e => {
+              console.error(`Failed to load logo for ${company.name}:`, company.logo);
+              const target = e.currentTarget as HTMLImageElement;
+              target.style.display = 'none';
+              // Show company name as fallback
+              const parent = target.parentElement;
+              if (parent && !parent.querySelector('.fallback-text')) {
+                const fallback = document.createElement('div');
+                fallback.className = 'fallback-text text-sm font-semibold text-gray-600';
+                fallback.textContent = company.name;
+                parent.appendChild(fallback);
+              }
+            }} onLoad={() => {
+              console.log(`Successfully loaded logo for ${company.name}`);
+            }} />
+              </div>)}
           </div>
         </div>
 
@@ -138,41 +139,31 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
             <p className="text-gray-600">Oficjalne rejestry i bazy instytucji szkoleniowych</p>
           </div>
           <div className="flex flex-wrap justify-center items-center gap-8">
-            {registeredCompanies.map((company, index) => (
-              <div 
-                key={company.name}
-                className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-orange-200 flex items-center justify-center min-w-[180px] h-[100px]"
-                style={{
-                  opacity: showAllFallback ? 1 : 0,
-                  transform: showAllFallback ? 'translateY(0)' : 'translateY(20px)',
-                  transition: 'all 0.6s ease-out',
-                  transitionDelay: showAllFallback ? `${(cooperatingCompanies.length + index) * 100}ms` : '0ms'
-                }}
-              >
-                <img 
-                  src={company.logo} 
-                  alt={`${company.name} logo`}
-                  className="max-w-full max-h-full object-contain"
-                  style={{ maxWidth: '160px', maxHeight: '80px' }}
-                  onError={(e) => {
-                    console.error(`Failed to load logo for ${company.name}:`, company.logo);
-                    const target = e.currentTarget as HTMLImageElement;
-                    target.style.display = 'none';
-                    // Show company name as fallback
-                    const parent = target.parentElement;
-                    if (parent && !parent.querySelector('.fallback-text')) {
-                      const fallback = document.createElement('div');
-                      fallback.className = 'fallback-text text-sm font-semibold text-gray-600 text-center';
-                      fallback.textContent = company.name;
-                      parent.appendChild(fallback);
-                    }
-                  }}
-                  onLoad={() => {
-                    console.log(`Successfully loaded logo for ${company.name}`);
-                  }}
-                />
-              </div>
-            ))}
+            {registeredCompanies.map((company, index) => <div key={company.name} className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-orange-200 flex items-center justify-center min-w-[180px] h-[100px]" style={{
+            opacity: showAllFallback ? 1 : 0,
+            transform: showAllFallback ? 'translateY(0)' : 'translateY(20px)',
+            transition: 'all 0.6s ease-out',
+            transitionDelay: showAllFallback ? `${(cooperatingCompanies.length + index) * 100}ms` : '0ms'
+          }}>
+                <img src={company.logo} alt={`${company.name} logo`} className="max-w-full max-h-full object-contain" style={{
+              maxWidth: '160px',
+              maxHeight: '80px'
+            }} onError={e => {
+              console.error(`Failed to load logo for ${company.name}:`, company.logo);
+              const target = e.currentTarget as HTMLImageElement;
+              target.style.display = 'none';
+              // Show company name as fallback
+              const parent = target.parentElement;
+              if (parent && !parent.querySelector('.fallback-text')) {
+                const fallback = document.createElement('div');
+                fallback.className = 'fallback-text text-sm font-semibold text-gray-600 text-center';
+                fallback.textContent = company.name;
+                parent.appendChild(fallback);
+              }
+            }} onLoad={() => {
+              console.log(`Successfully loaded logo for ${company.name}`);
+            }} />
+              </div>)}
           </div>
         </div>
 
@@ -186,17 +177,11 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
 
         {/* CTA */}
         <div className="text-center">
-          <Button 
-            size="lg" 
-            className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 text-lg px-8 py-4"
-            onClick={handleContactClick}
-          >
+          <Button size="lg" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 text-lg px-8 py-4" onClick={handleContactClick}>
             Rozpocznij współpracę z nami
           </Button>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default WhyChooseUsSection;
