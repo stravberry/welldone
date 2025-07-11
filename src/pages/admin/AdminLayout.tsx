@@ -164,7 +164,7 @@ const AdminLayout: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 overflow-hidden md:pt-0 pt-16 pb-16 md:pb-0">
+      <div className="flex-1 overflow-y-auto md:pt-0 pt-16 pb-16 md:pb-0">
         <Outlet />
       </div>
     </div>
