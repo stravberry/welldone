@@ -15,160 +15,143 @@ import BottomQuoteForm from '@/components/BottomQuoteForm';
 import WhyChooseUsSection from '@/components/WhyChooseUsSection';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-
 const HomePage = () => {
-  const { elementRef: statsRef, visibleItems, showAllFallback } = useStaggeredAnimation<HTMLDivElement>(4, 300);
+  const {
+    elementRef: statsRef,
+    visibleItems,
+    showAllFallback
+  } = useStaggeredAnimation<HTMLDivElement>(4, 300);
   const navigate = useNavigate();
-
   const handleQuoteClick = () => {
     navigate('/wycena');
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   };
-
   const handleAuditClick = () => {
     navigate('/bezplatny-audyt');
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   };
-
-  const services = [
-    {
-      title: "Uprawnienia UDT dla operatorów",
-      description: "Szkolenia i certyfikacja dla operatorów urządzeń transportu bliskiego, takich jak wózki widłowe, suwnice i podesty ruchome.",
-      icon: <Award size={40} className="text-orange-500" />,
-      link: "/uslugi/udt-operatorzy"
-    },
-    {
-      title: "Uprawnienia UDT dla konserwatorów",
-      description: "Kursy dla konserwatorów urządzeń transportu bliskiego, takich jak suwnice i żurawie. Teoria online, praktyka stacjonarna.",
-      icon: <Briefcase size={40} className="text-orange-500" />,
-      link: "/uslugi/udt-konserwatorzy"
-    },
-    {
-      title: "Uprawnienia SEP",
-      description: "Szkolenia i certyfikacja w zakresie uprawnień SEP: elektryczne, cieplne i gazowe dla pracowników obsługujących specjalistyczne urządzenia.",
-      icon: <BookOpen size={40} className="text-orange-500" />,
-      link: "/uslugi/sep"
-    },
-    {
-      title: "Szkolenia z lutowania",
-      description: "Profesjonalne kursy dla firm zajmujących się procesami lutowania. Podnosimy jakość produkcji i redukujemy liczbę błędów.",
-      icon: <BarChart size={40} className="text-orange-500" />,
-      link: "/uslugi/lutowanie"
-    },
-    {
-      title: "Eventy edukacyjne",
-      description: "Organizacja wydarzeń edukacyjnych dla firm, które chcą zwiększyć świadomość pracowników w zakresie bezpieczeństwa technicznego.",
-      icon: <Users size={40} className="text-orange-500" />,
-      link: "/uslugi/eventy"
-    }
-  ];
-  
-  const faqItems = [
-    {
-      question: "Czym zajmuje się Wasza firma?",
-      answer: "Specjalizujemy się w szkoleniach z zakresu BHP, uprawnień UDT (zarówno dla operatorów, jak i konserwatorów), SEP oraz w szkoleniach specjalistycznych, takich jak spawalnicze i na wózki unoszące. Nasze usługi są skierowane głównie do dużych firm produkcyjnych, które potrzebują regularnych szkoleń dla swoich pracowników."
-    },
-    {
-      question: "Do kogo skierowane są Wasze usługi?",
-      answer: "Nasze usługi są dedykowane głównie dla dużych firm produkcyjnych, które chcą podnosić kompetencje swoich pracowników oraz zapewnić im wymagane uprawnienia do obsługi specjalistycznego sprzętu."
-    },
-    {
-      question: "Co wyróżnia Waszą firmę na rynku?",
-      answer: "Wyróżnia nas elastyczność oraz głęboka znajomość specyfiki branży produkcyjnej. Oferujemy szkolenia dostosowane do harmonogramu firm oraz możliwość realizacji szkoleń w formie stacjonarnej, online i hybrydowej. Dodatkowo, zapewniamy bezpłatny audyt, który pozwala na optymalizację kosztów szkoleń w firmach."
-    },
-    {
-      question: "Jak wygląda proces współpracy?",
-      answer: "Proces współpracy jest uzależniony od sytuacji klienta. Jeśli klient wie jakiego typu rozwiązań potrzebuje, dostaraczmy błyskawiczną wycenę która pozwala mu zrozumieć pełny koszt współpracy. Natomiast dla firm które potrzebują kompleksowego wsparcia i identyfikacji możliwych sposobów optymalizacji kosztów szkoleń rekomendujemy rozpoczęcie od audytu, który pozwala nam na zrozumienie potrzeb szkoleniowych firmy."
-    },
-    {
-      question: "Jakie doświadczenie posiada Wasz zespół?",
-      answer: "Nasz zespół składa się z doświadczonych trenerów, którzy od lat specjalizują się w szkoleniach dla sektora produkcyjnego. Każdy z naszych specjalistów posiada odpowiednie certyfikaty oraz praktyczne doświadczenie, co gwarantuje najwyższą jakość szkoleń."
-    }
-  ];
-  
-  const processSteps = [
-    {
-      number: 1,
-      title: "Wycena",
-      description: "Przygotowujemy indywidualną wycenę dopasowaną do Twoich potrzeb."
-    },
-    {
-      number: 2,
-      title: "Weryfikacja założeń projektu",
-      description: "Analizujemy dokładnie Twoje potrzeby i oczekiwania."
-    },
-    {
-      number: 3,
-      title: "Harmonogram realizacji",
-      description: "Ustalamy dogodny dla Ciebie termin i formę szkoleń."
-    },
-    {
-      number: 4,
-      title: "Rozpoczęcie szkoleń",
-      description: "Realizujemy szkolenia zgodnie z ustalonym harmonogramem."
-    },
-    {
-      number: 5,
-      title: "Organizacja egzaminu",
-      description: "Koordynujemy cały proces egzaminacyjny."
-    },
-    {
-      number: 6,
-      title: "Przekazanie uprawnień",
-      description: "Dostarczamy wszystkie niezbędne certyfikaty i uprawnienia."
-    }
-  ];
-  
-  const benefits = [
-    {
-      title: "Elastyczny harmonogram",
-      description: "Dostosowujemy terminy szkoleń do Twojego harmonogramu pracy.",
-      icon: <Clock size={24} className="text-orange-500" />
-    },
-    {
-      title: "Doświadczeni trenerzy",
-      description: "Nasi trenerzy to specjaliści z wieloletnim doświadczeniem w branży.",
-      icon: <Award size={24} className="text-orange-500" />
-    },
-    {
-      title: "Szkolenia szyte na miarę",
-      description: "Każde szkolenie jest dopasowane do specyficznych potrzeb Twojej firmy.",
-      icon: <CheckCircle size={24} className="text-orange-500" />
-    },
-    {
-      title: "Najwyższa jakość",
-      description: "Gwarantujemy najwyższą jakość szkoleń i wsparcie na każdym etapie.",
-      icon: <ThumbsUp size={24} className="text-orange-500" />
-    }
-  ];
+  const services = [{
+    title: "Uprawnienia UDT dla operatorów",
+    description: "Szkolenia i certyfikacja dla operatorów urządzeń transportu bliskiego, takich jak wózki widłowe, suwnice i podesty ruchome.",
+    icon: <Award size={40} className="text-orange-500" />,
+    link: "/uslugi/udt-operatorzy"
+  }, {
+    title: "Uprawnienia UDT dla konserwatorów",
+    description: "Kursy dla konserwatorów urządzeń transportu bliskiego, takich jak suwnice i żurawie. Teoria online, praktyka stacjonarna.",
+    icon: <Briefcase size={40} className="text-orange-500" />,
+    link: "/uslugi/udt-konserwatorzy"
+  }, {
+    title: "Uprawnienia SEP",
+    description: "Szkolenia i certyfikacja w zakresie uprawnień SEP: elektryczne, cieplne i gazowe dla pracowników obsługujących specjalistyczne urządzenia.",
+    icon: <BookOpen size={40} className="text-orange-500" />,
+    link: "/uslugi/sep"
+  }, {
+    title: "Szkolenia z lutowania",
+    description: "Profesjonalne kursy dla firm zajmujących się procesami lutowania. Podnosimy jakość produkcji i redukujemy liczbę błędów.",
+    icon: <BarChart size={40} className="text-orange-500" />,
+    link: "/uslugi/lutowanie"
+  }, {
+    title: "Eventy edukacyjne",
+    description: "Organizacja wydarzeń edukacyjnych dla firm, które chcą zwiększyć świadomość pracowników w zakresie bezpieczeństwa technicznego.",
+    icon: <Users size={40} className="text-orange-500" />,
+    link: "/uslugi/eventy"
+  }];
+  const faqItems = [{
+    question: "Czym zajmuje się Wasza firma?",
+    answer: "Specjalizujemy się w szkoleniach z zakresu BHP, uprawnień UDT (zarówno dla operatorów, jak i konserwatorów), SEP oraz w szkoleniach specjalistycznych, takich jak spawalnicze i na wózki unoszące. Nasze usługi są skierowane głównie do dużych firm produkcyjnych, które potrzebują regularnych szkoleń dla swoich pracowników."
+  }, {
+    question: "Do kogo skierowane są Wasze usługi?",
+    answer: "Nasze usługi są dedykowane głównie dla dużych firm produkcyjnych, które chcą podnosić kompetencje swoich pracowników oraz zapewnić im wymagane uprawnienia do obsługi specjalistycznego sprzętu."
+  }, {
+    question: "Co wyróżnia Waszą firmę na rynku?",
+    answer: "Wyróżnia nas elastyczność oraz głęboka znajomość specyfiki branży produkcyjnej. Oferujemy szkolenia dostosowane do harmonogramu firm oraz możliwość realizacji szkoleń w formie stacjonarnej, online i hybrydowej. Dodatkowo, zapewniamy bezpłatny audyt, który pozwala na optymalizację kosztów szkoleń w firmach."
+  }, {
+    question: "Jak wygląda proces współpracy?",
+    answer: "Proces współpracy jest uzależniony od sytuacji klienta. Jeśli klient wie jakiego typu rozwiązań potrzebuje, dostaraczmy błyskawiczną wycenę która pozwala mu zrozumieć pełny koszt współpracy. Natomiast dla firm które potrzebują kompleksowego wsparcia i identyfikacji możliwych sposobów optymalizacji kosztów szkoleń rekomendujemy rozpoczęcie od audytu, który pozwala nam na zrozumienie potrzeb szkoleniowych firmy."
+  }, {
+    question: "Jakie doświadczenie posiada Wasz zespół?",
+    answer: "Nasz zespół składa się z doświadczonych trenerów, którzy od lat specjalizują się w szkoleniach dla sektora produkcyjnego. Każdy z naszych specjalistów posiada odpowiednie certyfikaty oraz praktyczne doświadczenie, co gwarantuje najwyższą jakość szkoleń."
+  }];
+  const processSteps = [{
+    number: 1,
+    title: "Wycena",
+    description: "Przygotowujemy indywidualną wycenę dopasowaną do Twoich potrzeb."
+  }, {
+    number: 2,
+    title: "Weryfikacja założeń projektu",
+    description: "Analizujemy dokładnie Twoje potrzeby i oczekiwania."
+  }, {
+    number: 3,
+    title: "Harmonogram realizacji",
+    description: "Ustalamy dogodny dla Ciebie termin i formę szkoleń."
+  }, {
+    number: 4,
+    title: "Rozpoczęcie szkoleń",
+    description: "Realizujemy szkolenia zgodnie z ustalonym harmonogramem."
+  }, {
+    number: 5,
+    title: "Organizacja egzaminu",
+    description: "Koordynujemy cały proces egzaminacyjny."
+  }, {
+    number: 6,
+    title: "Przekazanie uprawnień",
+    description: "Dostarczamy wszystkie niezbędne certyfikaty i uprawnienia."
+  }];
+  const benefits = [{
+    title: "Elastyczny harmonogram",
+    description: "Dostosowujemy terminy szkoleń do Twojego harmonogramu pracy.",
+    icon: <Clock size={24} className="text-orange-500" />
+  }, {
+    title: "Doświadczeni trenerzy",
+    description: "Nasi trenerzy to specjaliści z wieloletnim doświadczeniem w branży.",
+    icon: <Award size={24} className="text-orange-500" />
+  }, {
+    title: "Szkolenia szyte na miarę",
+    description: "Każde szkolenie jest dopasowane do specyficznych potrzeb Twojej firmy.",
+    icon: <CheckCircle size={24} className="text-orange-500" />
+  }, {
+    title: "Najwyższa jakość",
+    description: "Gwarantujemy najwyższą jakość szkoleń i wsparcie na każdym etapie.",
+    icon: <ThumbsUp size={24} className="text-orange-500" />
+  }];
 
   // Improved StatCard with proper fallback logic
-  const StatCard = ({ value, label, delay }: { value: number; label: string; delay: number }) => {
-    const { elementRef, count } = useCounterAnimation<HTMLDivElement>(value, 2000);
+  const StatCard = ({
+    value,
+    label,
+    delay
+  }: {
+    value: number;
+    label: string;
+    delay: number;
+  }) => {
+    const {
+      elementRef,
+      count
+    } = useCounterAnimation<HTMLDivElement>(value, 2000);
     const index = Math.floor(delay / 300);
     const isVisible = visibleItems.includes(index) || showAllFallback;
-    
-    return (
-      <div 
-        ref={elementRef}
-        className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-6 text-center transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-        style={{ 
-          opacity: 1,
-          transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-          transition: 'all 0.6s ease-out',
-          transitionDelay: isVisible ? `${delay}ms` : '0ms'
-        }}
-      >
+    return <div ref={elementRef} className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-6 text-center transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl" style={{
+      opacity: 1,
+      transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+      transition: 'all 0.6s ease-out',
+      transitionDelay: isVisible ? `${delay}ms` : '0ms'
+    }}>
         <div className="text-4xl font-bold text-orange-600 mb-2 bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent">
           {isVisible ? count : value}{value >= 1000 ? '+' : value === 80 || value === 96 ? '%' : '+'}
         </div>
         <div className="text-gray-700 font-medium">{label}</div>
-      </div>
-    );
+      </div>;
   };
-
-  return (
-    <div>
+  return <div>
       <Navbar />
       <div className="pt-16">
         {/* Enhanced Hero Section */}
@@ -176,15 +159,15 @@ const HomePage = () => {
           {/* Enhanced background effects */}
           <div className="absolute inset-0 bg-gradient-to-r from-orange-600/20 via-transparent to-orange-500/20" />
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-float" />
-          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-white/10 rounded-full blur-2xl animate-float" style={{ animationDelay: '2s' }} />
+          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-white/10 rounded-full blur-2xl animate-float" style={{
+          animationDelay: '2s'
+        }} />
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div className="animate-fade-in-left">
                 <div className="inline-block mb-6">
-                  <span className="bg-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide animate-pulse-slow">
-                    Profesjonalne szkolenia
-                  </span>
+                  
                 </div>
                 <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
                   Pomagamy firmom produkcyjnym 
@@ -209,15 +192,8 @@ const HomePage = () => {
               </div>
               <div className="flex items-center justify-center animate-fade-in-right">
                 <div className="w-full max-w-2xl transform hover:scale-105 transition-all duration-500">
-                  <AspectRatio ratio={16/9} className="bg-black rounded-xl overflow-hidden shadow-2xl">
-                    <iframe 
-                      src="https://www.youtube.com/embed/8QDIVIU9QZQ" 
-                      title="Well-Done.pl Company Presentation" 
-                      className="w-full h-full border-none" 
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                      allowFullScreen
-                    />
+                  <AspectRatio ratio={16 / 9} className="bg-black rounded-xl overflow-hidden shadow-2xl">
+                    <iframe src="https://www.youtube.com/embed/8QDIVIU9QZQ" title="Well-Done.pl Company Presentation" className="w-full h-full border-none" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
                   </AspectRatio>
                 </div>
               </div>
@@ -248,29 +224,15 @@ const HomePage = () => {
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {services.map((service, index) => (
-                <div key={index} className="transform hover:scale-105 transition-all duration-300">
-                  <ServiceCard
-                    title={service.title}
-                    description={service.description}
-                    icon={service.icon}
-                    link={service.link}
-                    index={index}
-                  />
-                </div>
-              ))}
+              {services.map((service, index) => <div key={index} className="transform hover:scale-105 transition-all duration-300">
+                  <ServiceCard title={service.title} description={service.description} icon={service.icon} link={service.link} index={index} />
+                </div>)}
             </div>
           </div>
         </section>
 
         {/* Why Choose Us Section */}
-        <WhyChooseUsSection 
-          benefits={benefits} 
-          statsRef={statsRef} 
-          visibleItems={visibleItems} 
-          StatCard={StatCard} 
-          showAllFallback={showAllFallback} 
-        />
+        <WhyChooseUsSection benefits={benefits} statsRef={statsRef} visibleItems={visibleItems} StatCard={StatCard} showAllFallback={showAllFallback} />
 
         {/* Enhanced Process Section */}
         <section className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
@@ -296,26 +258,15 @@ const HomePage = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-orange-50 via-white to-orange-50 rounded-3xl opacity-50" />
               
               <div className="relative grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-4 p-8">
-                {processSteps.map((step, index) => (
-                  <div key={step.number} className="transform hover:scale-105 transition-all duration-300">
-                    <ProcessStep
-                      number={step.number}
-                      title={step.title}
-                      description={step.description}
-                      index={index}
-                    />
-                  </div>
-                ))}
+                {processSteps.map((step, index) => <div key={step.number} className="transform hover:scale-105 transition-all duration-300">
+                    <ProcessStep number={step.number} title={step.title} description={step.description} index={index} />
+                  </div>)}
               </div>
             </div>
             
             <div className="text-center mt-12">
               <div className="relative inline-block">
-                <Button 
-                  size="lg" 
-                  className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 relative z-10 text-lg px-8 py-4"
-                  onClick={handleQuoteClick}
-                >
+                <Button size="lg" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 relative z-10 text-lg px-8 py-4" onClick={handleQuoteClick}>
                   <span>Uzyskaj Błyskawiczną Wycenę</span>
                 </Button>
               </div>
@@ -331,7 +282,9 @@ const HomePage = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-orange-600 via-orange-500 to-orange-700" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-float" />
-          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-white/10 rounded-full blur-2xl animate-float" style={{ animationDelay: '2s' }} />
+          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-white/10 rounded-full blur-2xl animate-float" style={{
+          animationDelay: '2s'
+        }} />
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-12">
@@ -366,11 +319,7 @@ const HomePage = () => {
                   </p>
                   <div className="relative inline-block group">
                     <div className="absolute inset-0 bg-white rounded-lg blur opacity-25 group-hover:opacity-50 transition-opacity duration-300" />
-                    <Button 
-                      size="lg" 
-                      className="relative bg-white text-orange-600 hover:bg-orange-50 font-bold text-lg px-8 py-4 shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 hover:-translate-y-1"
-                      onClick={handleAuditClick}
-                    >
+                    <Button size="lg" className="relative bg-white text-orange-600 hover:bg-orange-50 font-bold text-lg px-8 py-4 shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 hover:-translate-y-1" onClick={handleAuditClick}>
                       Zamów bezpłatny audyt
                       <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                     </Button>
@@ -379,24 +328,9 @@ const HomePage = () => {
               </div>
 
               <div className="order-1 lg:order-2 space-y-6">
-                <AuditCard
-                  title="Ocena aktualnych szkoleń"
-                  description="Przeanalizujemy, czy obecne szkolenia spełniają wszystkie wymagania prawne oraz czy odpowiadają na realne potrzeby Twojej firmy."
-                  icon="check"
-                  index={0}
-                />
-                <AuditCard
-                  title="Weryfikacja uprawnień pracowników"
-                  description="Sprawdzimy, czy wszyscy pracownicy posiadają wymagane uprawnienia do obsługi sprzętu i urządzeń."
-                  icon="users"
-                  index={1}
-                />
-                <AuditCard
-                  title="Optymalizacja kosztów"
-                  description="Pomożemy zidentyfikować, czy nie przepłacasz za szkolenia i certyfikacje, oraz wskażemy obszary, w których możesz zredukować koszty."
-                  icon="dollar-sign"
-                  index={2}
-                />
+                <AuditCard title="Ocena aktualnych szkoleń" description="Przeanalizujemy, czy obecne szkolenia spełniają wszystkie wymagania prawne oraz czy odpowiadają na realne potrzeby Twojej firmy." icon="check" index={0} />
+                <AuditCard title="Weryfikacja uprawnień pracowników" description="Sprawdzimy, czy wszyscy pracownicy posiadają wymagane uprawnienia do obsługi sprzętu i urządzeń." icon="users" index={1} />
+                <AuditCard title="Optymalizacja kosztów" description="Pomożemy zidentyfikować, czy nie przepłacasz za szkolenia i certyfikacje, oraz wskażemy obszary, w których możesz zredukować koszty." icon="dollar-sign" index={2} />
               </div>
             </div>
           </div>
@@ -411,8 +345,6 @@ const HomePage = () => {
         </div>
       </div>
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default HomePage;
