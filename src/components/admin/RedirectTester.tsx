@@ -29,25 +29,32 @@ export const RedirectTester: React.FC = () => {
         return;
       }
 
-      // Test 2: Sprawdź edge function bezpośrednio
-      const edgeResponse = await fetch(`https://jfjkerifrcanlrjrjnih.supabase.co/functions/v1/handle-redirect?path=${encodeURIComponent(testUrl)}`);
-      console.log('[REDIRECT-TEST] Edge function response:', edgeResponse.status, edgeResponse.statusText);
-      
-      if (edgeResponse.status === 301 || edgeResponse.status === 302) {
-        const location = edgeResponse.headers.get('Location');
-        console.log('[REDIRECT-TEST] Edge function redirect to:', location);
-        toast.success(`✅ Edge function działa! Przekierowanie na: ${location}`);
-        return;
+      // Test 2: Sprawdź edge function przez supabase client (unikając CORS)
+      try {
+        const { data: edgeData, error: edgeError } = await fetch('/api/redirect-handler', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'test-edge', path: testUrl })
+        }).then(res => res.json());
+
+        if (edgeError) {
+          console.log('[REDIRECT-TEST] Edge function error:', edgeError);
+          toast.warning('❓ Edge function nie odpowiedział poprawnie');
+        } else if (edgeData?.redirect) {
+          console.log('[REDIRECT-TEST] Edge function found redirect:', edgeData);
+          toast.success(`✅ Edge function działa! Przekierowanie na: ${edgeData.redirect.target_url}`);
+          return;
+        } else {
+          console.log('[REDIRECT-TEST] Edge function data:', edgeData);
+          toast.warning('❓ Nie znaleziono przekierowania w edge function');
+        }
+      } catch (edgeError) {
+        console.log('[REDIRECT-TEST] Edge function connection error:', edgeError);
+        toast.warning('❓ Nie można połączyć się z edge function');
       }
 
-      const edgeData = await edgeResponse.json();
-      console.log('[REDIRECT-TEST] Edge function data:', edgeData);
-
-      if (!edgeData.redirect) {
-        toast.warning('❓ Nie znaleziono przekierowania dla tego URL');
-      } else {
-        toast.error('❌ Nieoczekiwana odpowiedź z edge function');
-      }
+      // Końcowa informacja
+      toast.info('ℹ️ Test zakończony - sprawdź console dla szczegółów');
 
     } catch (error) {
       console.error('[REDIRECT-TEST] Error:', error);

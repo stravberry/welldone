@@ -1,4 +1,30 @@
 export default async function handler(req, res) {
+  // Handle POST requests for testing
+  if (req.method === 'POST') {
+    const { action, path } = req.body;
+    
+    if (action === 'test-edge' && path) {
+      console.log('[VERCEL] Testing edge function for path:', path);
+      
+      try {
+        const response = await fetch(`https://jfjkerifrcanlrjrjnih.supabase.co/functions/v1/handle-redirect?path=${encodeURIComponent(path)}`, {
+          headers: {
+            'Authorization': `Bearer ${process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpmamtlcmlmcmNhbmxyanJqbmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA2MjQxNDAsImV4cCI6MjA2NjIwMDE0MH0.b2Il4ItrSdtoLdwgGc_c-VvlJlPSg8XKsG_XmkNMApU'}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        const data = await response.json();
+        return res.status(200).json({ data, error: null });
+      } catch (error) {
+        console.error('[VERCEL] Edge function test error:', error);
+        return res.status(200).json({ data: null, error: error.message });
+      }
+    }
+    
+    return res.status(400).json({ error: 'Invalid action' });
+  }
+
   const { path } = req.query;
   
   console.log('[VERCEL] Redirect handler called for path:', path);
