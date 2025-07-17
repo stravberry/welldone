@@ -76,8 +76,8 @@ const HomePage = () => {
     description: "Indywidualna wycena dopasowana do Twoich potrzeb"
   }, {
     number: 2,
-    title: "Weryfikacja założeń projektu",
-    description: "Analizujemy dokładnie Twoje potrzeby i oczekiwania."
+    title: "Ustalenie szczegółów organizacyjnych",
+    description: ""
   }, {
     number: 3,
     title: "Harmonogram realizacji",
