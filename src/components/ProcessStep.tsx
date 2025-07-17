@@ -19,37 +19,18 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
     <>
       <style>
         {`
-          @keyframes pulseScale {
-            0%, 75% {
+          @keyframes subtlePulse {
+            0%, 90% {
               transform: scale(1);
-            }
-            8.33% {
-              transform: scale(1.1);
-            }
-            16.66% {
-              transform: scale(1);
-            }
-          }
-          
-          @keyframes pulseGlow {
-            0%, 75% {
               box-shadow: 
-                0 0 0 0 rgba(255, 102, 0, 0.4),
-                0 4px 15px rgba(255, 102, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+                0 0 0 0 rgba(255, 102, 0, 0.3),
+                0 4px 15px rgba(255, 102, 0, 0.15);
             }
-            8.33% {
+            5% {
+              transform: scale(1.03);
               box-shadow: 
-                0 0 20px 8px rgba(255, 102, 0, 0.6),
-                0 0 40px 15px rgba(255, 102, 0, 0.3),
-                0 8px 25px rgba(255, 102, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.4);
-            }
-            16.66% {
-              box-shadow: 
-                0 0 10px 4px rgba(255, 102, 0, 0.5),
-                0 4px 20px rgba(255, 102, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+                0 0 8px 2px rgba(255, 102, 0, 0.4),
+                0 4px 20px rgba(255, 102, 0, 0.2);
             }
           }
         `}
@@ -63,7 +44,7 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
           className="relative z-10"
           style={{
             opacity: isInView ? 1 : 0,
-            animation: isInView ? `pulseScale 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite ${index * 0.8}s` : 'none',
+            animation: isInView ? `subtlePulse 8s cubic-bezier(0.4, 0, 0.2, 1) infinite ${index * 1.5}s` : 'none',
             transition: 'opacity 0.5s ease-out',
             transformOrigin: 'center',
             willChange: 'transform'
@@ -73,7 +54,7 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
           <div 
             className="relative flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 text-white font-bold transition-all duration-300 overflow-hidden"
             style={{
-              animation: isInView ? `pulseGlow 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite ${index * 0.8}s` : 'none',
+              animation: 'none',
               willChange: 'box-shadow'
             }}
           >
