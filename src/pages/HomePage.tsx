@@ -73,7 +73,7 @@ const HomePage = () => {
   const processSteps = [{
     number: 1,
     title: "Kontakt i wycena",
-    description: "Indywidualna wycena dopasowana do Twoich potrzeb"
+    description: ""
   }, {
     number: 2,
     title: "Ustalenie szczegółów organizacyjnych",
