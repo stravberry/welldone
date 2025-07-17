@@ -44,18 +44,15 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
           className="relative z-10"
           style={{
             opacity: isInView ? 1 : 0,
-            animation: isInView ? `subtlePulse 8s cubic-bezier(0.4, 0, 0.2, 1) infinite ${index * 1.5}s` : 'none',
-            transition: 'opacity 0.5s ease-out',
-            transformOrigin: 'center',
-            willChange: 'transform'
+            transition: 'opacity 0.5s ease-out'
           }}
         >
           {/* Main circle with enhanced styling and glow animation */}
           <div 
             className="relative flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 text-white font-bold transition-all duration-300 overflow-hidden"
             style={{
-              animation: 'none',
-              willChange: 'box-shadow'
+              animation: isInView ? `subtlePulse 8s cubic-bezier(0.4, 0, 0.2, 1) infinite ${index * 1.5}s` : 'none',
+              willChange: 'transform, box-shadow'
             }}
           >
             {/* Inner highlight for depth */}
