@@ -72,8 +72,8 @@ const HomePage = () => {
   }];
   const processSteps = [{
     number: 1,
-    title: "Wycena",
-    description: "Przygotowujemy indywidualną wycenę dopasowaną do Twoich potrzeb."
+    title: "Kontakt i wycena",
+    description: "Indywidualna wycena dopasowana do Twoich potrzeb"
   }, {
     number: 2,
     title: "Weryfikacja założeń projektu",
