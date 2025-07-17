@@ -91,7 +91,7 @@ const Footer = () => {
                   <Link to="/uslugi/sep" className="text-gray-400 hover:text-white">Uprawnienia SEP</Link>
                 </li>
                 <li>
-                  <Link to="/uslugi/lutowanie" className="text-gray-400 hover:text-white">Szkolenia z lutowania</Link>
+                  <a href="https://akademia-lutowania.pl/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">Szkolenia z lutowania</a>
                 </li>
               </ul>
             </div>
