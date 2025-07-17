@@ -136,7 +136,7 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
         <div className="mb-16">
           <div className="text-center mb-8">
             <h3 className="text-2xl font-bold text-gray-900 mb-2">Jesteśmy wpisani do:</h3>
-            <p className="text-gray-600">Oficjalne rejestry i bazy instytucji szkoleniowych</p>
+            
           </div>
           <div className="flex flex-wrap justify-center items-center gap-8">
             {registeredCompanies.map((company, index) => <div key={company.name} className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-orange-200 flex items-center justify-center min-w-[180px] h-[100px]" style={{
