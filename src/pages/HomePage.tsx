@@ -54,15 +54,10 @@ const HomePage = () => {
     icon: <BookOpen size={40} className="text-orange-500" />,
     link: "/uslugi/sep"
   }, {
-    title: "Szkolenia z lutowania",
-    description: "Profesjonalne kursy dla firm zajmujących się procesami lutowania. Podnosimy jakość produkcji i redukujemy liczbę błędów.",
-    icon: <BarChart size={40} className="text-orange-500" />,
-    link: "/uslugi/lutowanie"
-  }, {
-    title: "Eventy edukacyjne",
-    description: "Organizacja wydarzeń edukacyjnych dla firm, które chcą zwiększyć świadomość pracowników w zakresie bezpieczeństwa technicznego.",
+    title: "Wózki unoszące",
+    description: "Specjalistyczne szkolenia na wózki unoszące dla operatorów pracujących na wysokości",
     icon: <Users size={40} className="text-orange-500" />,
-    link: "/uslugi/eventy"
+    link: "/szkolenie-wozki-unoszace"
   }];
   const faqItems = [{
     question: "Czym zajmuje się Wasza firma?",
