@@ -170,13 +170,6 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
           </div>
         </div>
 
-        {/* Stats Section */}
-        <div ref={statsRef} className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-16">
-          <StatCard value={150} label="Przeprowadzonych szkoleń" delay={0} />
-          <StatCard value={500} label="Zadowolonych klientów" delay={300} />
-          <StatCard value={96} label="Zdawalność egzaminów" delay={600} />
-          <StatCard value={10} label="Lat doświadczenia" delay={900} />
-        </div>
 
         {/* CTA */}
         <div className="text-center">
