@@ -121,24 +121,6 @@ const EnhancedTestimonialsSection = () => {
             />
           ))}
         </div>
-        
-        {/* Trust indicators */}
-        <div className="mt-16 text-center">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-orange-600 mb-2">100+</div>
-              <div className="text-gray-600">Zadowolonych firm</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-orange-600 mb-2">98%</div>
-              <div className="text-gray-600">Pozytywnych referencji</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-orange-600 mb-2">5+</div>
-              <div className="text-gray-600">lat doświadczenia</div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
