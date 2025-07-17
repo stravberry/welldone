@@ -53,11 +53,6 @@ const HomePage = () => {
     description: "Szkolenia na uprawnienia energetyczne tzw. SEP: E1 / D1 elektryczne, E2 / D2 cieplne, E3 / D3 gazowe",
     icon: <BookOpen size={40} className="text-orange-500" />,
     link: "/uslugi/sep"
-  }, {
-    title: "Wózki unoszące",
-    description: "Specjalistyczne szkolenia na wózki unoszące dla operatorów pracujących na wysokości",
-    icon: <Users size={40} className="text-orange-500" />,
-    link: "/szkolenie-wozki-unoszace"
   }];
   const faqItems = [{
     question: "Czym zajmuje się Wasza firma?",
