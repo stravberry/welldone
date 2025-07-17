@@ -44,18 +44,7 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, i
         ref={elementRef}
         className="process-step relative group text-center"
       >
-        {/* Connecting line to next step (except last) */}
-        {index < 3 && (
-          <div 
-            className="hidden lg:block absolute top-10 left-full w-full h-0.5 bg-gradient-to-r from-orange-300 to-orange-200 z-0"
-            style={{
-              animation: isInView ? `connectingLine 1s ease-out ${index * 400 + 800}ms both` : 'none',
-              marginLeft: '20px',
-              marginRight: '20px',
-              width: 'calc(100% - 40px)'
-            }}
-          />
-        )}
+        {/* Connecting line removed */}
         
         {/* Enhanced glowing circle */}
         <div 
