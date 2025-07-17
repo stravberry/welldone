@@ -19,6 +19,9 @@ import FreeAuditPage from './pages/FreeAuditPage';
 import QuotePage from './pages/QuotePage';
 import RealizationsPage from './pages/RealizationsPage';
 import KnowledgePage from './pages/KnowledgePage';
+import BlogPage from './pages/BlogPage';
+import BlogCategoryPage from './pages/BlogCategoryPage';
+import BlogPostPage from './pages/BlogPostPage';
 import WozkiUnoszacePage from './pages/WozkiUnoszacePage';
 import UdtOperatorzyPage from './pages/UdtOperatorzyPage';
 import UdtSzkoleniaPage from './pages/UdtSzkoleniaPage';
@@ -61,6 +64,11 @@ function App() {
                 <Route path="/wycena" element={<QuotePage />} />
                 <Route path="/realizacje" element={<RealizationsPage />} />
                 <Route path="/wiedza" element={<KnowledgePage />} />
+                
+                {/* Blog Routes */}
+                <Route path="/strefa-wiedzy" element={<BlogPage />} />
+                <Route path="/strefa-wiedzy/kategoria/:slug" element={<BlogCategoryPage />} />
+                <Route path="/strefa-wiedzy/:slug" element={<BlogPostPage />} />
                 
                 {/* Service Subpages - Updated structure */}
                 <Route path="/uslugi/udt-operatorzy" element={<UdtOperatorzyPage />} />

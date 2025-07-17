@@ -95,7 +95,7 @@ const KnowledgeBlogTab: React.FC = () => {
       </div>
       <div className="text-center mt-8">
         <Button asChild variant="default" size="lg">
-          <Link to="/wiedza/blog">Zobacz wszystkie artykuły</Link>
+          <Link to="/strefa-wiedzy">Zobacz wszystkie artykuły</Link>
         </Button>
       </div>
     </div>
