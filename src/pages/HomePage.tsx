@@ -239,10 +239,12 @@ const HomePage = () => {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-orange-50 via-white to-orange-50 rounded-3xl opacity-50" />
               
-              <div className="relative grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-4 p-8">
-                {processSteps.map((step, index) => <div key={step.number} className="transform hover:scale-105 transition-all duration-300">
+              <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 p-8 justify-items-center">
+                {processSteps.map((step, index) => (
+                  <div key={step.number} className="transform hover:scale-105 transition-all duration-300 w-full max-w-xs">
                     <ProcessStep number={step.number} title={step.title} description={step.description} index={index} />
-                  </div>)}
+                  </div>
+                ))}
               </div>
             </div>
             
