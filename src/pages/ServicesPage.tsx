@@ -24,7 +24,7 @@ const ServicesPage = () => {
       description: "Specjalistyczne szkolenia dla konserwatorów urządzeń technicznych i osób odpowiedzialnych za ich eksploatację.",
       icon: <Shield className="h-12 w-12 text-orange-500" />,
       link: "/udt-konserwatorze",
-      features: ["Uprawnienia konserwatorskie", "Dozór techniczny", "Certyfikacja UDT"]
+      features: ["Uprawnienia konserwatorskie", "Dozór techniczny", "Uprawnienia UDT"]
     },
     {
       title: "Szkolenia SEP",

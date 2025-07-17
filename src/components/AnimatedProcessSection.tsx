@@ -27,8 +27,8 @@ const AnimatedProcessSection = () => {
     },
     {
       icon: <Award className="h-6 w-6 text-white" />,
-      title: "Realizacja i certyfikacja",
-      description: "Prowadzimy szkolenia i pomagamy w uzyskaniu certyfikatów",
+      title: "Realizacja i uprawnienia",
+      description: "Prowadzimy szkolenia i pomagamy w uzyskaniu uprawnień",
       color: "from-green-500 to-green-600"
     }
   ];

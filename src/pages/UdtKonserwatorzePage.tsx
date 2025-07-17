@@ -102,7 +102,7 @@ const UdtKonserwatorzePage = () => {
     },
     {
       icon: <Zap className="h-6 w-6" />,
-      title: 'Certyfikacja UDT',
+      title: 'Uprawnienia UDT',
       description: 'Oficjalne uprawnienia uznawane w całej Polsce'
     }
   ];

@@ -51,7 +51,7 @@ const RealizationsPage = () => {
       scope: "Uprawnienia UDT dla konserwatorów suwnic",
       duration: "4 miesiące",
       location: "Gdańsk",
-      results: "Certyfikacja 20 konserwatorów, zwiększenie efektywności obsługi",
+      results: "Uprawnienia dla 20 konserwatorów, zwiększenie efektywności obsługi",
       year: "2023"
     }
   ];

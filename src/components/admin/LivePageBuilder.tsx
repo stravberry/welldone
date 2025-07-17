@@ -352,7 +352,7 @@ const getDefaultContent = (blockType: string): any => {
         services: [
           {
             title: "Uprawnienia UDT dla operatorów",
-            description: "Szkolenia i certyfikacja dla operatorów urządzeń transportu bliskiego.",
+            description: "Szkolenia i uprawnienia dla operatorów urządzeń transportu bliskiego.",
             icon: "award"
           },
           {
@@ -362,7 +362,7 @@ const getDefaultContent = (blockType: string): any => {
           },
           {
             title: "Uprawnienia SEP",
-            description: "Szkolenia i certyfikacja w zakresie uprawnień SEP.",
+            description: "Szkolenia i uprawnienia w zakresie uprawnień SEP.",
             icon: "book"
           }
         ]

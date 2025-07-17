@@ -12,7 +12,7 @@ const ServicesGridBlock: React.FC<ServicesGridBlockProps> = ({ block }) => {
   const services = block.content.services || [
     {
       title: "Uprawnienia UDT dla operatorów",
-      description: "Szkolenia i certyfikacja dla operatorów urządzeń transportu bliskiego.",
+      description: "Szkolenia i uprawnienia dla operatorów urządzeń transportu bliskiego.",
       icon: "award"
     },
     {
@@ -22,7 +22,7 @@ const ServicesGridBlock: React.FC<ServicesGridBlockProps> = ({ block }) => {
     },
     {
       title: "Uprawnienia SEP",
-      description: "Szkolenia i certyfikacja w zakresie uprawnień SEP.",
+      description: "Szkolenia i uprawnienia w zakresie uprawnień SEP.",
       icon: "book"
     }
   ];

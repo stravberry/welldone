@@ -40,7 +40,7 @@ const HomePage = () => {
   };
   const services = [{
     title: "Uprawnienia UDT dla operatorów",
-    description: "Szkolenia i certyfikacja dla operatorów urządzeń transportu bliskiego, takich jak wózki widłowe, suwnice i podesty ruchome.",
+    description: "Szkolenia i uprawnienia dla operatorów urządzeń transportu bliskiego, takich jak wózki widłowe, suwnice i podesty ruchome.",
     icon: <Award size={40} className="text-orange-500" />,
     link: "/uslugi/udt-operatorzy"
   }, {
@@ -50,7 +50,7 @@ const HomePage = () => {
     link: "/uslugi/udt-konserwatorzy"
   }, {
     title: "Uprawnienia SEP",
-    description: "Szkolenia i certyfikacja w zakresie uprawnień SEP: elektryczne, cieplne i gazowe dla pracowników obsługujących specjalistyczne urządzenia.",
+    description: "Szkolenia i uprawnienia w zakresie uprawnień SEP: elektryczne, cieplne i gazowe dla pracowników obsługujących specjalistyczne urządzenia.",
     icon: <BookOpen size={40} className="text-orange-500" />,
     link: "/uslugi/sep"
   }, {

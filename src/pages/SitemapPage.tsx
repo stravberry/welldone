@@ -27,7 +27,7 @@ const SitemapPage = () => {
       children: [
         { title: "UDT Operatorzy", link: "/uslugi/udt-operatorzy", description: "Szkolenia dla operatorów urządzeń transportu bliskiego" },
         { title: "UDT Konserwatorzy", link: "/udt-konserwatorze", description: "Kursy dla konserwatorów suwnic i żurawi" },
-        { title: "Uprawnienia SEP", link: "/sep", description: "Certyfikacja elektryczna, cieplna i gazowa" },
+        { title: "Uprawnienia SEP", link: "/sep", description: "Uprawnienia elektryczne, cieplne i gazowe" },
         { title: "Szkolenia z lutowania", link: "/lutowanie", description: "Profesjonalne kursy lutowania dla firm" },
         { title: "Eventy edukacyjne", link: "/eventy", description: "Wydarzenia zwiększające świadomość BHP" },
         { title: "Wózki unoszące", link: "/szkolenie-wozki-unoszace", description: "Specjalistyczne szkolenia na wózki unoszące" }
