@@ -152,7 +152,7 @@ const HomePage = () => {
                   
                 </div>
                 <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                  Profesjonalne szkolenia UDT i SEP 
+                  Profesjonalne szkolenia UDT i&nbsp;SEP 
                   <span className="block bg-gradient-to-r from-orange-200 to-white bg-clip-text text-transparent animate-gradient-shift">
                     dla firm
                   </span>
