@@ -108,8 +108,8 @@ const HomePage = () => {
     description: "Każde szkolenie jest dopasowane do specyficznych potrzeb Twojej firmy.",
     icon: <CheckCircle size={24} className="text-orange-500" />
   }, {
-    title: "Najwyższa jakość",
-    description: "Gwarantujemy najwyższą jakość szkoleń i wsparcie na każdym etapie.",
+    title: "Najwyższa zdawalność",
+    description: "Gwarantujemy najwyższą zdawalność egzaminów i wsparcie na każdym etapie.",
     icon: <ThumbsUp size={24} className="text-orange-500" />
   }];
 
