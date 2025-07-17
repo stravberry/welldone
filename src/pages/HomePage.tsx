@@ -80,8 +80,8 @@ const HomePage = () => {
     description: ""
   }, {
     number: 3,
-    title: "Harmonogram realizacji",
-    description: "Ustalamy dogodny dla Ciebie termin i formę szkoleń."
+    title: "Szkolenie i egzamin UDT lub SEP",
+    description: ""
   }, {
     number: 4,
     title: "Rozpoczęcie szkoleń",
