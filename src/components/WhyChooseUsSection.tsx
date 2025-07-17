@@ -105,10 +105,10 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
           </div>
           <div className="flex flex-wrap justify-center items-center gap-8">
             {cooperatingCompanies.map((company, index) => <div key={company.name} className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-orange-200 flex items-center justify-center min-w-[120px] h-[80px]" style={{
-            opacity: showAllFallback ? 1 : 0,
-            transform: showAllFallback ? 'translateY(0)' : 'translateY(20px)',
+            opacity: 1,
+            transform: 'translateY(0)',
             transition: 'all 0.6s ease-out',
-            transitionDelay: showAllFallback ? `${index * 100}ms` : '0ms'
+            transitionDelay: `${index * 100}ms`
           }}>
                 <img src={company.logo} alt={`${company.name} logo`} className="max-w-full max-h-full object-contain" style={{
               maxWidth: '100px',
@@ -140,10 +140,10 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
           </div>
           <div className="flex flex-wrap justify-center items-center gap-8">
             {registeredCompanies.map((company, index) => <div key={company.name} className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-orange-200 flex items-center justify-center min-w-[180px] h-[100px]" style={{
-            opacity: showAllFallback ? 1 : 0,
-            transform: showAllFallback ? 'translateY(0)' : 'translateY(20px)',
+            opacity: 1,
+            transform: 'translateY(0)',
             transition: 'all 0.6s ease-out',
-            transitionDelay: showAllFallback ? `${(cooperatingCompanies.length + index) * 100}ms` : '0ms'
+            transitionDelay: `${(cooperatingCompanies.length + index) * 100}ms`
           }}>
                 <img src={company.logo} alt={`${company.name} logo`} className="max-w-full max-h-full object-contain" style={{
               maxWidth: '160px',
