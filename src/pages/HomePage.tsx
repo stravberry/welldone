@@ -84,16 +84,8 @@ const HomePage = () => {
     description: ""
   }, {
     number: 4,
-    title: "Rozpoczęcie szkoleń",
-    description: "Realizujemy szkolenia zgodnie z ustalonym harmonogramem."
-  }, {
-    number: 5,
-    title: "Organizacja egzaminu",
-    description: "Koordynujemy cały proces egzaminacyjny."
-  }, {
-    number: 6,
-    title: "Przekazanie uprawnień",
-    description: "Dostarczamy wszystkie niezbędne certyfikaty i uprawnienia."
+    title: "Wydanie uprawnień UDT lub SEP",
+    description: ""
   }];
   const benefits = [{
     title: "Elastyczny harmonogram",
