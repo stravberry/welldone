@@ -152,13 +152,13 @@ const HomePage = () => {
                   
                 </div>
                 <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                  Pomagamy firmom produkcyjnym 
+                  Profesjonalne szkolenia UDT i SEP 
                   <span className="block bg-gradient-to-r from-orange-200 to-white bg-clip-text text-transparent animate-gradient-shift">
-                    działać bez ryzyka
+                    dla firm
                   </span>
                 </h1>
                 <p className="text-xl mb-8 text-orange-50 leading-relaxed">
-                  Zapewniamy pełną zgodność uprawnień UDT i SEP dla pracowników. Stosujemy procesowe podejście, które umożliwia precyzyjne dopasowanie szkoleń do indywidualnych potrzeb klienta.
+                  Pomagamy firmom produkcyjnym działać bez ryzyka. Zapewniamy pełną zgodność uprawnień UDT i SEP z przepisami.
                 </p>
                 <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
                   <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-orange-50 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl text-lg px-8 py-4">
