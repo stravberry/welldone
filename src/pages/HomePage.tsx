@@ -1,26 +1,25 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Award, Users, Briefcase, BarChart, CheckCircle, BookOpen, Clock, ThumbsUp } from 'lucide-react';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import ServiceCard from '@/components/ServiceCard';
-import FAQ from '@/components/FAQ';
 import ProcessStep from '@/components/ProcessStep';
-import { useScrollAnimation, useStaggeredAnimation, useCounterAnimation } from '@/hooks/useScrollAnimation';
+import { useOptimizedScrollAnimation, useOptimizedCounterAnimation } from '@/hooks/useOptimizedScrollAnimation';
 import AuditCard from '@/components/AuditCard';
 import AuditStatsCounter from '@/components/AuditStatsCounter';
-import PartnersSection from '@/components/PartnersSection';
-import EnhancedTestimonialsSection from '@/components/EnhancedTestimonialsSection';
-import BottomQuoteForm from '@/components/BottomQuoteForm';
-import WhyChooseUsSection from '@/components/WhyChooseUsSection';
+import LazyYouTubeEmbed from '@/components/LazyYouTubeEmbed';
+import OptimizedPartnersSection from '@/components/OptimizedPartnersSection';
+import PerformanceMonitor from '@/components/PerformanceMonitor';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+
+// Lazy load non-critical components
+const FAQ = lazy(() => import('@/components/FAQ'));
+const EnhancedTestimonialsSection = lazy(() => import('@/components/EnhancedTestimonialsSection'));
+const BottomQuoteForm = lazy(() => import('@/components/BottomQuoteForm'));
+const WhyChooseUsSection = lazy(() => import('@/components/WhyChooseUsSection'));
 const HomePage = () => {
-  const {
-    elementRef: statsRef,
-    visibleItems,
-    showAllFallback
-  } = useStaggeredAnimation<HTMLDivElement>(4, 300);
   const navigate = useNavigate();
   const handleQuoteClick = () => {
     navigate('/wycena');
@@ -105,35 +104,31 @@ const HomePage = () => {
     icon: <ThumbsUp size={24} className="text-orange-500" />
   }];
 
-  // Improved StatCard with proper fallback logic
-  const StatCard = ({
-    value,
-    label,
-    delay
-  }: {
-    value: number;
-    label: string;
-    delay: number;
-  }) => {
-    const {
-      elementRef,
-      count
-    } = useCounterAnimation<HTMLDivElement>(value, 2000);
-    const index = Math.floor(delay / 300);
-    const isVisible = visibleItems.includes(index) || showAllFallback;
-    return <div ref={elementRef} className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-6 text-center transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl" style={{
-      opacity: 1,
-      transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-      transition: 'all 0.6s ease-out',
-      transitionDelay: isVisible ? `${delay}ms` : '0ms'
-    }}>
+  // Optimized StatCard with better performance
+  const StatCard = ({ value, label, delay }: { value: number; label: string; delay: number; }) => {
+    const { elementRef, count } = useOptimizedCounterAnimation<HTMLDivElement>(value, 1500);
+    const { isInView } = useOptimizedScrollAnimation({ threshold: 0.1, triggerOnce: true });
+    
+    return (
+      <div 
+        ref={elementRef} 
+        className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-6 text-center transform hover:scale-105 transition-transform duration-200 shadow-lg hover:shadow-xl"
+        style={{
+          opacity: isInView ? 1 : 0,
+          transform: isInView ? 'translateY(0)' : 'translateY(20px)',
+          transition: 'all 0.4s ease-out',
+          transitionDelay: isInView ? `${delay}ms` : '0ms'
+        }}
+      >
         <div className="text-4xl font-bold text-orange-600 mb-2 bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent">
-          {isVisible ? count : value}{value >= 1000 ? '+' : value === 80 || value === 96 ? '%' : '+'}
+          {isInView ? count : value}{value >= 1000 ? '+' : value === 80 || value === 96 ? '%' : '+'}
         </div>
         <div className="text-gray-700 font-medium">{label}</div>
-      </div>;
+      </div>
+    );
   };
   return <div>
+      <PerformanceMonitor />
       <Navbar />
       <div className="pt-16">
         {/* Enhanced Hero Section */}
@@ -173,9 +168,13 @@ const HomePage = () => {
                 </div>
               </div>
               <div className="flex items-center justify-center animate-fade-in-right">
-                <div className="w-full max-w-2xl transform hover:scale-105 transition-all duration-500">
+                <div className="w-full max-w-2xl transform hover:scale-105 transition-transform duration-300">
                   <AspectRatio ratio={16 / 9} className="bg-black rounded-xl overflow-hidden shadow-2xl">
-                    <iframe src="https://www.youtube.com/embed/8QDIVIU9QZQ" title="Well-Done.pl Company Presentation" className="w-full h-full border-none" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+                    <LazyYouTubeEmbed 
+                      videoId="8QDIVIU9QZQ" 
+                      title="Well-Done.pl Company Presentation"
+                      className="rounded-xl"
+                    />
                   </AspectRatio>
                 </div>
               </div>
@@ -183,8 +182,8 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* Partners Section */}
-        <PartnersSection />
+        {/* Optimized Partners Section */}
+        <OptimizedPartnersSection />
 
         {/* Enhanced Services Section */}
         <section className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
@@ -213,8 +212,10 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* Why Choose Us Section */}
-        <WhyChooseUsSection benefits={benefits} statsRef={statsRef} visibleItems={visibleItems} StatCard={StatCard} showAllFallback={showAllFallback} />
+        {/* Why Choose Us Section - Lazy Loaded */}
+        <Suspense fallback={<div className="py-20 bg-gray-50"><div className="max-w-7xl mx-auto px-4 text-center">Ładowanie...</div></div>}>
+          <WhyChooseUsSection benefits={benefits} StatCard={StatCard} />
+        </Suspense>
 
         {/* Enhanced Process Section */}
         <section className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
@@ -258,8 +259,10 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* Enhanced Testimonials Section */}
-        <EnhancedTestimonialsSection />
+        {/* Enhanced Testimonials Section - Lazy Loaded */}
+        <Suspense fallback={<div className="py-20 bg-gray-50"><div className="max-w-7xl mx-auto px-4 text-center">Ładowanie opinii...</div></div>}>
+          <EnhancedTestimonialsSection />
+        </Suspense>
 
         {/* Free Audit CTA */}
         <section className="py-16 lg:py-20 relative overflow-hidden">
@@ -320,12 +323,16 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* FAQ Section */}
-        <FAQ items={faqItems} />
+        {/* FAQ Section - Lazy Loaded */}
+        <Suspense fallback={<div className="py-20 bg-gray-50"><div className="max-w-7xl mx-auto px-4 text-center">Ładowanie FAQ...</div></div>}>
+          <FAQ items={faqItems} />
+        </Suspense>
 
-        {/* Bottom Quote Form */}
+        {/* Bottom Quote Form - Lazy Loaded */}
         <div id="quote-form">
-          <BottomQuoteForm />
+          <Suspense fallback={<div className="py-20 bg-gray-50"><div className="max-w-7xl mx-auto px-4 text-center">Ładowanie formularza...</div></div>}>
+            <BottomQuoteForm />
+          </Suspense>
         </div>
       </div>
       <Footer />

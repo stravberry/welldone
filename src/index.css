@@ -462,6 +462,47 @@ html {
   animation: skeleton-loading 1.5s infinite;
 }
 
+/* Performance optimizations */
+.performance-optimized {
+  contain: layout style paint;
+  will-change: auto;
+}
+
+.gpu-accelerated {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Optimized animations for better performance */
+.fade-in-optimized {
+  animation: fadeInOptimized 0.4s ease-out forwards;
+}
+
+@keyframes fadeInOptimized {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Reduce animations for users with motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-optimized,
+  .animate-fade-in-left,
+  .animate-fade-in-right,
+  .animate-float,
+  .animate-gradient-shift {
+    animation: none !important;
+    opacity: 1;
+    transform: none !important;
+  }
+}
+
 /* Interactive progress bars */
 .progress-bar {
   position: relative;

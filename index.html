@@ -2,16 +2,35 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-MFXDSXB7');</script>
-    <!-- End Google Tag Manager -->
-    
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    
+    <!-- Performance optimizations -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://img.youtube.com">
+    <link rel="dns-prefetch" href="https://www.youtube.com">
+    
+    <!-- Critical CSS - inline the most important styles -->
+    <style>
+      /* Critical above-the-fold styles */
+      .hero-gradient {
+        background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-variant)) 100%);
+      }
+      .animate-fade-in-left {
+        animation: fadeInLeft 0.8s ease-out;
+      }
+      .animate-fade-in-right {
+        animation: fadeInRight 0.8s ease-out;
+      }
+      @keyframes fadeInLeft {
+        from { opacity: 0; transform: translateX(-30px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+      @keyframes fadeInRight {
+        from { opacity: 0; transform: translateX(30px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+    </style>
     
     <!-- Favicon - comprehensive support for all browsers and devices -->
     <link rel="icon" type="image/png" href="/favicon.png?v=2" />
@@ -21,8 +40,16 @@
     <link rel="icon" sizes="192x192" href="/favicon.png?v=2" />
     
     <title>Well-Done.pl | Szkolenia UDT & SEP dla firm</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
+    <meta name="description" content="Profesjonalne szkolenia UDT i SEP dla firm produkcyjnych. 96% zdawalność, elastyczne terminy, doświadczeni trenerzy." />
+    <meta name="author" content="Well-Done.pl" />
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MFXDSXB7');</script>
+    <!-- End Google Tag Manager -->
 
     <meta property="og:title" content="Well-Done.pl | Szkolenia UDT & SEP dla firm" />
     <meta property="og:description" content="Lovable Generated Project" />
