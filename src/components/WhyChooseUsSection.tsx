@@ -48,6 +48,9 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
     name: 'PUP Wrocław',
     logo: '/lovable-uploads/def966ea-cd05-4d1d-98e5-bfb8ae149ca4.png'
   }, {
+    name: 'SNTTI Silesia',
+    logo: '/lovable-uploads/423c40ce-46fe-4fec-b39a-ee6d5ebab67c.png'
+  }, {
     name: 'SEP',
     logo: '/lovable-uploads/94311598-c54a-4825-8c5a-7ab251653eef.png'
   }, {
