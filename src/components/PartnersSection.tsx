@@ -17,7 +17,7 @@ const PartnersSection = () => {
     { name: 'Bartek Candles', logo: '/lovable-uploads/87573245-503b-47bb-b4c4-cc146b6aaae9.png' },
     { name: 'DS Smith', logo: '/lovable-uploads/390f276a-c28b-4673-90e8-9597a05710ef.png' },
     { name: 'GTHR', logo: '/lovable-uploads/0dac7fe8-118a-4237-8a94-cf942035abc1.png' },
-    { name: '3M', logo: '/lovable-uploads/e412dee8-39ee-449c-b2f3-d78314cfe175.png' },
+    { name: '3M', logo: '/lovable-uploads/ab5e53af-efd7-4bb4-af28-172dee25f9d4.png' },
     { name: 'Walgo', logo: '/lovable-uploads/f94101ae-b323-4fd6-8617-ad3cb1638fd7.png' },
     { name: 'Oleofarm', logo: '/lovable-uploads/e7addfaa-d3a7-4fb7-8577-d1be9b3cbc4a.png' },
     { name: 'ZF', logo: '/lovable-uploads/8af76837-91e5-4d32-acb8-7b9677852535.png' },
