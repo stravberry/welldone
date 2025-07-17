@@ -40,7 +40,7 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
     logo: '/lovable-uploads/dff32973-25de-4c17-ac6c-7dee76c2c74c.png'
   }, {
     name: 'WDT',
-    logo: '/lovable-uploads/wdi-new-logo.png'
+    logo: '/lovable-uploads/948fd290-cefc-44e8-ae3c-da17e23070c6.png'
   }, {
     name: 'CPKZ Wrocław',
     logo: '/lovable-uploads/cpkz-wroclaw-logo.png'
