@@ -52,7 +52,7 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
     logo: '/lovable-uploads/94311598-c54a-4825-8c5a-7ab251653eef.png'
   }, {
     name: 'SPE International',
-    logo: '/lovable-uploads/spe-international-logo.png'
+    logo: '/lovable-uploads/b4228980-a084-4734-b945-d8a224290f4f.png'
   }];
   const registeredCompanies = [{
     name: 'Baza Usług Rozwojowych',
