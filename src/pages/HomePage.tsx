@@ -40,17 +40,17 @@ const HomePage = () => {
   };
   const services = [{
     title: "Uprawnienia UDT dla operatorów",
-    description: "Szkolenia i uprawnienia dla operatorów urządzeń transportu bliskiego, takich jak wózki widłowe, suwnice i podesty ruchome.",
+    description: "Szkolenia i uprawnienia dla operatorów wózków widłowych, suwnic, podestów / zwyżek, układnic, żurawi",
     icon: <Award size={40} className="text-orange-500" />,
     link: "/uslugi/udt-operatorzy"
   }, {
     title: "Uprawnienia UDT dla konserwatorów",
-    description: "Kursy dla konserwatorów urządzeń transportu bliskiego, takich jak suwnice i żurawie. Teoria online, praktyka stacjonarna.",
+    description: "Kursy i uprawnienia dla konserwatorów suwnic, żurawi, wciągników, wózków, podestów, dźwigników",
     icon: <Briefcase size={40} className="text-orange-500" />,
     link: "/uslugi/udt-konserwatorzy"
   }, {
     title: "Uprawnienia SEP",
-    description: "Szkolenia i uprawnienia w zakresie uprawnień SEP: elektryczne, cieplne i gazowe dla pracowników obsługujących specjalistyczne urządzenia.",
+    description: "Szkolenia na uprawnienia energetyczne tzw. SEP: E1 / D1 elektryczne, E2 / D2 cieplne, E3 / D3 gazowe",
     icon: <BookOpen size={40} className="text-orange-500" />,
     link: "/uslugi/sep"
   }, {
@@ -211,16 +211,16 @@ const HomePage = () => {
             <div className="text-center mb-16">
               <div className="inline-block mb-4">
                 <span className="bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide">
-                  Nasza oferta
+                  OFERTA
                 </span>
               </div>
               <h2 className="text-4xl font-bold mb-6">
                 <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                  Nasze Usługi
+                  Co robimy?
                 </span>
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Oferujemy kompleksowe szkolenia dla firm produkcyjnych, które chcą zapewnić swoim pracownikom niezbędne uprawnienia.
+                Well-Done.pl to specjaliści w obszarze szkoleń technicznych i uprawnień zawodowych
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
