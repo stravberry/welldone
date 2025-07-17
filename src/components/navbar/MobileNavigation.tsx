@@ -25,7 +25,8 @@ const MobileNavigation = ({ isOpen, services, onCloseMenu }: MobileNavigationPro
           { to: '/', label: 'Home', delay: 0 },
           { to: '/o-nas', label: 'O Nas', delay: 50 },
           { to: '/uslugi', label: 'Usługi', delay: 100 },
-          { to: '/bezplatny-audyt', label: 'Bezpłatny Audyt', delay: 125 }
+          { to: '/strefa-wiedzy', label: 'Strefa Wiedzy', delay: 125 },
+          { to: '/bezplatny-audyt', label: 'Bezpłatny Audyt', delay: 150 }
         ].map((item, index) => (
           <Link
             key={item.to}
@@ -68,6 +69,25 @@ const MobileNavigation = ({ isOpen, services, onCloseMenu }: MobileNavigationPro
               {service.title}
             </Link>
           ))}
+          
+          {/* Testy UDT online link */}
+          <a
+            href="https://testy.well-done.pl"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`block px-3 py-2 pl-6 rounded-md text-sm font-medium text-orange-600 hover:text-orange-700 hover:bg-gray-100 transition-all duration-200 border border-orange-300 mx-3 mt-2 text-center ${
+              isOpen 
+                ? 'animate-fade-in opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-2'
+            }`}
+            style={{
+              animationDelay: isOpen ? `${400 + (services.length * 75)}ms` : '0ms',
+              animationFillMode: 'both'
+            }}
+            onClick={onCloseMenu}
+          >
+            Testy UDT online
+          </a>
         </div>
       </div>
       
