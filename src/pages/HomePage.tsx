@@ -194,32 +194,6 @@ const HomePage = () => {
         {/* Partners Section */}
         <PartnersSection />
 
-        {/* Enhanced Services Section */}
-        <section className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-orange-50/30 to-blue-50/20" />
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="text-center mb-16">
-              <div className="inline-block mb-4">
-                <span className="bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide">
-                  OFERTA
-                </span>
-              </div>
-              <h2 className="text-4xl font-bold mb-6">
-                <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                  Co robimy?
-                </span>
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Well-Done.pl to specjaliści w obszarze szkoleń technicznych i uprawnień zawodowych
-              </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {services.map((service, index) => <div key={index} className="transform hover:scale-105 transition-all duration-300">
-                  <ServiceCard title={service.title} description={service.description} icon={service.icon} link={service.link} index={index} />
-                </div>)}
-            </div>
-          </div>
-        </section>
 
         {/* Why Choose Us Section */}
         <WhyChooseUsSection benefits={benefits} statsRef={statsRef} visibleItems={visibleItems} StatCard={StatCard} showAllFallback={showAllFallback} />
