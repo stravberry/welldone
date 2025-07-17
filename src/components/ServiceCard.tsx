@@ -72,6 +72,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon, lin
         variant="outline" 
         className="mt-auto transition-all duration-300 hover:bg-orange-50 hover:border-orange-300 hover:shadow-md" 
         onClick={handleClick}
+        aria-label={`Dowiedz się więcej o ${title} - przejdź do szczegółów szkoleń`}
       >
         <span className="flex items-center justify-center">
           Dowiedz się więcej <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />

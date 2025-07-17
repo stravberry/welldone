@@ -13,6 +13,7 @@ import OptimizedPartnersSection from '@/components/OptimizedPartnersSection';
 import PerformanceMonitor from '@/components/PerformanceMonitor';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 
 // Lazy load non-critical components
 const FAQ = lazy(() => import('@/components/FAQ'));
@@ -128,6 +129,7 @@ const HomePage = () => {
     );
   };
   return <div>
+      <BreadcrumbSchema items={[{ name: "Strona główna", url: "/" }]} />
       <PerformanceMonitor />
       <Navbar />
       <div className="pt-16">
@@ -147,20 +149,20 @@ const HomePage = () => {
                   
                 </div>
                 <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                  Profesjonalne szkolenia UDT i&nbsp;SEP 
+                  Profesjonalne szkolenia UDT i&nbsp;SEP we Wrocławiu
                   <span className="block bg-gradient-to-r from-orange-200 to-white bg-clip-text text-transparent animate-gradient-shift">
-                    dla firm
+                    dla firm produkcyjnych
                   </span>
                 </h1>
                 <p className="text-xl mb-8 text-orange-50 leading-relaxed">
-                  Pomagamy firmom produkcyjnym działać bez ryzyka. Zapewniamy pełną zgodność uprawnień UDT i SEP z przepisami.
+                  Pomagamy firmom produkcyjnym we Wrocławiu i całym Dolnym Śląsku działać bez ryzyka. Zapewniamy pełną zgodność uprawnień UDT i SEP z przepisami. 96% zdawalność egzaminów, elastyczne terminy szkoleń.
                 </p>
                 <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
                   <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-orange-50 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl text-lg px-8 py-4">
-                    <Link to="/o-nas">Dlaczego My?</Link>
+                    <Link to="/o-nas" aria-label="Dowiedz się dlaczego warto wybrać Well-Done.pl na szkolenia UDT i SEP">Dlaczego My?</Link>
                   </Button>
                   <Button asChild size="lg" variant="outline" className="bg-orange-500/20 text-white hover:bg-orange-400/30 border-white/30 hover:border-white/50 backdrop-blur-sm transform hover:scale-105 transition-all duration-300 text-lg px-8 py-4">
-                    <Link to="/wycena">
+                    <Link to="/wycena" aria-label="Otrzymaj błyskawiczną wycenę szkoleń UDT i SEP dla swojej firmy">
                       <span className="mr-2">🚀</span>
                       Błyskawiczna Wycena
                     </Link>
@@ -172,7 +174,7 @@ const HomePage = () => {
                   <AspectRatio ratio={16 / 9} className="bg-black rounded-xl overflow-hidden shadow-2xl">
                     <LazyYouTubeEmbed 
                       videoId="8QDIVIU9QZQ" 
-                      title="Well-Done.pl Company Presentation"
+                      title="Prezentacja firmy Well-Done.pl - Szkolenia UDT i SEP we Wrocławiu"
                       className="rounded-xl"
                     />
                   </AspectRatio>
@@ -186,7 +188,7 @@ const HomePage = () => {
         <OptimizedPartnersSection />
 
         {/* Enhanced Services Section */}
-        <section className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+        <section className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden" aria-labelledby="services-heading">
           <div className="absolute inset-0 bg-gradient-to-r from-orange-50/30 to-blue-50/20" />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-16">
@@ -195,13 +197,13 @@ const HomePage = () => {
                   OFERTA
                 </span>
               </div>
-              <h2 className="text-4xl font-bold mb-6">
+              <h2 id="services-heading" className="text-4xl font-bold mb-6">
                 <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                  Co robimy?
+                  Nasze szkolenia UDT i SEP we Wrocławiu
                 </span>
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Well-Done.pl to specjaliści w obszarze szkoleń technicznych i uprawnień zawodowych
+                Well-Done.pl to specjaliści w obszarze szkoleń UDT i uprawnień SEP dla firm produkcyjnych we Wrocławiu i województwie dolnośląskim
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -218,7 +220,7 @@ const HomePage = () => {
         </Suspense>
 
         {/* Enhanced Process Section */}
-        <section className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+        <section className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden" aria-labelledby="process-heading">
           <div className="absolute inset-0 bg-gradient-to-r from-orange-50/40 to-blue-50/30" />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-16">
@@ -227,9 +229,9 @@ const HomePage = () => {
                   Jak to działa?
                 </span>
               </div>
-              <h2 className="text-4xl font-bold mb-6">
+              <h2 id="process-heading" className="text-4xl font-bold mb-6">
                 <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                  Jak wygląda proces współpracy?
+                  Jak wygląda proces szkoleń UDT i SEP?
                 </span>
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -251,7 +253,12 @@ const HomePage = () => {
             
             <div className="text-center mt-12">
               <div className="relative inline-block">
-                <Button size="lg" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 relative z-10 text-lg px-8 py-4" onClick={handleQuoteClick}>
+                <Button 
+                  size="lg" 
+                  className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 relative z-10 text-lg px-8 py-4" 
+                  onClick={handleQuoteClick}
+                  aria-label="Otrzymaj bezpłatną wycenę szkoleń UDT i SEP dla swojej firmy"
+                >
                   <span>Uzyskaj Błyskawiczną Wycenę</span>
                 </Button>
               </div>
@@ -265,7 +272,7 @@ const HomePage = () => {
         </Suspense>
 
         {/* Free Audit CTA */}
-        <section className="py-16 lg:py-20 relative overflow-hidden">
+        <section className="py-16 lg:py-20 relative overflow-hidden" aria-labelledby="audit-heading">
           <div className="absolute inset-0 bg-gradient-to-br from-orange-600 via-orange-500 to-orange-700" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-float" />
@@ -280,8 +287,8 @@ const HomePage = () => {
                   Bezpłatna analiza
                 </span>
               </div>
-              <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
-                Skorzystaj z bezpłatnego audytu
+              <h2 id="audit-heading" className="text-4xl lg:text-5xl font-bold text-white mb-6">
+                Skorzystaj z bezpłatnego audytu szkoleń UDT i SEP
               </h2>
               <p className="text-xl text-orange-50 max-w-3xl mx-auto leading-relaxed">
                 Zastanawiasz się, czy Twoje szkolenia są odpowiednio dobrane i czy nie przepłacasz za uzyskiwanie uprawnień pracowników? Skorzystaj z bezpłatnego audytu i dowiedz się, jak możemy pomóc.
@@ -299,14 +306,19 @@ const HomePage = () => {
               <div className="order-2 lg:order-1">
                 <div className="space-y-6">
                   <h3 className="text-2xl font-bold text-white mb-4">
-                    Odkryj potencjał oszczędności w swojej firmie
+                    Odkryj potencjał oszczędności na szkoleniach UDT i SEP
                   </h3>
                   <p className="text-orange-50 text-lg leading-relaxed">
                     Nasz bezpłatny audyt pomoże Ci zidentyfikować obszary, w których możesz zoptymalizować koszty szkoleń i poprawić efektywność procesu certyfikacji pracowników.
                   </p>
                   <div className="relative inline-block group">
                     <div className="absolute inset-0 bg-white rounded-lg blur opacity-25 group-hover:opacity-50 transition-opacity duration-300" />
-                    <Button size="lg" className="relative bg-white text-orange-600 hover:bg-orange-50 font-bold text-lg px-8 py-4 shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 hover:-translate-y-1" onClick={handleAuditClick}>
+                    <Button 
+                      size="lg" 
+                      className="relative bg-white text-orange-600 hover:bg-orange-50 font-bold text-lg px-8 py-4 shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 hover:-translate-y-1" 
+                      onClick={handleAuditClick}
+                      aria-label="Zamów bezpłatny audyt szkoleń UDT i SEP dla swojej firmy"
+                    >
                       Zamów bezpłatny audyt
                       <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                     </Button>

@@ -20,7 +20,7 @@ const TikTokIcon = ({ size = 20 }: { size?: number }) => (
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-gray-900 text-white" role="contentinfo" aria-label="Stopka strony Well-Done.pl z informacjami kontaktowymi i linkami">
       <div className="pt-12 pb-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
@@ -28,27 +28,27 @@ const Footer = () => {
               <div className="flex items-center mb-4">
                 <img 
                   src="/lovable-uploads/a2c8c546-13e6-445b-9832-abf375420d6c.png" 
-                  alt="Well-done.pl Logo" 
+                  alt="Well-Done.pl - Szkolenia UDT i SEP Wrocław, logo firmy szkoleniowej" 
                   className="h-12 sm:h-14 md:h-16 mr-2 object-contain" 
                 />
               </div>
               <p className="text-gray-400 mb-4 text-sm sm:text-base">
-                Pomagamy firmom produkcyjnym działać bez ryzyka – zapewniamy pełną zgodność uprawnień UDT i SEP dla pracowników.
+                Pomagamy firmom produkcyjnym we Wrocławiu i Dolnym Śląsku działać bez ryzyka – zapewniamy pełną zgodność uprawnień UDT i SEP dla pracowników.
               </p>
               <div className="flex space-x-4">
-                <a href="https://www.facebook.com/people/Pawe%C5%82-Gerus-Uprawnienia-UDT-SEP/61572194412744/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+                <a href="https://www.facebook.com/people/Pawe%C5%82-Gerus-Uprawnienia-UDT-SEP/61572194412744/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white" aria-label="Odwiedź naszą stronę Facebook - Well-Done.pl szkolenia UDT i SEP">
                   <Facebook size={20} />
                 </a>
-                <a href="https://www.instagram.com/Pawel.od.udt" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+                <a href="https://www.instagram.com/Pawel.od.udt" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white" aria-label="Śledź nas na Instagram - @Pawel.od.udt">
                   <Instagram size={20} />
                 </a>
-                <a href="https://www.tiktok.com/@pawelodudt" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+                <a href="https://www.tiktok.com/@pawelodudt" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white" aria-label="Zobacz nasze filmiki na TikTok - @pawelodudt">
                   <TikTokIcon size={20} />
                 </a>
-                <a href="https://www.linkedin.com/in/pawel-gerus-well-donepl/?originalSubdomain=pl" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+                <a href="https://www.linkedin.com/in/pawel-gerus-well-donepl/?originalSubdomain=pl" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white" aria-label="Połącz się z nami na LinkedIn - Paweł Gerus Well-Done.pl">
                   <Linkedin size={20} />
                 </a>
-                <a href="https://www.youtube.com/@Well-Done.Szkolenia" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+                <a href="https://www.youtube.com/@Well-Done.Szkolenia" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white" aria-label="Subskrybuj nasz kanał YouTube - Well-Done Szkolenia">
                   <Youtube size={20} />
                 </a>
               </div>
