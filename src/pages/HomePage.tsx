@@ -149,9 +149,9 @@ const HomePage = () => {
                   
                 </div>
                 <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                  Profesjonalne szkolenia UDT i&nbsp;SEP dla firm
+                  Profesjonalne szkolenia UDT i&nbsp;SEP
                   <span className="block bg-gradient-to-r from-orange-200 to-white bg-clip-text text-transparent animate-gradient-shift">
-                    dla firm produkcyjnych
+                    dla firm
                   </span>
                 </h1>
                 <p className="text-xl mb-8 text-orange-50 leading-relaxed">
