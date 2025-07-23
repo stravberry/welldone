@@ -176,7 +176,7 @@ const HomePage = () => {
                   </span>
                 </h1>
                 <p className="text-xl mb-8 text-orange-50 leading-relaxed">
-                  Pomagamy firmom produkcyjnym działać bez ryzyka. Zapewniamy pełną zgodność uprawnień UDT i SEP z przepisami.
+                  Pomagamy firmom produkcyjnym działać bez ryzyka. Zapewniamy pełną zgodność uprawnień UDT i SEP z przepisami. Szybkie terminy, krótkie szkolenia, najwyższa zdawalność.
                 </p>
                 <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
                   <Button asChild size="lg" className="bg-white text-orange-600 hover:bg-orange-50 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl text-lg px-8 py-4">
