@@ -125,7 +125,26 @@ const HomePage = () => {
       threshold: 0.1,
       triggerOnce: true
     });
-    return;
+    
+    return (
+      <div 
+        ref={elementRef}
+        className="text-center"
+        style={{
+          opacity: isInView ? 1 : 0,
+          transform: isInView ? 'translateY(0)' : 'translateY(20px)',
+          transition: 'all 0.6s ease-out',
+          transitionDelay: `${delay}ms`
+        }}
+      >
+        <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
+          {count}
+        </div>
+        <div className="text-muted-foreground text-sm md:text-base font-medium uppercase tracking-wide">
+          {label}
+        </div>
+      </div>
+    );
   };
   return <div>
       <BreadcrumbSchema items={[{
