@@ -14,6 +14,7 @@ import {
 import Navbar from '@/components/Navbar';
 import FAQ from '@/components/FAQ';
 import ContactForm from '@/components/ContactForm';
+import CourseCard, { Course } from '@/components/CourseCard';
 
 const UdtOperatorzyPage = () => {
   const courses = [
@@ -251,58 +252,13 @@ const UdtOperatorzyPage = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {courses.map((course, index) => (
-                <div key={index} className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
-                  <div className="relative h-48 overflow-hidden">
-                    <img 
-                      src={course.image} 
-                      alt={course.alt} 
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                    <div className="absolute top-4 left-4 bg-orange-500 text-white p-2 rounded-lg">
-                      {course.icon}
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-2xl font-bold mb-2">{course.title}</h3>
-                    <p className="text-gray-600 mb-4">{course.description}</p>
-                    
-                    <div className="grid grid-cols-3 gap-4 mb-4 text-sm">
-                      <div className="text-center">
-                        <Clock className="h-4 w-4 mx-auto mb-1 text-orange-500" />
-                        <span className="block font-semibold">{course.duration}</span>
-                      </div>
-                      <div className="text-center">
-                        <Users className="h-4 w-4 mx-auto mb-1 text-orange-500" />
-                        <span className="block font-semibold">{course.groupSize}</span>
-                      </div>
-                      <div className="text-center">
-                        <span className="block font-semibold text-orange-600">{course.price}</span>
-                      </div>
-                    </div>
-
-                    <div className="mb-6">
-                      <h4 className="font-semibold mb-2">Co zawiera kurs:</h4>
-                      <ul className="space-y-1">
-                        {course.features.map((feature, idx) => (
-                          <li key={idx} className="flex items-center text-sm text-gray-600">
-                            <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Button asChild className="w-full bg-orange-500 hover:bg-orange-600">
-                        <Link to="/wycena" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Zapisz się na kurs</Link>
-                      </Button>
-                      <Button asChild variant="outline" className="w-full border-orange-500 text-orange-600 hover:bg-orange-50">
-                        <Link to="/kontakt">Szczegóły</Link>
-                      </Button>
-                    </div>
-                  </div>
-                </div>
+                <CourseCard
+                  key={index}
+                  course={course}
+                  index={index}
+                  enrollLink="/wycena"
+                  detailsLink="/kontakt"
+                />
               ))}
             </div>
           </div>
