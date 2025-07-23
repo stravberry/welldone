@@ -106,30 +106,32 @@ const HomePage = () => {
   }];
 
   // Optimized StatCard with better performance
-  const StatCard = ({ value, label, delay }: { value: number; label: string; delay: number; }) => {
-    const { elementRef, count } = useOptimizedCounterAnimation<HTMLDivElement>(value, 1500);
-    const { isInView } = useOptimizedScrollAnimation({ threshold: 0.1, triggerOnce: true });
-    
-    return (
-      <div 
-        ref={elementRef} 
-        className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-6 text-center transform hover:scale-105 transition-transform duration-200 shadow-lg hover:shadow-xl"
-        style={{
-          opacity: isInView ? 1 : 0,
-          transform: isInView ? 'translateY(0)' : 'translateY(20px)',
-          transition: 'all 0.4s ease-out',
-          transitionDelay: isInView ? `${delay}ms` : '0ms'
-        }}
-      >
-        <div className="text-4xl font-bold text-orange-600 mb-2 bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent">
-          {isInView ? count : value}{value >= 1000 ? '+' : value === 80 || value === 96 ? '%' : '+'}
-        </div>
-        <div className="text-gray-700 font-medium">{label}</div>
-      </div>
-    );
+  const StatCard = ({
+    value,
+    label,
+    delay
+  }: {
+    value: number;
+    label: string;
+    delay: number;
+  }) => {
+    const {
+      elementRef,
+      count
+    } = useOptimizedCounterAnimation<HTMLDivElement>(value, 1500);
+    const {
+      isInView
+    } = useOptimizedScrollAnimation({
+      threshold: 0.1,
+      triggerOnce: true
+    });
+    return;
   };
   return <div>
-      <BreadcrumbSchema items={[{ name: "Strona główna", url: "/" }]} />
+      <BreadcrumbSchema items={[{
+      name: "Strona główna",
+      url: "/"
+    }]} />
       <PerformanceMonitor />
       <Navbar />
       <div className="pt-16">
@@ -172,11 +174,7 @@ const HomePage = () => {
               <div className="flex items-center justify-center animate-fade-in-right">
                 <div className="w-full max-w-2xl transform hover:scale-105 transition-transform duration-300">
                   <AspectRatio ratio={16 / 9} className="bg-black rounded-xl overflow-hidden shadow-2xl">
-                    <LazyYouTubeEmbed 
-                      videoId="8QDIVIU9QZQ" 
-                      title="Prezentacja firmy Well-Done.pl - Szkolenia UDT i SEP we Wrocławiu"
-                      className="rounded-xl"
-                    />
+                    <LazyYouTubeEmbed videoId="8QDIVIU9QZQ" title="Prezentacja firmy Well-Done.pl - Szkolenia UDT i SEP we Wrocławiu" className="rounded-xl" />
                   </AspectRatio>
                 </div>
               </div>
@@ -243,22 +241,15 @@ const HomePage = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-orange-50 via-white to-orange-50 rounded-3xl opacity-50" />
               
               <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 p-8 justify-items-center">
-                {processSteps.map((step, index) => (
-                  <div key={step.number} className="transform hover:scale-105 transition-all duration-300 w-full max-w-xs">
+                {processSteps.map((step, index) => <div key={step.number} className="transform hover:scale-105 transition-all duration-300 w-full max-w-xs">
                     <ProcessStep number={step.number} title={step.title} description={step.description} index={index} />
-                  </div>
-                ))}
+                  </div>)}
               </div>
             </div>
             
             <div className="text-center mt-12">
               <div className="relative inline-block">
-                <Button 
-                  size="lg" 
-                  className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 relative z-10 text-lg px-8 py-4" 
-                  onClick={handleQuoteClick}
-                  aria-label="Otrzymaj bezpłatną wycenę szkoleń UDT i SEP dla swojej firmy"
-                >
+                <Button size="lg" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 relative z-10 text-lg px-8 py-4" onClick={handleQuoteClick} aria-label="Otrzymaj bezpłatną wycenę szkoleń UDT i SEP dla swojej firmy">
                   <span>Uzyskaj Błyskawiczną Wycenę</span>
                 </Button>
               </div>
@@ -313,12 +304,7 @@ const HomePage = () => {
                   </p>
                   <div className="relative inline-block group">
                     <div className="absolute inset-0 bg-white rounded-lg blur opacity-25 group-hover:opacity-50 transition-opacity duration-300" />
-                    <Button 
-                      size="lg" 
-                      className="relative bg-white text-orange-600 hover:bg-orange-50 font-bold text-lg px-8 py-4 shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 hover:-translate-y-1" 
-                      onClick={handleAuditClick}
-                      aria-label="Zamów bezpłatny audyt szkoleń UDT i SEP dla swojej firmy"
-                    >
+                    <Button size="lg" className="relative bg-white text-orange-600 hover:bg-orange-50 font-bold text-lg px-8 py-4 shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 hover:-translate-y-1" onClick={handleAuditClick} aria-label="Zamów bezpłatny audyt szkoleń UDT i SEP dla swojej firmy">
                       Zamów bezpłatny audyt
                       <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                     </Button>

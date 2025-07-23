@@ -78,31 +78,20 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-          <StatCard value={1200} label="Przeszkolonych osób" delay={0} />
-          <StatCard value={80} label="Firm z którymi współpracujemy" delay={100} />
-          <StatCard value={96} label="Średnia zdawalność" delay={200} />
-          <StatCard value={500} label="Wydanych uprawnień" delay={300} />
-        </div>
+        
 
         {/* Benefits Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
-          {benefits.map((benefit, index) => (
-            <div 
-              key={index} 
-              className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-orange-200 transform hover:scale-105"
-              style={{
-                opacity: 1,
-                transform: 'translateY(0)',
-                transition: 'all 0.4s ease-out',
-                transitionDelay: `${index * 100}ms`
-              }}
-            >
+          {benefits.map((benefit, index) => <div key={index} className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-orange-200 transform hover:scale-105" style={{
+          opacity: 1,
+          transform: 'translateY(0)',
+          transition: 'all 0.4s ease-out',
+          transitionDelay: `${index * 100}ms`
+        }}>
               <div className="mb-4">{benefit.icon}</div>
               <h3 className="text-xl font-bold mb-2 text-gray-900">{benefit.title}</h3>
               <p className="text-gray-600">{benefit.description}</p>
-            </div>
-          ))}
+            </div>)}
         </div>
 
         {/* Cooperating Companies Section */}
