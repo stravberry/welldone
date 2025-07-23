@@ -14,19 +14,19 @@ import {
 import Navbar from '@/components/Navbar';
 import FAQ from '@/components/FAQ';
 import ContactForm from '@/components/ContactForm';
-import CourseCard, { Course } from '@/components/CourseCard';
+import EnhancedCourseCard, { Course } from '@/pages/ServiceDetailPage/components/EnhancedCourseCard';
 
 const UdtOperatorzyPage = () => {
-  const courses = [
+  const courses: Course[] = [
     {
+      id: "wozki-widlowe",
       title: "Wózki widłowe",
       description: "Szkolenie na uprawnienia do obsługi wózków widłowych wszystkich typów",
       duration: "16 godzin",
-      groupSize: "do 6 osób",
+      participants: "do 6 osób",
       price: "od 450 zł",
-      icon: <Truck className="h-8 w-8 text-orange-500" />,
       image: "/lovable-uploads/a2c8c546-13e6-445b-9832-abf375420d6c.png",
-      alt: "Wózek widłowy w magazynie",
+      imageAlt: "Wózek widłowy w magazynie",
       features: [
         "Teoria i praktyka",
         "Egzamin UDT",
@@ -36,14 +36,14 @@ const UdtOperatorzyPage = () => {
       ]
     },
     {
+      id: "podesty-ruchome",
       title: "Podesty ruchome",
       description: "Kurs operatora podestów ruchomych i platform roboczych",
       duration: "16 godzin", 
-      groupSize: "do 6 osób",
+      participants: "do 6 osób",
       price: "od 500 zł",
-      icon: <Settings className="h-8 w-8 text-orange-500" />,
       image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
-      alt: "Podest ruchomy nożycowy na budowie",
+      imageAlt: "Podest ruchomy nożycowy na budowie",
       features: [
         "Teoria i praktyka",
         "Egzamin UDT",
@@ -53,14 +53,14 @@ const UdtOperatorzyPage = () => {
       ]
     },
     {
+      id: "suwnice-zurawie",
       title: "Suwnice i żurawie",
       description: "Szkolenie operatorów suwnic i żurawi stacjonarnych",
       duration: "24 godziny",
-      groupSize: "do 8 osób",
+      participants: "do 8 osób",
       price: "od 650 zł", 
-      icon: <HardHat className="h-8 w-8 text-orange-500" />,
       image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80",
-      alt: "Suwnica przemysłowa w hali produkcyjnej",
+      imageAlt: "Suwnica przemysłowa w hali produkcyjnej",
       features: [
         "Teoria i praktyka",
         "Egzamin UDT",
@@ -70,14 +70,14 @@ const UdtOperatorzyPage = () => {
       ]
     },
     {
+      id: "ukladnice-magazynowe",
       title: "Układnice magazynowe",
       description: "Uprawnienia do obsługi układnic teleskopowych i magazynowych",
       duration: "16 godzin",
-      groupSize: "do 6 osób",
+      participants: "do 6 osób",
       price: "od 480 zł",
-      icon: <Truck className="h-8 w-8 text-orange-500" />,
       image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80",
-      alt: "Układnica magazynowa w akcji",
+      imageAlt: "Układnica magazynowa w akcji",
       features: [
         "Teoria i praktyka",
         "Egzamin UDT",
@@ -252,12 +252,13 @@ const UdtOperatorzyPage = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {courses.map((course, index) => (
-                <CourseCard
-                  key={index}
+                <EnhancedCourseCard
+                  key={course.id}
                   course={course}
                   index={index}
-                  enrollLink="/wycena"
-                  detailsLink="/kontakt"
+                  isVisible={true}
+                  onClick={() => window.location.href = '/kontakt'}
+                  onEnroll={() => window.location.href = '/wycena'}
                 />
               ))}
             </div>
